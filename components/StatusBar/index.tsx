@@ -43,7 +43,7 @@ const StatusBar = () => {
       </Bar>
       {bar && (
         <Menu show={bar} onCloseModal={onClickBar}>
-          {<MenuList onCloseModal={onClickBar} setBar={setBar} />}
+          {<MenuList onCloseModal={onClickBar} />}
         </Menu>
       )}
     </>
