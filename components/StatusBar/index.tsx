@@ -29,7 +29,7 @@ const StatusBar = () => {
           </SubMenu>
         </SubBar>
         <MainBar>
-          <Name>이름</Name>
+          <Name>WAYC</Name>
           <div>
             <span className="hidden">shop</span>
             <span>
