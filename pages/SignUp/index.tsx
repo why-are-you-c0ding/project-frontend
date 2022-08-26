@@ -3,7 +3,6 @@ import {Form, Header, Input, Label, SignUpBtn, Wrapper} from './styles'
 
 const SignUp = () => {
   return (
-
       <Wrapper>
         <Header>회원가입</Header>
         <Form>
