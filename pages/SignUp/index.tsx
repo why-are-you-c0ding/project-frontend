@@ -1,9 +1,11 @@
 import React from "react";
 import {Form, Header, Input, Label, SignUpBtn, Wrapper} from './styles'
+import StatusBar from "@components/StatusBar";
 
 const SignUp = () => {
   return (
       <Wrapper>
+          <StatusBar />
         <Header>회원가입</Header>
         <Form>
             <Label>

@@ -1,9 +1,12 @@
 import React from "react";
 import {Form, Header, Input, Label, Line, SearchBox, SignUpBtn, SubHeader, Wrapper} from '@pages/SignUp/styles'
+import StatusBar from "@components/StatusBar";
+
 
 const LogIn = () => {
   return (
   <Wrapper>
+    <StatusBar />
     <Header>WAYC</Header>
     <SubHeader>Why Are You Coding?</SubHeader>
     <Form>
