@@ -16,8 +16,15 @@ export const Header = styled.header`
   font-size: 40px;
   letter-spacing: -0.75px;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;
+
+export const SubHeader = styled.div`
+  font-weight: bolder;
+  font-size: 20px;
+  letter-spacing: -0.75px;
+  margin-bottom: 30px;
+`
 
 
 export const Form = styled.form`
@@ -92,4 +99,18 @@ export const SignUpBtn = styled.button`
   margin-top: 1rem;
   font-size:1.5rem;
   font-weight: bold;
+  margin-bottom: 2rem;
+`;
+
+
+export const Line = styled.div`
+    border-left : 2px solid #EBEBEB;
+    height : 25px;
+`;
+
+export const SearchBox =styled.div`
+    text-align: center;
+  & span{
+    padding: 30px;
+  }
 `;
