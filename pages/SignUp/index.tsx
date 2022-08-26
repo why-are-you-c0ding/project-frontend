@@ -23,7 +23,7 @@ const SignUp = () => {
             <Label>
                 <span>비밀 번호 체크*</span>
                 <div>
-                    <Input type="password" value={''}  name="email" placeholder="예) 비밀번호를 정확히 입력해주세요"  />
+                    <Input type="password" value={''}  placeholder="예) 비밀번호를 정확히 입력해주세요"  />
                 </div>
             </Label>
             <Label>
