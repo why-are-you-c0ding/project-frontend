@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Bar,
   MainBar,
@@ -12,10 +12,24 @@ import Menu from "@components/Menu";
 import MenuList from "@components/MenuList";
 
 const StatusBar = () => {
-  const [bar, setBar] = useState(false);
+  const [menu, setMenu] = useState(false);
 
   const onClickBar = useCallback(() => {
-    setBar((prev) => !prev);
+    setMenu((prev) => !prev);
+  }, []);
+
+  useEffect(() => {
+    const windowResize = () => {
+      if (window.innerWidth > 769) {
+        setMenu(false);
+      }
+    };
+
+    window.addEventListener(`resize`, windowResize);
+
+    return () => {
+      window.removeEventListener(`resize`, windowResize);
+    };
   }, []);
 
   return (
@@ -41,8 +55,8 @@ const StatusBar = () => {
           </div>
         </MainBar>
       </Bar>
-      {bar && (
-        <Menu show={bar} onCloseModal={onClickBar}>
+      {menu && (
+        <Menu show={menu} onCloseModal={onClickBar}>
           {<MenuList onCloseModal={onClickBar} />}
         </Menu>
       )}
