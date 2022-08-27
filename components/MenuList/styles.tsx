@@ -15,7 +15,7 @@ export const List = styled.div`
   position: fixed;
   right: 0;
 
-  width: 70vw;
+  width: 60vw;
   height: 100%;
 
   background-color: white;
@@ -33,4 +33,13 @@ export const List = styled.div`
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     }
   }
+`;
+
+export const Blank = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40vw;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
 `;
