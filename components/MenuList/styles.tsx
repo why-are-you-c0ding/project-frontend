@@ -33,8 +33,4 @@ export const List = styled.div`
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     }
   }
-
-  //@media screen and (min-width: 769px) {
-  //  display: none;
-  //}
 `;

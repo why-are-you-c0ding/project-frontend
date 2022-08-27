@@ -2,17 +2,10 @@ import React, { FC, useEffect } from "react";
 import { CloseBtn, List } from "@components/MenuList/styles";
 
 interface Props {
-  // setBar: (frag: boolean) => void;
   onCloseModal: (e: React.SyntheticEvent<EventTarget>) => void;
 }
 
 const MenuList: FC<Props> = ({ onCloseModal }) => {
-  // useEffect(() => {
-  //   if (window.innerWidth > 769) {
-  //     setBar(false);
-  //   }
-  // }, []);
-
   return (
     <List>
       <CloseBtn onClick={onCloseModal}>X</CloseBtn>
