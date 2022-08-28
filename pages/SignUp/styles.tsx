@@ -1,7 +1,6 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
-
-export const Wrapper =styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,7 +8,7 @@ export const Wrapper =styled.div`
   width: 100vw;
   height: 100vh;
   margin-top: 0.2rem;
-`
+`;
 
 export const Header = styled.header`
   font-weight: bolder;
@@ -24,8 +23,7 @@ export const SubHeader = styled.div`
   font-size: 20px;
   letter-spacing: -0.75px;
   margin-bottom: 30px;
-`
-
+`;
 
 export const Form = styled.form`
   margin: 0 auto;
@@ -33,35 +31,46 @@ export const Form = styled.form`
   max-width: 400px;
 `;
 
-
 export const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   margin-bottom: 16px;
-  & > span {
+
+  position: relative;
+
+  & span {
     text-align: left;
     padding-bottom: 8px;
     font-size: 15px;
     cursor: pointer;
     font-weight: 700;
   }
-  
-  & > button{
+
+  & button {
+    position: absolute;
+    top: -12px;
+    left: 50px;
+
     width: 4rem;
-    height:1.5rem;
+    height: 1.5rem;
     border-radius: 5px;
     background-color: #e8e1e1;
-    color : black;
+    color: black;
     border: transparent;
     text-align: center;
     margin: 10px 20px 10px 2rem;
     font-weight: bold;
-    transition: all 0.2s ;
-    :hover{
+    cursor: pointer;
+
+    //transition: 0.2s;
+    &:hover {
       margin-top: 15px;
       margin-bottom: 5px;
     }
   }
 `;
-
 
 export const Input = styled.input`
   position: relative;
@@ -75,41 +84,38 @@ export const Input = styled.input`
   outline: none;
   font-size: 1rem;
   padding: 10px 0 14px;
-  margin-bottom:30px;
+  margin-bottom: 30px;
   :focus {
     border-bottom: 2px solid black;
-
   }
   ::placeholder {
     font-size: 0.9rem;
   }
-
 `;
-
 
 export const SignUpBtn = styled.button`
   width: 25rem;
   height: 4rem;
   background-color: blueviolet;
-  color : white;
+  color: white;
   border: transparent;
   border-radius: 20px;
   text-align: center;
   outline: none;
   margin-top: 1rem;
-  font-size:1.5rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 2rem;
 `;
 
 export const ErrorCircle = styled.div`
   background-color: red;
-  float:left;
-  width:15px;
+  float: left;
+  width: 15px;
   height: 15px;
   border-radius: 50%;
   font-weight: bold;
-  margin-right:10px;
+  margin-right: 10px;
 `;
 
 export const Error = styled.div`
@@ -126,28 +132,27 @@ export const Correct = styled.div`
 
 export const CorrectCircle = styled.div`
   background-color: green;
-  float:left;
-  width:15px;
+  float: left;
+  width: 15px;
   height: 15px;
   border-radius: 50%;
   font-weight: bold;
-  margin-right:10px;
-`
-
-export const Line = styled.div`
-    border-left : 2px solid #EBEBEB;
-    height : 25px;
+  margin-right: 10px;
 `;
 
-export const SearchBox =styled.div`
-    text-align: center;
-  & span{
+export const Line = styled.div`
+  border-left: 2px solid #ebebeb;
+  height: 25px;
+`;
+
+export const SearchBox = styled.div`
+  text-align: center;
+  & span {
     padding: 30px;
-    
-    & a{
+
+    & a {
       text-decoration: none;
       color: inherit;
     }
   }
-  
 `;
