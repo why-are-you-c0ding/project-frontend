@@ -1,6 +1,11 @@
 import React from "react";
 import {Form, Header, Input, Label, Line, SearchBox, SignUpBtn, SubHeader, Wrapper} from '@pages/SignUp/styles'
 import StatusBar from "@components/StatusBar";
+import useInput from "@hooks/useInput";
+
+const SignUp = () => {
+  const [id, onChangeId] = useInput('');
+};
 
 
 const LogIn = () => {
@@ -13,7 +18,7 @@ const LogIn = () => {
       <Label>
         <span>아이디</span>
         <div>
-          <Input type="text" value={''}  placeholder="예) Wayc"  />
+          <Input type="text" id="id" name="id" value={''}   placeholder="예) Wayc"  />
         </div>
       </Label>
       <Label>
