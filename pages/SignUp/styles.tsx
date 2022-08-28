@@ -102,6 +102,37 @@ export const SignUpBtn = styled.button`
   margin-bottom: 2rem;
 `;
 
+export const ErrorCircle = styled.div`
+  background-color: red;
+  float:left;
+  width:15px;
+  height: 15px;
+  border-radius: 50%;
+  font-weight: bold;
+  margin-right:10px;
+`;
+
+export const Error = styled.div`
+  color: red;
+  margin: 8px 0 16px;
+  font-weight: bold;
+`;
+
+export const Correct = styled.div`
+  color: red;
+  margin: 10px 0 10px;
+  font-weight: bold;
+`;
+
+export const CorrectCircle = styled.div`
+  background-color: green;
+  float:left;
+  width:15px;
+  height: 15px;
+  border-radius: 50%;
+  font-weight: bold;
+  margin-right:10px;
+`
 
 export const Line = styled.div`
     border-left : 2px solid #EBEBEB;
