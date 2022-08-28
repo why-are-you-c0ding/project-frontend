@@ -72,4 +72,8 @@ export const MainBar = styled.div`
 
 export const Name = styled.div`
   font-size: 30px;
+  & a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;

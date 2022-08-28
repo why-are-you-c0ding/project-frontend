@@ -43,7 +43,9 @@ const StatusBar = () => {
           </SubMenu>
         </SubBar>
         <MainBar>
-          <Name>WAYC</Name>
+          <Name>
+            <a href="/">WAYC</a>
+          </Name>
           <div>
             <span className="hidden">shop</span>
             <span>
