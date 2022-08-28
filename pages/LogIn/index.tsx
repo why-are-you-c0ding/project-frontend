@@ -1,11 +1,7 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {Form, Header, Input, Label, Line, SearchBox, SignUpBtn, SubHeader, Wrapper} from '@pages/SignUp/styles'
 import StatusBar from "@components/StatusBar";
-import useInput from "@hooks/useInput";
 
-const SignUp = () => {
-  const [id, onChangeId] = useInput('');
-};
 
 
 const LogIn = () => {
