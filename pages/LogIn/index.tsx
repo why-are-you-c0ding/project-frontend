@@ -24,7 +24,9 @@ const LogIn = () => {
       </Label>
       <SignUpBtn>Log In</SignUpBtn>
         <SearchBox>
-          <span>회원 가입</span>
+          <span>
+            <a href="/signup">회원 가입</a>
+          </span>
           <span>아이디 찾기</span>
           <span>비밀번호 찾기</span>
         </SearchBox>

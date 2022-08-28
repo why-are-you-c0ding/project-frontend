@@ -112,5 +112,11 @@ export const SearchBox =styled.div`
     text-align: center;
   & span{
     padding: 30px;
+    
+    & a{
+      text-decoration: none;
+      color: inherit;
+    }
   }
+  
 `;
