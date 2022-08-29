@@ -1,5 +1,13 @@
 import styled from "@emotion/styled";
 
+export const BarWrapper = styled.div`
+  margin-bottom: 6rem;
+
+  @media screen and (max-width: 769px) {
+    margin-bottom: 2rem;
+  }
+`;
+
 export const Bar = styled.div`
   background-color: white;
   z-index: 999;

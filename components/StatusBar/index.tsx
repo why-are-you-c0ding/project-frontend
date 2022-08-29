@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
   Bar,
+  BarWrapper,
   MainBar,
   Name,
   SubBar,
@@ -33,7 +34,7 @@ const StatusBar = () => {
   }, []);
 
   return (
-    <>
+    <BarWrapper>
       <Bar>
         <SubBar>
           <SubMenu>
@@ -62,7 +63,7 @@ const StatusBar = () => {
           {<MenuList onCloseModal={onClickBar} />}
         </Menu>
       )}
-    </>
+    </BarWrapper>
   );
 };
 
