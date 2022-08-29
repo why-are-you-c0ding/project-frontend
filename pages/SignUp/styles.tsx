@@ -5,14 +5,11 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
-  margin-top: 0.2rem;
 `;
 
 export const Header = styled.header`
   font-weight: bolder;
-  font-size: 40px;
+  font-size: 3em;
   letter-spacing: -0.75px;
   margin-top: 30px;
   margin-bottom: 20px;
@@ -38,37 +35,27 @@ export const Label = styled.label`
 
   margin-bottom: 16px;
 
-  position: relative;
-
   & span {
     text-align: left;
-    padding-bottom: 8px;
+    margin-bottom: 8px;
     font-size: 15px;
     cursor: pointer;
     font-weight: 700;
+
+    width: 7rem;
   }
 
   & button {
-    position: absolute;
-    top: -12px;
-    left: 50px;
-
     width: 4rem;
     height: 1.5rem;
     border-radius: 5px;
     background-color: #e8e1e1;
-    color: black;
+    color: inherit;
     border: transparent;
     text-align: center;
     margin: 10px 20px 10px 2rem;
     font-weight: bold;
     cursor: pointer;
-
-    //transition: 0.2s;
-    &:hover {
-      margin-top: 15px;
-      margin-bottom: 5px;
-    }
   }
 `;
 

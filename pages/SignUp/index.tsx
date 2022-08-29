@@ -54,14 +54,16 @@ const SignUp = () => {
   );
 
   return (
-    <Wrapper>
+    <div>
       <StatusBar />
-      <Header>회원가입</Header>
-      <Form onSubmit={onSubmit}>
-        <Label>
-          <span>아이디*</span>
-          <button>중복 체크</button>
-          <div>
+      <Wrapper>
+        <Header>회원가입</Header>
+        <Form onSubmit={onSubmit}>
+          <Label>
+            <div>
+              <span>아이디*</span>
+              <button>중복 체크</button>
+            </div>
             <Input
               type="text"
               id="id"
@@ -70,80 +72,84 @@ const SignUp = () => {
               onChange={onChangeId}
               placeholder="예) Wayc"
             />
-          </div>
-        </Label>
-        <Label>
-          <span>비밀 번호*</span>
-          <div>
-            <Input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={onChangePassword}
-              placeholder="예) 영문, 숫자, 특수문자 조합 8-16자"
-            />
-          </div>
-        </Label>
-        <Label>
-          <span>비밀 번호 체크* </span>
-          {mismatchError && (
-            <Error>
-              {" "}
-              비밀번호가 일치하지 않습니다!
-              <ErrorCircle></ErrorCircle>
-            </Error>
-          )}
-          {match && (
-            <Correct>
-              {" "}
-              비밀번호가 일치합니다!
-              <CorrectCircle></CorrectCircle>
-            </Correct>
-          )}
+          </Label>
+          <Label>
+            <span>비밀 번호*</span>
+            <div>
+              <Input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={onChangePassword}
+                placeholder="예) 영문, 숫자, 특수문자 조합 8-16자"
+              />
+            </div>
+          </Label>
+          <Label>
+            <span>비밀 번호 체크* </span>
+            {mismatchError && (
+              <Error>
+                {" "}
+                비밀번호가 일치하지 않습니다!
+                <ErrorCircle></ErrorCircle>
+              </Error>
+            )}
+            {match && (
+              <Correct>
+                {" "}
+                비밀번호가 일치합니다!
+                <CorrectCircle></CorrectCircle>
+              </Correct>
+            )}
 
-          <div>
-            <Input
-              type="password"
-              id="password-check"
-              name="password-check"
-              value={passwordCheck}
-              onChange={onChangePasswordCheck}
-              placeholder="예) 영문, 숫자, 특수문자 조합 8-16자"
-            />
-          </div>
-        </Label>
-        <Label>
-          <span>이메일 주소*</span>
-          <button>중복 체크</button>
-          <div>
-            <Input
-              type="email"
-              id="email"
-              name="email"
-              value={email}
-              onChange={onChangeEmail}
-              placeholder="예) wayc@google.com"
-            />
-          </div>
-        </Label>
-        <Label>
-          <span>닉네임*</span>
-          <button>중복 체크</button>
-          <div>
-            <Input
-              type="text"
-              id="nickname"
-              name="nickname"
-              value={nickname}
-              onChange={onChangeNickname}
-              placeholder="예) 권오현"
-            />
-          </div>
-        </Label>
-        <SignUpBtn>가입하기</SignUpBtn>
-      </Form>
-    </Wrapper>
+            <div>
+              <Input
+                type="password"
+                id="password-check"
+                name="password-check"
+                value={passwordCheck}
+                onChange={onChangePasswordCheck}
+                placeholder="예) 영문, 숫자, 특수문자 조합 8-16자"
+              />
+            </div>
+          </Label>
+          <Label>
+            <div>
+              <span>이메일 주소*</span>
+              <button>중복 체크</button>
+            </div>
+            <div>
+              <Input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={onChangeEmail}
+                placeholder="예) wayc@google.com"
+              />
+            </div>
+          </Label>
+          <Label>
+            <div>
+              <span>닉네임*</span>
+              <button>중복 체크</button>
+            </div>
+            <div>
+              <Input
+                type="text"
+                id="nickname"
+                name="nickname"
+                value={nickname}
+                onChange={onChangeNickname}
+                placeholder="예) 권오현"
+              />
+            </div>
+          </Label>
+          <SignUpBtn>가입하기</SignUpBtn>
+        </Form>
+      </Wrapper>
+    </div>
   );
 };
 
