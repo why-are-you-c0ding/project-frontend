@@ -30,6 +30,12 @@ const SignUp = () => {
   // const [signUpError, setSignUpError] = useState(false);
   // const [signUpSuccess, setSignUpSuccess] = useState(false);
 
+  // 여기 변수로 나이 계산
+  useEffect(() => {
+    const thisYear = new Date().getFullYear().toString().slice(0, 4);
+    console.log(parseInt(thisYear) - parseInt(birthDay.slice(0, 4)) + 1);
+  }, [birthDay, onChangeBirthDay, setBirthDay]);
+
   const onChangePassword = useCallback(
     (e) => {
       setPassword(e.target.value);
