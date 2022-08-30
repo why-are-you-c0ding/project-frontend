@@ -2,6 +2,7 @@ import React, {useCallback, useState} from "react";
 import {Form, Header, Input, Label, Line, SearchBox, SignUpBtn, SubHeader, Wrapper} from '@pages/SignUp/styles'
 import StatusBar from "@components/StatusBar";
 import useInput from "@hooks/useInput";
+import { Link } from 'react-router-dom';
 
 
 
@@ -60,7 +61,7 @@ const LogIn = () => {
       <SignUpBtn>Log In</SignUpBtn>
         <SearchBox>
           <span>
-            <a href="/signup">회원 가입</a>
+          <Link to="/signup">회원 가입</Link>
           </span>
           <span>아이디 찾기</span>
           <span>비밀번호 찾기</span>
