@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useInput from "@hooks/useInput";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 // import axios from "axios";
 import {
   Form,
@@ -17,13 +17,13 @@ import {
 } from "./styles";
 import StatusBar from "@components/StatusBar";
 
-
 const SignUp = () => {
   const [id, onChangeId] = useInput("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [email, setEmail] = useState("");
   const [nickname, onChangeNickname] = useInput("");
+  const [birthDay, onChangeBirthDay, setBirthDay] = useInput("");
 
   const [mismatchError, setMismatchError] = useState(false);
   const [match, setmatch] = useState(true);
@@ -71,7 +71,7 @@ const SignUp = () => {
       //     })
       //     .finally(()=>{});
     },
-    [id,  password, passwordCheck, email, nickname]
+    [id, password, passwordCheck, email, nickname]
   );
 
   return (
@@ -137,6 +137,11 @@ const SignUp = () => {
           </Label>
           <Label>
             <span>생년 월일*</span>
+            <Input
+              type="date"
+              value={birthDay}
+              onChange={onChangeBirthDay}
+            ></Input>
           </Label>
           <Label>
             <div>
@@ -151,12 +156,12 @@ const SignUp = () => {
             {/*)}*/}
             <div>
               <Input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={email}
-                  onChange={onChangeEmail}
-                  placeholder="예) wayc@google.com"
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={onChangeEmail}
+                placeholder="예) wayc@google.com"
               />
             </div>
           </Label>
