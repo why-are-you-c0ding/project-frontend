@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from "react";
 import useInput from "@hooks/useInput";
+import { Link } from 'react-router-dom';
+// import axios from "axios";
 import {
   Form,
   Error,
@@ -11,8 +13,10 @@ import {
   Label,
   SignUpBtn,
   Wrapper,
+  LinkContainer,
 } from "./styles";
 import StatusBar from "@components/StatusBar";
+
 
 const SignUp = () => {
   const [id, onChangeId] = useInput("");
@@ -20,8 +24,11 @@ const SignUp = () => {
   const [passwordCheck, setPasswordCheck] = useState("");
   const [email, setEmail] = useState("");
   const [nickname, onChangeNickname] = useInput("");
+
   const [mismatchError, setMismatchError] = useState(false);
   const [match, setmatch] = useState(true);
+  // const [signUpError, setSignUpError] = useState(false);
+  // const [signUpSuccess, setSignUpSuccess] = useState(false);
 
   const onChangePassword = useCallback(
     (e) => {
@@ -48,9 +55,23 @@ const SignUp = () => {
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      console.log(id, nickname, password, passwordCheck, email, nickname);
+      // axios.post('',{
+      //   id,password,nickname,
+      // })
+      //     .then((response)=>{
+      //       alert("성공");
+      //       console.log(response);
+      //       setSignUpSuccess(true);
+      //     })
+      //     .catch((error)=>{
+      //       alert("에러!!!!!!");
+      //       console.log(error.response);
+      //       setSignUpError(error.response.data);
+      //
+      //     })
+      //     .finally(()=>{});
     },
-    [id, nickname, password, passwordCheck, email, nickname]
+    [id,  password, passwordCheck, email, nickname]
   );
 
   return (
@@ -119,6 +140,12 @@ const SignUp = () => {
               <span>이메일 주소*</span>
               <button>중복 체크</button>
             </div>
+            {/*{signUpError && (*/}
+            {/*    <Error>*/}
+            {/*      {" "}*/}
+            {/*      이미 가입된 이메일입니다.*/}
+            {/*    </Error>*/}
+            {/*)}*/}
             <div>
               <Input
                 type="email"
@@ -142,12 +169,22 @@ const SignUp = () => {
                 name="nickname"
                 value={nickname}
                 onChange={onChangeNickname}
-                placeholder="예) 권오현"
+                placeholder="예) 권오현 진짜 못생김"
               />
             </div>
+            {/*{signUpSuccess && (*/}
+            {/*    <Success>*/}
+            {/*      {" "}*/}
+            {/*      회원 가입이 완료되었습니다.*/}
+            {/*    </Success>*/}
+            {/*)}*/}
           </Label>
-          <SignUpBtn>가입하기</SignUpBtn>
+          <SignUpBtn type="submit">가입하기</SignUpBtn>
         </Form>
+        <LinkContainer>
+          이미 회원이신가요? &nbsp;
+          <Link to="/login">로그인 하러가기</Link>
+        </LinkContainer>
       </Wrapper>
     </div>
   );
