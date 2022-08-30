@@ -22,6 +22,11 @@ export const SubBar = styled.div`
   padding: 10px 50px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
+  & span a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   @media screen and (max-width: 769px) {
     display: none;
   }
