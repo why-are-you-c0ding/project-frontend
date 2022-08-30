@@ -83,7 +83,7 @@ export const Input = styled.input`
 export const SignUpBtn = styled.button`
   width: 25rem;
   height: 4rem;
-  background-color: blueviolet;
+  background-color: cornflowerblue;
   color: white;
   border: transparent;
   border-radius: 20px;
@@ -93,6 +93,11 @@ export const SignUpBtn = styled.button`
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 2rem;
+  cursor: pointer;
+  &:hover {
+    background-color: blueviolet;
+    border: none;
+  }
 `;
 
 export const ErrorCircle = styled.div`
@@ -135,11 +140,27 @@ export const Line = styled.div`
 export const SearchBox = styled.div`
   text-align: center;
   & span {
-    padding: 30px;
+    padding: 20px;
 
     & a {
       text-decoration: none;
       color: inherit;
+    }
+  }
+`;
+
+export const LinkContainer = styled.p`
+  font-size: 13px;
+  color: #616061;
+  margin: 0 auto 8px;
+  width: 400px;
+  max-width: 400px;
+  & a {
+    color: #1264a3;
+    text-decoration: none;
+    font-weight: 700;
+    &:hover {
+      text-decoration: underline;
     }
   }
 `;
