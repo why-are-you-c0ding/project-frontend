@@ -136,6 +136,9 @@ const SignUp = () => {
             </div>
           </Label>
           <Label>
+            <span>생년 월일*</span>
+          </Label>
+          <Label>
             <div>
               <span>이메일 주소*</span>
               <button>중복 체크</button>
@@ -148,15 +151,16 @@ const SignUp = () => {
             {/*)}*/}
             <div>
               <Input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={onChangeEmail}
-                placeholder="예) wayc@google.com"
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={onChangeEmail}
+                  placeholder="예) wayc@google.com"
               />
             </div>
           </Label>
+
           <Label>
             <div>
               <span>닉네임*</span>
