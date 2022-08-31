@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import useInput from "@hooks/useInput";
 import { Link } from "react-router-dom";
 // import axios from "axios";
+
 import {
   Form,
   Error,
@@ -27,6 +28,10 @@ const SignUp = () => {
 
   const [mismatchError, setMismatchError] = useState(false);
   const [match, setmatch] = useState(true);
+  const [idmissmatch,setidmissmatch] = useState(false);
+  const [emailmissmatch,setemailmissmatch] = useState(false);
+  const [nicknamemissmatch,setnickcnamemissmatch] = useState(false);
+
   // const [signUpError, setSignUpError] = useState(false);
   // const [signUpSuccess, setSignUpSuccess] = useState(false);
 
@@ -58,11 +63,27 @@ const SignUp = () => {
     setEmail(e.target.value);
   }, []);
 
+
+  const onClickid = useCallback((e)=>{
+    setidmissmatch(e.target.value ! ==id);
+  },[]);
+  //백엔드에 있는 아이디와 현재 아이디 비교 후 오류 출력
+
+  const onClickemail = useCallback((e)=>{
+    setemailmissmatch(e.target.value ! ==email);
+  },[]);
+  //백엔드에 있는 아이디와 현재 아이디 비교 후 오류 출력
+
+  const onClicknickname = useCallback((e)=>{
+    setnickcnamemissmatch(e.target.value ! ==nickname);
+  },[]);
+  //백엔드에 있는 아이디와 현재 아이디 비교 후 오류 출력
+
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
       // axios.post('',{
-      //   id,password,nickname,
+      //   id,password,birthDay,email, nickname,
       // })
       //     .then((response)=>{
       //       alert("성공");
@@ -77,7 +98,7 @@ const SignUp = () => {
       //     })
       //     .finally(()=>{});
     },
-    [id, password, passwordCheck, email, nickname]
+    [id, password, passwordCheck, birthDay, email, nickname]
   );
 
   return (
@@ -89,7 +110,13 @@ const SignUp = () => {
           <Label>
             <div>
               <span>아이디*</span>
-              <button>중복 체크</button>
+              <button onClick={onClickid}>중복 체크</button>
+              {idmissmatch && (
+                  <Correct>
+                    {" "}
+                    사용 가능합니다
+                  </Correct>
+              )}
             </div>
             <Input
               type="text"
@@ -152,14 +179,14 @@ const SignUp = () => {
           <Label>
             <div>
               <span>이메일 주소*</span>
-              <button>중복 체크</button>
+              <button onClick={onClickemail}>중복 체크</button>
+              {emailmissmatch && (
+                  <Correct>
+                    {" "}
+                    사용 가능합니다
+                  </Correct>
+              )}
             </div>
-            {/*{signUpError && (*/}
-            {/*    <Error>*/}
-            {/*      {" "}*/}
-            {/*      이미 가입된 이메일입니다.*/}
-            {/*    </Error>*/}
-            {/*)}*/}
             <div>
               <Input
                 type="email"
@@ -175,7 +202,13 @@ const SignUp = () => {
           <Label>
             <div>
               <span>닉네임*</span>
-              <button>중복 체크</button>
+              <button onClick={onClicknickname}>중복 체크</button>
+              {nicknamemissmatch && (
+                  <Correct>
+                    {" "}
+                    사용 가능합니다
+                  </Correct>
+              )}
             </div>
             <div>
               <Input
@@ -187,12 +220,6 @@ const SignUp = () => {
                 placeholder="예) 권오현 진짜 못생김"
               />
             </div>
-            {/*{signUpSuccess && (*/}
-            {/*    <Success>*/}
-            {/*      {" "}*/}
-            {/*      회원 가입이 완료되었습니다.*/}
-            {/*    </Success>*/}
-            {/*)}*/}
           </Label>
           <SignUpBtn type="submit">가입하기</SignUpBtn>
         </Form>
