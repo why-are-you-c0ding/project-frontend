@@ -13,5 +13,9 @@ export const slideList = [
     id: 3,
     src: "slideImage/img3.jpeg",
     alt: "세번째 슬라이드",
+  },  {
+    id: 4,
+    src: "slideImage/img3.jpeg",
+    alt: "세번째 슬라이드",
   },
 ];
