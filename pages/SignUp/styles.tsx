@@ -117,7 +117,7 @@ export const Error = styled.div`
 `;
 
 export const Correct = styled.div`
-  color: red;
+  color: green;
   margin: 10px 0 10px;
   font-weight: bold;
 `;
