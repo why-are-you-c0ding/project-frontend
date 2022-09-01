@@ -83,9 +83,9 @@ const config: Configuration = {
     static: { directory: path.resolve(__dirname) },
     proxy: {
       "/api/": {
-        target: "http://localhost:3095",
+        target: "https://waycabvav.shop",
         changeOrigin: true,
-        ws: true,
+        // pathRewrite: { "^/api": "" },
       },
     },
   },
