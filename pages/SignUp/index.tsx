@@ -24,7 +24,7 @@ const SignUp = () => {
   const [passwordCheck, setPasswordCheck] = useState("");
   const [email, setEmail] = useState("");
   const [nickname, onChangeNickname] = useInput("");
-  const [birthDay, onChangeBirthDay, setBirthDay] = useInput("");
+  const [age, onChangeBirthDay, setBirthDay] = useInput("");
   const [signUpError, setSignUpError] = useState('');
   const [signUpSuccess, setSignUpSuccess] = useState(false);
 
@@ -41,8 +41,8 @@ const SignUp = () => {
   // 여기 변수로 나이 계산
   useEffect(() => {
     const thisYear = new Date().getFullYear().toString().slice(0, 4);
-    console.log(parseInt(thisYear) - parseInt(birthDay.slice(0, 4)) + 1);
-  }, [birthDay, onChangeBirthDay, setBirthDay]);
+    console.log(parseInt(thisYear) - parseInt(age.slice(0, 4)) + 1);
+  }, [age, onChangeBirthDay, setBirthDay]);
 
   const onChangePassword = useCallback(
       (e) => {
@@ -86,7 +86,7 @@ const SignUp = () => {
       (e) => {
         e.preventDefault();
         axios.post('https://waycabvav.shop/members',{
-          id,password,birthDay,email, nickname,
+          id,password,age,email, nickname,
         })
             .then((response)=>{
               alert("성공");
@@ -101,7 +101,7 @@ const SignUp = () => {
             })
             .finally(()=>{});
       },
-      [id, password, passwordCheck, birthDay, email, nickname]
+      [id, password, passwordCheck, age, email, nickname]
   );
 
   return (
@@ -175,7 +175,7 @@ const SignUp = () => {
               <span>생년 월일*</span>
               <Input
                   type="date"
-                  value={birthDay}
+                  value={age}
                   onChange={onChangeBirthDay}
               ></Input>
             </Label>
