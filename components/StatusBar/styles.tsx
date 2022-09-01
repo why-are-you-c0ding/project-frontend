@@ -59,7 +59,6 @@ export const MainBar = styled.div`
     font-size: 28px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.8);
-
     margin-left: 40px;
     cursor: pointer;
   }

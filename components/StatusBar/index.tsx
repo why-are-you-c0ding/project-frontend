@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
 import Menu from "@components/Menu";
 import MenuList from "@components/MenuList";
+import { Link } from "react-router-dom";
 
 const StatusBar = () => {
   const [menu, setMenu] = useState(false);
@@ -38,10 +39,14 @@ const StatusBar = () => {
       <Bar>
         <SubBar>
           <SubMenu>
-            <span>장바구니</span>
-            <span>마이페이지</span>
             <span>
-              <a href="/login">로그인</a>
+              <Link to="/login">장바구니</Link>
+            </span>
+            <span>
+              <Link to="/mypage">마이 페이지</Link>
+            </span>
+            <span>
+              <Link to="/login">로그인</Link>
             </span>
           </SubMenu>
         </SubBar>
@@ -50,7 +55,9 @@ const StatusBar = () => {
             <a href="/">WAYC</a>
           </Name>
           <div>
-            <span className="hidden">shop</span>
+            <span className="hidden">
+              <Link to="/Shop">Shop</Link>
+            </span>
             <span>
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </span>
