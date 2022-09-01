@@ -17,38 +17,45 @@ const Main = () => {
     }
   }, [size, setSize]);
 
-  const nextButton = () => {
+  const nextButton = useCallback(() => {
     let checkSize = size - 100;
 
     if (checkSize > -(slideList.length * 100)) {
-      ref.current.style = `transform: translateX(${checkSize}vw)`;
       setSize(checkSize);
+      ref.current.style = `transform: translateX(${checkSize}vw)`;
     } else {
-      ref.current.style = "transform: translateX(0vw)";
       setSize(0);
+      ref.current.style = "transform: translateX(0vw)";
     }
-  };
+  }, [size, setSize]);
 
-  const prevButton = () => {
+  const prevButton = useCallback(() => {
     let checkSize = size + 100;
 
     if (checkSize <= 0) {
-      ref.current.style = `transform: translateX(${checkSize}vw)`;
       setSize(checkSize);
+      ref.current.style = `transform: translateX(${checkSize}vw)`;
     } else {
       let temp = -(slideList.length - 1) * 100;
-      ref.current.style = `transform: translateX(${temp}vw)`;
       setSize(temp);
+      ref.current.style = `transform: translateX(${temp}vw)`;
     }
-  };
+  }, [size, setSize]);
 
-  const slideBtn = (v: number): void => {
-    let width = 100 * (v - 1);
-    setSize(-width);
-    ref.current.style = `transform: translateX(-${width}vw)`;
-  };
+  const slideBtn = useCallback(
+    (v: number): void => {
+      let width = 100 * (v - 1);
+      setSize(-width);
+      ref.current.style = `transform: translateX(-${width}vw)`;
+    },
+    [size, setSize]
+  );
 
   // setInterval(nextButton, 2000);
+
+  // useEffect(() => {
+  //   setTimeout(nextButton, 2000);
+  // }, [size, setSize, nextButton, prevButton, slideBtn]);
 
   return (
     <div>
