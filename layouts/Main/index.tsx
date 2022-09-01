@@ -1,23 +1,14 @@
-import React, {
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import StatusBar from "@components/StatusBar";
-import { Inner, Slide, Wrapper } from "@layouts/Main/styles";
+import { Inner, Slide, SlideList, SlideWrapper } from "@layouts/Main/styles";
 import { slideList } from "@utils/slideList";
 
 const Main = () => {
   const ref = useRef<any>(null);
 
-  // const first = () => {
-  //   ref.current.style = "translate: 0vw";
-  // };
-  //
-
   const [size, setSize] = useState(0);
+
+  // setInterval(() => nextButton(), 4000);
 
   useEffect(() => {
     console.log(size);
@@ -27,27 +18,28 @@ const Main = () => {
   }, [size, setSize]);
 
   const nextButton = () => {
-    // setSize(size - 100);
     let checkSize = size - 100;
 
     if (checkSize > -(slideList.length * 100)) {
       ref.current.style = `transform: translateX(${checkSize}vw)`;
       setSize(checkSize);
+    } else {
+      ref.current.style = "transform: translateX(0vw)";
+      setSize(0);
     }
   };
 
   const prevButton = () => {
-    // setSize(size + 100);
     let checkSize = size + 100;
 
     if (checkSize <= 0) {
       ref.current.style = `transform: translateX(${checkSize}vw)`;
       setSize(checkSize);
+    } else {
+      let temp = -(slideList.length - 1) * 100;
+      ref.current.style = `transform: translateX(${temp}vw)`;
+      setSize(temp);
     }
-    // else {
-    //   setSize(-(slideList.length - 1) * 100);
-    //   ref.current.style = `transform: translateX(${size}vw)`;
-    // }
   };
 
   const slideBtn = (v: number): void => {
@@ -56,33 +48,37 @@ const Main = () => {
     ref.current.style = `transform: translateX(-${width}vw)`;
   };
 
+  // setInterval(nextButton, 2000);
+
   return (
     <div>
       <StatusBar />
-      <Wrapper>
-        <Slide ref={ref}>
+      <SlideWrapper>
+        <Slide>
+          <SlideList ref={ref}>
+            {slideList.map((v) => {
+              return (
+                <Inner key={v.id}>
+                  <img src={v.src} alt={v.alt} />
+                </Inner>
+              );
+            })}
+          </SlideList>
+        </Slide>
+        <div>
+          <div>
+            <button onClick={prevButton}>prev</button>
+            <button onClick={nextButton}>next</button>
+          </div>
           {slideList.map((v) => {
             return (
-              <Inner key={v.id}>
-                <img src={v.src} alt={v.alt} />
-              </Inner>
+              <button key={v.id} onClick={() => slideBtn(v.id)}>
+                {v.id}
+              </button>
             );
           })}
-        </Slide>
-      </Wrapper>
-      <div>
-        <div>
-          <button onClick={prevButton}>prev</button>
-          <button onClick={nextButton}>next</button>
         </div>
-        {slideList.map((v) => {
-          return (
-            <button key={v.id} onClick={() => slideBtn(v.id)}>
-              {v.id}
-            </button>
-          );
-        })}
-      </div>
+      </SlideWrapper>
     </div>
   );
 };

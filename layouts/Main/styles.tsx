@@ -1,18 +1,21 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 
-export const Wrapper = styled.div`
+export const SlideWrapper = styled.div`
   margin-top: 8rem;
 
+  position: relative;
+`;
+
+export const Slide = styled.div`
   overflow: hidden;
 
   height: 50vh;
 `;
 
-export const Slide = styled.div`
+export const SlideList = styled.div`
   width: 400vw;
-
-  //transition: transform 0.5s;
+  transition: transform 0.5s;
+  position: relative;
 `;
 
 export const Inner = styled.div`
