@@ -29,7 +29,7 @@ const SignUp = () => {
   const [signUpSuccess, setSignUpSuccess] = useState(false);
 
   const [mismatchError, setMismatchError] = useState(false);
-  const [match, setmatch] = useState(true);
+  const [match, setmatch] = useState(false);
 
   const [idmissmatch,setidmissmatch] = useState(false);
   const [emailmissmatch,setemailmissmatch] = useState(false);
@@ -48,7 +48,7 @@ const SignUp = () => {
       (e) => {
         setPassword(e.target.value);
         setMismatchError(e.target.value !== passwordCheck);
-        setmatch(e.target.value === passwordCheck);
+        setmatch(e.target.value === passwordCheck)
       },
       [passwordCheck]
   );
@@ -56,9 +56,8 @@ const SignUp = () => {
   const onChangePasswordCheck = useCallback(
       (e) => {
         setPasswordCheck(e.target.value);
-
         setMismatchError(e.target.value !== password);
-        setmatch(e.target.value === password);
+        setmatch(e.target.value === password)
       },
       [password]
   );
