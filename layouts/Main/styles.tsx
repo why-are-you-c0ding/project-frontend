@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 export const Slide = styled.div`
   width: 400vw;
 
-  transition: transform 0.5s;
+  //transition: transform 0.5s;
 `;
 
 export const Inner = styled.div`

@@ -17,7 +17,7 @@ const Main = () => {
   // };
   //
 
-  const [size, setSize] = useState(-100);
+  const [size, setSize] = useState(0);
 
   useEffect(() => {
     console.log(size);
@@ -30,9 +30,9 @@ const Main = () => {
     // setSize(size - 100);
     let checkSize = size - 100;
 
-    if (checkSize <= 0) {
+    if (checkSize > -(slideList.length * 100)) {
+      ref.current.style = `transform: translateX(${checkSize}vw)`;
       setSize(checkSize);
-      ref.current.style = `transform: translateX(${size}vw)`;
     }
   };
 
@@ -41,16 +41,17 @@ const Main = () => {
     let checkSize = size + 100;
 
     if (checkSize <= 0) {
+      ref.current.style = `transform: translateX(${checkSize}vw)`;
       setSize(checkSize);
-      ref.current.style = `transform: translateX(${size}vw)`;
-    } else {
-      setSize(-(slideList.length - 1) * 100);
-      ref.current.style = `transform: translateX(${size}vw)`;
     }
+    // else {
+    //   setSize(-(slideList.length - 1) * 100);
+    //   ref.current.style = `transform: translateX(${size}vw)`;
+    // }
   };
 
   const slideBtn = (v: number): void => {
-    let width = 100 * (v-1);
+    let width = 100 * (v - 1);
     setSize(-width);
     ref.current.style = `transform: translateX(-${width}vw)`;
   };
