@@ -30,6 +30,7 @@ const SignUp = () => {
 
   const [mismatchError, setMismatchError] = useState(false);
   const [match, setmatch] = useState(true);
+
   const [idmissmatch,setidmissmatch] = useState(false);
   const [emailmissmatch,setemailmissmatch] = useState(false);
   const [nicknamemissmatch,setnickcnamemissmatch] = useState(false);
@@ -55,6 +56,7 @@ const SignUp = () => {
   const onChangePasswordCheck = useCallback(
       (e) => {
         setPasswordCheck(e.target.value);
+
         setMismatchError(e.target.value !== password);
         setmatch(e.target.value === password);
       },
@@ -74,12 +76,12 @@ const SignUp = () => {
   const onClickemail = useCallback((e)=>{
     setemailmissmatch(e.target.value ! ==email);
   },[]);
-  //백엔드에 있는 아이디와 현재 아이디 비교 후 오류 출력
+  //백엔드에 있는 아이디와 현재 이메일 비교 후 오류 출력
 
   const onClicknickname = useCallback((e)=>{
     setnickcnamemissmatch(e.target.value ! ==nickname);
   },[]);
-  //백엔드에 있는 아이디와 현재 아이디 비교 후 오류 출력
+  //백엔드에 있는 아이디와 현재 닉네임 비교 후 오류 출력
 
   const onSubmit = useCallback(
       (e) => {

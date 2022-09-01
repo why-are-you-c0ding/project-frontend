@@ -108,6 +108,7 @@ export const ErrorCircle = styled.div`
   border-radius: 50%;
   font-weight: bold;
   margin-right: 10px;
+  padding: 5px;
 `;
 
 export const Error = styled.div`
@@ -115,6 +116,7 @@ export const Error = styled.div`
   margin: 8px 0 16px;
   font-weight: bold;
 `;
+
 
 export const Correct = styled.div`
   color: green;
@@ -130,6 +132,7 @@ export const CorrectCircle = styled.div`
   border-radius: 50%;
   font-weight: bold;
   margin-right: 10px;
+  padding: 5px;
 `;
 
 export const Line = styled.div`
