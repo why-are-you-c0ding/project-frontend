@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import StatusBar from "@components/StatusBar";
+import MainItem from "@components/MainItem";
 import { Inner, Slide, SlideList, SlideWrapper } from "@layouts/Main/styles";
 import { slideList } from "@utils/slideList";
 
@@ -86,6 +87,7 @@ const Main = () => {
           })}
         </div>
       </SlideWrapper>
+      <MainItem />
     </div>
   );
 };
