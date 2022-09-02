@@ -81,13 +81,13 @@ const config: Configuration = {
     port: 3090,
     devMiddleware: { publicPath: "/dist/" },
     static: { directory: path.resolve(__dirname) },
-    proxy: {
-      "/api/": {
-        target: "https://waycabvav.shop",
-        changeOrigin: true,
-        // pathRewrite: { "^/api": "" },
-      },
-    },
+    // proxy: {
+    //   "/api/": {
+    //     target: "https://waycabvav.shop",
+    //     changeOrigin: true,
+    //     pathRewrite: { "^/api": "" },
+    //   },
+    // },
   },
 };
 

@@ -77,7 +77,7 @@ const SignUp = () => {
       e.preventDefault();
       axios
         .post(
-          "/members",
+          'https://waycabvav.shop/members',
           {
             nickName: nickname,
             email: email,
@@ -86,8 +86,8 @@ const SignUp = () => {
             checkPassword: passwordCheck,
             age: age,
           },
-          { withCredentials: true }
-        )
+            { withCredentials: true }
+            )
         .then((response) => {
           alert("성공");
           console.log(response);
@@ -98,7 +98,7 @@ const SignUp = () => {
           console.log(error.response);
         });
     },
-    [id, password, passwordCheck, birthDay, age, email, nickname]
+    [id, password, passwordCheck,  birthDay,age, email, nickname]
   );
 
   return (
