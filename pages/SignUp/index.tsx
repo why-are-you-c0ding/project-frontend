@@ -89,7 +89,7 @@ const SignUp = () => {
             { withCredentials: true }
             )
         .then((response) => {
-          alert("성공");
+          alert("회원가입에 성공하셨습니다. 로그인을 해주세요");
           console.log(response);
           setSignUpSuccess(true);
         })
@@ -99,6 +99,75 @@ const SignUp = () => {
         });
     },
     [id, password, passwordCheck,  birthDay,age, email, nickname]
+  );
+
+
+//이메일 발송 axios
+  const onSubmitEmail = useCallback((e)=>{
+    e.preventDefault();
+    axios
+        .post(
+            'https://waycabvav.shop/verification/email',
+            {
+              receiveEmail:email,
+            },
+            {withCredentials: true}
+        )
+        .then((response) => {
+          alert("이메일을 보냈습니다.");
+          console.log(response);
+        })
+        .catch((error) => {
+          alert("이메일 발송에 실패했습니다.");
+          console.log(error.response);
+        });
+      },
+      [email]
+  );
+
+  //닉네임 중복검사 axios
+  const onSubmitNickname = useCallback((e)=>{
+        e.preventDefault();
+        axios
+            .post(
+                'https://waycabvav.shop/verification/nick-name',
+                {
+                  nickName:nickname,
+                },
+                {withCredentials: true}
+            )
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              alert("검증에 실패했습니다.");
+              console.log(error.response);
+            });
+      },
+      [nickname]
+  );
+
+
+  //아이디 중복검사 axios
+  const onSubmitId = useCallback((e)=>{
+        e.preventDefault();
+        axios
+            .post(
+                'https://waycabvav.shop/verification/login-id',
+                {
+                  loginId:id,
+                },
+                {withCredentials: true}
+            )
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              alert("검증에 실패했습니다.");
+              console.log(error.response);
+            });
+      },
+      [id]
   );
 
   return (
@@ -111,7 +180,7 @@ const SignUp = () => {
             <div>
               <span>아이디*</span>
               <button onClick={() => {}}>중복 체크</button>
-              {idmissmatch && <Correct> 사용 가능합니다</Correct>}
+              {idmissmatch && <Correct> 사용 가능한 아이디입니다.</Correct>}
             </div>
             <Input
               type="text"
@@ -175,7 +244,7 @@ const SignUp = () => {
             <div>
               <span>이메일 주소*</span>
               <button onClick={() => {}}>중복 체크</button>
-              {emailmissmatch && <Correct> 사용 가능합니다</Correct>}
+              {emailmissmatch && <Correct> 이메일 인증에 성공했습니다.</Correct>}
             </div>
             <div>
               <Input
@@ -193,7 +262,7 @@ const SignUp = () => {
             <div>
               <span>닉네임*</span>
               <button onClick={() => {}}>중복 체크</button>
-              {nicknamemissmatch && <Correct> 사용 가능합니다</Correct>}
+              {nicknamemissmatch && <Correct> 사용 가능한 아이디입니다.</Correct>}
             </div>
             <div>
               <Input
