@@ -17,7 +17,6 @@ import {
   LinkContainer,
 } from "./styles";
 import StatusBar from "@components/StatusBar";
-import { useToastContainer } from "react-toastify";
 
 const SignUp = () => {
   const [id, onChangeId, setId] = useInput("");
