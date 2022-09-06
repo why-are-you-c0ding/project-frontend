@@ -37,7 +37,6 @@ export const Label = styled.label`
 
   & span {
     text-align: left;
-    margin-bottom: 8px;
     font-size: 15px;
     cursor: pointer;
     font-weight: 700;
@@ -53,7 +52,8 @@ export const Label = styled.label`
     color: inherit;
     border: transparent;
     text-align: center;
-    margin: 10px 20px 10px 2rem;
+    //margin: 10px 1rem;
+    margin-left: 1rem;
     font-weight: bold;
     cursor: pointer;
   }
@@ -71,7 +71,8 @@ export const Input = styled.input`
   outline: none;
   font-size: 1rem;
   padding: 10px 0 14px;
-  margin-bottom: 30px;
+  margin-top: 0.6rem;
+  margin-bottom: 1.2rem;
   :focus {
     border-bottom: 2px solid black;
   }
@@ -116,7 +117,6 @@ export const Error = styled.div`
   margin: 8px 0 16px;
   font-weight: bold;
 `;
-
 
 export const Correct = styled.div`
   color: green;
