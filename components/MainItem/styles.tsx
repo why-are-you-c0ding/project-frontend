@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.section`
-  max-width: 90vh;
+  max-width: 80%;
   display: block;
   margin: 5rem auto 5rem;
 `;
@@ -37,7 +37,6 @@ export const ItemList = styled.div`
 
 
 export const ItemImg = styled.div`
-  background-color: #f5f5f5;
   width: 18rem;
   height: 18rem;
   border-radius: 1rem;
