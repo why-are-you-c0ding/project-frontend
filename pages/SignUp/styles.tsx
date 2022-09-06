@@ -24,7 +24,7 @@ export const SubHeader = styled.div`
 
 export const Form = styled.form`
   margin: 0 auto;
-  width: 400px;
+  width: 100vw;
   max-width: 400px;
 `;
 
