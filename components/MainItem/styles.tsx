@@ -24,58 +24,59 @@ export const Title = styled.div`
 `
 
 export const SubTitle = styled.div`
-  font-size: 0.8rem;
-  line-height: 1rem;
-  color:gray;
-  font-weight: lighter;
-  margin:0;
-  padding:0;
+ font-size: 0.8rem;
+ line-height: 1rem;
+ color:gray;
+ font-weight: lighter;
+ margin:0;
+ padding:0;
 `
 
 export const ItemContainer = styled.div`
-  max-width: 100rem;
-  padding:1.8rem 1.8rem;
-  margin:0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: repeat(1,minmax(auto,auto));
-  grid-gap:1rem;
+ max-width: 100rem;
+ padding:1.8rem 1.8rem;
+ margin:0 auto;
+ display: grid;
+ grid-template-columns: 1fr 1fr 1fr 1fr;
+ grid-template-rows: repeat(1,minmax(auto,auto));
+ grid-gap:1rem;
 `
 
 export const ItemBox = styled.div`
-  width: 100%;
-  height: 28rem;
+ width: 100%;
+ height: 28rem;
 `
 
 export const Item =styled.div`
-  width: 18rem;
-  height: 18rem;
-  border-radius: 1rem;
-  margin: auto;
-  display: flex;
+ width: 18rem;
+ height: 18rem;
+ border-radius: 1rem;
+ margin: auto;
+ display: flex;
  `
 export const Itemdetail= styled.div`
-  padding: 1rem;
+ padding: 1rem;
 `
 
 
 export const ItemName = styled.div`
-  font-weight: bold;
-  font-size: 0.9rem;
-  text-decoration: underline;
-  margin-bottom: 0.5rem;
+ font-weight: bold;
+ font-size: 1.2rem;
+ margin-bottom: 0.5rem;
+ text-decoration: underline;
 `;
 
 export const ItemFullName = styled.div`
-  font-size: 0.8rem;
-  margin-bottom: 0.5rem;
+ font-size: 1rem;
+ margin-bottom: 0.5rem;
 `;
 
 export const ItemPrice = styled.div`
-  font-weight: bold;
+ font-weight: bold;
+ margin-bottom: 0.3rem;
 `;
 
 export const RightPrice = styled.div`
-  font-size: 0.75rem;
-  color: gray;
+ font-size: 0.8rem;
+ color: gray;
 `;
