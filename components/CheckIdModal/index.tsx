@@ -4,8 +4,6 @@ import React, {
   FC,
   SetStateAction,
   useCallback,
-  useEffect,
-  useRef,
   useState,
 } from "react";
 import {
@@ -35,10 +33,6 @@ const CheckIdModal: FC<Props> = ({
   const [failUseID, setFailUseId] = useState(false);
   const [clickCheck, setClickCheck] = useState(false);
 
-  const stopPropagation = useCallback((e: any) => {
-    e.stopPropagation();
-  }, []);
-
   const onSubmitId = useCallback(
     (e) => {
       e.preventDefault();
@@ -64,8 +58,15 @@ const CheckIdModal: FC<Props> = ({
     [id, setId]
   );
 
+  const stopPropagation = useCallback(
+    (e: React.SyntheticEvent<EventTarget>) => {
+      e.stopPropagation();
+    },
+    []
+  );
+
   return (
-    <Wrapper onChange={stopPropagation}>
+    <Wrapper onClick={stopPropagation}>
       <Form onSubmit={onSubmitId}>
         <Div>
           <Header>아이디 중복 검사</Header>

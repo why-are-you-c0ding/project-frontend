@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 import { Blank, CloseBtn, List } from "@components/MenuList/styles";
 
 interface Props {
@@ -6,8 +6,14 @@ interface Props {
 }
 
 const MenuList: FC<Props> = ({ onCloseModal }) => {
+  const stopPropagation = useCallback(
+    (e: React.SyntheticEvent<EventTarget>) => {
+      e.stopPropagation();
+    },
+    []
+  );
   return (
-    <div>
+    <div onClick={stopPropagation}>
       <Blank onClick={onCloseModal}></Blank>
       <List>
         <CloseBtn onClick={onCloseModal}>X</CloseBtn>
