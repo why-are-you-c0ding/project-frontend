@@ -4,6 +4,7 @@ import React, {
   FC,
   SetStateAction,
   useCallback,
+  useEffect,
   useState,
 } from "react";
 import {
@@ -46,6 +47,9 @@ const CheckIdModal: FC<Props> = ({
         )
         .then((response) => {
           setFailUseId(true);
+          setId(id);
+
+          if (id.length < 6) setFailUseId(false);
         })
         .catch((error) => {
           setFailUseId(false);
@@ -75,9 +79,9 @@ const CheckIdModal: FC<Props> = ({
         <Input
           type="text"
           id="id"
+          onChange={onChangeId}
           name="id"
           value={id}
-          onChange={onChangeId}
         ></Input>
         <button onClick={onCloseCheckIdModal}>X</button>
         {clickCheck && !failUseID && id.length > 0 && (
