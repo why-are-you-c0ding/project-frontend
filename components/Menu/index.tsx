@@ -9,19 +9,12 @@ interface Props {
 }
 
 const Menu: FC<Props> = ({ children, show, onCloseModal, closeButton }) => {
-  const stopPropagation = useCallback(
-    (e: React.SyntheticEvent<EventTarget>) => {
-      e.stopPropagation();
-    },
-    []
-  );
-
   if (!show) return null;
 
   return (
     <div>
       <CreateModal onClick={onCloseModal}>
-        <div onClick={stopPropagation}>{children}</div>
+        <div>{children}</div>
       </CreateModal>
     </div>
   );
