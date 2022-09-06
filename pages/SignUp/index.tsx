@@ -18,7 +18,7 @@ import {
 } from "./styles";
 import StatusBar from "@components/StatusBar";
 import Menu from "@components/Menu";
-// import CheckIdModal from "@components/checkIdModal";
+import CheckIdModal from "@components/CheckIdModal";
 
 const SignUp = () => {
   const [id, onChangeId, setId] = useInput("");
@@ -34,9 +34,11 @@ const SignUp = () => {
   const [mismatchError, setMismatchError] = useState(false);
   const [mismatchCondition, setMismatchCondition] = useState(false);
 
-  const [mismatchId, setmisMatchId] = useState(false);
-  const [mismatchEmail, setmisMatchEmail] = useState(false);
-  const [mismatchNickname, setmisMatchNickname] = useState(false);
+  // const [mismatchId, setmisMatchId] = useState(false);
+  // const [mismatchEmail, setmisMatchEmail] = useState(false);
+  // const [mismatchNickname, setmisMatchNickname] = useState(false);  // const [mismatchId, setmisMatchId] = useState(false);
+
+  const [checkIdModal, setCheckIdModal] = useState(true);
 
   // 여기 변수로 나이 계산
   useEffect(() => {
@@ -69,6 +71,10 @@ const SignUp = () => {
     },
     [password, setPasswordCheck]
   );
+
+  const onCloseCheckIdModal = useCallback(() => {
+    setCheckIdModal((prev) => !prev);
+  }, []);
 
   // const onClickid = useCallback((e) => {
   //   setmisMatchId(e.target.value! == id);
@@ -119,8 +125,27 @@ const SignUp = () => {
           console.log(error.response);
         });
     },
-    [id, password, passwordCheck, birthDay, age, email, nickname]
+    [
+      id,
+      setId,
+      password,
+      setPassword,
+      passwordCheck,
+      setPasswordCheck,
+      birthDay,
+      setBirthDay,
+      age,
+      setAge,
+      email,
+      setEmail,
+      nickname,
+      setNickname,
+    ]
   );
+
+  // const stopPropagation = useCallback((e: any) => {
+  //   e.stopPropagation();
+  // }, []);
 
   //이메일 발송 axios
   const onSubmitEmail = useCallback(
@@ -169,28 +194,6 @@ const SignUp = () => {
     [nickname]
   );
 
-  //아이디 중복검사 axios
-  const onSubmitId = useCallback(
-    (e) => {
-      e.preventDefault();
-      axios
-        .post(
-          "https://waycabvav.shop/verification/login-id",
-          {
-            loginId: id,
-          },
-          { withCredentials: true }
-        )
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          alert("검증에 실패했습니다.");
-        });
-    },
-    [id]
-  );
-
   return (
     <div>
       <StatusBar />
@@ -200,7 +203,9 @@ const SignUp = () => {
           <Label>
             <div>
               <span>아이디*</span>
-              <button onClick={() => {}}>중복 체크</button>
+              <button type="button" onClick={onCloseCheckIdModal}>
+                중복 체크
+              </button>
             </div>
             <Input
               type="text"
@@ -281,7 +286,7 @@ const SignUp = () => {
           <Label>
             <div>
               <span>이메일 주소*</span>
-              <button onClick={() => {}}>중복 체크</button>
+              <button type="button">중복 체크</button>
             </div>
             <div>
               <Input
@@ -298,7 +303,7 @@ const SignUp = () => {
           <Label>
             <div>
               <span>닉네임*</span>
-              <button onClick={() => {}}>중복 체크</button>
+              <button type="button">중복 체크</button>
             </div>
             <div>
               <Input
@@ -322,11 +327,18 @@ const SignUp = () => {
           이미 회원이신가요? &nbsp;
           <Link to="/login">로그인 하러가기</Link>
         </LinkContainer>
-        {/*{*/}
-        {/*  <Menu show={true} onCloseModal={() => {}}>*/}
-        {/*    {<CheckIdModal />}*/}
-        {/*  </Menu>*/}
-        {/*}*/}
+        {
+          <Menu show={checkIdModal} onCloseModal={onCloseCheckIdModal}>
+            {
+              <CheckIdModal
+                id={id}
+                onChangeId={onChangeId}
+                onCloseCheckIdModal={onCloseCheckIdModal}
+                setId={setId}
+              />
+            }
+          </Menu>
+        }
       </Wrapper>
     </div>
   );
