@@ -38,7 +38,7 @@ const SignUp = () => {
   // const [mismatchEmail, setmisMatchEmail] = useState(false);
   // const [mismatchNickname, setmisMatchNickname] = useState(false);  // const [mismatchId, setmisMatchId] = useState(false);
 
-  const [checkIdModal, setCheckIdModal] = useState(true);
+  const [checkIdModal, setCheckIdModal] = useState(false);
 
   // 여기 변수로 나이 계산
   useEffect(() => {
@@ -75,6 +75,13 @@ const SignUp = () => {
   const onCloseCheckIdModal = useCallback(() => {
     setCheckIdModal((prev) => !prev);
   }, []);
+
+  const stopPropagation = useCallback(
+      (e: React.SyntheticEvent<EventTarget>) => {
+        e.stopPropagation();
+      },
+      []
+  );
 
   // const onClickid = useCallback((e) => {
   //   setmisMatchId(e.target.value! == id);

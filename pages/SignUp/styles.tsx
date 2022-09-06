@@ -32,7 +32,6 @@ export const Label = styled.label`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   margin-bottom: 16px;
 
   & span {
@@ -45,14 +44,13 @@ export const Label = styled.label`
   }
 
   & button {
-    width: 4rem;
+    width: 5rem;
     height: 1.5rem;
     border-radius: 5px;
-    background-color: #e8e1e1;
+    background-color: #e8e1e5;
     color: inherit;
     border: transparent;
     text-align: center;
-    //margin: 10px 1rem;
     margin-left: 1rem;
     font-weight: bold;
     cursor: pointer;
