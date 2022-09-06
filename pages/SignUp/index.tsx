@@ -15,6 +15,8 @@ import {
   SignUpBtn,
   Wrapper,
   LinkContainer,
+  Button,
+  Div,
 } from "./styles";
 import StatusBar from "@components/StatusBar";
 import Menu from "@components/Menu";
@@ -38,7 +40,7 @@ const SignUp = () => {
   // const [mismatchEmail, setmisMatchEmail] = useState(false);
   // const [mismatchNickname, setmisMatchNickname] = useState(false);  // const [mismatchId, setmisMatchId] = useState(false);
 
-  const [checkIdModal, setCheckIdModal] = useState(true);
+  const [checkIdModal, setCheckIdModal] = useState(false);
 
   // 여기 변수로 나이 계산
   useEffect(() => {
@@ -143,9 +145,6 @@ const SignUp = () => {
     ]
   );
 
-  // const stopPropagation = useCallback((e: any) => {
-  //   e.stopPropagation();
-  // }, []);
 
   //이메일 발송 axios
   const onSubmitEmail = useCallback(
@@ -200,22 +199,22 @@ const SignUp = () => {
       <Wrapper>
         <Header>회원가입</Header>
         <Form onSubmit={onSubmit}>
-          <Label>
-            <div>
+          <Div>
+            <Label>
               <span>아이디*</span>
-              <button type="button" onClick={onCloseCheckIdModal}>
-                중복 체크
-              </button>
-            </div>
-            <Input
-              type="text"
-              id="id"
-              name="id"
-              value={id}
-              onChange={onChangeId}
-              placeholder="예) Wayc123, 6자 이상"
-            />
-          </Label>
+              <Input
+                type="text"
+                id="id"
+                name="id"
+                value={id}
+                onChange={onChangeId}
+                placeholder="예) Wayc123, 6자 이상"
+              />
+            </Label>
+            <Button type="button" onClick={onCloseCheckIdModal}>
+              중복 체크
+            </Button>
+          </Div>
           <Label>
             <span>비밀 번호*</span>
             {!mismatchCondition && password.length > 0 && (
@@ -283,12 +282,9 @@ const SignUp = () => {
               onChange={onChangeBirthDay}
             ></Input>
           </Label>
-          <Label>
-            <div>
+          <Div>
+            <Label>
               <span>이메일 주소*</span>
-              <button type="button">중복 체크</button>
-            </div>
-            <div>
               <Input
                 type="email"
                 id="email"
@@ -297,15 +293,13 @@ const SignUp = () => {
                 onChange={onChangeEmail}
                 placeholder="예) wayc@google.com"
               />
-            </div>
-          </Label>
+            </Label>
+            <Button type="button">인증 번호</Button>
+          </Div>
 
-          <Label>
-            <div>
+          <Div>
+            <Label>
               <span>닉네임*</span>
-              <button type="button">중복 체크</button>
-            </div>
-            <div>
               <Input
                 type="text"
                 id="nickname"
@@ -315,8 +309,10 @@ const SignUp = () => {
                 placeholder="예) 나비, 2자 이상"
                 minLength={2}
               />
-            </div>
-          </Label>
+            </Label>
+            <Button type="button">중복 체크</Button>
+          </Div>
+
           {signUpError && <Error>{signUpError}</Error>}
           {signUpSuccess && (
             <Correct>회원가입되었습니다! 로그인해주세요.</Correct>

@@ -15,6 +15,27 @@ export const Header = styled.header`
   margin-bottom: 20px;
 `;
 
+export const Div = styled.div`
+  position: relative;
+`;
+
+export const Button = styled.button`
+  width: 4rem;
+  height: 1.5rem;
+  border-radius: 5px;
+  background-color: #e8e1e1;
+  color: inherit;
+  border: transparent;
+  text-align: center;
+  margin-left: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+
+  position: absolute;
+  top: 0;
+  left: 4.5rem;
+`;
+
 export const SubHeader = styled.div`
   font-weight: bolder;
   font-size: 20px;
@@ -33,7 +54,7 @@ export const Label = styled.label`
   flex-direction: column;
   justify-content: center;
 
-  margin-bottom: 16px;
+  margin-bottom: 2rem;
 
   & span {
     text-align: left;
@@ -42,20 +63,7 @@ export const Label = styled.label`
     font-weight: 700;
 
     width: 7rem;
-  }
 
-  & button {
-    width: 4rem;
-    height: 1.5rem;
-    border-radius: 5px;
-    background-color: #e8e1e1;
-    color: inherit;
-    border: transparent;
-    text-align: center;
-    //margin: 10px 1rem;
-    margin-left: 1rem;
-    font-weight: bold;
-    cursor: pointer;
   }
 `;
 
@@ -72,7 +80,6 @@ export const Input = styled.input`
   font-size: 1rem;
   padding: 10px 0 14px;
   margin-top: 0.6rem;
-  margin-bottom: 1.2rem;
   :focus {
     border-bottom: 2px solid black;
   }
