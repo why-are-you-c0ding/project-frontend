@@ -17,6 +17,8 @@ import {
   LinkContainer,
 } from "./styles";
 import StatusBar from "@components/StatusBar";
+import Menu from "@components/Menu";
+// import CheckIdModal from "@components/checkIdModal";
 
 const SignUp = () => {
   const [id, onChangeId, setId] = useInput("");
@@ -199,15 +201,14 @@ const SignUp = () => {
             <div>
               <span>아이디*</span>
               <button onClick={() => {}}>중복 체크</button>
-              {mismatchId && <Correct> 사용 가능한 아이디입니다.</Correct>}
             </div>
             <Input
-              type="email"
+              type="text"
               id="id"
               name="id"
               value={id}
               onChange={onChangeId}
-              placeholder="예) Wayc"
+              placeholder="예) Wayc123, 6자 이상"
             />
           </Label>
           <Label>
@@ -281,7 +282,6 @@ const SignUp = () => {
             <div>
               <span>이메일 주소*</span>
               <button onClick={() => {}}>중복 체크</button>
-              {mismatchEmail && <Correct> 이메일 인증에 성공했습니다.</Correct>}
             </div>
             <div>
               <Input
@@ -299,9 +299,6 @@ const SignUp = () => {
             <div>
               <span>닉네임*</span>
               <button onClick={() => {}}>중복 체크</button>
-              {mismatchNickname && (
-                <Correct> 사용 가능한 아이디입니다.</Correct>
-              )}
             </div>
             <div>
               <Input
@@ -325,6 +322,11 @@ const SignUp = () => {
           이미 회원이신가요? &nbsp;
           <Link to="/login">로그인 하러가기</Link>
         </LinkContainer>
+        {/*{*/}
+        {/*  <Menu show={true} onCloseModal={() => {}}>*/}
+        {/*    {<CheckIdModal />}*/}
+        {/*  </Menu>*/}
+        {/*}*/}
       </Wrapper>
     </div>
   );
