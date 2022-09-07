@@ -33,6 +33,11 @@ export const List = styled.div`
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     }
   }
+
+  & a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 
 export const Blank = styled.div`
@@ -41,5 +46,5 @@ export const Blank = styled.div`
   left: 0;
   width: 40vw;
   height: 100%;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0, 0, 0, 0.3);
 `;
