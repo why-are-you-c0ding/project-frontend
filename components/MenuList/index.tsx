@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useEffect } from "react";
 import { Blank, CloseBtn, List } from "@components/MenuList/styles";
+import {Link} from "react-router-dom";
 
 interface Props {
   onCloseModal: (e: React.SyntheticEvent<EventTarget>) => void;
@@ -21,7 +22,9 @@ const MenuList: FC<Props> = ({ onCloseModal }) => {
           <span>Shop</span>
           <span>장바구니</span>
           <span>마이페이지</span>
-          <span>로그인</span>
+          <span>
+            <Link to="/login">로그인</Link>
+          </span>
         </div>
       </List>
     </div>
