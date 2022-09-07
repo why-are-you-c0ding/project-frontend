@@ -21,6 +21,7 @@ import {
 import StatusBar from "@components/StatusBar";
 import Menu from "@components/Menu";
 import CheckIdModal from "@components/CheckIdModal";
+import CheckNicknameModal from "@components/CheckNicknameModal";
 
 const SignUp = () => {
   const [id, onChangeId, setId] = useInput("");
@@ -36,11 +37,11 @@ const SignUp = () => {
   const [mismatchError, setMismatchError] = useState(false);
   const [mismatchCondition, setMismatchCondition] = useState(false);
 
-  // const [mismatchId, setmisMatchId] = useState(false);
-  // const [mismatchEmail, setmisMatchEmail] = useState(false);
-  // const [mismatchNickname, setmisMatchNickname] = useState(false);  // const [mismatchId, setmisMatchId] = useState(false);
+  const [checkId, setCheckId] = useState(false);
+  const [checkNickname, setCheckNickname] = useState(false);
 
   const [checkIdModal, setCheckIdModal] = useState(false);
+  const [checkNicknameModal, setCheckNicknameModal] = useState(false);
 
   // 여기 변수로 나이 계산
   useEffect(() => {
@@ -78,12 +79,9 @@ const SignUp = () => {
     setCheckIdModal((prev) => !prev);
   }, []);
 
-  const stopPropagation = useCallback(
-      (e: React.SyntheticEvent<EventTarget>) => {
-        e.stopPropagation();
-      },
-      []
-  );
+  const onCloseCheckNicknameModal = useCallback(() => {
+    setCheckNicknameModal((prev) => !prev);
+  }, []);
 
   // const onClickid = useCallback((e) => {
   //   setmisMatchId(e.target.value! == id);
@@ -103,6 +101,17 @@ const SignUp = () => {
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
+
+      if (
+        !checkId &&
+        !checkNickname &&
+        setMismatchCondition &&
+        !birthDay &&
+        !birthDay.trim()
+      ) {
+        alert("전부 다 입력해주세요");
+        return;
+      }
 
       axios
         .post(
@@ -152,7 +161,6 @@ const SignUp = () => {
     ]
   );
 
-
   //이메일 발송 axios
   const onSubmitEmail = useCallback(
     (e) => {
@@ -175,29 +183,6 @@ const SignUp = () => {
         });
     },
     [email]
-  );
-
-  //닉네임 중복검사 axios
-  const onSubmitNickname = useCallback(
-    (e) => {
-      e.preventDefault();
-      axios
-        .post(
-          "https://waycabvav.shop/verification/nick-name",
-          {
-            nickName: nickname,
-          },
-          { withCredentials: true }
-        )
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          alert("검증에 실패했습니다.");
-          console.log(error.response);
-        });
-    },
-    [nickname]
   );
 
   return (
@@ -317,7 +302,9 @@ const SignUp = () => {
                 minLength={2}
               />
             </Label>
-            <Button type="button">중복 체크</Button>
+            <Button type="button" onClick={onCloseCheckNicknameModal}>
+              중복 체크
+            </Button>
           </Div>
 
           {signUpError && <Error>{signUpError}</Error>}
@@ -338,6 +325,23 @@ const SignUp = () => {
                 onChangeId={onChangeId}
                 onCloseCheckIdModal={onCloseCheckIdModal}
                 setId={setId}
+                setCheckId={setCheckId}
+              />
+            }
+          </Menu>
+        }
+        {
+          <Menu
+            show={checkNicknameModal}
+            onCloseModal={onCloseCheckNicknameModal}
+          >
+            {
+              <CheckNicknameModal
+                nickname={nickname}
+                onChangeNickname={onChangeNickname}
+                onCloseCheckIdModal={onCloseCheckNicknameModal}
+                setNickname={setNickname}
+                setCheckNickname={setCheckNickname}
               />
             }
           </Menu>
