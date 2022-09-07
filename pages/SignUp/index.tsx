@@ -34,6 +34,7 @@ const SignUp = () => {
 
   const [signUpError, setSignUpError] = useState(false);
   const [signUpSuccess, setSignUpSuccess] = useState(false);
+  /** password mismatch */
   const [mismatchError, setMismatchError] = useState(false);
   const [mismatchCondition, setMismatchCondition] = useState(false);
 
@@ -83,33 +84,18 @@ const SignUp = () => {
     setCheckNicknameModal((prev) => !prev);
   }, []);
 
-  // const onClickid = useCallback((e) => {
-  //   setmisMatchId(e.target.value! == id);
-  // }, []);
-  // //백엔드에 있는 아이디와 현재 아이디 비교 후 오류 출력
-  //
-  // const onClickemail = useCallback((e) => {
-  //   setmisMatchEmail(e.target.value! == email);
-  // }, []);
-  // //백엔드에 있는 아이디와 현재 이메일 비교 후 오류 출력
-  //
-  // const onClicknickname = useCallback((e) => {
-  //   setmisMatchNickname(e.target.value! == nickname);
-  // }, []);
-  // //백엔드에 있는 아이디와 현재 닉네임 비교 후 오류 출력
-
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
 
       if (
-        !checkId &&
-        !checkNickname &&
-        setMismatchCondition &&
-        !birthDay &&
-        !birthDay.trim()
+        !checkId ||
+        !mismatchError ||
+        !mismatchCondition ||
+        (!birthDay && !birthDay.trim()) ||
+        !checkNickname
       ) {
-        alert("전부 다 입력해주세요");
+        alert("전부 조건에 맞게 입력해주세요!");
         return;
       }
 
@@ -158,6 +144,14 @@ const SignUp = () => {
       setEmail,
       nickname,
       setNickname,
+      checkId,
+      setCheckId,
+      checkNickname,
+      setCheckNickname,
+      mismatchError,
+      setMismatchError,
+      mismatchCondition,
+      setMismatchCondition,
     ]
   );
 
