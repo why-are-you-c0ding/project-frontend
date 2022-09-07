@@ -78,6 +78,13 @@ const SignUp = () => {
     setCheckIdModal((prev) => !prev);
   }, []);
 
+  const stopPropagation = useCallback(
+      (e: React.SyntheticEvent<EventTarget>) => {
+        e.stopPropagation();
+      },
+      []
+  );
+
   // const onClickid = useCallback((e) => {
   //   setmisMatchId(e.target.value! == id);
   // }, []);
