@@ -38,6 +38,9 @@ const CheckNicknameModal: FC<Props> = ({
   const onSubmitNickname = useCallback(
     (e) => {
       e.preventDefault();
+
+      if (!nickname && !nickname.trim()) return;
+
       axios
         .post(
           "https://waycabvav.shop/verification/nick-name",
