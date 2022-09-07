@@ -63,6 +63,11 @@ export const MainBar = styled.div`
     cursor: pointer;
   }
 
+  & a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   @media screen and (min-width: 769px) {
     .faBars {
       display: none;
