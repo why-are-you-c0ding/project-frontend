@@ -56,7 +56,7 @@ const CheckIdModal: FC<Props> = ({
 
           if (id.length < 6) {
             setFailUseId(false);
-            setCheckId(true);
+            setCheckId(false);
           }
 
           console.log(response);
