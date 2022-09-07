@@ -4,7 +4,6 @@ import React, {
   FC,
   SetStateAction,
   useCallback,
-  useEffect,
   useState,
 } from "react";
 import {
@@ -23,6 +22,7 @@ interface Props {
   onChangeId: (e: ChangeEvent<HTMLInputElement>) => void;
   onCloseCheckIdModal: () => void;
   setId: Dispatch<SetStateAction<string>>;
+  setCheckId: (frag: boolean) => void;
 }
 
 const CheckIdModal: FC<Props> = ({
@@ -30,6 +30,7 @@ const CheckIdModal: FC<Props> = ({
   onChangeId,
   onCloseCheckIdModal,
   setId,
+  setCheckId,
 }) => {
   const [failUseID, setFailUseId] = useState(false);
   const [clickCheck, setClickCheck] = useState(false);
@@ -37,6 +38,9 @@ const CheckIdModal: FC<Props> = ({
   const onSubmitId = useCallback(
     (e) => {
       e.preventDefault();
+
+      if (!id && !id.trim()) return;
+
       axios
         .post(
           "https://waycabvav.shop/verification/login-id",
@@ -48,11 +52,19 @@ const CheckIdModal: FC<Props> = ({
         .then((response) => {
           setFailUseId(true);
           setId(id);
+          setCheckId(true);
 
-          if (id.length < 6) setFailUseId(false);
+          if (id.length < 6) {
+            setFailUseId(false);
+            setCheckId(true);
+          }
+
+          console.log(response);
         })
         .catch((error) => {
           setFailUseId(false);
+          setCheckId(false);
+
           console.log(error.response);
         })
         .finally(() => {
