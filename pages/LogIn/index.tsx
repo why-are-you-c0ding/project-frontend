@@ -22,7 +22,7 @@ import fetcher from '@utils/fetcher';
 
 
 const LogIn = () => {
-  const { data, error, mutate } = useSWR('https://waycabvav.shop/', fetcher);
+  // const { data, error} = useSWR('https://waycabvav.shop/login', fetcher);
   //요기 주소도 수빈이(로그인 정보 받아올곳)
   const [id, onChangeId] = useInput("");
   const [password, onChangePassword] = useInput('');
@@ -34,12 +34,15 @@ const LogIn = () => {
         e.preventDefault();
         setLogInError(false);
         axios
-            .post('https://waycabvav.shop/',
-                { id, password },
+            .post('https://waycabvav.shop/login',
+                {
+                  loginId:id,
+                  password:password
+                },
                 { withCredentials: true })
             .then((response) => {
               alert("성공");
-              mutate(response.data, false);
+              // mutate(response.data, false);
             })
             .catch((error) => {
               alert("에러");
@@ -48,7 +51,7 @@ const LogIn = () => {
       },
       [id, password],
   );
-  // 로그인 주소 물어봐야됨
+
 
 
   return (
