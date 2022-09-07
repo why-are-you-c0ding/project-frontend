@@ -56,8 +56,6 @@ const SignUp = () => {
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,15}$/;
     if (password.match(regexp)) setMismatchCondition(true);
     else setMismatchCondition(false);
-
-    console.log(mismatchCondition);
   }, [password, setPassword]);
 
   const onChangePassword = useCallback(
