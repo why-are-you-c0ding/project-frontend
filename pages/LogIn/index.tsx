@@ -27,7 +27,9 @@ const LogIn = () => {
   const [id, onChangeId] = useInput("");
   const [password, onChangePassword] = useInput('');
   const [logInError, setLogInError] = useState(false);
-
+  const headers={
+    'X-Requested-With': 'XMLHttpRequest'
+  }
 
   const onSubmit = useCallback(
       (e) => {
@@ -38,8 +40,8 @@ const LogIn = () => {
                 {
                   loginId:id,
                   password:password
-                },
-                { withCredentials: true })
+                }, {headers})
+
             .then((response) => {
               alert("성공");
               // mutate(response.data, false);
