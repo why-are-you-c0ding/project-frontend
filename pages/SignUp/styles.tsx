@@ -63,7 +63,6 @@ export const Label = styled.label`
     font-weight: 700;
 
     width: 7rem;
-
   }
 `;
 
@@ -140,11 +139,6 @@ export const CorrectCircle = styled.div`
   font-weight: bold;
   margin-right: 10px;
   padding: 5px;
-`;
-
-export const Line = styled.div`
-  border-left: 2px solid #ebebeb;
-  height: 25px;
 `;
 
 export const SearchBox = styled.div`
