@@ -18,8 +18,7 @@ import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 
 const LogIn = () => {
-  // const { data, error} = useSWR('https://waycabvav.shop/login', fetcher);
-  //요기 주소도 수빈이(로그인 정보 받아올곳)
+  const { data, error,mutate} = useSWR('https://waycabvav.shop/members', fetcher);
   const [id, onChangeId, setId] = useInput("");
   const [password, onChangePassword, setPassword] = useInput("");
   const [logInError, setLogInError] = useState(false);
@@ -44,7 +43,8 @@ const LogIn = () => {
 
         .then((response) => {
           alert("성공");
-          // mutate(response.data, false);
+          console.log(response)
+          mutate(response.data, false);
         })
         .catch((error) => {
           alert("에러");

@@ -82,6 +82,9 @@ const SignUp = () => {
     setCheckNicknameModal((prev) => !prev);
   }, []);
 
+  const headers = {
+    "X-Requested-With": "XMLHttpRequest",
+  };
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
@@ -108,7 +111,7 @@ const SignUp = () => {
             checkPassword: passwordCheck,
             age: age,
           },
-          { withCredentials: true }
+            { withCredentials: true, headers }
         )
         .then((response) => {
           alert("회원가입에 성공하셨습니다. 로그인을 해주세요");
