@@ -16,10 +16,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
+import { setCookie } from "@utils/cookie";
 
 const LogIn = () => {
   // const { data, error} = useSWR('https://waycabvav.shop/login', fetcher);
   //요기 주소도 수빈이(로그인 정보 받아올곳)
+
+  setCookie("a", "123");
+
   const [id, onChangeId, setId] = useInput("");
   const [password, onChangePassword, setPassword] = useInput("");
   const [logInError, setLogInError] = useState(false);
@@ -44,6 +48,10 @@ const LogIn = () => {
 
         .then((response) => {
           alert("성공");
+
+          console.log(response.headers);
+          console.log(response.headers["Date"]);
+          // console.log(response.)
           // mutate(response.data, false);
         })
         .catch((error) => {
