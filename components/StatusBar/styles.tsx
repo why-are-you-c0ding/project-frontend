@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const BarWrapper = styled.div`
-  margin-bottom: 6rem;
+  margin-bottom: 8rem;
 
   @media screen and (max-width: 769px) {
     margin-bottom: 2rem;
