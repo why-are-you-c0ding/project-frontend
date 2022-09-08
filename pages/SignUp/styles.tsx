@@ -11,8 +11,7 @@ export const Header = styled.header`
   font-weight: bolder;
   font-size: 3em;
   letter-spacing: -0.75px;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 `;
 
 export const Div = styled.div`
