@@ -13,6 +13,7 @@ import {
   BuyStatus,
   Letter,
   Count,
+  DetailOrder,
 } from "@pages/MyPage/styles";
 
 const MyPage = () => {
@@ -34,6 +35,7 @@ const MyPage = () => {
               <EditBtn>프로필 수정</EditBtn>
             </List>
           </UserProfile>
+
           <BuyItem>
             <span>구매 내역</span>
             <BuyStatus>
@@ -55,6 +57,18 @@ const MyPage = () => {
               </div>
             </BuyStatus>
           </BuyItem>
+
+          <DetailOrder>
+            <span>주문 내역</span>
+            <div>
+              <span>상품정보</span>
+              <span>주문일자</span>
+              <span>주문번호</span>
+              <span>주문금액(수량)</span>
+              <span>주문 상태</span>
+            </div>
+          </DetailOrder>
+        {/* 여기 동적으로 상품 정보 */}
         </RightSide>
       </Wrapper>
     </div>
