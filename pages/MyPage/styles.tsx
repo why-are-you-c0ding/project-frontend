@@ -3,15 +3,17 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 0.2fr 1fr;
+
+  min-height: 100vh;
 `;
 
 export const SideBar = styled.section`
   font-weight: bolder;
-  border: 1px solid;
+
+  padding-top: 2rem;
 `;
 
 export const RightSide = styled.section`
-  border: 1px solid;
   padding: 0 6rem;
   padding-bottom: 1rem;
 `;
@@ -96,27 +98,4 @@ export const Count = styled.span`
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-`;
-
-export const DetailOrder = styled.div`
-  margin-top: 2rem;
-
-  & > span {
-    font-size: 1.3rem;
-  }
-
-  & > div {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-
-    border-top: 2px solid;
-    border-bottom: 1px solid;
-
-    margin-top: 1rem;
-    padding: 0.6rem 0;
-
-    & span {
-      text-align: center;
-    }
-  }
 `;

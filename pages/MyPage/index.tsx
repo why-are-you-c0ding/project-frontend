@@ -13,9 +13,9 @@ import {
   BuyStatus,
   Letter,
   Count,
-  DetailOrder,
 } from "@pages/MyPage/styles";
 import MypageSidebar from "@components/MypageSidebar";
+import DetailOrder from "@components/DetailOrder";
 
 const MyPage = () => {
   return (
@@ -61,17 +61,7 @@ const MyPage = () => {
             </BuyStatus>
           </BuyItem>
 
-          <DetailOrder>
-            <span>주문 내역</span>
-            <div>
-              <span>상품정보</span>
-              <span>주문일자</span>
-              <span>주문번호</span>
-              <span>주문금액(수량)</span>
-              <span>주문 상태</span>
-            </div>
-          </DetailOrder>
-          {/* 컴포넌트로 여기 동적으로 상품 정보 */}
+          <DetailOrder />
         </RightSide>
       </Wrapper>
     </div>
