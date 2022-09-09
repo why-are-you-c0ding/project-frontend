@@ -40,7 +40,7 @@ const StatusBar = () => {
         <SubBar>
           <SubMenu>
             <span>
-              <Link to="/login">장바구니</Link>
+              <Link to="#">장바구니</Link>
             </span>
             <span>
               <Link to="/mypage">마이 페이지</Link>
