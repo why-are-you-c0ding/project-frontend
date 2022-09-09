@@ -22,6 +22,7 @@ import StatusBar from "@components/StatusBar";
 import Menu from "@components/Menu";
 import CheckIdModal from "@components/CheckIdModal";
 import CheckNicknameModal from "@components/CheckNicknameModal";
+import SendProveEmail from "@components/SendProveEmail";
 
 const SignUp = () => {
   const [id, onChangeId, setId] = useInput("");
@@ -40,9 +41,11 @@ const SignUp = () => {
 
   const [checkId, setCheckId] = useState(false);
   const [checkNickname, setCheckNickname] = useState(false);
+  const [checkEmail, setCheckEmail] = useState(false);
 
   const [checkIdModal, setCheckIdModal] = useState(false);
   const [checkNicknameModal, setCheckNicknameModal] = useState(false);
+  const [checkEmailModal, setCheckEmailModal] = useState(false);
 
   // 여기 변수로 나이 계산
   useEffect(() => {
@@ -82,6 +85,10 @@ const SignUp = () => {
     setCheckNicknameModal((prev) => !prev);
   }, []);
 
+  const onCloseCheckEmailModal = useCallback(() => {
+    setCheckEmailModal((prev) => !prev);
+  }, []);
+
   const headers = {
     "X-Requested-With": "XMLHttpRequest",
   };
@@ -111,7 +118,7 @@ const SignUp = () => {
             checkPassword: passwordCheck,
             age: age,
           },
-            { withCredentials: true, headers }
+          { withCredentials: true, headers }
         )
         .then((response) => {
           alert("회원가입에 성공하셨습니다. 로그인을 해주세요");
@@ -132,52 +139,17 @@ const SignUp = () => {
     },
     [
       id,
-      setId,
       password,
-      setPassword,
       passwordCheck,
-      setPasswordCheck,
       birthDay,
-      setBirthDay,
       age,
-      setAge,
       email,
-      setEmail,
       nickname,
-      setNickname,
       checkId,
-      setCheckId,
       checkNickname,
-      setCheckNickname,
       mismatchError,
-      setMismatchError,
       mismatchCondition,
-      setMismatchCondition,
     ]
-  );
-
-  //이메일 발송 axios
-  const onSubmitEmail = useCallback(
-    (e) => {
-      e.preventDefault();
-      axios
-        .post(
-          "https://waycabvav.shop/verification/email",
-          {
-            receiveEmail: email,
-          },
-          { withCredentials: true }
-        )
-        .then((response) => {
-          alert("이메일을 보냈습니다.");
-          console.log(response);
-        })
-        .catch((error) => {
-          alert("이메일 발송에 실패했습니다.");
-          console.log(error.response);
-        });
-    },
-    [email]
   );
 
   return (
@@ -281,7 +253,9 @@ const SignUp = () => {
                 placeholder="예) wayc@google.com"
               />
             </Label>
-            <Button type="button">인증 번호</Button>
+            <Button type="button" onClick={onCloseCheckEmailModal}>
+              인증 번호
+            </Button>
           </Div>
 
           <Div>
@@ -337,6 +311,19 @@ const SignUp = () => {
                 onCloseCheckIdModal={onCloseCheckNicknameModal}
                 setNickname={setNickname}
                 setCheckNickname={setCheckNickname}
+              />
+            }
+          </Menu>
+        }
+        {
+          <Menu show={checkEmailModal} onCloseModal={onCloseCheckEmailModal}>
+            {
+              <SendProveEmail
+                email={email}
+                onChangeEmail={onChangeEmail}
+                onCloseCheckEmailModal={onCloseCheckEmailModal}
+                setEmail={setEmail}
+                setCheckId={setCheckId}
               />
             }
           </Menu>
