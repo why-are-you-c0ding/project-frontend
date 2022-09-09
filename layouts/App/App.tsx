@@ -19,6 +19,7 @@ const App = () => {
       <Route path="/signup" component={SignUp} />
       <Route path="/login" component={LogIn} />
       <Route path="/mypage" component={MyPage} />
+      <Route path="/mypage:id" component={MyPage} />
       <Route path="/shop" component={Shop} />
     </Switch>
   );
