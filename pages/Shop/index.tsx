@@ -1,13 +1,12 @@
 import React from 'react';
-import StatusBar from "@components/StatusBar";
 import { Wrapper } from "./styles";
+import Buy from "@components/Buy";
 
 const Shop =()=>{
     return (
         <div>
-            <StatusBar />
             <Wrapper>
-                shop
+                <Buy/>
             </Wrapper>
         </div>
     )
