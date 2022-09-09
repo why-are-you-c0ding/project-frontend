@@ -93,5 +93,5 @@ export const MoreBtn = styled.div`
   display: flex;
   align-content: center;
   justify-content: center;
- color: #6b5151;
+  color: #6b5151;
 `;
