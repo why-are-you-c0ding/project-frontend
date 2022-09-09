@@ -4,7 +4,7 @@ export const BarWrapper = styled.div`
   margin-bottom: 8rem;
 
   @media screen and (max-width: 769px) {
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
   }
 `;
 
