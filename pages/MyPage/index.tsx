@@ -15,13 +15,16 @@ import {
   Count,
   DetailOrder,
 } from "@pages/MyPage/styles";
+import MypageSidebar from "@components/MypageSidebar";
 
 const MyPage = () => {
   return (
     <div>
       <StatusBar />
       <Wrapper>
-        <SideBar>여긴 사이드 바</SideBar>
+        <SideBar>
+          <MypageSidebar></MypageSidebar>
+        </SideBar>
         <RightSide>
           <UserProfile>
             {/* 이미지 그라바타로 구현 */}
@@ -68,7 +71,7 @@ const MyPage = () => {
               <span>주문 상태</span>
             </div>
           </DetailOrder>
-        {/* 여기 동적으로 상품 정보 */}
+          {/* 컴포넌트로 여기 동적으로 상품 정보 */}
         </RightSide>
       </Wrapper>
     </div>
