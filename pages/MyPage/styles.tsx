@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 0.2fr 1fr;
+  padding: 0.5rem 3rem;
 `;
 
 export const SideBar = styled.section`
