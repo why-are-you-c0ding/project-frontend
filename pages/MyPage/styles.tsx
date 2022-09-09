@@ -5,6 +5,15 @@ export const Wrapper = styled.div`
   grid-template-columns: 0.2fr 1fr;
 
   min-height: 100vh;
+
+  & a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .selected {
+    color: black;
+  }
 `;
 
 export const SideBar = styled.section`
