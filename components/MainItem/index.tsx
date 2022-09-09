@@ -1,6 +1,6 @@
 import React, {} from "react";
 
-import {Wrapper,TitleContainer, TitleBox, Title, SubTitle,ItemContainer,ItemBox,Item,Itemdetail,ItemName,ItemFullName,ItemPrice,RightPrice} from "@components/MainItem/styles";
+import {Wrapper,TitleContainer, More,TitleBox, Title, SubTitle,ItemContainer,ItemBox,Item,Itemdetail,ItemName,ItemFullName,ItemPrice,RightPrice,MoreBtn} from "@components/MainItem/styles";
 
 
 
@@ -65,6 +65,9 @@ const MainItem =()=>{
                     </Itemdetail>
                 </ItemBox>
             </ItemContainer>
+            <More>
+                <MoreBtn>더보기</MoreBtn>
+            </More>
         </Wrapper>
     )
 };
