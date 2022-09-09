@@ -19,7 +19,7 @@ export const Bar = styled.div`
 `;
 
 export const SubBar = styled.div`
-  padding: 10px 50px;
+  padding: 0.5rem 3rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   & span a {
