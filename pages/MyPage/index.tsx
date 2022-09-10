@@ -1,24 +1,16 @@
 import React from "react";
 import StatusBar from "@components/StatusBar";
-import {
-  Wrapper,
-  UserProfile,
-  SideBar,
-  RightSide,
-  List,
-  LoginId,
-  Email,
-  EditBtn,
-  BuyItem,
-  BuyStatus,
-  Letter,
-  Count,
-} from "@pages/MyPage/styles";
+import { Wrapper, SideBar, RightSide } from "@pages/MyPage/styles";
 import MypageSidebar from "@components/MypageSidebar";
-import DetailOrder from "@components/DetailOrder";
 import { Route, Switch, useParams } from "react-router";
-import Test from "@components/Test";
-import My from "@components/My/styles";
+import loadable from "@loadable/component";
+
+const Buying = loadable(() => import("@components/Buying"));
+const Like = loadable(() => import("@components/Like"));
+const Profile = loadable(() => import("@components/Profile"));
+const Address = loadable(() => import("@components/Address"));
+const Payment = loadable(() => import("@components/Payment"));
+const My = loadable(() => import("@components/My"));
 
 const MyPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,14 +21,17 @@ const MyPage = () => {
       <StatusBar />
       <Wrapper>
         <SideBar>
-          <MypageSidebar></MypageSidebar>
+          <MypageSidebar />
         </SideBar>
         <RightSide>
           <Switch>
             <Route path="/mypage/my" component={My} />
-            <Route path="/mypage/buying" component={Test} />
+            <Route path="/mypage/buying" component={Buying} />
+            <Route path="/mypage/like" component={Like} />
+            <Route path="/mypage/profile" component={Profile} />
+            <Route path="/mypage/address" component={Address} />
+            <Route path="/mypage/payment" component={Payment} />
           </Switch>
-          {/*<div>123</div>*/}
         </RightSide>
       </Wrapper>
     </div>
