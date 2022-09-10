@@ -101,6 +101,7 @@ const SignUp = () => {
         !mismatchError ||
         !mismatchCondition ||
         (!birthDay && !birthDay.trim()) ||
+        !checkEmail ||
         !checkNickname
       ) {
         alert("전부 조건에 맞게 입력해주세요!");
@@ -323,7 +324,7 @@ const SignUp = () => {
                 onChangeEmail={onChangeEmail}
                 onCloseCheckEmailModal={onCloseCheckEmailModal}
                 setEmail={setEmail}
-                setCheckId={setCheckId}
+                setCheckEmail={setCheckEmail}
               />
             }
           </Menu>
