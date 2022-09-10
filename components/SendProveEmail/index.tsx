@@ -13,16 +13,18 @@ import {
   Header,
   Input,
 } from "@components/CheckIdModal/styles";
-import { Correct, Error } from "@pages/SignUp/styles";
+import { Correct } from "@pages/SignUp/styles";
 import axios from "axios";
 import { Wrapper } from "@components/CheckNicknameModal/styles";
+import { InputKey } from "@components/SendProveEmail/styles";
+import useInput from "@hooks/useInput";
 
 interface Props {
   email: string;
   onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void;
   onCloseCheckEmailModal: () => void;
   setEmail: Dispatch<SetStateAction<string>>;
-  setCheckId: (frag: boolean) => void;
+  setCheckEmail: (frag: boolean) => void;
 }
 
 const SendProveEmail: FC<Props> = ({
@@ -30,10 +32,11 @@ const SendProveEmail: FC<Props> = ({
   onChangeEmail,
   onCloseCheckEmailModal,
   setEmail,
-  setCheckId,
+  setCheckEmail,
 }) => {
   const [failUseEmail, setFailUseEmail] = useState(false);
-  const [clickCheck, setClickCheck] = useState(false);
+  const [authKey, onChangeAuthKey, setAuthKey] = useInput("");
+  const [proveEamil, setProveEamil] = useState(false);
 
   const onSubmitEmail = useCallback(
     (e) => {
@@ -51,18 +54,46 @@ const SendProveEmail: FC<Props> = ({
         )
         .then((response) => {
           setFailUseEmail(true);
+          alert("이메일 발송했습니다. 5분 안에 입력해주세요.");
           console.log(response);
         })
         .catch((error) => {
           alert("이메일 발송에 실패했습니다.");
           setFailUseEmail(false);
           console.log(error.response);
-        })
-        .finally(() => {
-          setClickCheck(true);
         });
     },
     [email]
+  );
+
+  const onSubmitProveEmail = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      if (!authKey && !authKey.trim()) return;
+
+      axios
+        .post(
+          "https://waycabvav.shop/verification/email/auth-key",
+          {
+            email: email,
+            authKey: authKey,
+          },
+          { withCredentials: true }
+        )
+        .then((response) => {
+          setProveEamil(true);
+          setCheckEmail(true);
+          console.log(response);
+        })
+        .catch((error) => {
+          setProveEamil(false);
+          setCheckEmail(false);
+          alert("인증 번호를 다시 입력해주세요.");
+          console.log(error.response);
+        });
+    },
+    [authKey]
   );
 
   const stopPropagation = useCallback(
@@ -77,7 +108,7 @@ const SendProveEmail: FC<Props> = ({
       <Form onSubmit={onSubmitEmail}>
         <Div>
           <Header>이메일 인증</Header>
-          <Button type="submit">검사</Button>
+          <Button type="submit">보내기</Button>
         </Div>
         <Input
           type="email"
@@ -87,13 +118,17 @@ const SendProveEmail: FC<Props> = ({
           value={email}
         ></Input>
         <button onClick={onCloseCheckEmailModal}>X</button>
-        {clickCheck && !failUseEmail && email.length > 0 && (
-          <Error>닉네임을 사용하실 수 없습니다.</Error>
-        )}
-        {clickCheck && failUseEmail && (
-          <Correct>닉네임 사용이 가능합니다.</Correct>
-        )}
+        {proveEamil && <Correct>이메일 인증이 완료되었습니다.</Correct>}
       </Form>
+      {failUseEmail && !proveEamil && (
+        <InputKey>
+          <form onSubmit={onSubmitProveEmail}>
+            <span>인증 번호 입력</span>
+            <input type="text" value={authKey} onChange={onChangeAuthKey} />
+            <Button type="submit">검사</Button>
+          </form>
+        </InputKey>
+      )}
     </Wrapper>
   );
 };
