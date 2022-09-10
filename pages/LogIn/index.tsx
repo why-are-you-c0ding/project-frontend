@@ -19,7 +19,7 @@ import fetcher from "@utils/fetcher";
 import { setCookie } from "@utils/cookie";
 
 const LogIn = () => {
-  // const { data, error} = useSWR('https://waycabvav.shop/login', fetcher);
+  // const { data, error} = useSWR("https://waycabvav.shop/login", fetcher);
   //요기 주소도 수빈이(로그인 정보 받아올곳)
 
   setCookie("a", "123");
