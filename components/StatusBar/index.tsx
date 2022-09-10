@@ -43,7 +43,7 @@ const StatusBar = () => {
               <Link to="#">장바구니</Link>
             </span>
             <span>
-              <Link to="/mypage">마이 페이지</Link>
+              <Link to="/mypage/my">마이 페이지</Link>
             </span>
             <span>
               <Link to="/login">로그인</Link>

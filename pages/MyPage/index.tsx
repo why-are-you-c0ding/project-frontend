@@ -33,9 +33,10 @@ const MyPage = () => {
         </SideBar>
         <RightSide>
           <Switch>
-            <Route path="/mypage" component={My} />
+            <Route path="/mypage/my" component={My} />
             <Route path="/mypage/buying" component={Test} />
           </Switch>
+          {/*<div>123</div>*/}
         </RightSide>
       </Wrapper>
     </div>
