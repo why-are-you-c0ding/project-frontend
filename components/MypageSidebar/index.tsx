@@ -1,7 +1,6 @@
 import React from "react";
 import { Info, Title, Wrapper } from "@components/MypageSidebar/styles";
 import { Link, NavLink } from "react-router-dom";
-import { useParams } from "react-router";
 
 const MypageSidebar = () => {
   return (
