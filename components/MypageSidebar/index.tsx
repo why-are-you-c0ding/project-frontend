@@ -1,12 +1,13 @@
 import React from "react";
 import { Info, Title, Wrapper } from "@components/MypageSidebar/styles";
 import { Link, NavLink } from "react-router-dom";
+import { useParams } from "react-router";
 
 const MypageSidebar = () => {
   return (
     <Wrapper>
       <Title>
-        <Link to={"/mypage"}>마이 페이지</Link>
+        <Link to={"/mypage/my"}>마이 페이지</Link>
       </Title>
 
       <Info>
