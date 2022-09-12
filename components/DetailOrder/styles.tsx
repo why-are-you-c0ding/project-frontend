@@ -21,4 +21,8 @@ export const Menu = styled.div`
       text-align: center;
     }
   }
+
+  @media (max-width: 769px) {
+    display: none;
+  }
 `;

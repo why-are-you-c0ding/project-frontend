@@ -17,17 +17,25 @@ export const Wrapper = styled.div`
 
   @media screen and (max-width: 769px) {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 `;
 
 export const SideBar = styled.section`
   font-weight: bolder;
-
   padding-top: 2rem;
+
+  @media screen and (max-width: 769px) {
+    order: 1;
+  }
 `;
 
 export const RightSide = styled.section`
   padding: 0 6rem;
   padding-bottom: 1rem;
+
+
+  @media screen and (max-width: 769px) {
+    padding: 0;
+  }
 `;

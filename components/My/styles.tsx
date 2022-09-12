@@ -16,6 +16,10 @@ export const UserProfile = styled.section`
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 50%;
   }
+
+  @media (max-width: 769px) {
+    border: none;
+  }
 `;
 
 export const List = styled.div`
@@ -50,6 +54,12 @@ export const BuyItem = styled.div`
 
   & > span {
     font-size: 1.3rem;
+  }
+
+  @media (max-width: 769px) {
+    padding: 0 2rem;
+    
+    margin-top: 0;
   }
 `;
 

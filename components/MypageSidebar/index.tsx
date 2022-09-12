@@ -11,6 +11,11 @@ const MypageSidebar = () => {
 
       <Info>
         <header>쇼핑 정보</header>
+        <span className="hidden">
+          <NavLink activeClassName="selected" to={"/mypage/my"}>
+            내 계정
+          </NavLink>
+        </span>
         <span>
           <NavLink activeClassName="selected" to={"/mypage/buying"}>
             주문 내역
@@ -25,6 +30,7 @@ const MypageSidebar = () => {
 
       <Info>
         <header>내 정보</header>
+
         <span>
           <NavLink activeClassName="selected" to={`/mypage/profile`}>
             프로필 정보
