@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import MainItem from "@components/MainItem";
-import { Inner, Slide, SlideList, SlideWrapper } from "@layouts/Main/styles";
+import { Inner, Slide, SlideList, SlideWrapper ,MoreBtn} from "@layouts/Main/styles";
 import { slideList } from "@utils/slideList";
+import axios from "axios";
+import {Redirect} from "react-router";
 
 const Main = () => {
   const ref = useRef<any>(null);
@@ -57,7 +59,22 @@ const Main = () => {
   // useEffect(() => {
   //   setTimeout(nextButton, 2000);
   // }, [size, setSize, nextButton, prevButton, slideBtn]);
+  // const { data, error, mutate} = useSWR("https://waycabvav.shop/login", fetcher);
 
+  const onLogout =useCallback(()=>{
+    axios.post("https://waycabvav.shop/logout", null ,{
+      withCredentials:true,
+    })
+        .then(()=>{})
+        .catch(()=>{})
+        .finally(()=>{});
+  },[])
+  
+  //로그인 안되어 있으면 로그인 창으로 가세요
+  // if(!data){
+  //   return <Redirect to="/login"/>
+  // }
+  
   return (
     <div>
       <StatusBar />
@@ -88,6 +105,8 @@ const Main = () => {
         </div>
       </SlideWrapper>
       <MainItem />
+      <button onClick={onLogout}>로그아웃 시팔</button>
+
     </div>
   );
 };
