@@ -10,10 +10,12 @@ import {
   Wrapper,
 } from "@components/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
+import ReponsiveBar from "@components/ReponsiveBar";
 
 const Like = () => {
   return (
     <div>
+      <ReponsiveBar title={"장바구니"} />
       <Wrapper>
         <TopHeader>관심 상품</TopHeader>
         <ListBox>
