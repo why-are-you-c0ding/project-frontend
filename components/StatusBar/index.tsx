@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import {
   Bar,
   BarWrapper,
@@ -13,7 +13,11 @@ import Menu from "@components/Menu";
 import MenuList from "@components/MenuList";
 import { Link } from "react-router-dom";
 
-const StatusBar = () => {
+interface Props {
+  sideBar?: boolean;
+}
+
+const StatusBar: FC<Props> = ({ sideBar }) => {
   const [menu, setMenu] = useState(false);
 
   const onClickBar = useCallback(() => {
@@ -35,7 +39,7 @@ const StatusBar = () => {
   }, []);
 
   return (
-    <BarWrapper>
+    <BarWrapper sideBar={sideBar}>
       <Bar>
         <SubBar>
           <SubMenu>

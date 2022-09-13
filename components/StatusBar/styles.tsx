@@ -1,10 +1,17 @@
 import styled from "@emotion/styled";
 
-export const BarWrapper = styled.div`
+export const BarWrapper = styled.div<{ sideBar: boolean | undefined }>`
   margin-bottom: 7rem;
 
   @media screen and (max-width: 769px) {
     margin-bottom: 1rem;
+
+    ${({ sideBar }) =>
+      !sideBar &&
+      sideBar !== undefined &&
+      `
+    display: none;
+  `};
   }
 `;
 
