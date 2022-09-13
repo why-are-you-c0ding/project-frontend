@@ -25,7 +25,6 @@ export const SideBar = styled.section`
   font-weight: bolder;
   padding-top: 2rem;
 
-  //border: 2px solid red;
   margin: 0 auto;
 
   @media screen and (max-width: 769px) {
@@ -38,8 +37,6 @@ export const SideBar = styled.section`
 export const RightSide = styled.section`
   padding: 0 6rem;
   padding-bottom: 1rem;
-
-  //border: 2px solid blue;
 
   @media screen and (max-width: 769px) {
     padding: 0;
