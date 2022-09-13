@@ -21,6 +21,14 @@ export const Wrapper = styled.div`
   }
 `;
 
+export const TopHeader = styled.div`
+  font-size: 2rem;
+  font-weight: bolder;
+  border-bottom: 3px solid black;
+  padding-bottom: 1.2rem;
+  max-width: 100rem;
+`;
+
 export const SideBar = styled.section`
   font-weight: bolder;
   padding-top: 2rem;
