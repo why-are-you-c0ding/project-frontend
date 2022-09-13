@@ -8,7 +8,7 @@ import React, {
 import StatusBar from "@components/StatusBar";
 import { Wrapper, SideBar, RightSide } from "@pages/MyPage/styles";
 import MypageSidebar from "@components/MypageSidebar";
-import { Route, Switch, useParams } from "react-router";
+import { Route, Switch } from "react-router";
 import { useLocation } from "react-router-dom";
 import loadable from "@loadable/component";
 
@@ -34,7 +34,7 @@ const MyPage = () => {
 
   return (
     <div>
-      <StatusBar />
+      <StatusBar sideBar={sideBar} />
       <Wrapper>
         <SideBar>
           <MypageSidebar sideBar={sideBar} />

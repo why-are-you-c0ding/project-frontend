@@ -27,6 +27,10 @@ export const TopHeader = styled.div`
   border-bottom: 3px solid black;
   padding-bottom: 1.2rem;
   max-width: 100rem;
+
+  @media (max-width: 769px) {
+    display: none;
+  }
 `;
 
 export const SideBar = styled.section`
