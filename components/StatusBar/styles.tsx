@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 
 export const BarWrapper = styled.div`
-  margin-bottom: 8rem;
+  margin-bottom: 7rem;
 
   @media screen and (max-width: 769px) {
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
   }
 `;
 
@@ -38,14 +38,14 @@ export const SubMenu = styled.div`
   align-items: center;
 
   & span {
-    margin-left: 20px;
+    margin-left: 1rem;
     color: rgba(0, 0, 0, 0.6);
     cursor: pointer;
   }
 `;
 
 export const MainBar = styled.div`
-  padding: 20px 50px;
+  padding: 1rem 2rem;
 
   display: flex;
   justify-content: space-between;
@@ -56,10 +56,10 @@ export const MainBar = styled.div`
   }
 
   & span {
-    font-size: 28px;
+    font-size: 1.2rem;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.8);
-    margin-left: 40px;
+    margin-left: 2rem;
     cursor: pointer;
   }
 
@@ -74,21 +74,20 @@ export const MainBar = styled.div`
     }
   }
   @media screen and (max-width: 769px) {
-    padding: 10px 25px;
+    padding: 1rem 1rem;
 
     .hidden {
       display: none;
     }
 
     & span {
-      font-size: 24px;
       color: rgba(0, 0, 0, 0.4);
     }
   }
 `;
 
 export const Name = styled.div`
-  font-size: 30px;
+  font-size: 2rem;
   & a {
     text-decoration: none;
     color: inherit;

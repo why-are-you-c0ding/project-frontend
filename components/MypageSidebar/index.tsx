@@ -1,21 +1,20 @@
-import React from "react";
+import React, { FC } from "react";
 import { Info, Title, Wrapper } from "@components/MypageSidebar/styles";
 import { Link, NavLink } from "react-router-dom";
 
-const MypageSidebar = () => {
+interface Props {
+  sideBar: boolean;
+}
+
+const MypageSidebar: FC<Props> = ({ sideBar }) => {
   return (
-    <Wrapper>
+    <Wrapper sideBar={sideBar}>
       <Title>
         <Link to={"/mypage/my"}>마이 페이지</Link>
       </Title>
 
       <Info>
         <header>쇼핑 정보</header>
-        <span className="hidden">
-          <NavLink activeClassName="selected" to={"/mypage/my"}>
-            내 계정
-          </NavLink>
-        </span>
         <span>
           <NavLink activeClassName="selected" to={"/mypage/buying"}>
             주문 내역
