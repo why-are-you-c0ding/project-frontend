@@ -6,7 +6,7 @@ export const Wrapper = styled.div<{ sideBar: boolean }>`
   font-weight: 400;
 
   @media (max-width: 769px) {
-    margin-bottom: 0rem;
+    margin-bottom: 0;
 
     ${({ sideBar }) =>
       !sideBar &&
