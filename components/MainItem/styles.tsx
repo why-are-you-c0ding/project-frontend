@@ -19,6 +19,10 @@ export const Title = styled.div`
   line-height: 1.5rem;
   margin: 0;
   padding: 0;
+
+  @media screen and (max-width: 769px) {
+    font-size: 1.7rem;
+  }
 `;
 
 export const SubTitle = styled.div`
@@ -27,7 +31,12 @@ export const SubTitle = styled.div`
   color: gray;
   font-weight: lighter;
   margin: 0;
-  padding: 0;
+  padding: 0.3rem 0.3rem;
+
+  @media screen and (max-width: 769px) {
+    padding: 0.5rem 0.5rem;
+    font-size: 1rem;
+  }
 `;
 
 export const ItemContainer = styled.div`
@@ -36,8 +45,15 @@ export const ItemContainer = styled.div`
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: repeat(1, minmax(auto, auto));
+  grid-template-rows: repeat(1, minmax(1, auto));
   grid-gap: 1rem;
+
+  @media screen and (max-width: 769px) {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 2rem;
+    margin-left: 3rem;
+  }
 `;
 
 export const ItemBox = styled.div`
