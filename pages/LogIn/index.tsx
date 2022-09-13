@@ -16,13 +16,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
-import { setCookie } from "@utils/cookie";
+import {Redirect, Route} from "react-router";
 
 const LogIn = () => {
-  // const { data, error} = useSWR("https://waycabvav.shop/login", fetcher);
+  // const { data, error, mutate} = useSWR("https://waycabvav.shop/docs/login.html", fetcher);
   //요기 주소도 수빈이(로그인 정보 받아올곳)
 
-  setCookie("a", "123");
 
   const [id, onChangeId, setId] = useInput("");
   const [password, onChangePassword, setPassword] = useInput("");
@@ -48,10 +47,9 @@ const LogIn = () => {
 
         .then((response) => {
           alert("성공");
-
           console.log(response.headers);
           console.log(response.headers["Date"]);
-          // console.log(response.)
+          console.log(response.data)
           // mutate(response.data, false);
         })
         .catch((error) => {
@@ -61,6 +59,11 @@ const LogIn = () => {
     },
     [id, password]
   );
+
+  // 만약 데이터가 있을때 ( 로그인 성공시) 메인 화면으로 이동
+  // if (data){
+  //   return <Redirect to="/main"/>
+  // }
 
   return (
     <Wrapper>
