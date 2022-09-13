@@ -41,10 +41,8 @@ export const List = styled.div`
 `;
 
 export const Blank = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.3);
   width: 40vw;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
 `;
