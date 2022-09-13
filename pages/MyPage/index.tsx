@@ -1,8 +1,15 @@
-import React from "react";
+import React, {
+  FC,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import StatusBar from "@components/StatusBar";
 import { Wrapper, SideBar, RightSide } from "@pages/MyPage/styles";
 import MypageSidebar from "@components/MypageSidebar";
 import { Route, Switch, useParams } from "react-router";
+import { useLocation } from "react-router-dom";
 import loadable from "@loadable/component";
 
 const Buying = loadable(() => import("@components/Buying"));
@@ -13,15 +20,24 @@ const Payment = loadable(() => import("@components/Payment"));
 const My = loadable(() => import("@components/My"));
 
 const MyPage = () => {
-  const { id } = useParams<{ id: string }>();
-  console.log(id);
+  const location = useLocation();
+  const [sideBar, setSideBar] = useState(false);
+
+  useEffect(() => {
+    console.log(location.pathname);
+
+    if (location.pathname === "/mypage/my") {
+      setSideBar(true);
+    } else setSideBar(false);
+    console.log(sideBar);
+  }, [location, sideBar]);
 
   return (
     <div>
       <StatusBar />
       <Wrapper>
         <SideBar>
-          <MypageSidebar />
+          <MypageSidebar sideBar={sideBar} />
         </SideBar>
         <RightSide>
           <Switch>
