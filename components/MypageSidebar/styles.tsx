@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  margin-left: 2.3rem;
+  //margin-left: 2.3rem;
+
   font-weight: 400;
 
   @media (max-width: 769px) {
@@ -10,7 +11,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Title = styled.header`
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   margin-bottom: 1.8rem;
 
   @media (max-width: 769px) {
@@ -20,7 +21,7 @@ export const Title = styled.header`
 
 export const Info = styled.div`
   & header {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 
     @media (max-width: 769px) {
       display: none;
