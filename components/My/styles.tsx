@@ -19,6 +19,8 @@ export const UserProfile = styled.section`
 
   @media (max-width: 769px) {
     border: none;
+
+    //margin-top: -0rem;
   }
 `;
 
@@ -97,5 +99,9 @@ export const Order = styled.div`
 
   & > span {
     font-size: 1.3rem;
+
+    @media (max-width: 769px) {
+      display: none;
+    }
   }
 `;
