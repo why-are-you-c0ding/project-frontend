@@ -6,7 +6,6 @@ import { useHistory } from "react-router";
 
 interface Props {
   title: string;
-  style?: CSSProperties;
 }
 
 const ReponsiveBar: FC<Props> = ({ title }) => {
