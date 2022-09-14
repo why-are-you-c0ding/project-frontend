@@ -12,7 +12,7 @@ export const ListBox = styled.div`
 
   & table {
     display: grid;
-    grid-template-columns: 0.5fr 3fr 0.5fr 1.5fr;
+    grid-template-columns: 0.5fr 2.5fr 1fr 1.5fr;
     padding: 0.5rem 0;
   }
 
@@ -47,7 +47,16 @@ export const ItemTitle = styled.span`
 `;
 
 export const MiddleSide = styled.span`
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  & div:last-child {
+    
+    
+    &
+  }
 `;
 
 export const RightSide = styled.span`
@@ -94,3 +103,11 @@ export const BuyBtn = styled.div`
     padding: 1rem 1rem;
   }
 `;
+
+export const ItemSum = styled.div`
+  padding: 1rem 1rem;
+  font-size: 1.2rem;
+  font-weight: bolder;
+`;
+
+export const ItemBox = styled.div``;
