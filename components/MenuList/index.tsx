@@ -20,7 +20,9 @@ const MenuList: FC<Props> = ({ onCloseModal }) => {
         <CloseBtn onClick={onCloseModal}>X</CloseBtn>
         <div>
           <span>Shop</span>
-          <span>장바구니</span>
+          <span>
+            <Link to="/mypage/like">장바구니</Link>
+          </span>
           <span>
             <Link to="/mypage/my">마이페이지</Link>
           </span>
