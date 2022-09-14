@@ -24,8 +24,7 @@ export const Wrapper = styled.div`
 export const TopHeader = styled.div`
   font-size: 2rem;
   font-weight: bolder;
-  border-bottom: 3px solid black;
-  padding-bottom: 1.2rem;
+  padding-bottom: 1rem;
   max-width: 100rem;
 
   @media (max-width: 769px) {
