@@ -11,11 +11,13 @@ export const Wrapper = styled.div`
   top: 0;
   width: 100%;
 
-  padding: 1rem 1rem;
+  padding: 1rem 0;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  box-sizing: border-box;
 
   & div {
     width: 33%;
@@ -27,6 +29,9 @@ export const Back = styled.div`
 
   color: rgba(0, 0, 0, 0.4);
   cursor: pointer;
+
+  box-sizing: border-box;
+  padding-left: 1rem;
 `;
 
 export const Title = styled.div`
