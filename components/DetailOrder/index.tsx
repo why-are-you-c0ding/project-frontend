@@ -4,8 +4,6 @@ import { Menu } from "@components/DetailOrder/styles";
 const DetailOrder = () => {
   return (
     <Menu>
-      <span>주문 내역</span>
-
       <div>
         <span>상품정보</span>
         <span>주문일자</span>

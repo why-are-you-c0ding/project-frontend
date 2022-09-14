@@ -1,11 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Menu = styled.div`
-  margin-top: 2rem;
-
-  & > span {
-    font-size: 1.3rem;
-  }
+  margin-top: 1rem;
 
   & > div {
     display: grid;
