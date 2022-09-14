@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 
 export const BarWrapper = styled.div<{ sideBar: boolean | undefined }>`
-  margin-bottom: 7rem;
+  margin-bottom: 9rem;
 
   @media screen and (max-width: 769px) {
-    margin-bottom: 1rem;
+    margin-bottom: 6rem;
 
     ${({ sideBar }) =>
       !sideBar &&
@@ -27,7 +27,7 @@ export const Bar = styled.div`
 
 export const SubBar = styled.div`
   padding: 0.5rem 3rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  //border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   & span a {
     text-decoration: none;
@@ -52,10 +52,13 @@ export const SubMenu = styled.div`
 `;
 
 export const MainBar = styled.div`
-  padding: 1rem 2rem;
+  padding: 0.8rem 2rem;
 
   display: flex;
   justify-content: space-between;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
   & div {
     display: flex;
