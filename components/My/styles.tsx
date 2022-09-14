@@ -58,7 +58,7 @@ export const BuyItem = styled.div`
 
   @media (max-width: 769px) {
     padding: 0 2rem;
-    
+
     margin-top: 0;
   }
 `;
@@ -90,4 +90,12 @@ export const Count = styled.span`
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+`;
+
+export const Order = styled.div`
+  margin-top: 2rem;
+
+  & > span {
+    font-size: 1.3rem;
+  }
 `;

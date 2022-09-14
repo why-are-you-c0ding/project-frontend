@@ -10,6 +10,7 @@ import {
   Letter,
   List,
   LoginId,
+  Order,
   UserProfile,
 } from "@components/My/styles";
 
@@ -49,7 +50,11 @@ const My = () => {
           </div>
         </BuyStatus>
       </BuyItem>
-      <DetailOrder />
+
+      <Order>
+        <span>주문 내역</span>
+        <DetailOrder />
+      </Order>
     </div>
   );
 };
