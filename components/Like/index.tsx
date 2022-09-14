@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 
 import {
   BuyBtn,
@@ -8,11 +8,42 @@ import {
   MiddleSide,
   RightSide,
   Wrapper,
+  ItemSum,
+  ItemBox,
 } from "@components/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 import ReponsiveBar from "@components/ReponsiveBar";
 
 const Like = () => {
+  const [count, setCount] = useState(0);
+  const [id, setId] = useState("");
+
+  const ItemList = [
+    {
+      id: "1번 상품",
+      name: "진짜 네임",
+      subname: "서브네임",
+      info: "상품 설명",
+      price: " 가격",
+    },
+    {
+      id: "2번 상품",
+      name: "진짜 네임",
+      subname: "서브네임",
+      info: "상품 설명",
+      price: " 가격",
+    },
+  ];
+  const Plus = () => {
+    setCount(count + 1);
+  };
+
+  const Minus = () => {
+    setCount(count - 1);
+  };
+
+  const remove = useCallback(() => {}, []);
+
   return (
     <div>
       <ReponsiveBar title={"장바구니"} />
@@ -30,14 +61,20 @@ const Like = () => {
               <div>짱 귀여워</div>
             </ItemTitle>
             <MiddleSide>
-              <div>수량</div>
+              <div>수량 :{count}</div>
+              <div>
+                <button onClick={Plus}>+</button>
+                <button onClick={Minus}>-</button>
+              </div>
             </MiddleSide>
             <RightSide>
               <BuyBtn>
                 <div>구매</div>
                 <div>200원</div>
               </BuyBtn>
-              <Delete>삭제</Delete>
+              <Delete>
+                <button onClick={remove}>삭제</button>
+              </Delete>
             </RightSide>
           </table>
         </ListBox>
@@ -53,17 +90,34 @@ const Like = () => {
               <div>짱 귀여워</div>
             </ItemTitle>
             <MiddleSide>
-              <div>수량</div>
+              <div>수량 :{count}</div>
+              <div>
+                <button onClick={Plus}>+</button>
+                <button onClick={Minus}>-</button>
+              </div>
             </MiddleSide>
             <RightSide>
               <BuyBtn>
                 <div>구매</div>
                 <div>200원</div>
               </BuyBtn>
-              <Delete /**onClick={}**/>삭제</Delete>
+              <Delete>
+                <button onClick={remove}>삭제</button>
+              </Delete>
             </RightSide>
           </table>
         </ListBox>
+        <ItemSum>{ItemList.length}개의 상품이 담겨있습니다.</ItemSum>
+        <ItemBox>
+          {ItemList.map((item) => (
+            <div key={item.id}>
+              <div>{item.name}</div>
+              <div>{item.subname}</div>
+              <div>{item.info}</div>
+              <div>{item.price}</div>
+            </div>
+          ))}
+        </ItemBox>
       </Wrapper>
     </div>
   );
