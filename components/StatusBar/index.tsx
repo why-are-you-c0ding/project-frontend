@@ -44,7 +44,7 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
         <SubBar>
           <SubMenu>
             <span>
-              <Link to="#">장바구니</Link>
+              <Link to="/mypage/like">장바구니</Link>
             </span>
             <span>
               <Link to="/mypage/my">마이 페이지</Link>
