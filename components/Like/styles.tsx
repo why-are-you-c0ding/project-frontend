@@ -3,7 +3,9 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.section`
   max-width: 100rem;
 
-  margin-top: 4rem;
+  @media (max-width: 769px) {
+    margin-top: 3rem;
+  }
 `;
 
 export const ListBox = styled.div`
