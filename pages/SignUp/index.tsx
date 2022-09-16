@@ -286,7 +286,7 @@ const SignUp = () => {
           </Div>
 
           <CheckSeller>
-            <span>*판매자로 가입하시면 체크해주세요</span>
+            <span>*판매자로 가입하시려면 체크해주세요</span>
             <input type="checkbox" onChange={onChangeSeller} />
           </CheckSeller>
 
