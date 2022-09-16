@@ -7,6 +7,7 @@ const LogIn = loadable(() => import("@pages/LogIn"));
 const Main = loadable(() => import(`@layouts/Main`));
 const MyPage = loadable(() => import(`@pages/MyPage`));
 const Shop = loadable(() => import(`@pages/Shop`));
+const SellShop = loadable(() => import(`@pages/SellShop`));
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <Route path="/mypage" component={MyPage} />
       <Route path="/mypage:id" component={MyPage} />
       <Route path="/shop" component={Shop} />
+      <Route path="/SellShop" component={SellShop} />
     </Switch>
   );
 };
