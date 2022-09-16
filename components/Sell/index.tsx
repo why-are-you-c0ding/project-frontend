@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import StatusBar from "@components/StatusBar";
+import { useRef } from "react";
 import {
   Wrapper,
   LeftSide,
@@ -12,11 +13,13 @@ import {
 import { Itemdetail, ItemFullName, ItemName } from "@components/Buy/styles";
 import { Input } from "@pages/SignUp/styles";
 import useInput from "@hooks/useInput";
+import axios from "axios";
 
 const Sell = () => {
   const [itemname, onChangeItemname, setItemName] = useInput("");
   const [itemfullname, onChangeitemfullname, setItemFullName] = useInput("");
   const [price, onChangeprice, setprice] = useInput("");
+  const [files, setFiles] = useState("");
 
   const [imageSrc, setImageSrc] = useState("");
 
@@ -34,6 +37,23 @@ const Sell = () => {
     });
   };
 
+  const headers = {
+    "content-type": "multipart/form-data",
+  };
+
+  const onLoadFile = (e: any) => {
+    const file = e.target.files;
+    console.log(file);
+    setFiles(file);
+  };
+
+  const handleClick = (e: any) => {
+    const formdata = new FormData();
+    formdata.append("uploadImage", files[0]);
+
+    axios.post("https://waycabvav.shop/images", formdata, { headers });
+  };
+
   return (
     <div>
       <StatusBar />
@@ -45,10 +65,12 @@ const Sell = () => {
 
           <input
             type="file"
-            onChange={(e: any) => {
-              encodeFileToBase64(e.target.files[0]);
-            }}
+            name="image"
+            accept="image/*"
+            onChange={onLoadFile}
           />
+
+          <button onClick={handleClick}>보내기</button>
 
           <div className="preview">
             {imageSrc && <img src={imageSrc} alt="preview-img" />}
