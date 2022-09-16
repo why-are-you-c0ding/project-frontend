@@ -49,9 +49,17 @@ const Sell = () => {
 
   const handleClick = (e: any) => {
     const formdata = new FormData();
-    formdata.append("uploadImage", files[0]);
+    formdata.append("images", files[0]);
 
-    axios.post("https://waycabvav.shop/images", formdata, { headers });
+    axios({
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+      },
+      url: "https://waycabvav.shop/images",
+      method: "post",
+      data: formdata,
+    });
   };
 
   return (
