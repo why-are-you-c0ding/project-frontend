@@ -167,3 +167,12 @@ export const LinkContainer = styled.p`
     }
   }
 `;
+
+export const CheckSeller = styled.div`
+  color: dodgerblue;
+  font-size: 1rem;
+
+  & span {
+    margin-right: 0.3rem;
+  }
+`;
