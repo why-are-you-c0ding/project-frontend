@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { FormEvent, useCallback, useEffect, useState } from "react";
 import useInput from "@hooks/useInput";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -17,6 +17,7 @@ import {
   LinkContainer,
   Button,
   Div,
+  CheckSeller,
 } from "./styles";
 import StatusBar from "@components/StatusBar";
 import Menu from "@components/Menu";
@@ -32,6 +33,7 @@ const SignUp = () => {
   const [nickname, onChangeNickname, setNickname] = useInput("");
   const [birthDay, onChangeBirthDay, setBirthDay] = useInput("");
   const [age, setAge] = useState(0);
+  const [seller, setSeller] = useState(false);
 
   const [signUpError, setSignUpError] = useState(false);
   const [signUpSuccess, setSignUpSuccess] = useState(false);
@@ -89,11 +91,16 @@ const SignUp = () => {
     setCheckEmailModal((prev) => !prev);
   }, []);
 
+  const onChangeSeller = useCallback(() => {
+    setSeller((prev) => !prev);
+    console.log(seller);
+  }, [seller]);
+
   const headers = {
     "X-Requested-With": "XMLHttpRequest",
   };
   const onSubmit = useCallback(
-    (e) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
       if (
@@ -110,7 +117,9 @@ const SignUp = () => {
 
       axios
         .post(
-          "https://waycabvav.shop/members",
+          seller
+            ? "https://waycabvav.shop/members/sellers"
+            : "https://waycabvav.shop/members/consumers",
           {
             nickName: nickname,
             email: email,
@@ -150,6 +159,7 @@ const SignUp = () => {
       checkNickname,
       mismatchError,
       mismatchCondition,
+      seller,
     ]
   );
 
@@ -179,14 +189,12 @@ const SignUp = () => {
             <span>비밀 번호*</span>
             {!mismatchCondition && password.length > 0 && (
               <Error>
-                {" "}
                 비밀번호 조건에 일치하지 않습니다!
                 <ErrorCircle></ErrorCircle>
               </Error>
             )}
             {mismatchCondition && (
               <Correct>
-                {" "}
                 비밀번호 조건에 일치합니다!
                 <CorrectCircle></CorrectCircle>
               </Correct>
@@ -276,6 +284,11 @@ const SignUp = () => {
               중복 체크
             </Button>
           </Div>
+
+          <CheckSeller>
+            <span>*판매자로 가입하시면 체크해주세요</span>
+            <input type="checkbox" onChange={onChangeSeller} />
+          </CheckSeller>
 
           {signUpError && <Error>{signUpError}</Error>}
           {signUpSuccess && (
