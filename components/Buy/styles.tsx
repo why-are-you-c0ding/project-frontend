@@ -31,7 +31,11 @@ export const Item = styled.div`
   }
 `;
 
-export const Itemdetail = styled.div``;
+export const Itemdetail = styled.div`
+  & input {
+    margin-bottom: 1.5rem;
+  }
+`;
 
 export const ItemName = styled.div`
   font-weight: bold;
