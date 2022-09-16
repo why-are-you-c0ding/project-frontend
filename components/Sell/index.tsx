@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import {
   Wrapper,
@@ -18,13 +18,41 @@ const Sell = () => {
   const [itemfullname, onChangeitemfullname, setItemFullName] = useInput("");
   const [price, onChangeprice, setprice] = useInput("");
 
+  const [imageSrc, setImageSrc] = useState("");
+
+  const encodeFileToBase64 = (fileBlob: any) => {
+    const reader: any = new FileReader();
+
+    reader.readAsDataURL(fileBlob);
+
+    return new Promise((resolve: any) => {
+      reader.onload = () => {
+        setImageSrc(reader.result);
+
+        resolve();
+      };
+    });
+  };
+
   return (
     <div>
       <StatusBar />
       <Wrapper>
         <LeftSide>
-          <img src={"/img/profile.png"}></img>
-          <input type="file"></input>
+          {/*<img src={"/img/profile.png"}></img>*/}
+          {/*<input type="file"></input>*/}
+          <h2>이미지 미리보기</h2>
+
+          <input
+            type="file"
+            onChange={(e: any) => {
+              encodeFileToBase64(e.target.files[0]);
+            }}
+          />
+
+          <div className="preview">
+            {imageSrc && <img src={imageSrc} alt="preview-img" />}
+          </div>
         </LeftSide>
         <MiddleSide></MiddleSide>
         <RightSide>
