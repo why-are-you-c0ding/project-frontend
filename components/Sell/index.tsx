@@ -62,8 +62,6 @@ const Sell = () => {
       <StatusBar />
       <Wrapper>
         <LeftSide>
-          {/*<img src={"/img/profile.png"}></img>*/}
-          {/*<input type="file"></input>*/}
           <h2>이미지 미리보기</h2>
 
           <input
