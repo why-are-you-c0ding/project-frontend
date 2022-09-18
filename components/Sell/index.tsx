@@ -37,10 +37,6 @@ const Sell = () => {
     });
   };
 
-  const headers = {
-    "content-type": "multipart/form-data",
-  };
-
   const onLoadFile = (e: any) => {
     const file = e.target.files;
     console.log(file);
