@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { FormEvent, useCallback, useEffect, useState } from "react";
 import {
   Form,
   Header,
@@ -16,12 +16,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
-import {Redirect, Route} from "react-router";
+import { Redirect, Route } from "react-router";
 
 const LogIn = () => {
   // const { data, error, mutate} = useSWR("https://waycabvav.shop/docs/login.html", fetcher);
   //요기 주소도 수빈이(로그인 정보 받아올곳)
-
 
   const [id, onChangeId, setId] = useInput("");
   const [password, onChangePassword, setPassword] = useInput("");
@@ -32,7 +31,7 @@ const LogIn = () => {
   };
 
   const onSubmit = useCallback(
-    (e) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setLogInError(false);
       axios
@@ -49,7 +48,7 @@ const LogIn = () => {
           alert("성공");
           console.log(response.headers);
           console.log(response.headers["Date"]);
-          console.log(response.data)
+          console.log(response.data);
           // mutate(response.data, false);
         })
         .catch((error) => {
