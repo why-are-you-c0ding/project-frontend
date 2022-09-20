@@ -2,6 +2,7 @@ import React, {
   ChangeEvent,
   Dispatch,
   FC,
+  FormEvent,
   SetStateAction,
   useCallback,
   useState,
@@ -39,7 +40,7 @@ const SendProveEmail: FC<Props> = ({
   const [proveEamil, setProveEamil] = useState(false);
 
   const onSubmitEmail = useCallback(
-    (e) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
       if (!email && !email.trim()) return;
@@ -67,7 +68,7 @@ const SendProveEmail: FC<Props> = ({
   );
 
   const onSubmitProveEmail = useCallback(
-    (e) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
       if (!authKey && !authKey.trim()) return;
