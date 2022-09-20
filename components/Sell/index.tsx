@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import StatusBar from "@components/StatusBar";
-import { useRef } from "react";
 import {
   Wrapper,
   LeftSide,
-  MiddleSide,
   RightSide,
   Btn,
   BuyBtn,
+  ItemInfo,
+  ItemTitle,
+  Preview,
 } from "@components/Sell/styles";
 
-import { Itemdetail, ItemFullName, ItemName } from "@components/Buy/styles";
 import { Input } from "@pages/SignUp/styles";
 import useInput from "@hooks/useInput";
 import axios from "axios";
@@ -41,20 +41,36 @@ const Sell = () => {
     const file = e.target.files;
     console.log(file);
     setFiles(file);
+
+    encodeFileToBase64(e.target.files[0]);
   };
 
-  const handleClick = (e: any) => {
+  const handleClick = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const formdata = new FormData();
     formdata.append("images", files[0]);
 
-    axios({
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      url: "https://waycabvav.shop/images",
-      method: "post",
-      data: formdata,
-    });
+    axios
+      .post("https://waycabvav.shop/images", formdata, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((response) => {
+        alert("성공");
+      })
+      .catch((error) => {
+        alert("실패");
+      });
+
+    // 이거도 되는 방법
+    // axios({
+    //   headers: {
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    //   url: "https://waycabvav.shop/images",
+    //   method: "post",
+    //   data: formdata,
+    // });
   };
 
   return (
@@ -62,49 +78,59 @@ const Sell = () => {
       <StatusBar />
       <Wrapper>
         <LeftSide>
-          <h2>이미지 미리보기</h2>
+          <h2>등록 상품 이미지</h2>
 
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={onLoadFile}
-          />
+          <form onSubmit={handleClick}>
+            <Preview>
+              {imageSrc && <img src={imageSrc} alt="preview-img" />}
+            </Preview>
 
-          <button onClick={handleClick}>보내기</button>
-
-          <div className="preview">
-            {imageSrc && <img src={imageSrc} alt="preview-img" />}
-          </div>
+            <div>
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={onLoadFile}
+              />
+              <button type="submit">상품 사진 등록하기</button>
+            </div>
+          </form>
         </LeftSide>
-        <MiddleSide></MiddleSide>
         <RightSide>
-          <Itemdetail>
-            <ItemName>상품 이름</ItemName>
-            <Input
-              type="text"
-              name="item-name"
-              value={itemname}
-              onChange={onChangeItemname}
-              placeholder=" 예시) 잠만보"
-            />
-            <ItemFullName>상세 이름을 적어주세요</ItemFullName>
-            <Input
-              type="text"
-              name="item-fullname"
-              value={itemfullname}
-              onChange={onChangeitemfullname}
-              placeholder=" 예시) 잠만보 진짜 잠만 잠"
-            />
-            <ItemFullName>가격</ItemFullName>
-            <Input
-              type="text"
-              name="price"
-              value={price}
-              onChange={onChangeprice}
-              placeholder=" 예시) 20300원"
-            />
-          </Itemdetail>
+          <ItemInfo>
+            <label>
+              <ItemTitle>상품 이름</ItemTitle>
+              <Input
+                type="text"
+                name="item-name"
+                value={itemname}
+                onChange={onChangeItemname}
+                placeholder=" 예시) 잠만보"
+              />
+            </label>
+
+            <label>
+              <ItemTitle>상세 이름을 적어주세요</ItemTitle>
+              <Input
+                type="text"
+                name="item-fullname"
+                value={itemfullname}
+                onChange={onChangeitemfullname}
+                placeholder=" 예시) 잠만보 진짜 잠만 잠"
+              />
+            </label>
+
+            <label>
+              <ItemTitle>가격</ItemTitle>
+              <Input
+                type="text"
+                name="price"
+                value={price}
+                onChange={onChangeprice}
+                placeholder=" 예시) 20300원"
+              />
+            </label>
+          </ItemInfo>
           <Btn>
             <BuyBtn type="submit">판매</BuyBtn>
           </Btn>
