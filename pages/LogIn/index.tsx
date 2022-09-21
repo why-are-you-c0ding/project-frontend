@@ -46,8 +46,12 @@ const LogIn = () => {
 
         .then((response) => {
           alert("성공");
+          const { accessToken } = response.data;
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${accessToken}`;
           console.log(response.headers);
-          console.log(response.headers["Date"]);
+          // console.log(response.headers["Date"]);
           console.log(response.data);
           // mutate(response.data, false);
         })
