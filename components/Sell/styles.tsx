@@ -1,15 +1,16 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.section`
-  display: grid;
-  grid-template-columns: 2fr 2.5fr;
   padding-left: 3rem;
   padding-right: 3rem;
   padding-top: 2rem;
 `;
 
-export const LeftSide = styled.section`
+export const Image = styled.section`
   position: relative;
+  border: 1px solid;
+
+  height: 50vh;
 
   & div {
     display: flex;
@@ -42,26 +43,24 @@ export const Preview = styled.div`
   }
 `;
 
-export const Btn = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 3rem 2rem;
-`;
 export const BuyBtn = styled.button`
   width: 25rem;
   height: 4rem;
+
   background-color: cornflowerblue;
   color: white;
+
   border: transparent;
   border-radius: 20px;
   text-align: center;
   outline: none;
   margin-top: 1rem;
+  margin-bottom: 2rem;
+
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 2rem;
   cursor: pointer;
+
   &:hover {
     background-color: #d63535;
     border: none;
@@ -69,13 +68,14 @@ export const BuyBtn = styled.button`
 `;
 
 export const RightSide = styled.section`
-  //border: 1px solid;
+  border: 1px solid;
+
+  display: flex;
+  justify-content: center;
 `;
 
 export const ItemInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 0 auto;
   margin-top: 3rem;
 
   & label {
@@ -83,8 +83,6 @@ export const ItemInfo = styled.div`
     flex-direction: column;
     align-items: center;
     margin-bottom: 2rem;
-
-    width: 70%;
   }
 
   & input {
