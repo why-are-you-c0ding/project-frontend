@@ -1,7 +1,14 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { ItemTitle } from "@components/Sell/styles";
 import { Input } from "@pages/SignUp/styles";
 import useInput from "@hooks/useInput";
+import { OptCount, OptInput } from "@components/Option/styles";
 
 const Option = () => {
   const optionCount = [1, 2, 3, 4, 5];
@@ -13,6 +20,12 @@ const Option = () => {
   // const [optName4, onChangeOptName4, setOpt4] = useInput("");
   // const [optName5, onChangeOptName5, setOpt5] = useInput("");
 
+  const ref = useRef<any>(null);
+
+  useEffect(() => {
+    console.log(ref.current.value);
+  }, [ref]);
+
   const handleCountSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     const cnt = parseInt(e.target.value);
     setCount(cnt);
@@ -22,8 +35,8 @@ const Option = () => {
     <div>
       <h2>옵션</h2>
       <div>
-        <div>
-          <ItemTitle>옵션 개수</ItemTitle>
+        <OptCount>
+          <ItemTitle style={{ fontSize: "1.2rem" }}>옵션 개수</ItemTitle>
           <div>
             <select onChange={handleCountSelect} value={count}>
               {optionCount.map((item) => (
@@ -33,19 +46,21 @@ const Option = () => {
               ))}
             </select>
           </div>
-        </div>
+        </OptCount>
 
         <div>
-          <ItemTitle>옵션 입력</ItemTitle>
-          <div>
-            <span>옵션명</span>
-            {[...Array(count)].map((n, index) => {
-              return (
-                <div key={index}>
-                  <Input type="text" placeholder="예시) 사이즈, 색상" />
-                </div>
-              );
-            })}
+          <ItemTitle style={{ fontSize: "1.2rem" }}>옵션 입력</ItemTitle>
+          <OptInput>
+            <div className="firstOpt">
+              <span>옵션명</span>
+              {[...Array(count)].map((n, index) => {
+                return (
+                  <div key={index}>
+                    <Input type="text" placeholder="예시) 사이즈, 색상" />
+                  </div>
+                );
+              })}
+            </div>
             <div>
               <span>옵션값</span>
               {[...Array(count)].map((n, index) => {
@@ -55,13 +70,15 @@ const Option = () => {
                       type="text"
                       // value={`optName${index + 1}`}
                       // onChange={`onChangeOptName${index + 1}`}
+                      ref={ref}
                       placeholder="예시) s, m, l(,로 구분)"
+                      style={{ width: "30vw" }}
                     />
                   </div>
                 );
               })}
             </div>
-          </div>
+          </OptInput>
         </div>
       </div>
     </div>
