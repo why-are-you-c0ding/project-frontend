@@ -36,11 +36,11 @@ const OptionInput: FC<Props> = ({ OptInput, setOptInput }) => {
   let opt: string[][] = [];
 
   useEffect(() => {
-    const t = optName.trim();
+    const t = optName;
 
     console.log(t);
 
-    let temp = t;
+    let temp = t.replace(/ /g, "");
     let ary: Array<string> = temp.split(",");
     console.log(ary);
     opt.push(ary);
