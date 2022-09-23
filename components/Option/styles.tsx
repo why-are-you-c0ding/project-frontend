@@ -27,4 +27,10 @@ export const OptInput = styled.div`
   & input {
     margin-top: 1rem;
   }
+
+  .opt0 {
+    color: red;
+  }
 `;
+
+export const OptList = styled.div``;
