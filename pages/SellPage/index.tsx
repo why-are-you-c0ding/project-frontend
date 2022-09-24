@@ -26,7 +26,6 @@ const SellPage = () => {
     if (location.pathname === "/sellpage/info") {
       setSideBar(true);
     } else setSideBar(false);
-    console.log(sideBar);
   }, [location, sideBar]);
 
   return (
