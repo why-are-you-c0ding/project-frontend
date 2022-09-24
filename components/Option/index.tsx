@@ -26,6 +26,18 @@ const Option = () => {
     console.log(optInput);
   }, [optInput]);
 
+  let ary: Array<string> = [];
+
+  const apush = (x: string) => {
+    ary.push(x);
+  };
+
+  apush("asda");
+
+  useEffect(() => {
+    console.log(ary);
+  });
+
   return (
     <div>
       <h2>옵션</h2>
