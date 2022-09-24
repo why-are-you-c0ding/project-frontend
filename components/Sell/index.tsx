@@ -15,11 +15,8 @@ import useInput from "@hooks/useInput";
 import axios from "axios";
 
 const Sell = () => {
-  const [itemname, onChangeItemname, setItemName] = useInput("");
-  const [itemfullname, onChangeItemfullname, setItemFullName] = useInput("");
-  const [price, onChangePrice, setPrice] = useInput("");
-  const [color, onChangeColor, setColor] = useInput("");
-  const [size, onChangeSize, setSize] = useInput("");
+  const [itemName, onChangeItemname, setItemName] = useInput("");
+  const [itemFullName, onChangeItemfullname, setItemFullName] = useInput("");
 
   const [files, setFiles] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -106,7 +103,7 @@ const Sell = () => {
                 <Input
                   type="text"
                   name="item-name"
-                  value={itemname}
+                  value={itemName}
                   onChange={onChangeItemname}
                   placeholder=" 예시) 잠만보"
                 />
@@ -117,7 +114,7 @@ const Sell = () => {
                 <Input
                   type="text"
                   name="item-fullname"
-                  value={itemfullname}
+                  value={itemFullName}
                   onChange={onChangeItemfullname}
                   placeholder=" 예시) 잠만보 진짜 잠만 잠"
                 />
