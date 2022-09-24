@@ -1,11 +1,4 @@
-import React, {
-  ChangeEvent,
-  ChangeEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 import { ItemTitle } from "@components/Sell/styles";
 import { Input } from "@pages/SignUp/styles";
@@ -15,28 +8,14 @@ import OptionInput from "@components/OptionInput";
 const Option = () => {
   const optionCount = [1, 2, 3, 4, 5];
   const [count, setCount] = useState(1);
-  const [optInput, setOptInput] = useState<string[][]>([]);
+
+  let optList: string[][] = [[], [], [], [], []];
+  let optCount: number[][] = [[0], [0], [0], [0], [0]];
 
   const handleCountSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     const cnt = parseInt(e.target.value);
     setCount(cnt);
   }, []);
-
-  useEffect(() => {
-    console.log(optInput);
-  }, [optInput]);
-
-  let ary: Array<string> = [];
-
-  const apush = (x: string) => {
-    ary.push(x);
-  };
-
-  apush("asda");
-
-  useEffect(() => {
-    console.log(ary);
-  });
 
   return (
     <div>
@@ -74,8 +53,9 @@ const Option = () => {
                 return (
                   <div key={index}>
                     <OptionInput
-                      OptInput={OptInput}
-                      setOptInput={setOptInput}
+                      index={index}
+                      optList={optList}
+                      optCount={optCount}
                     />
                   </div>
                 );

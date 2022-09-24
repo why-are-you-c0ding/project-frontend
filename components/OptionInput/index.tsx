@@ -1,32 +1,15 @@
-import React, {
-  ChangeEvent,
-  DetailedHTMLProps,
-  Dispatch,
-  ElementType,
-  FC,
-  HTMLAttributes,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
+import React, { ChangeEvent, FC, useCallback, useEffect } from "react";
 
-// import produce from "immer";
 import { Input } from "@pages/SignUp/styles";
 import useInput from "@hooks/useInput";
-import { StyledComponent } from "@emotion/styled";
-import { Theme } from "@emotion/react";
 
 interface Props {
-  setOptInput: Dispatch<SetStateAction<string[][]>>;
-  OptInput: StyledComponent<
-    { theme?: Theme | undefined; as?: ElementType<any> | undefined },
-    DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-    {}
-  >;
+  index: number;
+  optList: string[][];
+  optCount: number[][];
 }
 
-const OptionInput: FC<Props> = ({ OptInput, setOptInput }) => {
+const OptionInput: FC<Props> = ({ index, optList, optCount }) => {
   const [optName, , setOpt] = useInput("");
 
   const onChangeOptName = useCallback(
@@ -38,15 +21,29 @@ const OptionInput: FC<Props> = ({ OptInput, setOptInput }) => {
 
   let opt: string[] = [];
 
-  useEffect(() => {
-    const t = optName;
-    console.log(t);
+  let count = 0;
 
-    let temp = t.replace(/ /g, "");
+  useEffect(() => {
+    let temp = optName.replace(/ /g, "");
 
     let ary: any = temp.split(",");
-    console.log(ary);
     opt.push(ary);
+
+    if (optName !== "") count = ary.length;
+    else count = 0;
+
+    optCount[index][0] = count;
+    console.log("여긴 개수");
+    console.log(optCount);
+  });
+
+  optList[index] = opt;
+
+  useEffect(() => {
+    console.log("여긴 목록");
+    console.log(optList);
+
+    console.log("_______");
   });
 
   return (
