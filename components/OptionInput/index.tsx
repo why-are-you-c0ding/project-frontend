@@ -8,7 +8,10 @@ import React, {
   SetStateAction,
   useCallback,
   useEffect,
+  useRef,
 } from "react";
+
+import produce from "immer";
 import { Input } from "@pages/SignUp/styles";
 import useInput from "@hooks/useInput";
 import { StyledComponent } from "@emotion/styled";
@@ -37,10 +40,10 @@ const OptionInput: FC<Props> = ({ OptInput, setOptInput }) => {
 
   useEffect(() => {
     const t = optName;
-
     console.log(t);
 
     let temp = t.replace(/ /g, "");
+
     let ary: any = temp.split(",");
     console.log(ary);
     opt.push(ary);
