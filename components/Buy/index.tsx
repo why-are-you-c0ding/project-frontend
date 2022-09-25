@@ -21,9 +21,12 @@ import {
   DeliverySub,
 } from "@components/Buy/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBasketShopping,faTruck } from "@fortawesome/free-solid-svg-icons";
+import { faBasketShopping, faTruck } from "@fortawesome/free-solid-svg-icons";
+import useSWR from "swr";
+import fetcher from "@utils/fetcher";
 
 const Buy = () => {
+  const { data, error } = useSWR("https://waycabvav.shop/items/1", fetcher);
   return (
     <div>
       <StatusBar />
@@ -68,7 +71,10 @@ const Buy = () => {
             </table>
           </DetailOrder>
           <Delivery>
-            <DeliveryTitle>배송정보<FontAwesomeIcon icon={faTruck} /></DeliveryTitle>
+            <DeliveryTitle>
+              배송정보
+              <FontAwesomeIcon icon={faTruck} />
+            </DeliveryTitle>
             <DeliveryInfo>
               <DeliveryPrice>일반배송 3000원</DeliveryPrice>
               <DeliverySub>검수 후 배송 5-7일 내 도착 예정</DeliverySub>

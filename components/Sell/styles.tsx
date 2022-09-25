@@ -1,7 +1,12 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.section`
+<<<<<<< Updated upstream
   margin-top: -8rem;
+=======
+  padding-left: 2rem;
+  padding-right: 2rem;
+>>>>>>> Stashed changes
 `;
 
 export const Image = styled.section`

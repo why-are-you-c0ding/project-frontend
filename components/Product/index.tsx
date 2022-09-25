@@ -19,10 +19,15 @@ import {
 
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
+import { SProduct } from "@typings/db";
 
 const Product = () => {
-  // const { data, error, mutate} = useSWR("https://waycabvav.shop/items", fetcher);
+  const { data: productData, error } = useSWR<SProduct>(
+    "https://waycabvav.shop/items/1",
+    fetcher
+  );
   //아직 주소 모름
+  //아직 전체 아이템 못가져옴
   return (
     <div>
       <StatusBar />
@@ -40,7 +45,19 @@ const Product = () => {
           {/*          return <Card key={product.id} product={product}></Card>;*/}
           {/*      })*/}
           {/*  }*/}
-          {/*  이런 느낌으로 넣을 듯?*/}
+          <ItemBox>
+            {/*{productData.map((product)=>{*/}
+            {/*return(*/}
+            {/*    <Item>*/}
+            {/*      <img src={product.imgUrl} alt="" />*/}
+            {/*    </Item>*/}
+            {/*  <Itemdetail>*/}
+            {/*    <ItemName>{product.itemName}</ItemName>*/}
+            {/*    <ItemPrice>{product.itemPrice}</ItemPrice>*/}
+            {/*  </Itemdetail>*/}
+            {/*);*/}
+            {/*})};*/}
+          </ItemBox>
           <ItemBox>
             <Item>
               <img
@@ -54,19 +71,6 @@ const Product = () => {
               <ItemPrice>2억</ItemPrice>
             </Itemdetail>
           </ItemBox>
-          {/*<ItemBox>*/}
-          {/*  <Item>*/}
-          {/*    <img*/}
-          {/*      src="https://post-phinf.pstatic.net/MjAyMTAzMTNfODUg/MDAxNjE1NjAxNjIwOTQz.81Ruw-E3aK-7V89c5JacxvnbWFe8ez_6dGT3S3AC-g8g.ZcQgsuG13-tR16wrj6B32vOIi3axULarz9eoWwBjo2kg.PNG/%EC%B9%98%EC%BD%94%EB%A6%AC%ED%83%80_%EA%B3%B5%EC%8B%9D_%EC%9D%BC%EB%9F%AC%EC%8A%A4%ED%8A%B8-downDFG.png?type=w1200"*/}
-          {/*      alt=""*/}
-          {/*    />*/}
-          {/*  </Item>*/}
-          {/*  <Itemdetail>*/}
-          {/*    <ItemName>대표 이름</ItemName>*/}
-          {/*    <ItemFullName>풀 이름</ItemFullName>*/}
-          {/*    <ItemPrice>2억</ItemPrice>*/}
-          {/*  </Itemdetail>*/}
-          {/*</ItemBox>*/}
           {/*<ItemBox>*/}
           {/*  <Item>*/}
           {/*    <img*/}
