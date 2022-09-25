@@ -16,7 +16,8 @@ import axios from "axios";
 
 const Sell = () => {
   const [itemName, onChangeItemname, setItemName] = useInput("");
-  const [itemFullName, onChangeItemfullname, setItemFullName] = useInput("");
+  const [itemExplain, onChangeItemExplain, setItemExplain] = useInput("");
+  const [itemPrice, onChangeItemPrice, setItemPrice] = useInput("");
 
   const [files, setFiles] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -108,18 +109,26 @@ const Sell = () => {
                   placeholder=" 예시) 잠만보"
                 />
               </label>
-
               <label>
-                <ItemTitle>상세 이름을 적어주세요</ItemTitle>
+                <ItemTitle>상세 설명</ItemTitle>
                 <Input
                   type="text"
                   name="item-fullname"
-                  value={itemFullName}
-                  onChange={onChangeItemfullname}
+                  value={itemExplain}
+                  onChange={onChangeItemExplain}
                   placeholder=" 예시) 잠만보 진짜 잠만 잠"
                 />
               </label>
-
+              <label>
+                <ItemTitle>기본 가격</ItemTitle>
+                <Input
+                  type="text"
+                  name="item-fullname"
+                  value={itemExplain}
+                  onChange={onChangeItemExplain}
+                  placeholder=" 예시) 20000"
+                />
+              </label>
               <Option />
             </ItemInfo>
             <BuyBtn type="submit">상품 등록</BuyBtn>
