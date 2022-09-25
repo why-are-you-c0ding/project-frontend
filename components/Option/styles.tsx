@@ -33,4 +33,22 @@ export const OptInput = styled.div`
   }
 `;
 
+export const OptInputTitle = styled.div`
+  display: flex;
+  width: 50vw;
+
+  @media (max-width: 769px) {
+    width: 80vw;
+  }
+
+  & > span {
+    width: 40%;
+    margin-right: 1rem;
+
+    @media (max-width: 769px) {
+      width: 50%;
+    }
+  }
+`;
+
 export const OptList = styled.div``;
