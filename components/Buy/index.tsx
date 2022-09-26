@@ -7,8 +7,7 @@ import {
   RightSide,
   Item,
   ItemName,
-  ItemFullName,
-  ItemKorean,
+  Option,
   Itemdetail,
   Btn,
   BuyBtn,
@@ -24,9 +23,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketShopping, faTruck } from "@fortawesome/free-solid-svg-icons";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
+import { SProduct } from "@typings/db";
 
 const Buy = () => {
-  const { data, error } = useSWR("https://waycabvav.shop/items/1", fetcher);
+  const { data: eachProduct, error } = useSWR<SProduct | undefined>(
+    "https://waycabvav.shop/items/1",
+    fetcher
+  );
+
+  console.log(eachProduct?.itemName);
+  console.log(eachProduct?.itemId);
   return (
     <div>
       <StatusBar />
@@ -42,10 +48,9 @@ const Buy = () => {
         <MiddleSide></MiddleSide>
         <RightSide>
           <Itemdetail>
-            <ItemName>잠만보</ItemName>
-            <ItemFullName>jamombo real deep sleep</ItemFullName>
-            <ItemKorean>잠만보 진짜 잠만잠</ItemKorean>
+            <ItemName>{eachProduct?.itemName}</ItemName>
           </Itemdetail>
+          <Option></Option>
           <Btn>
             <BuyBtn type="submit">구매</BuyBtn>
             <SelectBtn type="submit">

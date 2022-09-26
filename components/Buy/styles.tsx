@@ -43,15 +43,9 @@ export const ItemName = styled.div`
   margin-bottom: 0.5rem;
   text-decoration: underline;
 `;
-
-export const ItemFullName = styled.div`
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-`;
-
-export const ItemKorean = styled.div`
-  font-weight: bold;
-  margin-bottom: 0.3rem;
+export const Option = styled.div`
+  display: flex;
+  margin-top: 1rem;
 `;
 
 export const Btn = styled.section`

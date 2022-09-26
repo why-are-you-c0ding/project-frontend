@@ -6,10 +6,6 @@ import fetcher from "@utils/fetcher";
 import { SProduct } from "@typings/db";
 
 const ProductPage: VFC = () => {
-  const { data: productData, error } = useSWR<SProduct>(
-    "https://waycabvav.shop/items",
-    fetcher
-  );
   return (
     <div>
       <Wrapper>

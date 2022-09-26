@@ -22,10 +22,12 @@ import fetcher from "@utils/fetcher";
 import { SProduct } from "@typings/db";
 
 const Product = () => {
-  const { data: productData, error } = useSWR<SProduct>(
-    "https://waycabvav.shop/items/1",
-    fetcher
-  );
+  // const { data: productData, error } = useSWR<SProduct | undefined>(
+  //   "https://waycabvav.shop/items",
+  //   fetcher
+  // );
+  //이건 아직 전체 아이템이 아니야
+  // console.log(productData?.itemName);
   //아직 주소 모름
   //아직 전체 아이템 못가져옴
   return (
