@@ -2,15 +2,23 @@ import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 
 import { ItemTitle } from "@components/Sell/styles";
 import { Input } from "@pages/SignUp/styles";
-import { OptCount, OptInput, OptList } from "@components/Option/styles";
+import {
+  OptCount,
+  OptInput,
+  OptInputTitle,
+  OptList,
+} from "@components/Option/styles";
 import OptionInput from "@components/OptionInput";
 
 const Option = () => {
   const optionCount = [1, 2, 3, 4, 5];
   const [count, setCount] = useState(1);
 
+  let optNames: string[][] = [[], [], [], [], []];
   let optList: string[][] = [[], [], [], [], []];
   let optCount: number[][] = [[0], [0], [0], [0], [0]];
+
+  const [sOptList, SetsOptList] = useState(optList);
 
   const handleCountSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     const cnt = parseInt(e.target.value);
@@ -37,18 +45,11 @@ const Option = () => {
         <div>
           <ItemTitle style={{ fontSize: "1.2rem" }}>옵션 입력</ItemTitle>
           <OptInput>
-            <div className="firstOpt">
-              <span>옵션명</span>
-              {[...Array(count)].map((n, index) => {
-                return (
-                  <div key={index}>
-                    <Input type="text" placeholder="예시) 사이즈, 색상" />
-                  </div>
-                );
-              })}
-            </div>
             <div>
-              <span>옵션값</span>
+              <OptInputTitle>
+                <span className="optName">옵션명</span>
+                <span className="optTitle">옵션값</span>
+              </OptInputTitle>
               {[...Array(count)].map((n, index) => {
                 return (
                   <div key={index}>
@@ -56,6 +57,9 @@ const Option = () => {
                       index={index}
                       optList={optList}
                       optCount={optCount}
+                      optNames={optNames}
+                      sOptList={sOptList}
+                      SetsOptList={SetsOptList}
                     />
                   </div>
                 );
