@@ -9,16 +9,25 @@ import {
   OptList,
 } from "@components/Option/styles";
 import OptionInput from "@components/OptionInput";
+import useInput from "@hooks/useInput";
 
 const Option = () => {
   const optionCount = [1, 2, 3, 4, 5];
   const [count, setCount] = useState(1);
+  // const [test, setTest] = useState([1, 2, 3]);
+  //
+  // const onChange = useCallback((e: any) => {
+  //   e.stopPropagation();
+  //
+  //   setTest([...test, 7]);
+  //   console.log("눌림");
+  //
+  //   e.stopPropagation();
+  // }, []);
 
   let optNames: string[][] = [[], [], [], [], []];
   let optList: string[][] = [[], [], [], [], []];
   let optCount: number[][] = [[0], [0], [0], [0], [0]];
-
-  const [sOptList, SetsOptList] = useState(optList);
 
   const handleCountSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     const cnt = parseInt(e.target.value);
@@ -58,8 +67,6 @@ const Option = () => {
                       optList={optList}
                       optCount={optCount}
                       optNames={optNames}
-                      sOptList={sOptList}
-                      SetsOptList={SetsOptList}
                     />
                   </div>
                 );

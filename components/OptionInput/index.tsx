@@ -1,28 +1,27 @@
-import React, { ChangeEvent, FC, useCallback, useEffect } from "react";
+import React, {
+  ChangeEvent,
+  FC,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 import { Input } from "@pages/SignUp/styles";
 import useInput from "@hooks/useInput";
 import { Wrapper } from "@components/OptionInput/styles";
+import Test from "@components/Test";
 
 interface Props {
   index: number;
   optList: string[][];
   optCount: number[][];
   optNames: string[][];
-  sOptList: any;
-  SetsOptList: any;
 }
 
-const OptionInput: FC<Props> = ({
-  index,
-  optList,
-  optCount,
-  optNames,
-  sOptList,
-  SetsOptList,
-}) => {
+const OptionInput: FC<Props> = ({ index, optList, optCount, optNames }) => {
   const [optValue, , setOptValue] = useInput("");
   const [optName, onChangeOptName, setOptName] = useInput("");
+  const [test, setTest] = useState([1, 2, 3]);
 
   const onChangeOptValue = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,29 +44,32 @@ const OptionInput: FC<Props> = ({
     else count = 0;
 
     optCount[index][0] = count;
-    // console.log("여긴 개수");
-    // console.log(optCount);
-  });
 
-  optList[index] = opt;
-  optNames[index][0] = optName;
-  SetsOptList(optList);
+    optList[index] = opt;
+    optNames[index][0] = optName;
+  });
 
   let flatOptList: Array<string> = [];
 
   useEffect(() => {
-    console.log("여긴 목록");
+    console.log("여긴 옵션값");
     console.log(optList);
 
     flatOptList = optList.flat().flat();
-    console.log("flat");
+    console.log("저는 옵션값 flat");
     console.log(flatOptList);
 
+    console.log("나는 옵션명");
     console.log(optNames);
   });
 
+  const stopPropagation = useCallback((e: any) => {
+    e.stopPropagation();
+    e.preventDefault();
+  }, []);
+
   return (
-    <div>
+    <div style={{ border: "1px solid" }} onClick={stopPropagation}>
       <Wrapper>
         <Input
           type="text"
@@ -83,6 +85,8 @@ const OptionInput: FC<Props> = ({
           onChange={onChangeOptValue}
         />
       </Wrapper>
+
+      <Test test={test} setTest={setTest} flatOptList={flatOptList} />
     </div>
   );
 };
