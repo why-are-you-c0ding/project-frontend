@@ -8,7 +8,10 @@ export const Wrapper = styled.section`
   padding-top: 5rem;
 `;
 
-export const LeftSide = styled.section``;
+export const LeftSide = styled.section`
+  padding: 1rem 1rem;
+  margin-right: 1rem;
+`;
 
 export const MiddleSide = styled.section`
   border-left: 2px solid #c1b6b6;
@@ -16,7 +19,10 @@ export const MiddleSide = styled.section`
   height: 70vh;
 `;
 
-export const RightSide = styled.section``;
+export const RightSide = styled.section`
+  padding: 1rem 1rem;
+  margin-left: 1rem;
+`;
 
 export const Item = styled.div`
   padding-bottom: 1.3rem;
@@ -46,6 +52,21 @@ export const ItemName = styled.div`
 export const Option = styled.div`
   display: flex;
   margin-top: 1rem;
+  flex-direction: column;
+`;
+
+export const OptionList = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid #ebebeb;
+  width: 25rem;
+  height: 3rem;
+  outline: none;
+  font-size: 1rem;
+  padding: 10px 0 14px;
+  margin-top: 0.6rem;
 `;
 
 export const Btn = styled.section`
