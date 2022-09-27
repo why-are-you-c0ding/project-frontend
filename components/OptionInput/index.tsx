@@ -1,6 +1,8 @@
 import React, {
   ChangeEvent,
+  Dispatch,
   FC,
+  SetStateAction,
   useCallback,
   useEffect,
   useState,
@@ -14,6 +16,7 @@ import Test from "@components/Test";
 interface Props {
   index: number;
   optList: string[][];
+  setOptList: Dispatch<SetStateAction<never[][]>>;
   optCount: number[][];
   optNames: string[][];
 }

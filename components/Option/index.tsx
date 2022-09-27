@@ -26,8 +26,10 @@ const Option = () => {
   // }, []);
 
   let optNames: string[][] = [[], [], [], [], []];
-  let optList: string[][] = [[], [], [], [], []];
+  // let optList: string[][] = [[], [], [], [], []];
   let optCount: number[][] = [[0], [0], [0], [0], [0]];
+
+  const [optList, setOptList] = useState([[]]);
 
   const handleCountSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     const cnt = parseInt(e.target.value);
@@ -65,6 +67,7 @@ const Option = () => {
                     <OptionInput
                       index={index}
                       optList={optList}
+                      setOptList={setOptList}
                       optCount={optCount}
                       optNames={optNames}
                     />
