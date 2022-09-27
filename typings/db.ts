@@ -1,7 +1,11 @@
-export interface SProduct {
+export interface EachProduct {
   shopId: number;
   shopName: string;
   itemId: number;
   itemName: string;
-  imgUrl: string;
+  optionGroupName: string;
+  optionGroupId: Number;
+  optionId: number;
+  optionName: string;
+  price: number;
 }
