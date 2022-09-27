@@ -19,7 +19,7 @@ import {
 
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
-import { SProduct } from "@typings/db";
+import { EachProduct } from "@typings/db";
 
 const Product = () => {
   // const { data: productData, error } = useSWR<SProduct | undefined>(

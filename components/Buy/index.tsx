@@ -8,6 +8,7 @@ import {
   Item,
   ItemName,
   Option,
+  OptionList,
   Itemdetail,
   Btn,
   BuyBtn,
@@ -23,16 +24,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketShopping, faTruck } from "@fortawesome/free-solid-svg-icons";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
-import { SProduct } from "@typings/db";
+import { EachProduct } from "@typings/db";
 
 const Buy = () => {
-  const { data: eachProduct, error } = useSWR<SProduct | undefined>(
-    "https://waycabvav.shop/items/1",
+  const { data: eachData, error } = useSWR<EachProduct | undefined>(
+    "https://waycabvav.shop/items/2",
     fetcher
   );
-
-  console.log(eachProduct?.itemName);
-  console.log(eachProduct?.itemId);
+  console.log("eachData", eachData);
+  for (let x in eachData) {
+    console.log("x", x);
+  }
+  // const optionGroups = <T>(optionGroups: T[]): number => arr.length;
   return (
     <div>
       <StatusBar />
@@ -48,9 +51,14 @@ const Buy = () => {
         <MiddleSide></MiddleSide>
         <RightSide>
           <Itemdetail>
-            <ItemName>{eachProduct?.itemName}</ItemName>
+            <ItemName>{eachData?.itemName}</ItemName>
           </Itemdetail>
-          <Option></Option>
+          <Option>
+            <OptionList>{eachData?.shopName}</OptionList>
+            <OptionList>ss</OptionList>
+            <OptionList>ss</OptionList>
+            <OptionList>ss</OptionList>
+          </Option>
           <Btn>
             <BuyBtn type="submit">구매</BuyBtn>
             <SelectBtn type="submit">
