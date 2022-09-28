@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, useCallback, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import {
   Wrapper,
@@ -39,8 +39,33 @@ const Buy = () => {
     console.log("x", x);
   }
   console.log(eachData);
-  console.log(eachData?.optionGroups[0].options[0]);
-  console.log(eachData?.optionGroups[1]);
+  console.log(eachData?.optionGroups[0]);
+  console.log(eachData?.optionGroups[0].options[0].optionName);
+  console.log(eachData?.optionGroups[0].options[1].optionName);
+
+  console.log(eachData?.optionGroups[1].options[0].optionName);
+  console.log(eachData?.optionGroups[1].options[1].optionName);
+
+  const optionColor = [
+    eachData?.optionGroups[0].options[0].optionName,
+    eachData?.optionGroups[0].options[1].optionName,
+  ];
+
+  const optionSize = [
+    eachData?.optionGroups[1].options[0].optionName,
+    eachData?.optionGroups[1].options[1].optionName,
+  ];
+
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+
+  const handleColor = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+    setColor(e.target.value);
+  }, []);
+
+  const handleSize = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+    setSize(e.target.value);
+  }, []);
 
   return (
     <div>
@@ -60,16 +85,20 @@ const Buy = () => {
             <ItemName>{eachData?.itemName}</ItemName>
           </Itemdetail>
           <Option>
-            <OptionList>{eachData?.optionGroups[0].optionGroupName}</OptionList>
-            <OptionList>
-              사이즈:{eachData?.optionGroups[0].options[0].optionName}
-            </OptionList>
-            <OptionList>
-              사이즈:{eachData?.optionGroups[0].options[1].optionName}
-            </OptionList>
-            <OptionList>
-              가격:{eachData?.optionGroups[0].options[0].price}원
-            </OptionList>
+            <select onChange={handleColor} value={color}>
+              {optionColor.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+            <select onChange={handleSize} value={size}>
+              {optionSize.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
           </Option>
           <Btn>
             <BuyBtn type="submit">구매</BuyBtn>
