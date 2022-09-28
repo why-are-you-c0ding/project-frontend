@@ -16,39 +16,42 @@ export const OptCount = styled.div`
   }
 `;
 
-export const OptInput = styled.div`
-  display: flex;
-  margin-top: 1rem;
+export const OptNameInput = styled.div`
+  & > div {
+    display: flex;
+    margin-top: 0.4rem;
 
-  .firstOpt {
-    margin-right: 2rem;
-  }
+    & > span:first-of-type,
+    & > input:first-of-type {
+      margin-right: 1rem;
+      width: 30%;
+    }
 
-  & input {
-    margin-top: 1rem;
-  }
-
-  .opt0 {
-    color: red;
-  }
-`;
-
-export const OptInputTitle = styled.div`
-  display: flex;
-  width: 50vw;
-
-  @media (max-width: 769px) {
-    width: 80vw;
-  }
-
-  & > span {
-    width: 40%;
-    margin-right: 1rem;
-
-    @media (max-width: 769px) {
-      width: 50%;
+    & > span:last-of-type,
+    & > input:last-of-type {
+      width: 60%;
     }
   }
 `;
 
-export const OptList = styled.div``;
+export const Input = styled.input`
+  border: none;
+  border-bottom: 1px solid;
+  font-size: 1.1rem;
+`;
+
+export const OptTable = styled.div`
+  margin-top: 1rem;
+
+  & > div {
+    display: flex;
+
+    & > span {
+      width: 15%;
+    }
+
+    & > input {
+      width: 70%;
+    }
+  }
+`;
