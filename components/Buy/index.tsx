@@ -26,16 +26,22 @@ import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import { EachProduct } from "@typings/db";
 
+const eachData: { [key: string]: string | number | undefined } = {};
+
 const Buy = () => {
   const { data: eachData, error } = useSWR<EachProduct | undefined>(
-    "https://waycabvav.shop/items/2",
+    "https://waycabvav.shop/items/18",
     fetcher
   );
+
   console.log("eachData", eachData);
   for (let x in eachData) {
     console.log("x", x);
   }
-  // const optionGroups = <T>(optionGroups: T[]): number => arr.length;
+  console.log(eachData);
+  console.log(eachData?.optionGroups[0].options[0]);
+  console.log(eachData?.optionGroups[1]);
+
   return (
     <div>
       <StatusBar />
@@ -54,10 +60,16 @@ const Buy = () => {
             <ItemName>{eachData?.itemName}</ItemName>
           </Itemdetail>
           <Option>
-            <OptionList>{eachData?.shopName}</OptionList>
-            <OptionList>ss</OptionList>
-            <OptionList>ss</OptionList>
-            <OptionList>ss</OptionList>
+            <OptionList>{eachData?.optionGroups[0].optionGroupName}</OptionList>
+            <OptionList>
+              사이즈:{eachData?.optionGroups[0].options[0].optionName}
+            </OptionList>
+            <OptionList>
+              사이즈:{eachData?.optionGroups[0].options[1].optionName}
+            </OptionList>
+            <OptionList>
+              가격:{eachData?.optionGroups[0].options[0].price}원
+            </OptionList>
           </Option>
           <Btn>
             <BuyBtn type="submit">구매</BuyBtn>
