@@ -2,6 +2,7 @@ import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { BuyBtn, ItemTitle } from "@components/Sell/styles";
 import {
   Input,
+  MakeTable,
   OptCount,
   OptNameInput,
   OptTable,
@@ -9,6 +10,12 @@ import {
 import { makeOptionRequests } from "@utils/makeOptionRequests";
 
 const Option = () => {
+  const [toggleTable, setToggleTable] = useState(false);
+
+  const onClickToggleTable = useCallback(() => {
+    setToggleTable((prev) => !prev);
+  }, []);
+
   //optName
   const [optName, setOptName] = useState({
     optName1: "",
@@ -58,16 +65,18 @@ const Option = () => {
 
   for (let i = 0; i < 5; i++) {
     let te = OptValueAll[i].replace(/\s/g, "").split(",");
-    opt.push(te);
+
+    if (te[0] !== "") opt.push(te);
   }
 
   // 옵션값들 모음 일차 배열
   let optFlat = opt.flat();
+  // let optAndPrice = optFlat.map((x) => x);
 
   // 옵션값들 각각 추가 가격
-  const [optPrice, SetoptPrice] = useState<any>([]);
-  let soptPrice = optPrice;
+  const [optPrice, setOptPrice] = useState<any>({});
 
+  //select
   const optionCount = [1, 2, 3, 4, 5];
   const [count, setCount] = useState(1);
 
@@ -76,10 +85,7 @@ const Option = () => {
     setCount(cnt);
   }, []);
 
-  useEffect(() => {
-    // console.log(makeOptionRequests(optFlat, soptPrice));
-    console.log(soptPrice);
-  });
+  console.log(makeOptionRequests(optFlat, optPrice));
 
   return (
     <div>
@@ -179,25 +185,35 @@ const Option = () => {
           </div>
         </OptNameInput>
 
-        <OptTable>
-          <h2>옵션 목록(추가 가격)</h2>
-          {optFlat.map((v, index) => {
-            if (v !== "") {
-              return (
-                <div key={index}>
-                  <span>{v}</span>
-                  <Input
-                    type="text"
-                    value={optPrice[index]}
-                    onChange={(e) => {
-                      optPrice[index] = e.target.value;
-                    }}
-                  />
-                </div>
-              );
-            }
-          })}
-        </OptTable>
+        <MakeTable>
+          <button onClick={onClickToggleTable}>목록 만들기</button>
+        </MakeTable>
+
+        {toggleTable && (
+          <OptTable>
+            <h2>옵션 목록(추가 가격)</h2>
+            {optFlat.map((v, index) => {
+              const num = index.toString();
+
+              if (v !== "") {
+                return (
+                  <div key={index}>
+                    <span>{v}</span>
+                    <Input
+                      type="text"
+                      onChange={(e: any) => {
+                        setOptPrice({
+                          ...optPrice,
+                          [`${num}`]: e.target.value,
+                        });
+                      }}
+                    />
+                  </div>
+                );
+              }
+            })}
+          </OptTable>
+        )}
       </div>
       <BuyBtn>상품 등록</BuyBtn>
     </div>

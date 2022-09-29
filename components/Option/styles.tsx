@@ -40,11 +40,42 @@ export const Input = styled.input`
   font-size: 1.1rem;
 `;
 
+export const MakeTable = styled.div`
+  display: flex;
+  justify-content: center;
+
+  margin-top: 0.5rem;
+
+  & button {
+    width: 50%;
+    padding: 0.5rem 0.8rem;
+
+    background-color: cornflowerblue;
+    color: white;
+
+    border: transparent;
+    border-radius: 20px;
+    text-align: center;
+    outline: none;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d63535;
+      border: none;
+    }
+`;
+
 export const OptTable = styled.div`
   margin-top: 1rem;
 
   & > div {
     display: flex;
+    margin-top: 0.5rem;
 
     & > span {
       width: 15%;
