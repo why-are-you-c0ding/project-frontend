@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
-
-import { ItemTitle } from "@components/Sell/styles";
+import { BuyBtn, ItemTitle } from "@components/Sell/styles";
 import {
   Input,
   OptCount,
   OptNameInput,
   OptTable,
 } from "@components/Option/styles";
+import { makeOptionRequests } from "@utils/makeOptionRequests";
 
 const Option = () => {
   //optName
@@ -49,9 +49,11 @@ const Option = () => {
     });
   };
 
+  // 옵션명 모음 일차 배열
   let OptNameAll: string[] = Object.values(optName);
 
   let OptValueAll: string[] = Object.values(optValue);
+  // 한 옵션명의 옵션값들 모음 이차 배열
   let opt: string[][] = [];
 
   for (let i = 0; i < 5; i++) {
@@ -59,16 +61,25 @@ const Option = () => {
     opt.push(te);
   }
 
-  let optFlat = opt.flat().flatMap((x) => [[x]]);
-  console.log(optFlat);
+  // 옵션값들 모음 일차 배열
+  let optFlat = opt.flat();
+
+  // 옵션값들 각각 추가 가격
+  const [optPrice, SetoptPrice] = useState<any>([]);
+  let soptPrice = optPrice;
 
   const optionCount = [1, 2, 3, 4, 5];
   const [count, setCount] = useState(1);
 
-  const handleCountSelect = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+  const handleCountSelect = useCallback((e: any) => {
     const cnt = parseInt(e.target.value);
     setCount(cnt);
   }, []);
+
+  useEffect(() => {
+    // console.log(makeOptionRequests(optFlat, soptPrice));
+    console.log(soptPrice);
+  });
 
   return (
     <div>
@@ -171,17 +182,24 @@ const Option = () => {
         <OptTable>
           <h2>옵션 목록(추가 가격)</h2>
           {optFlat.map((v, index) => {
-            if (v[0] !== "") {
+            if (v !== "") {
               return (
                 <div key={index}>
                   <span>{v}</span>
-                  <Input type="text" />
+                  <Input
+                    type="text"
+                    value={optPrice[index]}
+                    onChange={(e) => {
+                      optPrice[index] = e.target.value;
+                    }}
+                  />
                 </div>
               );
             }
           })}
         </OptTable>
       </div>
+      <BuyBtn>상품 등록</BuyBtn>
     </div>
   );
 };
