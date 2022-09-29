@@ -1,7 +1,9 @@
-export const makeOptionRequests = (a: string[], b: string[]) => {
+export const makeOptionRequests = (a: string[], b: any) => {
   let optionRequests: Array<Object> = [];
 
-  const len = a.length;
+  let aryB: string[] = Object.keys(b).map((item) => b[item]);
+
+  const len = aryB.length;
 
   for (let i = 0; i < len; i++) {
     const option: object = {
