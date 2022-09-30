@@ -16,3 +16,43 @@ export const makeOptionRequests = (a: string[], b: any) => {
 
   return optionRequests;
 };
+
+export const makeOptionGroupRequests = (
+  a: any,
+  b: any,
+  c: any,
+  d: any,
+  optName: string
+) => {
+  let optLen = [];
+
+  for (let i = 0; i < d.length; i++) {
+    optLen.push(d[i].length);
+  }
+
+  const optRequests = makeOptionRequests(a, b);
+
+  let eachGroup: any = [];
+
+  for (let i = 0; i < optLen.length; i++) {
+    if (i === 0)
+      eachGroup.push({
+        ["optionRequests"]: optRequests.slice(0, optLen[i]),
+        ["optionGroupName"]: c[i],
+        ["basic"]: "true",
+      });
+    else
+      eachGroup.push({
+        ["optionRequests"]: optRequests.slice(
+          optLen[i - 1],
+          optLen[i] + optLen[i - 1]
+        ),
+        ["optionGroupName"]: c[i],
+        ["basic"]: "false",
+      });
+  }
+
+  eachGroup = { ["itemName"]: optName, ["optionGroupRequests"]: eachGroup };
+
+  return eachGroup;
+};

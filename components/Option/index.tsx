@@ -7,7 +7,11 @@ import {
   OptNameInput,
   OptTable,
 } from "@components/Option/styles";
-import { makeOptionRequests } from "@utils/makeOptionRequests";
+import {
+  makeOptionGroupRequests,
+  makeOptionRequests,
+} from "@utils/makeOptionRequests";
+import axios from "axios";
 
 const Option = () => {
   const [toggleTable, setToggleTable] = useState(false);
@@ -57,14 +61,14 @@ const Option = () => {
   };
 
   // 옵션명 모음 일차 배열
-  let OptNameAll: string[] = Object.values(optName);
+  let optNameAll: string[] = Object.values(optName);
 
-  let OptValueAll: string[] = Object.values(optValue);
+  let optValueAll: string[] = Object.values(optValue);
   // 한 옵션명의 옵션값들 모음 이차 배열
   let opt: string[][] = [];
 
   for (let i = 0; i < 5; i++) {
-    let te = OptValueAll[i].replace(/\s/g, "").split(",");
+    let te = optValueAll[i].replace(/\s/g, "").split(",");
 
     if (te[0] !== "") opt.push(te);
   }
@@ -85,7 +89,38 @@ const Option = () => {
     setCount(cnt);
   }, []);
 
-  console.log(makeOptionRequests(optFlat, optPrice));
+  const Data = makeOptionGroupRequests(
+    optFlat,
+    optPrice,
+    optNameAll,
+    opt,
+    "삼성 냉장고으앵앵"
+  );
+
+  const onSubmitItems = useCallback(
+    (e: any) => {
+      e.preventDefault();
+
+      axios
+        .post("https://waycabvav.shop/items", Data, {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0b2tlbiIsImlkIjo0MSwiYXV0aG9yaXRpZXMiOiJST0xFX1NFTExFUiIsImlhdCI6MTY2NDU1OTcwNSwiZXhwIjoxNjY0NTU5NzkyfQ.R2HpP7ck-kDY5Uz12P0LFs222_R2sDZZBIUu84lO86I6Lc1TNY2drBjZ5B85KrA3af4bw_MPC4dd4oijV0rCNA",
+          },
+        })
+        .then((response) => {
+          alert("등록 성공!");
+        })
+        .catch((err) => {
+          alert("실패,,,");
+        });
+    },
+    [Data]
+  );
+
+  console.log(
+    makeOptionGroupRequests(optFlat, optPrice, optNameAll, opt, "삼성 냉장고")
+  );
 
   return (
     <div>
@@ -215,7 +250,7 @@ const Option = () => {
           </OptTable>
         )}
       </div>
-      <BuyBtn>상품 등록</BuyBtn>
+      <BuyBtn onClick={onSubmitItems}>상품 등록</BuyBtn>
     </div>
   );
 };
