@@ -25,19 +25,24 @@ import { faBasketShopping, faTruck } from "@fortawesome/free-solid-svg-icons";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import { EachProduct } from "@typings/db";
+import { useParams } from "react-router";
 
 const eachData: { [key: string]: string | number | undefined } = {};
 
-const Buy = () => {
+const Buy = (props: any) => {
   const { data: eachData, error } = useSWR<EachProduct | undefined>(
     "https://waycabvav.shop/items/18",
     fetcher
   );
 
+  let { id } = useParams<{ id: any }>();
+
+  id = eachData?.itemId;
   console.log("eachData", eachData);
   for (let x in eachData) {
     console.log("x", x);
   }
+  console.log(id);
   console.log(eachData);
   console.log(eachData?.optionGroups[0]);
   console.log(eachData?.optionGroups[0].options[0].optionName);
@@ -87,6 +92,27 @@ const Buy = () => {
           <Option>
             <select onChange={handleColor} value={color}>
               {optionColor.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+            <select onChange={handleSize} value={size}>
+              {optionSize.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+            <select onChange={handleSize} value={size}>
+              {optionSize.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+            <select onChange={handleSize} value={size}>
+              {optionSize.map((item) => (
                 <option value={item} key={item}>
                   {item}
                 </option>

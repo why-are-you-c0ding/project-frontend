@@ -52,7 +52,26 @@ export const ItemName = styled.div`
 export const Option = styled.div`
   display: flex;
   margin-top: 1rem;
-  flex-direction: column;
+  flex-wrap: wrap;
+
+  & select {
+    margin: 1rem 1rem;
+    width: 10rem;
+    height: 3rem;
+    border: 1px solid #c4c4c4;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+
+  & select:focus {
+    border: 1px solid #b7acac;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 3px solid #f8e4ff;
+  }
 `;
 
 export const OptionList = styled.div`
