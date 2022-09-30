@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router";
 import loadable from "@loadable/component";
+import Product from "@components/Product";
 
 const SignUp = loadable(() => import("@pages/SignUp"));
 const LogIn = loadable(() => import("@pages/LogIn"));
@@ -28,6 +29,7 @@ const App = () => {
       <Route path="/shop" component={Shop} />
       <Route path="/sellshop" component={SellShop} />
       <Route path="/productpage" component={ProductPage} />
+      <Route path="/productpage/:itemId" component={ProductPage} />
     </Switch>
   );
 };

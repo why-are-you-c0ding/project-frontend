@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, useCallback, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import {
   Wrapper,
@@ -25,17 +25,53 @@ import { faBasketShopping, faTruck } from "@fortawesome/free-solid-svg-icons";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import { EachProduct } from "@typings/db";
+import { useParams } from "react-router";
 
-const Buy = () => {
+const eachData: { [key: string]: string | number | undefined } = {};
+
+const Buy = (props: any) => {
   const { data: eachData, error } = useSWR<EachProduct | undefined>(
-    "https://waycabvav.shop/items/2",
+    "https://waycabvav.shop/items/18",
     fetcher
   );
+
+  let { id } = useParams<{ id: any }>();
+
+  id = eachData?.itemId;
   console.log("eachData", eachData);
   for (let x in eachData) {
     console.log("x", x);
   }
-  // const optionGroups = <T>(optionGroups: T[]): number => arr.length;
+  console.log(id);
+  console.log(eachData);
+  console.log(eachData?.optionGroups[0]);
+  console.log(eachData?.optionGroups[0].options[0].optionName);
+  console.log(eachData?.optionGroups[0].options[1].optionName);
+
+  console.log(eachData?.optionGroups[1].options[0].optionName);
+  console.log(eachData?.optionGroups[1].options[1].optionName);
+
+  const optionColor = [
+    eachData?.optionGroups[0].options[0].optionName,
+    eachData?.optionGroups[0].options[1].optionName,
+  ];
+
+  const optionSize = [
+    eachData?.optionGroups[1].options[0].optionName,
+    eachData?.optionGroups[1].options[1].optionName,
+  ];
+
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+
+  const handleColor = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+    setColor(e.target.value);
+  }, []);
+
+  const handleSize = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+    setSize(e.target.value);
+  }, []);
+
   return (
     <div>
       <StatusBar />
@@ -54,10 +90,41 @@ const Buy = () => {
             <ItemName>{eachData?.itemName}</ItemName>
           </Itemdetail>
           <Option>
-            <OptionList>{eachData?.shopName}</OptionList>
-            <OptionList>ss</OptionList>
-            <OptionList>ss</OptionList>
-            <OptionList>ss</OptionList>
+            <select onChange={handleColor} value={color}>
+              {optionColor.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+            <select onChange={handleSize} value={size}>
+              {optionSize.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+            <select onChange={handleSize} value={size}>
+              {optionSize.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+            <select onChange={handleSize} value={size}>
+              {optionSize.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+            <select onChange={handleSize} value={size}>
+              {optionSize.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
           </Option>
           <Btn>
             <BuyBtn type="submit">구매</BuyBtn>

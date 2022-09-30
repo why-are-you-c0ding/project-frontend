@@ -20,15 +20,18 @@ import {
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import { EachProduct } from "@typings/db";
+import { Link, NavLink } from "react-router-dom";
+import { useParams } from "react-router";
 
-const Product = () => {
-  // const { data: productData, error } = useSWR<SProduct | undefined>(
-  //   "https://waycabvav.shop/items",
-  //   fetcher
-  // );
-  //이건 아직 전체 아이템이 아니야
-  // console.log(productData?.itemName);
-  //아직 주소 모름
+const Product = (props: any) => {
+  const { data: eachData, error } = useSWR<EachProduct | undefined>(
+    "https://waycabvav.shop/items/{itemId}",
+    fetcher
+  );
+  let { id } = useParams<{ id: any }>();
+
+  id = eachData?.itemId;
+  //백에서 주소 알려주면 가져와서 각각 데이터 배열하는 것으로
   //아직 전체 아이템 못가져옴
   return (
     <div>
@@ -62,10 +65,12 @@ const Product = () => {
           </ItemBox>
           <ItemBox>
             <Item>
-              <img
-                src="https://post-phinf.pstatic.net/MjAyMTAzMTNfODUg/MDAxNjE1NjAxNjIwOTQz.81Ruw-E3aK-7V89c5JacxvnbWFe8ez_6dGT3S3AC-g8g.ZcQgsuG13-tR16wrj6B32vOIi3axULarz9eoWwBjo2kg.PNG/%EC%B9%98%EC%BD%94%EB%A6%AC%ED%83%80_%EA%B3%B5%EC%8B%9D_%EC%9D%BC%EB%9F%AC%EC%8A%A4%ED%8A%B8-downDFG.png?type=w1200"
-                alt=""
-              />
+              <NavLink to={"shop/" + props.id}>
+                <img
+                  src="https://post-phinf.pstatic.net/MjAyMTAzMTNfODUg/MDAxNjE1NjAxNjIwOTQz.81Ruw-E3aK-7V89c5JacxvnbWFe8ez_6dGT3S3AC-g8g.ZcQgsuG13-tR16wrj6B32vOIi3axULarz9eoWwBjo2kg.PNG/%EC%B9%98%EC%BD%94%EB%A6%AC%ED%83%80_%EA%B3%B5%EC%8B%9D_%EC%9D%BC%EB%9F%AC%EC%8A%A4%ED%8A%B8-downDFG.png?type=w1200"
+                  alt=""
+                />
+              </NavLink>
             </Item>
             <Itemdetail>
               <ItemName>대표 이름</ItemName>
