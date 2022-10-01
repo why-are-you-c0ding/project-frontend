@@ -44,6 +44,7 @@ const Buy = (props: any) => {
   }
   console.log(id);
   console.log(eachData);
+
   console.log(eachData?.optionGroups[0]);
   console.log(eachData?.optionGroups[0].options[0].optionName);
   console.log(eachData?.optionGroups[0].options[1].optionName);
