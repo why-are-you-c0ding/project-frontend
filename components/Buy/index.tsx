@@ -104,27 +104,6 @@ const Buy = (props: any) => {
                 </option>
               ))}
             </select>
-            <select onChange={handleSize} value={size}>
-              {optionSize.map((item) => (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-            <select onChange={handleSize} value={size}>
-              {optionSize.map((item) => (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-            <select onChange={handleSize} value={size}>
-              {optionSize.map((item) => (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
           </Option>
           <Btn>
             <BuyBtn type="submit">구매</BuyBtn>
