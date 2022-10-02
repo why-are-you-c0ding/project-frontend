@@ -7,10 +7,7 @@ import {
   OptNameInput,
   OptTable,
 } from "@components/Option/styles";
-import {
-  makeOptionGroupRequests,
-  makeOptionRequests,
-} from "@utils/makeOptionRequests";
+import { makeOptionGroupRequests } from "@utils/makeOptionRequests";
 import axios from "axios";
 
 const Option = () => {
@@ -97,6 +94,12 @@ const Option = () => {
     "삼성 냉장고으앵앵"
   );
 
+  // console.log(optFlat);
+  // console.log(optPrice);
+  // console.log(optNameAll);
+  console.log(opt);
+  // console.log(Data);
+
   const onSubmitItems = useCallback(
     (e: any) => {
       e.preventDefault();
@@ -105,7 +108,7 @@ const Option = () => {
         .post("https://waycabvav.shop/items", Data, {
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0b2tlbiIsImlkIjo0MSwiYXV0aG9yaXRpZXMiOiJST0xFX1NFTExFUiIsImlhdCI6MTY2NDU1OTcwNSwiZXhwIjoxNjY0NTU5NzkyfQ.R2HpP7ck-kDY5Uz12P0LFs222_R2sDZZBIUu84lO86I6Lc1TNY2drBjZ5B85KrA3af4bw_MPC4dd4oijV0rCNA",
+              "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0b2tlbiIsImlkIjo0MSwiYXV0aG9yaXRpZXMiOiJST0xFX1NFTExFUiIsImlhdCI6MTY2NDY5MTYwMCwiZXhwIjoxNjY0NjkxNjg2fQ.EBZ-UtgJKAZn13nH7GXiBMV1FvPrCfSTpEGkl_AEDWOKyjFwQILEFHKbg27y6PSuBmP_pctOeCsOi0AAJPRSLA",
           },
         })
         .then((response) => {
