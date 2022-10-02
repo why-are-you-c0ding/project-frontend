@@ -52,7 +52,7 @@ export const ItemName = styled.div`
 export const Option = styled.div`
   display: flex;
   margin-top: 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
 
   & select {
     margin: 1rem 1rem;
@@ -72,6 +72,10 @@ export const Option = styled.div`
     border-radius: 10px;
     outline: 3px solid #f8e4ff;
   }
+`;
+
+export const OptionName = styled.div`
+  margin-right: 3rem;
 `;
 
 export const OptionList = styled.div`
