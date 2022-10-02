@@ -52,7 +52,7 @@ export const ItemName = styled.div`
 export const Option = styled.div`
   display: flex;
   margin-top: 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
 
   & select {
     margin: 1rem 1rem;
