@@ -26,51 +26,83 @@ import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import { EachProduct } from "@typings/db";
 import { useParams } from "react-router";
+import option from "@components/Option";
 
-const eachData: { [key: string]: string | number | undefined } = {};
-
-const Buy = (props: any) => {
-  const { data: eachData, error } = useSWR<EachProduct | undefined>(
-    "https://waycabvav.shop/items/18",
+const Buy = () => {
+  const { data: eachData, error } = useSWR<any>(
+    "https://waycabvav.shop/items/26",
     fetcher
   );
 
-  let { id } = useParams<{ id: any }>();
+  // 옵션의 개수
+  const optionLen: any = eachData?.optionGroups?.length;
 
-  id = eachData?.itemId;
-  console.log("eachData", eachData);
-  for (let x in eachData) {
-    console.log("x", x);
+  // 옵션의 이름
+  let optGroupNames: Array<string> = [];
+
+  for (let i = 0; i < optionLen; i++) {
+    let temp = eachData?.optionGroups[i].optionGroupName;
+
+    if (temp) optGroupNames.push(temp);
   }
-  console.log(id);
-  console.log(eachData);
-  console.log(eachData?.optionGroups[0]);
-  console.log(eachData?.optionGroups[0].options[0].optionName);
-  console.log(eachData?.optionGroups[0].options[1].optionName);
 
-  console.log(eachData?.optionGroups[1].options[0].optionName);
-  console.log(eachData?.optionGroups[1].options[1].optionName);
+  // 각 옵션의 값들 이차 배열
+  let optGroupValue: string[][] = [];
+  for (let i = 0; i < optionLen; i++) {
+    optGroupValue.push([]);
 
-  const optionColor = [
-    eachData?.optionGroups[0].options[0].optionName,
-    eachData?.optionGroups[0].options[1].optionName,
-  ];
+    let temp = eachData?.optionGroups[i].options.length;
 
-  const optionSize = [
-    eachData?.optionGroups[1].options[0].optionName,
-    eachData?.optionGroups[1].options[1].optionName,
-  ];
+    if (temp) {
+      for (let j = 0; j < temp; j++) {
+        optGroupValue[i].push(
+          eachData?.optionGroups[i]?.options[j]?.optionName
+        );
+      }
+    }
+  }
 
-  const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
+  console.log(optGroupValue);
+  // 각 옵션들 기본값 일차 배열
+  let eachOptBase: string[] = [];
 
-  const handleColor = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
-    setColor(e.target.value);
-  }, []);
+  for (let i = 0; i < optGroupValue.length; i++)
+    eachOptBase.push(optGroupValue[i][0]);
 
-  const handleSize = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
-    setSize(e.target.value);
-  }, []);
+  // 각 옵션마다 몇개가 들어있는지
+  let eachOptLen: number[] = [];
+
+  for (let i = 0; i < optionLen; i++) {
+    eachOptLen.push(optGroupValue[i]?.length);
+  }
+
+  const [optSelect, setOptSelect] = useState({
+    optSelect0: "",
+    optSelect1: "",
+    optSelect2: "",
+    optSelect3: "",
+    optSelect4: "",
+  });
+
+  const { optSelect0, optSelect1, optSelect2, optSelect3, optSelect4 } =
+    optSelect;
+
+  const onChangeSelect = (e: any) => {
+    const { name, value } = e.target;
+
+    setOptSelect({
+      ...optSelect,
+      [name]: value,
+    });
+  };
+
+  let test = "";
+
+  if (optSelect0 === "") {
+    test = eachOptBase[0];
+  } else test = optSelect0;
+
+  console.log(test);
 
   return (
     <div>
@@ -90,41 +122,21 @@ const Buy = (props: any) => {
             <ItemName>{eachData?.itemName}</ItemName>
           </Itemdetail>
           <Option>
-            <select onChange={handleColor} value={color}>
-              {optionColor.map((item) => (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-            <select onChange={handleSize} value={size}>
-              {optionSize.map((item) => (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-            <select onChange={handleSize} value={size}>
-              {optionSize.map((item) => (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-            <select onChange={handleSize} value={size}>
-              {optionSize.map((item) => (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-            <select onChange={handleSize} value={size}>
-              {optionSize.map((item) => (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
+            {optGroupNames.map((v, index) => {
+              return (
+                <div key={index}>
+                  <h2>{v}</h2>
+
+                  <select name={`optSelect${index}`} onChange={onChangeSelect}>
+                    {[...Array(eachOptLen[index])].map((w, idx) => (
+                      <option value={optGroupValue[index][idx]} key={idx}>
+                        {optGroupValue[index][idx]}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              );
+            })}
           </Option>
           <Btn>
             <BuyBtn type="submit">구매</BuyBtn>
@@ -135,7 +147,7 @@ const Buy = (props: any) => {
           </Btn>
           <DetailOrder>
             <span>상품 정보</span>
-            <table>
+            <div>
               <span>
                 <div>모델번호</div>
               </span>
@@ -148,7 +160,7 @@ const Buy = (props: any) => {
               <span>
                 <div>발매가</div>
               </span>
-            </table>
+            </div>
           </DetailOrder>
           <Delivery>
             <DeliveryTitle>
