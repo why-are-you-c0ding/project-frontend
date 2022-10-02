@@ -97,7 +97,7 @@ const Sell = () => {
           </form>
         </Image>
         <RightSide>
-          <form onSubmit={() => {}}>
+          <div>
             <ItemInfo>
               <label>
                 <ItemTitle>상품 이름</ItemTitle>
@@ -131,8 +131,7 @@ const Sell = () => {
               </label>
               <Option />
             </ItemInfo>
-            <BuyBtn type="submit">상품 등록</BuyBtn>
-          </form>
+          </div>
         </RightSide>
       </Wrapper>
     </div>

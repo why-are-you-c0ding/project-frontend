@@ -1,47 +1,17 @@
-import React, {
-  Dispatch,
-  FC,
-  SetStateAction,
-  useCallback,
-  useState,
-} from "react";
+import React, { FC } from "react";
 
 interface Props {
-  test: any;
-  setTest: any;
-  flatOptList: any;
+  optList: string[][];
 }
 
-const Test: FC<Props> = ({ test, setTest, flatOptList }) => {
-  // const [test, setTest] = useState([1, 2, 3]);
-
-  const onChange = useCallback((e: any) => {
-    // e.stopPropagation();
-    // e.preventDefault();
-    // e.stopImmediatePropagation();
-
-    setTest([...test, 7]);
-
-    console.log("눌림");
-  }, []);
-
-  const stopPropagation = useCallback((e: any) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setTest([...test, ...flatOptList]);
-  }, []);
-
-  let aaa: any = test;
+const Test: FC<Props> = ({ optList }) => {
+  const aaa: string[][] = optList;
 
   return (
-    // <div onClick={stopPropagation}>
     <div>
-      <button onChange={(event) => onChange(event)}>눌러!</button>
-      <div>
-        {aaa.map((v: any, index: number) => {
-          return <div key={index}>{v}</div>;
-        })}
-      </div>
+      {[...Array(5)].map((n, index) => {
+        return <div>{optList}</div>;
+      })}
     </div>
   );
 };
