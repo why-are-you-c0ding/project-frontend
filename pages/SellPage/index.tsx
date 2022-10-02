@@ -15,6 +15,7 @@ import SellpageSidebar from "@components/SellpageSidebar";
 const SellInfo = loadable(() => import("@components/SellInfo"));
 const SellRegister = loadable(() => import("@components/SellRegister"));
 const SellStock = loadable(() => import("@components/SellStock"));
+const SellStockLook = loadable(() => import("@components/SellStockLook"));
 
 const SellPage = () => {
   const location = useLocation();
@@ -40,6 +41,7 @@ const SellPage = () => {
             <Route path="/sellpage/info" component={SellInfo} />
             <Route path="/sellpage/sellregister" component={SellRegister} />
             <Route path="/sellpage/sellstock" component={SellStock} />
+            <Route path="/sellpage/sellstocklook" component={SellStockLook} />
           </Switch>
         </RightSide>
       </Wrapper>
