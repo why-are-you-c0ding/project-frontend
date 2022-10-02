@@ -50,9 +50,7 @@ export const ItemName = styled.div`
   text-decoration: underline;
 `;
 export const Option = styled.div`
-  display: flex;
   margin-top: 1rem;
-  flex-wrap: wrap;
 
   & select {
     margin: 1rem 1rem;
