@@ -25,12 +25,20 @@ import { useParams } from "react-router";
 
 const Product = (props: any) => {
   const { data: eachData, error } = useSWR<EachProduct | undefined>(
-    "https://waycabvav.shop/items/{itemId}",
+    "https://waycabvav.shop/items/23",
     fetcher
   );
   let { id } = useParams<{ id: any }>();
 
   id = eachData?.itemId;
+
+  id = eachData?.itemId;
+  console.log("eachData", eachData);
+  for (let x in eachData) {
+    console.log("x", x);
+  }
+  console.log(id);
+  console.log(eachData);
   //백에서 주소 알려주면 가져와서 각각 데이터 배열하는 것으로
   //아직 전체 아이템 못가져옴
   return (
