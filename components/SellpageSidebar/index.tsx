@@ -31,7 +31,7 @@ const SellpageSidebar: FC<Props> = ({ sideBar }) => {
         <header>상품 조회</header>
 
         <span>
-          <NavLink activeClassName="selected" to={`/sellpage/profile`}>
+          <NavLink activeClassName="selected" to={`/sellpage/sellstocklook`}>
             상품 조회
           </NavLink>
         </span>
