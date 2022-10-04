@@ -1,4 +1,10 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  FC,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { BuyBtn, ItemTitle } from "@components/Sell/styles";
 import {
   Input,
@@ -10,7 +16,11 @@ import {
 import { makeOptionGroupRequests } from "@utils/makeOptionRequests";
 import axios from "axios";
 
-const Option = () => {
+interface Props {
+  itemName: string;
+}
+
+const Option: FC<Props> = ({ itemName }) => {
   const [toggleTable, setToggleTable] = useState(false);
 
   const onClickToggleTable = useCallback(() => {
@@ -91,14 +101,10 @@ const Option = () => {
     optPrice,
     optNameAll,
     opt,
-    "삼성 냉장고으앵앵"
+    itemName
   );
 
-  // console.log(optFlat);
-  // console.log(optPrice);
-  // console.log(optNameAll);
-  console.log(opt);
-  // console.log(Data);
+  console.log(localStorage.getItem("jwt"));
 
   const onSubmitItems = useCallback(
     (e: any) => {
@@ -107,8 +113,7 @@ const Option = () => {
       axios
         .post("https://waycabvav.shop/items", Data, {
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0b2tlbiIsImlkIjo0MSwiYXV0aG9yaXRpZXMiOiJST0xFX1NFTExFUiIsImlhdCI6MTY2NDY5MTYwMCwiZXhwIjoxNjY0NjkxNjg2fQ.EBZ-UtgJKAZn13nH7GXiBMV1FvPrCfSTpEGkl_AEDWOKyjFwQILEFHKbg27y6PSuBmP_pctOeCsOi0AAJPRSLA",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         })
         .then((response) => {
@@ -122,25 +127,25 @@ const Option = () => {
   );
 
   console.log(
-    makeOptionGroupRequests(optFlat, optPrice, optNameAll, opt, "삼성 냉장고")
+    makeOptionGroupRequests(optFlat, optPrice, optNameAll, opt, itemName)
   );
 
   return (
     <div>
       <h2>옵션</h2>
       <div>
-        <OptCount>
-          <ItemTitle style={{ fontSize: "1.2rem" }}>옵션 개수</ItemTitle>
-          <div>
-            <select onChange={handleCountSelect} value={count}>
-              {optionCount.map((item) => (
-                <option value={item} key={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-          </div>
-        </OptCount>
+        {/*<OptCount>*/}
+        {/*  <ItemTitle style={{ fontSize: "1.2rem" }}>옵션 개수</ItemTitle>*/}
+        {/*  <div>*/}
+        {/*    <select onChange={handleCountSelect} value={count}>*/}
+        {/*      {optionCount.map((item) => (*/}
+        {/*        <option value={item} key={item}>*/}
+        {/*          {item}*/}
+        {/*        </option>*/}
+        {/*      ))}*/}
+        {/*    </select>*/}
+        {/*  </div>*/}
+        {/*</OptCount>*/}
 
         <ItemTitle style={{ fontSize: "1.2rem" }}>옵션 입력</ItemTitle>
 
