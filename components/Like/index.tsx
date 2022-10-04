@@ -13,6 +13,7 @@ import {
 } from "@components/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 import ReponsiveBar from "@components/ReponsiveBar";
+import { Link } from "react-router-dom";
 
 const Like = () => {
   const [count, setCount] = useState(0);
@@ -68,16 +69,19 @@ const Like = () => {
               </div>
             </MiddleSide>
             <RightSide>
-              <BuyBtn>
-                <div>구매</div>
-                <div>200원</div>
-              </BuyBtn>
+              <Link to="/checkout">
+                <BuyBtn>
+                  <div>구매</div>
+                  <div>200원</div>
+                </BuyBtn>
+              </Link>
               <Delete>
                 <button onClick={remove}>삭제</button>
               </Delete>
             </RightSide>
           </table>
         </ListBox>
+
         <ListBox>
           <table>
             <img

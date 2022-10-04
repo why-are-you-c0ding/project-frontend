@@ -27,6 +27,7 @@ import fetcher from "@utils/fetcher";
 import { EachProduct } from "@typings/db";
 import { useParams } from "react-router";
 import option from "@components/Option";
+import { Link } from "react-router-dom";
 
 const Buy = () => {
   const { data: eachData, error } = useSWR<any>(
@@ -142,7 +143,9 @@ const Buy = () => {
             })}
           </Option>
           <Btn>
-            <BuyBtn type="submit">구매</BuyBtn>
+            <Link to="/checkout">
+              <BuyBtn type="submit">구매</BuyBtn>
+            </Link>
             <SelectBtn type="submit">
               <FontAwesomeIcon icon={faBasketShopping} />
               관심상품
