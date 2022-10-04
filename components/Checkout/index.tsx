@@ -1,7 +1,12 @@
 import React from "react";
+import StatusBar from "@components/StatusBar";
 
 const Checkout = () => {
-  return <div>결제 페이지</div>;
+  return (
+    <div>
+      <StatusBar />
+    </div>
+  );
 };
 
 export default Checkout;
