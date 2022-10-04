@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import {
   Wrapper,
@@ -8,34 +8,43 @@ import {
   Item,
   ItemName,
   Option,
-  OptionList,
   Itemdetail,
   Btn,
   BuyBtn,
   SelectBtn,
-  DetailOrder,
   Delivery,
   DeliveryTitle,
   DeliveryInfo,
   DeliveryPrice,
   DeliverySub,
+  CountBtn,
 } from "@components/Buy/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketShopping, faTruck } from "@fortawesome/free-solid-svg-icons";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
-import { EachProduct } from "@typings/db";
-import { useParams } from "react-router";
 import option from "@components/Option";
 import { Link } from "react-router-dom";
+import { makeCartItems } from "@utils/makeCartItems";
+import axios from "axios";
 
 const Buy = () => {
   const { data: eachData, error } = useSWR<any>(
-    "https://waycabvav.shop/items/26",
+    "https://waycabvav.shop/items/30",
     fetcher
   );
 
-  console.log(eachData);
+  const [count, setCount] = useState(0);
+
+  const Plus = () => {
+    setCount(count + 1);
+  };
+
+  const Minus = () => {
+    if (count - 1 >= 0) {
+      setCount(count - 1);
+    }
+  };
 
   // 옵션의 개수
   const optionLen: any = eachData?.optionGroups?.length;
@@ -65,7 +74,6 @@ const Buy = () => {
     }
   }
 
-  console.log(optGroupValue);
   // 각 옵션들 기본값 일차 배열
   let eachOptBase: string[] = [];
 
@@ -99,14 +107,62 @@ const Buy = () => {
     });
   };
 
-  let test = "";
+  // 이게 값 모음
+  let optPrice: number[][] = [];
 
-  if (optSelect0 === "") {
-    test = eachOptBase[0];
-  } else test = optSelect0;
+  for (let i = 0; i < optionLen; i++) {
+    optPrice.push([]);
+    for (let j = 0; j < eachOptLen[i]; j++) {
+      optPrice[i].push(eachData.optionGroups[i].options[j].price);
+    }
+  }
 
-  console.log(test);
-  console.log(eachData);
+  const Data = makeCartItems(
+    optSelect,
+    optGroupNames,
+    optGroupValue,
+    eachOptBase,
+    eachOptLen,
+    optionLen,
+    optPrice,
+    count,
+    eachData?.itemId,
+    eachData?.itemName
+  );
+
+  const onClickCart = useCallback(
+    (e: any) => {
+      e.preventDefault();
+
+      axios
+        .post("https://waycabvav.shop/carts/cart-line-items", Data, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        })
+        .then((res) => {
+          alert("성공");
+        })
+        .catch((err) => {
+          alert("실패");
+        });
+    },
+    [Data]
+  );
+
+  // console.log("optionLen: ", optionLen);
+  // console.log("optGroupNames: ", optGroupNames);
+  // console.log("optGroupValue: ", optGroupValue);
+  // console.log("eachOptBase: ", eachOptBase);
+  // console.log("eachOptLen: ", eachOptLen);
+  // console.log("optSelect: ", optSelect);
+  // console.log("optPrice: ", optPrice);
+  //
+  // let test = "";
+  //
+  // if (optSelect0 === "") {
+  //   test = eachOptBase[0];
+  // } else test = optSelect0;
 
   return (
     <div>
@@ -126,48 +182,60 @@ const Buy = () => {
             <ItemName>{eachData?.itemName}</ItemName>
           </Itemdetail>
           <Option>
-            {optGroupNames.map((v, index) => {
-              return (
-                <div key={index}>
-                  <h2>{v}</h2>
+            <div>
+              {optGroupNames.map((v, index) => {
+                return (
+                  <div key={index}>
+                    <h3>{v}</h3>
 
-                  <select name={`optSelect${index}`} onChange={onChangeSelect}>
-                    {[...Array(eachOptLen[index])].map((w, idx) => (
-                      <option value={optGroupValue[index][idx]} key={idx}>
-                        {optGroupValue[index][idx]}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              );
-            })}
+                    <select
+                      name={`optSelect${index}`}
+                      onChange={onChangeSelect}
+                    >
+                      {[...Array(eachOptLen[index])].map((w, idx) => (
+                        <option value={optGroupValue[index][idx]} key={idx}>
+                          {optGroupValue[index][idx]}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                );
+              })}
+            </div>
           </Option>
           <Btn>
+            <div>
+              <CountBtn>
+                <button onClick={Minus}>-</button>
+                <span>{count}</span>
+                <button onClick={Plus}>+</button>
+              </CountBtn>
+              <SelectBtn onClick={onClickCart}>
+                <FontAwesomeIcon icon={faBasketShopping} />
+                장바구니
+              </SelectBtn>
+            </div>
             <Link to="/checkout">
               <BuyBtn type="submit">구매</BuyBtn>
             </Link>
-            <SelectBtn type="submit">
-              <FontAwesomeIcon icon={faBasketShopping} />
-              관심상품
-            </SelectBtn>
           </Btn>
-          <DetailOrder>
-            <span>상품 정보</span>
-            <div>
-              <span>
-                <div>모델번호</div>
-              </span>
-              <span>
-                <div>출시일</div>
-              </span>
-              <span>
-                <div>컬러</div>
-              </span>
-              <span>
-                <div>발매가</div>
-              </span>
-            </div>
-          </DetailOrder>
+          {/*<DetailOrder>*/}
+          {/*  <span>상품 정보</span>*/}
+          {/*  <div>*/}
+          {/*    <span>*/}
+          {/*      <div>모델번호</div>*/}
+          {/*    </span>*/}
+          {/*    <span>*/}
+          {/*      <div>출시일</div>*/}
+          {/*    </span>*/}
+          {/*    <span>*/}
+          {/*      <div>컬러</div>*/}
+          {/*    </span>*/}
+          {/*    <span>*/}
+          {/*      <div>발매가</div>*/}
+          {/*    </span>*/}
+          {/*  </div>*/}
+          {/*</DetailOrder>*/}
           <Delivery>
             <DeliveryTitle>
               배송정보

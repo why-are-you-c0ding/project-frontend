@@ -5,7 +5,7 @@ export const Wrapper = styled.section`
   grid-template-columns: 4fr 0.8fr 5fr;
   padding-left: 3rem;
   padding-right: 3rem;
-  padding-top: 5rem;
+  padding-top: 1rem;
 `;
 
 export const LeftSide = styled.section`
@@ -45,17 +45,22 @@ export const Itemdetail = styled.div`
 
 export const ItemName = styled.div`
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  text-decoration: underline;
+  //text-decoration: underline;
 `;
+
 export const Option = styled.div`
-  display: flex;
   margin-top: 1rem;
-  flex-direction: column;
+
+  & > div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3%;
+  }
 
   & select {
-    margin: 1rem 1rem;
+    margin: 0.5rem 0;
     width: 10rem;
     height: 3rem;
     border: 1px solid #c4c4c4;
@@ -74,28 +79,39 @@ export const Option = styled.div`
   }
 `;
 
-export const OptionList = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-  box-sizing: border-box;
-  border: 1px solid #ebebeb;
-  width: 25rem;
-  height: 3rem;
-  outline: none;
-  font-size: 1rem;
-  padding: 10px 0 14px;
-  margin-top: 0.6rem;
-`;
+// export const OptionList = styled.div`
+//   display: flex;
+//   align-items: center;
+//   position: relative;
+//   box-sizing: border-box;
+//   border: 1px solid #ebebeb;
+//   width: 25rem;
+//   height: 3rem;
+//   outline: none;
+//   font-size: 1rem;
+//   padding: 10px 0 14px;
+//   margin-top: 0.6rem;
+// `;
 
 export const Btn = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem 2rem;
+
+  width: 80%;
+  padding: 3rem 0;
+
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  //border: 1px solid;
 `;
+
 export const BuyBtn = styled.button`
-  width: 25rem;
+  width: 27rem;
   height: 4rem;
   background-color: red;
   color: white;
@@ -106,16 +122,45 @@ export const BuyBtn = styled.button`
   margin-top: 1rem;
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   cursor: pointer;
+
   &:hover {
     background-color: #d63535;
     border: none;
   }
 `;
 
+export const CountBtn = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+
+  padding: 1rem 0;
+
+  //border: 1px solid rgba(0, 0, 0, 0.4);
+
+  & > span {
+    font-size: 1.2rem;
+    margin: 0 1rem;
+    //margin-right: 0.5rem;
+  }
+
+  & button {
+    display: flex;
+    justify-content: center;
+    font-size: 1.3rem;
+    width: 30%;
+    padding: 0.5rem 1rem;
+    background-color: inherit;
+    border-radius: 5px;
+
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+`;
+
 export const SelectBtn = styled.button`
-  width: 25rem;
+  width: 18rem;
   height: 4rem;
   background-color: white;
   color: black;
@@ -123,7 +168,6 @@ export const SelectBtn = styled.button`
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 2rem;
   cursor: pointer;
 `;
 
@@ -133,7 +177,7 @@ export const DetailOrder = styled.div`
     font-size: 1.2rem;
   }
 
-  & > table {
+  & table {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     border-top: 1px solid;
