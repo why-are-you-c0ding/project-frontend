@@ -4,39 +4,42 @@ import ReponsiveBar from "@components/ReponsiveBar";
 import axios from "axios";
 import useInput from "@hooks/useInput";
 import { Input } from "@components/Option/styles";
-import { BuyBtn } from "@components/Sell/styles";
+import { Wrapper, InputLine, BuyBtn } from "@components/SellStock/styles";
 
 const SellStock = () => {
   const [quantity, onChangeQuantity, setQuantity] = useInput("");
 
-  const [optlist, setoptlist] = useState({
+  const [optList, setoptlist] = useState({
     optlist1: "",
   });
 
-  const { optlist1 } = optlist;
+  const { optlist1 } = optList;
 
-  const onChangeOptValue = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleIdList = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     setoptlist({
-      ...optlist,
+      ...optList,
       [name]: value,
     });
   };
 
-  let list: any[] = Object.values(optlist);
+  //list에 optlist객체 값 넣기
+  let list: any[] = Object.values(optList);
 
-  let optidlist: any[] = [];
+  //푸시할 배열 생성
+  let optionIdList: any[] = [];
 
-  //,을 기준으로 나누어서 삽입
-  let te = list[0].replace(/\s/g, "").split(",");
-  optidlist.push(te);
+  //,을 기준으로 나누어서 삽입 split하면 문자열로 들어가기 때문에 number로 변환
+  let change = list[0].replace(/\s/g, "").split(",").map(Number);
+  optionIdList.push(change);
 
   //전달할 quantity 확인
   console.log(quantity);
 
   //전달 할 optionIdList 확인
-  console.log(optidlist);
+  console.log(list);
+  console.log(optionIdList);
 
   const onSubmitStock = useCallback(
     (e: any) => {
@@ -46,13 +49,12 @@ const SellStock = () => {
         .post(
           "https://waycabvav.shop/stocks",
           {
-            quantity: quantity,
-            optidlist: optidlist,
+            optionIdList: optionIdList[0],
+            quantity,
           },
           {
             headers: {
-              Authorization:
-                "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0b2tlbiIsImlkIjo0MiwiYXV0aG9yaXRpZXMiOiJST0xFX1NFTExFUiIsImlhdCI6MTY2NDcyMzM2MywiZXhwIjoxNjY0NzIzNDUwfQ.92_ytXfQwYtqLhvLO7f6VTAxnIBXcaUXeygtBN4apCoinbZSrr3bKBuz3L9b_cP1UiNsMkCTFUQ2oCIJYAJ3bg",
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
             },
           }
         )
@@ -63,30 +65,34 @@ const SellStock = () => {
           alert("등록 실패");
         });
     },
-    [quantity]
+    [quantity, optionIdList]
   );
+
   return (
-    <div>
+    <Wrapper>
       <ReponsiveBar title={"재고 등록"} />
 
       <TopHeader>재고 등록</TopHeader>
-      <div>
+      <InputLine>
+        <h1>등록 할 수량</h1>
         <Input
-          type="text"
+          type="number"
           name="quantity"
           value={quantity}
           onChange={onChangeQuantity}
+          placeholder="예) 1000"
         />
-      </div>
-      <Input
-        type="text"
-        name="optlist1"
-        value={optlist1}
-        onChange={onChangeOptValue}
-      />
-      <div></div>
+        <h1>등록 할 상품 ID</h1>
+        <Input
+          type="text"
+          name="optlist1"
+          value={optlist1}
+          onChange={handleIdList}
+          placeholder="예) 23,25"
+        />
+      </InputLine>
       <BuyBtn onClick={onSubmitStock}>재고 등록</BuyBtn>
-    </div>
+    </Wrapper>
   );
 };
 
