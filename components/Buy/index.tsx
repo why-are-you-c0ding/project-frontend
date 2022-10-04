@@ -103,6 +103,7 @@ const Buy = () => {
   } else test = optSelect0;
 
   console.log(test);
+  console.log(eachData);
 
   return (
     <div>
