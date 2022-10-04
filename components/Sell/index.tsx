@@ -61,7 +61,6 @@ const Sell = () => {
         alert("실패");
       });
 
-    <Option />;
     // 이거도 되는 방법
     // axios({
     //   headers: {
@@ -119,17 +118,17 @@ const Sell = () => {
                   placeholder=" 예시) 잠만보 진짜 잠만 잠"
                 />
               </label>
-              <label>
-                <ItemTitle>기본 가격</ItemTitle>
-                <Input
-                  type="text"
-                  name="item-fullname"
-                  value={itemExplain}
-                  onChange={onChangeItemExplain}
-                  placeholder=" 예시) 20000"
-                />
-              </label>
-              <Option />
+              {/*<label>*/}
+              {/*  <ItemTitle>기본 가격</ItemTitle>*/}
+              {/*  <Input*/}
+              {/*    type="text"*/}
+              {/*    name="item-fullname"*/}
+              {/*    value={itemExplain}*/}
+              {/*    onChange={onChangeItemExplain}*/}
+              {/*    placeholder=" 예시) 20000"*/}
+              {/*  />*/}
+              {/*</label>*/}
+              <Option itemName={itemName} />
             </ItemInfo>
           </div>
         </RightSide>
