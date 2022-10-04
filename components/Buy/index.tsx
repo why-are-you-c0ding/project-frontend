@@ -34,6 +34,8 @@ const Buy = () => {
     fetcher
   );
 
+  console.log(eachData);
+
   // 옵션의 개수
   const optionLen: any = eachData?.optionGroups?.length;
 
