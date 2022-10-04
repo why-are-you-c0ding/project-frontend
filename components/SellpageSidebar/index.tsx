@@ -25,6 +25,11 @@ const SellpageSidebar: FC<Props> = ({ sideBar }) => {
             재고 등록
           </NavLink>
         </span>
+        <span>
+          <NavLink activeClassName="selected" to={`/sellpage/sellstocklook`}>
+            재고 조회
+          </NavLink>
+        </span>
       </Info>
 
       <Info>
