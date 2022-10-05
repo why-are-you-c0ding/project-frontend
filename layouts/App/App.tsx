@@ -24,15 +24,16 @@ const App = () => {
       <Route path="/signup" component={SignUp} />
       <Route path="/login" component={LogIn} />
       <Route path="/mypage" component={MyPage} />
-      <Route path="/mypage:id" component={MyPage} />
+      <Route path="/mypage/:id" component={MyPage} />
       <Route path="/sellpage" component={SellPage} />
-      <Route path="/sellpage:id" component={SellPage} />
+      <Route path="/sellpage/:id" component={SellPage} />
       <Route path="/shop" component={Shop} />
+      <Route path="/shop/:itemId" component={Shop} />
       <Route path="/sellshop" component={SellShop} />
       <Route path="/productpage" component={ProductPage} />
       <Route path="/productpage/:itemId" component={ProductPage} />
       <Route path="/checkout" component={Checkout} />
-      <Route path="/checkout:id" component={Checkout} />
+      <Route path="/checkout/:id" component={Checkout} />
     </Switch>
   );
 };
