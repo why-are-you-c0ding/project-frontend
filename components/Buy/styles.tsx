@@ -6,6 +6,12 @@ export const Wrapper = styled.section`
   padding-left: 3rem;
   padding-right: 3rem;
   padding-top: 1rem;
+
+  @media (max-width: 940px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const LeftSide = styled.section`
@@ -13,15 +19,25 @@ export const LeftSide = styled.section`
   margin-right: 1rem;
 `;
 
-export const MiddleSide = styled.section`
+export const MiddleSide = styled.div`
   border-left: 2px solid #c1b6b6;
   margin-left: 50%;
   height: 70vh;
+
+  @media (max-width: 940px) {
+    display: none;
+  }
 `;
 
 export const RightSide = styled.section`
   padding: 1rem 1rem;
   margin-left: 1rem;
+
+  @media (max-width: 940px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 export const Item = styled.div`
@@ -48,10 +64,18 @@ export const ItemName = styled.div`
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
   //text-decoration: underline;
+
+  @media (max-width: 940px) {
+    margin-left: 3rem;
+  }
 `;
 
 export const Option = styled.div`
   margin-top: 1rem;
+
+  @media (max-width: 940px) {
+    margin-left: 3rem;
+  }
 
   & > div {
     display: grid;
@@ -79,19 +103,16 @@ export const Option = styled.div`
   }
 `;
 
-// export const OptionList = styled.div`
-//   display: flex;
-//   align-items: center;
-//   position: relative;
-//   box-sizing: border-box;
-//   border: 1px solid #ebebeb;
-//   width: 25rem;
-//   height: 3rem;
-//   outline: none;
-//   font-size: 1rem;
-//   padding: 10px 0 14px;
-//   margin-top: 0.6rem;
-// `;
+export const TotalPrice = styled.div`
+  margin-top: 2rem;
+  font-size: 1.5rem;
+
+  margin-bottom: -2rem;
+
+  @media (max-width: 940px) {
+    margin-left: 3rem;
+  }
+`;
 
 export const Btn = styled.section`
   display: flex;
@@ -100,6 +121,11 @@ export const Btn = styled.section`
 
   width: 80%;
   padding: 3rem 0;
+  margin-right: 7rem;
+
+  @media (max-width: 940px) {
+    margin-left: 3rem;
+  }
 
   & > div {
     display: flex;
@@ -169,27 +195,6 @@ export const SelectBtn = styled.button`
   font-size: 1.5rem;
   font-weight: bold;
   cursor: pointer;
-`;
-
-export const DetailOrder = styled.div`
-  & > span {
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-
-  & table {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid;
-    border-bottom: 1px solid;
-
-    margin-top: 1rem;
-    padding: 0.6rem 0;
-
-    & span {
-      text-align: center;
-    }
-  }
 `;
 
 export const Delivery = styled.div`
