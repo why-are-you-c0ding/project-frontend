@@ -40,8 +40,6 @@ const MainItem = () => {
     item[i] = Object.values(item[i]);
   }
 
-  console.log(item[0]);
-
   return (
     <Wrapper>
       <TitleContainer>
