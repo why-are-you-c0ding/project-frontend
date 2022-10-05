@@ -48,6 +48,11 @@ export const ItemContainer = styled.div`
   grid-template-rows: repeat(1, minmax(1, auto));
   grid-gap: 1rem;
 
+  & a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   @media screen and (max-width: 769px) {
     display: flex;
     flex-direction: column;
@@ -87,11 +92,6 @@ export const ItemFullName = styled.div`
 export const ItemPrice = styled.div`
   font-weight: bold;
   margin-bottom: 0.3rem;
-`;
-
-export const RightPrice = styled.div`
-  font-size: 0.8rem;
-  color: gray;
 `;
 
 export const More = styled.div`
