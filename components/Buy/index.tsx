@@ -16,21 +16,23 @@ import {
   DeliveryTitle,
   DeliveryInfo,
   DeliveryPrice,
-  DeliverySub,
   CountBtn,
+  TotalPrice,
 } from "@components/Buy/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketShopping, faTruck } from "@fortawesome/free-solid-svg-icons";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import option from "@components/Option";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { makeCartItems } from "@utils/makeCartItems";
 import axios from "axios";
 
 const Buy = () => {
+  const location = useLocation();
+
   const { data: eachData, error } = useSWR<any>(
-    "https://waycabvav.shop/items/30",
+    `https://waycabvav.shop/items/${location.pathname.split("/")[2]}`,
     fetcher
   );
 
@@ -117,7 +119,9 @@ const Buy = () => {
     }
   }
 
-  const Data = makeCartItems(
+  console.log(optPrice);
+
+  const DataPrice = makeCartItems(
     optSelect,
     optGroupNames,
     optGroupValue,
@@ -130,9 +134,19 @@ const Buy = () => {
     eachData?.itemName
   );
 
+  const Data = DataPrice[0];
+  const total = DataPrice[1];
+
+  console.log(total);
+
   const onClickCart = useCallback(
     (e: any) => {
       e.preventDefault();
+
+      if (count === 0) {
+        alert("한 개 이상 담아주세요.");
+        return;
+      }
 
       axios
         .post("https://waycabvav.shop/carts/cart-line-items", Data, {
@@ -141,7 +155,7 @@ const Buy = () => {
           },
         })
         .then((res) => {
-          alert("성공");
+          alert("장바구니에 담겼습니다.");
         })
         .catch((err) => {
           alert("실패");
@@ -149,20 +163,6 @@ const Buy = () => {
     },
     [Data]
   );
-
-  // console.log("optionLen: ", optionLen);
-  // console.log("optGroupNames: ", optGroupNames);
-  // console.log("optGroupValue: ", optGroupValue);
-  // console.log("eachOptBase: ", eachOptBase);
-  // console.log("eachOptLen: ", eachOptLen);
-  // console.log("optSelect: ", optSelect);
-  // console.log("optPrice: ", optPrice);
-  //
-  // let test = "";
-  //
-  // if (optSelect0 === "") {
-  //   test = eachOptBase[0];
-  // } else test = optSelect0;
 
   return (
     <div>
@@ -187,14 +187,14 @@ const Buy = () => {
                 return (
                   <div key={index}>
                     <h3>{v}</h3>
-
                     <select
                       name={`optSelect${index}`}
                       onChange={onChangeSelect}
                     >
                       {[...Array(eachOptLen[index])].map((w, idx) => (
                         <option value={optGroupValue[index][idx]} key={idx}>
-                          {optGroupValue[index][idx]}
+                          {optGroupValue[index][idx]}{" "}
+                          {index !== 0 && `(+${optPrice[index][idx]})`}
                         </option>
                       ))}
                     </select>
@@ -203,6 +203,9 @@ const Buy = () => {
               })}
             </div>
           </Option>
+
+          <TotalPrice>총 가격: {total}원</TotalPrice>
+
           <Btn>
             <div>
               <CountBtn>
@@ -219,23 +222,7 @@ const Buy = () => {
               <BuyBtn type="submit">구매</BuyBtn>
             </Link>
           </Btn>
-          {/*<DetailOrder>*/}
-          {/*  <span>상품 정보</span>*/}
-          {/*  <div>*/}
-          {/*    <span>*/}
-          {/*      <div>모델번호</div>*/}
-          {/*    </span>*/}
-          {/*    <span>*/}
-          {/*      <div>출시일</div>*/}
-          {/*    </span>*/}
-          {/*    <span>*/}
-          {/*      <div>컬러</div>*/}
-          {/*    </span>*/}
-          {/*    <span>*/}
-          {/*      <div>발매가</div>*/}
-          {/*    </span>*/}
-          {/*  </div>*/}
-          {/*</DetailOrder>*/}
+
           <Delivery>
             <DeliveryTitle>
               배송정보
@@ -243,7 +230,6 @@ const Buy = () => {
             </DeliveryTitle>
             <DeliveryInfo>
               <DeliveryPrice>일반배송 3000원</DeliveryPrice>
-              <DeliverySub>검수 후 배송 5-7일 내 도착 예정</DeliverySub>
             </DeliveryInfo>
           </Delivery>
         </RightSide>

@@ -24,6 +24,7 @@ export const makeCartItems = (
   }
 
   let cartOption: Array<Object> = [];
+  let totalPrice = 0;
 
   for (let i = 0; i < f; i++) {
     let temp = {
@@ -37,6 +38,7 @@ export const makeCartItems = (
     };
 
     cartOption.push(temp);
+    totalPrice += g[i][Chose[i]];
   }
 
   const value: Object = {
@@ -46,5 +48,5 @@ export const makeCartItems = (
     cartOptionGroups: cartOption,
   };
 
-  return value;
+  return [value, totalPrice];
 };

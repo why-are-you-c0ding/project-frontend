@@ -10,14 +10,11 @@ import {
 } from "@layouts/Main/styles";
 import { slideList } from "@utils/slideList";
 import axios from "axios";
-import { Redirect } from "react-router";
 
 const Main = () => {
   const ref = useRef<any>(null);
 
   const [size, setSize] = useState(0);
-
-  // setInterval(() => nextButton(), 4000);
 
   useEffect(() => {
     console.log(size);
@@ -112,7 +109,7 @@ const Main = () => {
         </div>
       </SlideWrapper>
       <MainItem />
-      <button onClick={onLogout}>로그아웃 버튼버튼버튼</button>
+      {/*<button onClick={onLogout}>로그아웃 버튼버튼버튼</button>*/}
     </div>
   );
 };
