@@ -1,6 +1,12 @@
 import React, { useCallback, useState } from "react";
 
-import { Wrapper } from "@components/Like/styles";
+import {
+  CartItem,
+  InfoBottom,
+  InfoTop,
+  ItemInfo,
+  Wrapper,
+} from "@components/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 import ReponsiveBar from "@components/ReponsiveBar";
 import useSWR from "swr";
@@ -14,15 +20,47 @@ const Like = () => {
 
   console.log(cartData);
 
+  let item: any = [];
+
+  if (cartData) item = Object.values(cartData);
+
+  for (let i = 0; i < item.length; i++) {
+    item[i] = Object.values(item[i]);
+  }
+
+  console.log(item);
+  console.log(item[0]);
+  console.log(16 * 8);
+
   return (
     <div>
       <ReponsiveBar title={"장바구니"} />
       <Wrapper>
         <TopHeader>관심 상품</TopHeader>
-        <img
-          src="http://image.dongascience.com/Photo/2022/06/6982fdc1054c503af88bdefeeb7c8fa8.jpg"
-          alt=""
-        />
+        <CartItem>
+          <img
+            src="http://image.dongascience.com/Photo/2022/06/6982fdc1054c503af88bdefeeb7c8fa8.jpg"
+            alt=""
+          />
+          <ItemInfo>
+            <InfoTop>거치대</InfoTop>
+            <InfoBottom>
+              <div>
+                <span>2~3일 내 도착</span>
+              </div>
+              <div>
+                <span>900원</span>
+                <span>
+                  <input type="text" />
+                </span>
+                <div>
+                  <span>900원</span>
+                  <button>X</button>
+                </div>
+              </div>
+            </InfoBottom>
+          </ItemInfo>
+        </CartItem>
       </Wrapper>
     </div>
   );
