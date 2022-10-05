@@ -106,10 +106,12 @@ const SellStock = () => {
     eachOptLen.push(optGroupValue[i]?.length);
   }
 
-  const data = {
-    optionIdList: [1],
-    quantity: 1000,
-  };
+  const data = [
+    {
+      optionIdList: [1],
+      quantity: 1000,
+    },
+  ];
 
   // 옵션값들 모음 일차 배열
   let optFlat = optGroupValue.flat();
