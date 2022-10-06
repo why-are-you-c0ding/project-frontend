@@ -46,34 +46,7 @@ export const makeOptionGroupRequests = (
     start += optLen[i];
   }
 
-  // else
-  //   eachGroup.push({
-  //     ["optionRequests"]: optRequests.slice(
-  //       optLen[i - 1],
-  //       optLen[i] + optLen[i - 1]
-  //     ),
-  //     ["optionGroupName"]: c[i],
-  //     ["basic"]: "false",
-  //   });
-  // for (let i = 0; i < optLen.length; i++) {
-  //   if (i === 0)
-  //     eachGroup.push({
-  //       ["optionRequests"]: optRequests.slice(0, optLen[i]),
-  //       ["optionGroupName"]: c[i],
-  //       ["basic"]: "true",
-  //     });
-  //   else
-  //     eachGroup.push({
-  //       ["optionRequests"]: optRequests.slice(
-  //         optLen[i - 1],
-  //         optLen[i] + optLen[i - 1]
-  //       ),
-  //       ["optionGroupName"]: c[i],
-  //       ["basic"]: "false",
-  //     });
-
   eachGroup = { ["itemName"]: optName, ["optionGroupRequests"]: eachGroup };
 
   return eachGroup;
-  // return optLen;
 };

@@ -69,9 +69,15 @@ const Option: FC<Props> = ({ itemName }) => {
   let opt: string[][] = [];
 
   for (let i = 0; i < 5; i++) {
-    let te = optValueAll[i].replace(/\s/g, "").split(",");
+    let temp = optValueAll[i].split(",");
 
-    if (te[0] !== "") opt.push(te);
+    let ary: string[] = [];
+
+    for (let i = 0; i < temp.length; i++) {
+      ary.push(temp[i].trim());
+    }
+
+    if (temp[0] !== "") opt.push(ary);
   }
 
   // 옵션값들 모음 일차 배열
@@ -98,8 +104,6 @@ const Option: FC<Props> = ({ itemName }) => {
     itemName
   );
 
-  console.log(localStorage.getItem("jwt"));
-
   const onSubmitItems = useCallback(
     (e: any) => {
       e.preventDefault();
@@ -122,14 +126,6 @@ const Option: FC<Props> = ({ itemName }) => {
     },
     [Data]
   );
-
-  console.log(
-    makeOptionGroupRequests(optFlat, optPrice, optNameAll, opt, itemName)
-  );
-
-  // if (good) {
-  //   return <Redirect to="sellpage/sellstock" />;
-  // }
 
   return (
     <div>

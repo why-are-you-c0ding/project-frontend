@@ -13,6 +13,7 @@ export const CartItem = styled.div`
   display: flex;
 
   padding-bottom: 1rem;
+  margin-bottom: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 
   & img {
@@ -50,11 +51,16 @@ export const InfoTop = styled.div`
 
 export const InfoBottom = styled.div`
   & > div {
-    width: 50%;
+    //width: 50%;
   }
 
   & > div:first-of-type {
     color: #199530;
+    margin-right: 5rem;
+
+    @media (max-width: 769px) {
+      display: none;
+    }
   }
 
   & > div:last-of-type {
