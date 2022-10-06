@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import {
   CartItem,
@@ -25,11 +25,10 @@ const Like = () => {
   if (cartData) item = Object.values(cartData)[0];
 
   const getItemLen = (item: any) => {
-    let ary: any = [];
+    let ary: number[] = [];
     const itemLen = item?.length;
 
     for (let i = 0; i < itemLen; i++) {
-      // ary.push(item[i]?.itemId);
       ary[i] = item[i]?.count;
     }
 
@@ -37,6 +36,7 @@ const Like = () => {
   };
 
   const eachLen = getItemLen(item);
+  // console.log(eachLen);
 
   const getTotalPrice = (item: any, len: number) => {
     let total = 0;
@@ -48,15 +48,96 @@ const Like = () => {
     return total;
   };
 
-  console.log(cartData);
+  const onClickLenUp = useCallback(
+    (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+      id: number,
+      idx: number
+    ) => {
+      e.preventDefault();
 
-  const onClickLenUp: any = useCallback((idx: number, e: any) => {
-    console.log("누름", idx);
-  }, []);
+      const len = idx + 1;
+
+      axios
+        .patch(
+          "https://waycabvav.shop/carts/cart-line-items",
+          {
+            count: len,
+            cartLineItemId: id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+          }
+        )
+        .then((res) => {
+          mutateCart();
+        })
+        .catch((err) => {});
+    },
+    []
+  );
+
+  const onClickLenDown = useCallback(
+    (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+      id: number,
+      idx: number
+    ) => {
+      e.preventDefault();
+
+      const len = idx - 1;
+
+      axios
+        .patch(
+          "https://waycabvav.shop/carts/cart-line-items",
+          {
+            count: len,
+            cartLineItemId: id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+          }
+        )
+        .then((res) => {
+          mutateCart();
+        })
+        .catch((err) => {
+          alert("수량을 변경하지 못했습니다.");
+        });
+    },
+    []
+  );
+
+  const onDeleteItem = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number) => {
+      e.preventDefault();
+
+      axios
+        .delete("https://waycabvav.shop/carts/cart-line-items", {
+          data: {
+            cartLineItemId: id,
+          },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        })
+        .then((res) => {
+          mutateCart();
+        })
+        .catch((err) => {
+          alert("상품을 삭제하지 못했습니다.");
+        });
+    },
+    []
+  );
 
   return (
     <div>
-      <ReponsiveBar title={"장바구니"} />₩
+      <ReponsiveBar title={"장바구니"} />
       <Wrapper>
         <TopHeader>관심 상품</TopHeader>
         {[...Array(item?.length)].map((v, index) => {
@@ -75,14 +156,33 @@ const Like = () => {
                   <div>
                     <span>{getTotalPrice(item, index)}원</span>
                     <span>
+                      <button
+                        onClick={(event) =>
+                          onClickLenDown(event, item[index]?.id, eachLen[index])
+                        }
+                      >
+                        -
+                      </button>
                       {eachLen[index]}개
-                      <button onClick={onClickLenUp(item[index]?.id)}>+</button>
+                      <button
+                        onClick={(event) =>
+                          onClickLenUp(event, item[index]?.id, eachLen[index])
+                        }
+                      >
+                        +
+                      </button>
                     </span>
                     <div>
                       <span>
                         {getTotalPrice(item, index) * eachLen[index]}원
                       </span>
-                      <button>X</button>
+                      <button
+                        onClick={(event) => {
+                          onDeleteItem(event, item[index]?.id);
+                        }}
+                      >
+                        X
+                      </button>
                     </div>
                   </div>
                 </InfoBottom>
