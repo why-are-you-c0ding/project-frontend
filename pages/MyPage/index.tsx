@@ -24,12 +24,9 @@ const MyPage = () => {
   const [sideBar, setSideBar] = useState(false);
 
   useEffect(() => {
-    console.log(location.pathname);
-
     if (location.pathname === "/mypage/my") {
       setSideBar(true);
     } else setSideBar(false);
-    console.log(sideBar);
   }, [location, sideBar]);
 
   return (
