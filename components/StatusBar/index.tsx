@@ -62,9 +62,6 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
             <a href="/">WAYC</a>
           </Name>
           <div>
-            <span className="hidden">
-              <Link to="/Shop">상품개별 구매</Link>
-            </span>
             {/*모두 완성되면 하나 지우면됨 구매페이지*/}
             <span className="hidden">
               <Link to="/ProductPage">Shop</Link>
