@@ -12,6 +12,8 @@ import {
   RegisterStock,
   RegisterLeft,
   RegisterRight,
+  CheckName,
+  CheckValue,
 } from "@components/SellStock/styles";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
@@ -50,7 +52,7 @@ const SellStock = () => {
   // console.log(optionIdList);
 
   const { data: eachData, error } = useSWR<any>(
-    "https://waycabvav.shop/items/30",
+    "https://waycabvav.shop/items/26",
     fetcher
   );
 
@@ -170,12 +172,14 @@ const SellStock = () => {
           {optGroupNames.map((v, index) => {
             return (
               <div key={index}>
-                {v}
-                {[...Array(eachOptLen[index])].map((w, idx) => (
-                  <option value={optGroupValue[index][idx]} key={idx}>
-                    {optGroupValue[index][idx]}
-                  </option>
-                ))}
+                <CheckName>상품 옵션 이름: {v}</CheckName>
+                <CheckValue>
+                  {[...Array(eachOptLen[index])].map((w, idx) => (
+                    <option value={optGroupValue[index][idx]} key={idx}>
+                      {optGroupValue[index][idx]}
+                    </option>
+                  ))}
+                </CheckValue>
               </div>
             );
           })}
@@ -188,19 +192,19 @@ const SellStock = () => {
             if (v !== "") {
               return (
                 <div key={index}>
-                  <RegisterLeft>
-                    <span>{v}</span>
-                  </RegisterLeft>
-                  <Input
-                    type="text"
-                    placeholder="등록할 수량을 입력해주세요"
-                    onChange={(e: any) => {
-                      setNumber({
-                        ...number,
-                        [`${num}`]: e.target.value,
-                      });
-                    }}
-                  />
+                  <RegisterLeft>{v}</RegisterLeft>
+                  <RegisterRight>
+                    <Input
+                      type="text"
+                      placeholder="등록할 수량을 입력해주세요"
+                      onChange={(e: any) => {
+                        setNumber({
+                          ...number,
+                          [`${num}`]: e.target.value,
+                        });
+                      }}
+                    />
+                  </RegisterRight>
                 </div>
               );
             }

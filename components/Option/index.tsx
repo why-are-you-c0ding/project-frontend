@@ -1,20 +1,14 @@
-import React, {
-  ChangeEvent,
-  FC,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { ChangeEvent, FC, useCallback, useState } from "react";
 import { BuyBtn, ItemTitle } from "@components/Sell/styles";
 import {
   Input,
   MakeTable,
-  OptCount,
   OptNameInput,
   OptTable,
 } from "@components/Option/styles";
 import { makeOptionGroupRequests } from "@utils/makeOptionRequests";
 import axios from "axios";
+import { Redirect } from "react-router";
 
 interface Props {
   itemName: string;
@@ -118,6 +112,9 @@ const Option: FC<Props> = ({ itemName }) => {
         })
         .then((response) => {
           alert("등록 성공!");
+          console.log(response.data);
+          // let good = response.data;
+          <Redirect to="sellpage/sellstock" />;
         })
         .catch((err) => {
           alert("실패,,,");
@@ -129,6 +126,10 @@ const Option: FC<Props> = ({ itemName }) => {
   console.log(
     makeOptionGroupRequests(optFlat, optPrice, optNameAll, opt, itemName)
   );
+
+  // if (good) {
+  //   return <Redirect to="sellpage/sellstock" />;
+  // }
 
   return (
     <div>

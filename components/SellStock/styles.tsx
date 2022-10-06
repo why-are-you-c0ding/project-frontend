@@ -8,7 +8,7 @@ export const InputLine = styled.div`
     padding-bottom: 2rem;
   }
   & input {
-    width: 25rem;
+    width: 20rem;
     height: 3rem;
     font-size: 0.9rem;
     border: 0;
@@ -16,21 +16,37 @@ export const InputLine = styled.div`
     outline: none;
     padding-left: 1rem;
     background-color: rgb(233, 233, 233);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     margin-left: 2rem;
+
+    :focus {
+      background-color: rgb(220, 220, 220);
+    }
   }
 `;
 export const CheckStock = styled.div`
   & div {
-    padding: 1rem 1rem;
+    padding: 0.5rem 0.5rem;
   }
 `;
+
+export const CheckName = styled.div`
+  padding: 1rem 1rem;
+  font-weight: bolder;
+  color: #706868;
+  font-size: 1.2rem;
+`;
+
+export const CheckValue = styled.div``;
+
 export const RegisterStock = styled.div`
   display: flex;
   flex-direction: column;
 `;
 export const RegisterLeft = styled.div`
-  padding: 1rem 1rem;
+  padding: 0.5rem 0.5rem;
+  font-weight: bolder;
+  color: #3f3838;
 `;
 export const RegisterRight = styled.div``;
 

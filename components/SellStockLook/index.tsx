@@ -18,6 +18,11 @@ const SellStockLook = () => {
     fetcher
   );
 
+  // const { data: StockOption, error } = useSWR<any>(
+  //   "https://waycabvav.shop/",
+  //   fetcher
+  // );
+
   console.log(StockData);
 
   const optionLen: any = StockData?.stockList?.length;
