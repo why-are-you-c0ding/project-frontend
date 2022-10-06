@@ -36,14 +36,14 @@ const Buy = () => {
     fetcher
   );
 
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   const Plus = () => {
     setCount(count + 1);
   };
 
   const Minus = () => {
-    if (count - 1 >= 0) {
+    if (count - 1 > 0) {
       setCount(count - 1);
     }
   };
@@ -119,8 +119,6 @@ const Buy = () => {
     }
   }
 
-  console.log(optPrice);
-
   const DataPrice = makeCartItems(
     optSelect,
     optGroupNames,
@@ -137,16 +135,9 @@ const Buy = () => {
   const Data = DataPrice[0];
   const total = DataPrice[1];
 
-  console.log(total);
-
   const onClickCart = useCallback(
     (e: any) => {
       e.preventDefault();
-
-      if (count === 0) {
-        alert("한 개 이상 담아주세요.");
-        return;
-      }
 
       axios
         .post("https://waycabvav.shop/carts/cart-line-items", Data, {
