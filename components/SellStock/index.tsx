@@ -3,8 +3,16 @@ import { TopHeader } from "@pages/MyPage/styles";
 import ReponsiveBar from "@components/ReponsiveBar";
 import axios from "axios";
 import useInput from "@hooks/useInput";
-
-import { Wrapper, InputLine, BuyBtn } from "@components/SellStock/styles";
+import { makeStock } from "@utils/makeStock";
+import {
+  Wrapper,
+  InputLine,
+  BuyBtn,
+  CheckStock,
+  RegisterStock,
+  RegisterLeft,
+  RegisterRight,
+} from "@components/SellStock/styles";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import option from "@components/Option";
@@ -42,7 +50,7 @@ const SellStock = () => {
   // console.log(optionIdList);
 
   const { data: eachData, error } = useSWR<any>(
-    "https://waycabvav.shop/items/26",
+    "https://waycabvav.shop/items/30",
     fetcher
   );
 
@@ -106,31 +114,30 @@ const SellStock = () => {
     eachOptLen.push(optGroupValue[i]?.length);
   }
 
-  const data = {
-    optionIdList: [1],
-    quantity: 1000,
-  };
-
   // 옵션값들 모음 일차 배열
   let optFlat = optGroupValue.flat();
 
   // 옵션ID들 모음 일차 배열
-  let optID = optGroupId.flat();
+  let optId = optGroupId.flat();
 
-  console.log(optID);
+  //각 옵션 아이디 출력
+  console.log(optId);
+
+  //옵션 아이디 길이
+  let long = optId.length;
 
   const stringArray: number[] = Object.values(number);
+
+  //넘버 어레이 숫자 배열로 변환
   const NumberArray = stringArray.map((i) => Number(i));
 
-  const NumberArrayLen = stringArray.length;
-
+  //가격 배열 출력
   console.log(NumberArray);
 
+  //보내기전 데이터 확인
+  const data = makeStock(optId, NumberArray, long);
+
   console.log(data);
-
-  const dataArray = [...optID, ...NumberArray];
-
-  console.log(dataArray);
 
   const onSubmitStock = useCallback(
     (e: any) => {
@@ -158,41 +165,47 @@ const SellStock = () => {
 
       <TopHeader>재고 등록</TopHeader>
       <InputLine>
-        <h1>등록 할 재고 확인</h1>
-        {optGroupNames.map((v, index) => {
-          return (
-            <div key={index}>
-              {v}
-              {[...Array(eachOptLen[index])].map((w, idx) => (
-                <option value={optGroupValue[index][idx]} key={idx}>
-                  {optGroupValue[index][idx]}
-                </option>
-              ))}
-            </div>
-          );
-        })}
-
-        <h1>수량 등록</h1>
-        {optFlat.map((v: any, index: any) => {
-          const num = index.toString();
-
-          if (v !== "") {
+        <CheckStock>
+          <h1>등록 할 재고 확인</h1>
+          {optGroupNames.map((v, index) => {
             return (
               <div key={index}>
-                <span>{v}</span>
-                <Input
-                  type="text"
-                  onChange={(e: any) => {
-                    setNumber({
-                      ...number,
-                      [`${num}`]: e.target.value,
-                    });
-                  }}
-                />
+                {v}
+                {[...Array(eachOptLen[index])].map((w, idx) => (
+                  <option value={optGroupValue[index][idx]} key={idx}>
+                    {optGroupValue[index][idx]}
+                  </option>
+                ))}
               </div>
             );
-          }
-        })}
+          })}
+        </CheckStock>
+        <RegisterStock>
+          <h1>수량 등록</h1>
+          {optFlat.map((v: any, index: any) => {
+            const num = index.toString();
+
+            if (v !== "") {
+              return (
+                <div key={index}>
+                  <RegisterLeft>
+                    <span>{v}</span>
+                  </RegisterLeft>
+                  <Input
+                    type="text"
+                    placeholder="등록할 수량을 입력해주세요"
+                    onChange={(e: any) => {
+                      setNumber({
+                        ...number,
+                        [`${num}`]: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+              );
+            }
+          })}
+        </RegisterStock>
       </InputLine>
       <BuyBtn onClick={onSubmitStock}>재고 등록</BuyBtn>
     </Wrapper>
