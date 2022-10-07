@@ -47,7 +47,7 @@ const LogIn = () => {
 
         .then((response) => {
           alert("성공");
-          setCookie("jwt", response.data.jwt);
+          localStorage.setItem("jwt", response.data.jwt);
         })
         .catch((error) => {
           alert("에러");

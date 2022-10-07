@@ -145,7 +145,7 @@ const Buy = () => {
       axios
         .post("https://waycabvav.shop/carts/cart-line-items", Data, {
           headers: {
-            Authorization: `Bearer ${getCookie("jwt")}`,
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         })
         .then((res) => {

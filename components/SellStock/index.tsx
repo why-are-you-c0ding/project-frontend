@@ -149,7 +149,7 @@ const SellStock = () => {
       axios
         .post("https://waycabvav.shop/stocks", data, {
           headers: {
-            Authorization: `Bearer ${getCookie("jwt")}`,
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         })
         .then((response) => {

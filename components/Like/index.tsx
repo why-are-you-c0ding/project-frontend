@@ -68,7 +68,7 @@ const Like = () => {
           },
           {
             headers: {
-              Authorization: `Bearer ${getCookie("jwt")}`,
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
             },
           }
         )
@@ -101,7 +101,7 @@ const Like = () => {
           },
           {
             headers: {
-              Authorization: `Bearer ${getCookie("jwt")}`,
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
             },
           }
         )
@@ -125,7 +125,7 @@ const Like = () => {
             cartLineItemId: id,
           },
           headers: {
-            Authorization: `Bearer ${getCookie("jwt")}`,
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         })
         .then((res) => {
