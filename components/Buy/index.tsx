@@ -127,13 +127,15 @@ const Buy = () => {
     eachOptLen,
     optionLen,
     optPrice,
-    count,
     eachData?.itemId,
+    count,
     eachData?.itemName
   );
 
   const Data = DataPrice[0];
   const total = DataPrice[1];
+
+  console.log(Data);
 
   const onClickCart = useCallback(
     (e: any) => {
