@@ -151,14 +151,19 @@ const Like = () => {
                 alt=""
               />
               <ItemInfo>
-                <InfoTop>{item[index]?.name}</InfoTop>
+                <InfoTop>
+                  <div>
+                    <span>{item[index]?.name}</span>
+                    <span>{getTotalPrice(item, index)}원</span>
+                  </div>
+                  <div></div>
+                </InfoTop>
                 <InfoBottom>
                   <div>
                     <span>2~3일 내 도착</span>
                   </div>
                   <div>
-                    <span>{getTotalPrice(item, index)}원</span>
-                    <span>
+                    <div>
                       <button
                         onClick={(event) =>
                           onClickLenDown(event, item[index]?.id, eachLen[index])
@@ -174,10 +179,11 @@ const Like = () => {
                       >
                         +
                       </button>
-                    </span>
-                    <span>
+                    </div>
+
+                    <div>
                       <span>
-                        {getTotalPrice(item, index) * eachLen[index]}원
+                        총 금액: {getTotalPrice(item, index) * eachLen[index]}원
                       </span>
                       <span>
                         <button
@@ -188,7 +194,7 @@ const Like = () => {
                           X
                         </button>
                       </span>
-                    </span>
+                    </div>
                   </div>
                 </InfoBottom>
               </ItemInfo>
