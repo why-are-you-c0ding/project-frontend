@@ -1,17 +1,13 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.section`
-<<<<<<< Updated upstream
   margin-top: -8rem;
-=======
   padding-left: 2rem;
   padding-right: 2rem;
->>>>>>> Stashed changes
 `;
 
 export const Image = styled.section`
   position: relative;
-  border: 1px solid;
 
   height: 50vh;
 
@@ -46,6 +42,13 @@ export const Preview = styled.div`
   }
 `;
 
+export const Explain = styled.div`
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.5);
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+`;
+
 export const BuyBtn = styled.button`
   width: 25rem;
   height: 4rem;
@@ -71,8 +74,6 @@ export const BuyBtn = styled.button`
 `;
 
 export const RightSide = styled.section`
-  border: 1px solid;
-
   display: flex;
   justify-content: center;
 `;
