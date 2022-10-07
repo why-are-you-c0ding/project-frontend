@@ -166,7 +166,7 @@ const Like = () => {
                       >
                         -
                       </button>
-                      {eachLen[index]}개
+                      <span>{eachLen[index]}개</span>
                       <button
                         onClick={(event) =>
                           onClickLenUp(event, item[index]?.id, eachLen[index])
@@ -175,18 +175,20 @@ const Like = () => {
                         +
                       </button>
                     </span>
-                    <div>
+                    <span>
                       <span>
                         {getTotalPrice(item, index) * eachLen[index]}원
                       </span>
-                      <button
-                        onClick={(event) => {
-                          onDeleteItem(event, item[index]?.id);
-                        }}
-                      >
-                        X
-                      </button>
-                    </div>
+                      <span>
+                        <button
+                          onClick={(event) => {
+                            onDeleteItem(event, item[index]?.id);
+                          }}
+                        >
+                          X
+                        </button>
+                      </span>
+                    </span>
                   </div>
                 </InfoBottom>
               </ItemInfo>

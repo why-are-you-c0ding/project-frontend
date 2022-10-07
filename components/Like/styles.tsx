@@ -56,7 +56,8 @@ export const InfoBottom = styled.div`
 
   & > div:first-of-type {
     color: #199530;
-    margin-right: 5rem;
+    margin-right: 1rem;
+    width: 35%;
 
     @media (max-width: 769px) {
       display: none;
@@ -66,11 +67,43 @@ export const InfoBottom = styled.div`
   & > div:last-of-type {
     display: flex;
     align-items: center;
-
     font-size: 1rem;
 
-    & span {
-      margin-right: 1rem;
+    width: 60vw;
+    border: 1px solid;
+
+    & > span {
+      width: 33%;
+      text-align: center;
+
+      border: 1px solid;
+    }
+
+    & > span:nth-of-type(2) {
+      width: 60%;
+
+      & span {
+        margin: 0 1rem;
+      }
+
+      & button {
+        padding: 0.1rem 0.5rem;
+        background-color: #ececec;
+        border-radius: 5px;
+      }
+    }
+
+    & > span:last-of-type {
+      text-align: right;
+      width: 60%;
+
+      & button {
+        margin-left: 2rem;
+
+        padding: 0.1rem 0.5rem;
+        background-color: #ececec;
+        border-radius: 5px;
+      }
     }
   }
 
