@@ -38,6 +38,8 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
     };
   }, []);
 
+  const [jwt, setJwt] = useState(localStorage.getItem("jwt"));
+
   return (
     <BarWrapper sideBar={sideBar}>
       <Bar>
@@ -53,7 +55,17 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
               <Link to="/mypage/my">마이 페이지</Link>
             </span>
             <span>
-              <Link to="/login">로그인</Link>
+              {jwt !== "" ? (
+                <Link to="/login">로그인</Link>
+              ) : (
+                <div
+                  onClick={() => {
+                    localStorage.clear();
+                  }}
+                >
+                  로그아웃
+                </div>
+              )}
             </span>
           </SubMenu>
         </SubBar>
