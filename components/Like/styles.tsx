@@ -88,6 +88,8 @@ export const InfoBottom = styled.div`
   display: flex;
   align-items: center;
 
+  margin-top: 0.6rem;
+
   & > div:first-of-type {
     color: #199530;
     margin-right: 1rem;
@@ -150,8 +152,8 @@ export const InfoBottom = styled.div`
 
         @media (max-width: 769px) {
           position: absolute;
-          top: 5;
-          right: -25;
+          top: 3;
+          right: -20;
         }
       }
     }
