@@ -87,6 +87,8 @@ const Like = () => {
     ) => {
       e.preventDefault();
 
+      if (idx < 2) return;
+
       const len = idx - 1;
 
       axios
