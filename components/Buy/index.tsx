@@ -27,6 +27,7 @@ import option from "@components/Option";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { makeCartItems } from "@utils/makeCartItems";
 import axios from "axios";
+import { getCookie } from "@utils/cookie";
 
 const Buy = () => {
   const location = useLocation();
@@ -144,7 +145,7 @@ const Buy = () => {
       axios
         .post("https://waycabvav.shop/carts/cart-line-items", Data, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            Authorization: `Bearer ${getCookie("jwt")}`,
           },
         })
         .then((res) => {

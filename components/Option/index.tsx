@@ -9,6 +9,7 @@ import {
 import { makeOptionGroupRequests } from "@utils/makeOptionRequests";
 import axios from "axios";
 import { Redirect } from "react-router";
+import { getCookie } from "@utils/cookie";
 
 interface Props {
   itemName: string;
@@ -111,7 +112,7 @@ const Option: FC<Props> = ({ itemName }) => {
       axios
         .post("https://waycabvav.shop/items", Data, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            Authorization: `Bearer ${getCookie("jwt")}`,
           },
         })
         .then((response) => {

@@ -17,6 +17,7 @@ import axios from "axios";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import { Redirect, Route } from "react-router";
+import { setCookie } from "@utils/cookie";
 
 const LogIn = () => {
   // const { data, error, mutate} = useSWR("https://waycabvav.shop/docs/login.html", fetcher);
@@ -46,17 +47,7 @@ const LogIn = () => {
 
         .then((response) => {
           alert("성공");
-          console.log(response.data);
-          localStorage.clear();
-          localStorage.setItem("jwt", response.data.jwt);
-
-          // const { accessToken } = response.data;
-          // axios.defaults.headers.common[
-          //   "Authorization"
-          // ] = `Bearer ${accessToken}`;
-          console.log(response.headers);
-          // console.log(response.headers["Date"]);
-          // mutate(response.data, false);
+          setCookie("jwt", response.data.jwt);
         })
         .catch((error) => {
           alert("에러");

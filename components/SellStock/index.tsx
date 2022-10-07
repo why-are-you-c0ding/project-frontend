@@ -19,6 +19,7 @@ import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import option from "@components/Option";
 import { Input } from "@components/Option/styles";
+import { getCookie } from "@utils/cookie";
 
 const SellStock = () => {
   const [number, setNumber] = useState<any>({});
@@ -148,7 +149,7 @@ const SellStock = () => {
       axios
         .post("https://waycabvav.shop/stocks", data, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            Authorization: `Bearer ${getCookie("jwt")}`,
           },
         })
         .then((response) => {

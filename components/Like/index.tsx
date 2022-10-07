@@ -12,6 +12,7 @@ import ReponsiveBar from "@components/ReponsiveBar";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import axios from "axios";
+import { getCookie } from "@utils/cookie";
 
 const Like = () => {
   const {
@@ -67,7 +68,7 @@ const Like = () => {
           },
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+              Authorization: `Bearer ${getCookie("jwt")}`,
             },
           }
         )
@@ -100,7 +101,7 @@ const Like = () => {
           },
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+              Authorization: `Bearer ${getCookie("jwt")}`,
             },
           }
         )
@@ -124,7 +125,7 @@ const Like = () => {
             cartLineItemId: id,
           },
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            Authorization: `Bearer ${getCookie("jwt")}`,
           },
         })
         .then((res) => {
