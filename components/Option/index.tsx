@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useCallback, useState } from "react";
-import { BuyBtn, ItemTitle } from "@components/Sell/styles";
+import { BuyBtn, Explain } from "@components/Sell/styles";
 import {
   Input,
   MakeTable,
@@ -10,6 +10,7 @@ import { makeOptionGroupRequests } from "@utils/makeOptionRequests";
 import axios from "axios";
 import { Redirect } from "react-router";
 import { getCookie } from "@utils/cookie";
+import { Btn } from "@components/Buy/styles";
 
 interface Props {
   itemName: string;
@@ -17,10 +18,6 @@ interface Props {
 
 const Option: FC<Props> = ({ itemName }) => {
   const [toggleTable, setToggleTable] = useState(false);
-
-  const onClickToggleTable = useCallback(() => {
-    setToggleTable((prev) => !prev);
-  }, []);
 
   //optName
   const [optName, setOptName] = useState({
@@ -61,6 +58,12 @@ const Option: FC<Props> = ({ itemName }) => {
       [name]: value,
     });
   };
+
+  console.log(optValue);
+
+  const onClickToggleTable = useCallback(() => {
+    setToggleTable((prev) => !prev);
+  }, []);
 
   // 옵션명 모음 일차 배열
   let optNameAll: string[] = Object.values(optName);
@@ -105,24 +108,42 @@ const Option: FC<Props> = ({ itemName }) => {
     itemName
   );
 
+  console.log(Data);
+  console.log(Data?.optionGroupRequests[0]?.optionRequests[0]?.price);
+
   const onSubmitItems = useCallback(
     (e: any) => {
       e.preventDefault();
 
+      if (optName1 === "") {
+        alert("옵션명을 입력해주세요.");
+        return;
+      }
+
+      if (Data?.optionGroupRequests.length === 0) {
+        alert("옵션값을 입력해주세요.");
+        return;
+      }
+
+      if (
+        Data?.optionGroupRequests[0]?.optionRequests[0]?.price === undefined
+      ) {
+        alert("가격을 입력해주세요");
+        return;
+      }
+
       axios
         .post("https://waycabvav.shop/items", Data, {
           headers: {
-            Authorization: `Bearer ${getCookie("jwt")}`,
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         })
         .then((response) => {
           alert("등록 성공!");
-          console.log(response.data);
-          // let good = response.data;
           <Redirect to="sellpage/sellstock" />;
         })
         .catch((err) => {
-          alert("실패,,,");
+          alert("상품 등록에 실패하였습니다.");
         });
     },
     [Data]
@@ -131,6 +152,11 @@ const Option: FC<Props> = ({ itemName }) => {
   return (
     <div>
       <h2>옵션</h2>
+      <Explain>
+        첫번째 옵션엔 기본값을 넣어주세요. 옵션값은 1,000원 이상
+        <br />
+        옵션명 5자 이상, 옵션값 4자 이상
+      </Explain>
       <div>
         {/*<OptCount>*/}
         {/*  <ItemTitle style={{ fontSize: "1.2rem" }}>옵션 개수</ItemTitle>*/}
@@ -145,7 +171,7 @@ const Option: FC<Props> = ({ itemName }) => {
         {/*  </div>*/}
         {/*</OptCount>*/}
 
-        <ItemTitle style={{ fontSize: "1.2rem" }}>옵션 입력</ItemTitle>
+        {/*<ItemTitle style={{ fontSize: "1.2rem" }}>옵션 입력</ItemTitle>*/}
 
         <OptNameInput>
           <div>
@@ -158,12 +184,14 @@ const Option: FC<Props> = ({ itemName }) => {
               name="optName1"
               value={optName1}
               onChange={onChangeOptName}
+              placeholder={"예시) 색상"}
             />
             <Input
               type="text"
               name="optValue1"
               value={optValue1}
               onChange={onChangeOptValue}
+              placeholder={"기본값 입력, 예시) 20000"}
             />
           </div>
 
@@ -173,12 +201,14 @@ const Option: FC<Props> = ({ itemName }) => {
               name="optName2"
               value={optName2}
               onChange={onChangeOptName}
+              placeholder={"예시) 사이즈"}
             />
             <Input
               type="text"
               name="optValue2"
               value={optValue2}
               onChange={onChangeOptValue}
+              placeholder={"옵션값 입력, 예시) 1000"}
             />
           </div>
           <div>
