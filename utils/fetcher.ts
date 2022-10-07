@@ -6,7 +6,7 @@ const fetcher = (url: string) =>
     .get(url, {
       withCredentials: true,
       headers: {
-        Authorization: `Bearer ${getCookie("jwt")}`,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
       },
     })
     .then((response) => response.data);
