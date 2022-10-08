@@ -31,6 +31,8 @@ const LogIn = () => {
     "X-Requested-With": "XMLHttpRequest",
   };
 
+  const [isLogin, setIsLogin] = useState(localStorage.getItem("jwt") !== null);
+
   const onSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -48,6 +50,8 @@ const LogIn = () => {
         .then((response) => {
           alert("성공");
           localStorage.setItem("jwt", response.data.jwt);
+
+          setIsLogin(true);
         })
         .catch((error) => {
           alert("에러");
@@ -57,10 +61,9 @@ const LogIn = () => {
     [id, password]
   );
 
-  // 만약 데이터가 있을때 ( 로그인 성공시) 메인 화면으로 이동
-  // if (data){
-  //   return <Redirect to="/main"/>
-  // }
+  if (isLogin) {
+    return <Redirect to={"/main"} />;
+  }
 
   return (
     <Wrapper>

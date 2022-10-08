@@ -38,7 +38,12 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
     };
   }, []);
 
-  const [jwt, setJwt] = useState(localStorage.getItem("jwt"));
+  const [isLogin, setIsLogin] = useState(localStorage.getItem("jwt") !== null);
+
+  const onLogout = useCallback((e: any) => {
+    localStorage.removeItem("jwt");
+    setIsLogin(false);
+  }, []);
 
   return (
     <BarWrapper sideBar={sideBar}>
@@ -55,17 +60,12 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
               <Link to="/mypage/my">마이 페이지</Link>
             </span>
             <span>
-              {jwt !== "" ? (
+              {!isLogin ? (
                 <Link to="/login">로그인</Link>
               ) : (
-                <div
-                  onClick={() => {
-                    localStorage.clear();
-                  }}
-                >
-                  로그아웃
-                </div>
+                <div onClick={onLogout}>로그아웃</div>
               )}
+              {/*{jwt !== null && <div onClick={onLogout}>로그아웃</div>}*/}
             </span>
           </SubMenu>
         </SubBar>
