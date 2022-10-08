@@ -10,7 +10,7 @@ const SellpageSidebar: FC<Props> = ({ sideBar }) => {
   return (
     <Wrapper sideBar={sideBar}>
       <Title>
-        <Link to={"/sellpage/info"}>상품 판매 페이지</Link>
+        <Link to={"/sellpage/info"}>판매자 페이지</Link>
       </Title>
 
       <Info>

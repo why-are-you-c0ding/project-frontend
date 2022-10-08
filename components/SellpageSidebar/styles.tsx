@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div<{ sideBar: boolean }>`
-  //margin-left: 2.3rem;
-
+  margin-left: 2.3rem;
   font-weight: 400;
+  min-width: 150px;
 
   @media (max-width: 769px) {
     margin-bottom: 0;
