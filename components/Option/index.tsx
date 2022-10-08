@@ -140,7 +140,7 @@ const Option: FC<Props> = ({ itemName }) => {
         })
         .then((response) => {
           alert("등록 성공!");
-          <Redirect to="sellpage/sellstock" />;
+          return <Redirect to="sellpage/sellstock" />;
         })
         .catch((err) => {
           alert("상품 등록에 실패하였습니다.");
