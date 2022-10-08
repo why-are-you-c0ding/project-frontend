@@ -60,7 +60,7 @@ export const BuyBtn = styled.button`
   border-radius: 20px;
   text-align: center;
   outline: none;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   margin-bottom: 2rem;
 
   font-size: 1.5rem;
@@ -73,7 +73,7 @@ export const BuyBtn = styled.button`
   }
 `;
 
-export const RightSide = styled.section`
+export const OptionInfo = styled.section`
   display: flex;
   justify-content: center;
 `;

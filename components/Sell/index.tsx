@@ -3,12 +3,12 @@ import StatusBar from "@components/StatusBar";
 import Option from "@components/Option";
 import {
   Wrapper,
-  RightSide,
   BuyBtn,
   ItemInfo,
   ItemTitle,
   Preview,
   Image,
+  OptionInfo,
 } from "@components/Sell/styles";
 import { Input } from "@pages/SignUp/styles";
 import useInput from "@hooks/useInput";
@@ -95,7 +95,7 @@ const Sell = () => {
             </div>
           </form>
         </Image>
-        <RightSide>
+        <OptionInfo>
           <div>
             <ItemInfo>
               <label>
@@ -131,7 +131,7 @@ const Sell = () => {
               <Option itemName={itemName} />
             </ItemInfo>
           </div>
-        </RightSide>
+        </OptionInfo>
       </Wrapper>
     </div>
   );
