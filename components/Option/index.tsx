@@ -5,6 +5,7 @@ import {
   MakeTable,
   OptNameInput,
   OptTable,
+  Wrapper,
 } from "@components/Option/styles";
 import { makeOptionGroupRequests } from "@utils/makeOptionRequests";
 import axios from "axios";
@@ -150,7 +151,7 @@ const Option: FC<Props> = ({ itemName }) => {
   );
 
   return (
-    <div>
+    <Wrapper>
       <h2>옵션</h2>
       <Explain>
         첫번째 옵션엔 기본값을 넣어주세요. 옵션값은 1,000원 이상
@@ -283,11 +284,12 @@ const Option: FC<Props> = ({ itemName }) => {
                 );
               }
             })}
+            <BuyBtn onClick={onSubmitItems}>상품 등록</BuyBtn>
           </OptTable>
         )}
       </div>
-      <BuyBtn onClick={onSubmitItems}>상품 등록</BuyBtn>
-    </div>
+      {/*<BuyBtn onClick={onSubmitItems}>상품 등록</BuyBtn>*/}
+    </Wrapper>
   );
 };
 

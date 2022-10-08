@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+export const Wrapper = styled.section``;
+
 export const OptCount = styled.div`
   display: flex;
   margin: 1rem 0;
@@ -38,6 +40,10 @@ export const Input = styled.input`
   border: none;
   border-bottom: 1px solid;
   font-size: 1.1rem;
+
+  ::placeholder {
+    font-size: 1rem;
+  }
 `;
 
 export const MakeTable = styled.div`
@@ -78,7 +84,13 @@ export const OptTable = styled.div`
     margin-top: 0.5rem;
 
     & > span {
-      width: 15%;
+      width: 25%;
+
+      //width:70px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
     }
 
     & > input {
