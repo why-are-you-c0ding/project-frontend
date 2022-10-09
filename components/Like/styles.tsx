@@ -116,13 +116,14 @@ export const InfoBottom = styled.div`
     }
 
     & > div:first-of-type {
-      width: 40%;
+      width: 50%;
 
-      @media (max-width: 769px) {
-        width: 50%;
+      @media (max-width: 975px) {
+        width: 38%;
+        font-size: 0.9rem;
       }
 
-      & span {
+      & > span {
         margin: 0 0.5rem;
       }
 
@@ -132,10 +133,18 @@ export const InfoBottom = styled.div`
         background-color: #ececec;
         border: 1px solid transparent;
         border-radius: 5px;
+
+        @media (max-width: 975px) {
+          padding: 0 0.2rem;
+        }
       }
 
       & button:first-of-type {
         padding: 0.2rem 0.6rem;
+
+        @media (max-width: 975px) {
+          padding: 0 0.3rem;
+        }
       }
     }
 
@@ -143,14 +152,20 @@ export const InfoBottom = styled.div`
       text-align: right;
       width: 80%;
 
-      & button {
-        margin-left: 3rem;
+      @media (max-width: 769px) {
+        font-size: 0.9rem;
+      }
 
+      & span:first-of-type {
+        margin-right: 2rem;
+      }
+
+      & button {
         font-size: 1.3rem;
         border: none;
         background-color: inherit;
 
-        @media (max-width: 769px) {
+        @media (max-width: 975px) {
           position: absolute;
           top: 3;
           right: -20;
