@@ -44,7 +44,7 @@ const MainItem = () => {
     <Wrapper>
       <TitleContainer>
         <TitleBox>
-          <Title>인기 상품</Title>
+          <Title>전체 상품</Title>
           <SubTitle>발매 상품</SubTitle>
         </TitleBox>
       </TitleContainer>
