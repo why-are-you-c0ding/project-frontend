@@ -9,6 +9,8 @@ export const CloseBtn = styled.button`
   position: absolute;
   right: 10px;
   top: 10px;
+
+  cursor: pointer;
 `;
 
 export const List = styled.div`
@@ -20,7 +22,7 @@ export const List = styled.div`
 
   background-color: white;
 
-  & div {
+  & > div {
     display: flex;
     flex-direction: column;
 
@@ -31,6 +33,7 @@ export const List = styled.div`
       padding: 20px 0;
       padding-left: 20px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      cursor: pointer;
     }
   }
 

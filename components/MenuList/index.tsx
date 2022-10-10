@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { Blank, CloseBtn, List } from "@components/MenuList/styles";
 import { Link } from "react-router-dom";
 
@@ -7,12 +7,20 @@ interface Props {
 }
 
 const MenuList: FC<Props> = ({ onCloseModal }) => {
+  const [isLogin, setIsLogin] = useState(localStorage.getItem("jwt") !== null);
+
+  const onLogout = useCallback((e: any) => {
+    localStorage.removeItem("jwt");
+    setIsLogin(false);
+  }, []);
+
   const stopPropagation = useCallback(
     (e: React.SyntheticEvent<EventTarget>) => {
       e.stopPropagation();
     },
     []
   );
+
   return (
     <div onClick={stopPropagation}>
       <Blank onClick={onCloseModal}></Blank>
@@ -27,7 +35,11 @@ const MenuList: FC<Props> = ({ onCloseModal }) => {
             <Link to="/mypage/my">마이페이지</Link>
           </span>
           <span>
-            <Link to="/login">로그인</Link>
+            {!isLogin ? (
+              <Link to="/login">로그인</Link>
+            ) : (
+              <div onClick={onLogout}>로그아웃</div>
+            )}
           </span>
         </div>
       </List>
