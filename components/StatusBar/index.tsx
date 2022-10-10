@@ -65,7 +65,6 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
               ) : (
                 <div onClick={onLogout}>로그아웃</div>
               )}
-              {/*{jwt !== null && <div onClick={onLogout}>로그아웃</div>}*/}
             </span>
           </SubMenu>
         </SubBar>
