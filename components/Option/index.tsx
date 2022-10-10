@@ -10,8 +10,6 @@ import {
 import { makeOptionGroupRequests } from "@utils/makeOptionRequests";
 import axios from "axios";
 import { Redirect } from "react-router";
-import { getCookie } from "@utils/cookie";
-import { Btn } from "@components/Buy/styles";
 
 interface Props {
   itemName: string;
@@ -62,10 +60,6 @@ const Option: FC<Props> = ({ itemName }) => {
 
   console.log(optValue);
 
-  const onClickToggleTable = useCallback(() => {
-    setToggleTable((prev) => !prev);
-  }, []);
-
   // 옵션명 모음 일차 배열
   let optNameAll: string[] = Object.values(optName);
 
@@ -109,8 +103,24 @@ const Option: FC<Props> = ({ itemName }) => {
     itemName
   );
 
-  console.log(Data);
-  console.log(Data?.optionGroupRequests[0]?.optionRequests[0]?.price);
+  const onClickToggleTable = useCallback(() => {
+    if (itemName === "") {
+      alert("상품 이름을 입력해주세요");
+      return;
+    }
+
+    if (optName1 === "") {
+      alert("옵션명을 입력해주세요.");
+      return;
+    }
+
+    if (Data?.optionGroupRequests.length === 0) {
+      alert("옵션값을 입력해주세요.");
+      return;
+    }
+
+    setToggleTable((prev) => !prev);
+  }, [itemName, optName1, Data]);
 
   const onSubmitItems = useCallback(
     (e: any) => {
