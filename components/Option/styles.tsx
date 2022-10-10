@@ -97,4 +97,13 @@ export const OptTable = styled.div`
       width: 70%;
     }
   }
+
+  .line {
+    width: 95.3%;
+    height: 1%;
+
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
 `;

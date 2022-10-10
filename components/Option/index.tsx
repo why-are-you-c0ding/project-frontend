@@ -58,8 +58,6 @@ const Option: FC<Props> = ({ itemName }) => {
     });
   };
 
-  console.log(optValue);
-
   // 옵션명 모음 일차 배열
   let optNameAll: string[] = Object.values(optName);
 
@@ -80,11 +78,27 @@ const Option: FC<Props> = ({ itemName }) => {
   }
 
   // 옵션값들 모음 일차 배열
-  let optFlat = opt.flat();
-  // let optAndPrice = optFlat.map((x) => x);
+  let optFlat: string[] = [];
+
+  let dummyOpt: string[][] = [];
+
+  for (let i = 0; i < opt.length; i++) {
+    let temp = opt[i]?.filter((item) => item !== "");
+
+    dummyOpt.push(temp);
+    opt[i] = temp;
+
+    if (i !== opt.length - 1) dummyOpt.push([""]);
+  }
+
+  // console.log(dummyOpt);
+
+  optFlat = dummyOpt.flat();
 
   // 옵션값들 각각 추가 가격
   const [optPrice, setOptPrice] = useState<any>({});
+
+  let price: string[] = Object.values(optPrice);
 
   //select
   const optionCount = [1, 2, 3, 4, 5];
@@ -97,11 +111,17 @@ const Option: FC<Props> = ({ itemName }) => {
 
   const Data = makeOptionGroupRequests(
     optFlat,
-    optPrice,
+    price,
     optNameAll,
     opt,
     itemName
   );
+
+  // console.log(optFlat);
+  // console.log(optPrice);
+  // console.log(optNameAll);
+  // console.log(opt);
+  console.log(Data);
 
   const onClickToggleTable = useCallback(() => {
     if (itemName === "") {
@@ -292,6 +312,8 @@ const Option: FC<Props> = ({ itemName }) => {
                     />
                   </div>
                 );
+              } else {
+                return <div key={index} className={"line"}></div>;
               }
             })}
             <BuyBtn onClick={onSubmitItems}>상품 등록</BuyBtn>
