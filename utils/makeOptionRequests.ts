@@ -1,17 +1,21 @@
-const makeOptionRequests = (a: string[], b: any) => {
+const makeOptionRequests = (a: string[], b: any, d: any) => {
   let optionRequests: Array<Object> = [];
 
   let aryB: string[] = Object.keys(b).map((item) => b[item]);
 
-  const len = aryB.length;
+  const len = a.length;
 
-  for (let i = 0; i < len; i++) {
-    const option: object = {
-      optionName: a[i],
-      price: parseInt(b[i]),
-    };
+  let count = 0;
+  for (let i = 0; i < len + d.length; i++) {
+    if (a[i] !== "") {
+      const option: object = {
+        optionName: a[i],
+        price: parseInt(b[count]),
+      };
 
-    optionRequests.push(option);
+      optionRequests.push(option);
+      count++;
+    }
   }
 
   return optionRequests;
@@ -30,7 +34,7 @@ export const makeOptionGroupRequests = (
     optLen.push(d[i].length);
   }
 
-  const optRequests = makeOptionRequests(a, b);
+  const optRequests = makeOptionRequests(a, b, d);
 
   let eachGroup: any = [];
 
