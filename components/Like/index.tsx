@@ -12,7 +12,6 @@ import ReponsiveBar from "@components/ReponsiveBar";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import axios from "axios";
-import { getCookie } from "@utils/cookie";
 
 const Like = () => {
   const {
@@ -37,7 +36,6 @@ const Like = () => {
   };
 
   const eachLen = getItemLen(item);
-  // console.log(eachLen);
 
   const getTotalPrice = (item: any, len: number) => {
     let total = 0;
