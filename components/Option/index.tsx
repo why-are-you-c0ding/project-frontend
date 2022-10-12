@@ -117,10 +117,6 @@ const Option: FC<Props> = ({ itemName }) => {
     itemName
   );
 
-  // console.log(optFlat);
-  // console.log(optPrice);
-  // console.log(optNameAll);
-  // console.log(opt);
   console.log(Data);
 
   const onClickToggleTable = useCallback(() => {
