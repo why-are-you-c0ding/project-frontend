@@ -24,36 +24,36 @@ import { getCookie } from "@utils/cookie";
 const SellStock = () => {
   const [number, setNumber] = useState<any>({});
 
-  const [optList, setoptlist] = useState({
-    optlist1: "",
-  });
-
-  const { optlist1 } = optList;
-
-  const handleIdList = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setoptlist({
-      ...optList,
-      [name]: value,
-    });
-  };
-
-  //list에 optlist객체 값 넣기
-  let list: any[] = Object.values(optList);
-
-  //푸시할 배열 생성
-  let optionIdList: any[] = [];
-
-  //,을 기준으로 나누어서 삽입 split하면 문자열로 들어가기 때문에 number로 변환
-  let change = list[0].replace(/\s/g, "").split(",").map(Number);
-  optionIdList.push(change);
-
-  // 전달 할 optionIdList 확인
-  // console.log(optionIdList);
+  // const [optList, setoptlist] = useState({
+  //   optlist1: "",
+  // });
+  //
+  // const { optlist1 } = optList;
+  //
+  // const handleIdList = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //
+  //   setoptlist({
+  //     ...optList,
+  //     [name]: value,
+  //   });
+  // };
+  //
+  // //list에 optlist객체 값 넣기
+  // let list: any[] = Object.values(optList);
+  //
+  // //푸시할 배열 생성
+  // let optionIdList: any[] = [];
+  //
+  // //,을 기준으로 나누어서 삽입 split하면 문자열로 들어가기 때문에 number로 변환
+  // let change = list[0].replace(/\s/g, "").split(",").map(Number);
+  // optionIdList.push(change);
+  //
+  // // 전달 할 optionIdList 확인
+  // // console.log(optionIdList);
 
   const { data: eachData, error } = useSWR<any>(
-    "https://waycabvav.shop/items/26",
+    "https://waycabvav.shop/items/1",
     fetcher
   );
 

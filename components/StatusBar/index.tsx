@@ -12,6 +12,7 @@ import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
 import Menu from "@components/Menu";
 import MenuList from "@components/MenuList";
 import { Link } from "react-router-dom";
+import Search from "@components/Search";
 
 interface Props {
   sideBar?: boolean;
@@ -78,7 +79,8 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
               <Link to="/ProductPage">Shop</Link>
             </span>
             <span>
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
+              {/*<FontAwesomeIcon icon={faMagnifyingGlass} />*/}
+              <Search />
             </span>
             <span className="faBars" onClick={onClickBar}>
               <FontAwesomeIcon icon={faBars} />
