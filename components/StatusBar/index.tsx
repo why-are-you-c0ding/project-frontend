@@ -80,6 +80,7 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
               <Link to="/ProductPage">Shop</Link>
             </span>
             <span>
+              {/*<FontAwesomeIcon icon={faMagnifyingGlass} />*/}
               <Search />
             </span>
             <span className="faBars" onClick={onClickBar}>
