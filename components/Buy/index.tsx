@@ -135,7 +135,7 @@ const Buy = () => {
   const Data = DataPrice[0];
   const total = DataPrice[1];
 
-  console.log(Data);
+  console.log(eachData);
 
   const onClickCart = useCallback(
     (e: any) => {
@@ -165,7 +165,7 @@ const Buy = () => {
           <Item>
             <img
               src="https://mblogthumb-phinf.pstatic.net/MjAxNzAzMzFfNjEg/MDAxNDkwOTM2NjE4MDQy.eIMvlKaVriccpz8TPo-Wyagr3J6oEz_pRe3S32gADVIg.jQUkh4ws9TiGn6y2h2iu3z5xmyKvxrRMgS0rjJVTRPQg.PNG.jkirby/%EC%9E%A0%EB%A7%8C%EB%B3%B4.png?type=w800"
-              alt=""
+              alt="상품 사진"
             />
           </Item>
         </LeftSide>
@@ -211,20 +211,30 @@ const Buy = () => {
                 장바구니
               </SelectBtn>
             </div>
-            <Link to={`/checkout/${location.pathname.split("/")[2]}`}>
+            <Link
+              to={{
+                pathname: `/checkout/${location.pathname.split("/")[2]}`,
+                state: {
+                  eachData: eachData,
+                  optInfo: Data,
+                  count: count,
+                  total: total,
+                },
+              }}
+            >
               <BuyBtn type="submit">구매</BuyBtn>
             </Link>
           </Btn>
 
-          <Delivery>
-            <DeliveryTitle>
-              배송정보
-              <FontAwesomeIcon icon={faTruck} />
-            </DeliveryTitle>
-            <DeliveryInfo>
-              <DeliveryPrice>일반배송 3000원</DeliveryPrice>
-            </DeliveryInfo>
-          </Delivery>
+          {/*<Delivery>*/}
+          {/*  <DeliveryTitle>*/}
+          {/*    배송정보*/}
+          {/*    <FontAwesomeIcon icon={faTruck} />*/}
+          {/*  </DeliveryTitle>*/}
+          {/*  <DeliveryInfo>*/}
+          {/*    <DeliveryPrice>일반배송 3000원</DeliveryPrice>*/}
+          {/*  </DeliveryInfo>*/}
+          {/*</Delivery>*/}
         </RightSide>
       </Wrapper>
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, useCallback } from "react";
 import StatusBar from "@components/StatusBar";
 import {
   Button,
@@ -7,8 +7,45 @@ import {
   Title,
   Wrapper,
 } from "@components/Checkout/styles";
+import { useLocation } from "react-router-dom";
+import { makeOrder } from "@utils/makeOrder";
+import axios from "axios";
 
 const Checkout = () => {
+  const location: any = useLocation();
+
+  const order = makeOrder(
+    location.state.eachData,
+    location.state.optInfo,
+    location.state.count
+  );
+
+  console.log(JSON.stringify(order));
+
+  const onClickBuyBtn = useCallback(
+    (e: any) => {
+      e.preventDefault();
+
+      axios
+        .post(
+          "https://waycabvav.shop/orders",
+          { order },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+          }
+        )
+        .then((res) => {
+          alert("성공");
+        })
+        .catch((err) => {
+          alert("실패");
+        });
+    },
+    [order]
+  );
+
   return (
     <div>
       <StatusBar />
@@ -36,8 +73,16 @@ const Checkout = () => {
             <h3>결제 정보</h3>
           </Title>
           <div>
-            <span>총 상품가격</span>
-            <span>500000원</span>
+            <span>상품명</span>
+            <span>{location.state.eachData.itemName}</span>
+          </div>
+          <div>
+            <span>수량</span>
+            <span>{location.state.count}개</span>
+          </div>
+          <div>
+            <span>개당 가격</span>
+            <span>{location.state.total}원</span>
           </div>
           <div>
             <span>배송비</span>
@@ -45,12 +90,12 @@ const Checkout = () => {
           </div>
           <div>
             <span>총 결제금액</span>
-            <span>478000원</span>
+            <span>{location.state.total * location.state.count}원</span>
           </div>
         </Info>
 
         <Button>
-          <button>결제하기</button>
+          <button onClick={onClickBuyBtn}>결제하기</button>
         </Button>
       </Wrapper>
     </div>
