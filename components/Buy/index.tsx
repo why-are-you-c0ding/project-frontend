@@ -27,7 +27,6 @@ import option from "@components/Option";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { makeCartItems } from "@utils/makeCartItems";
 import axios from "axios";
-import { getCookie } from "@utils/cookie";
 
 const Buy = () => {
   const location = useLocation();
@@ -212,7 +211,7 @@ const Buy = () => {
                 장바구니
               </SelectBtn>
             </div>
-            <Link to="/checkout">
+            <Link to={`/checkout/${location.pathname.split("/")[2]}`}>
               <BuyBtn type="submit">구매</BuyBtn>
             </Link>
           </Btn>
