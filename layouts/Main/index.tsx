@@ -10,6 +10,7 @@ import {
 } from "@layouts/Main/styles";
 import { slideList } from "@utils/slideList";
 import axios from "axios";
+import SliderImage from "@components/SliderImage";
 
 const Main = () => {
   const ref = useRef<any>(null);
@@ -82,32 +83,33 @@ const Main = () => {
   return (
     <div>
       <StatusBar />
-      <SlideWrapper>
-        <Slide>
-          <SlideList ref={ref}>
-            {slideList.map((v) => {
-              return (
-                <Inner key={v.id}>
-                  <img src={v.src} alt={v.alt} />
-                </Inner>
-              );
-            })}
-          </SlideList>
-        </Slide>
-        <div>
-          <div>
-            <button onClick={prevButton}>prev</button>
-            <button onClick={nextButton}>next</button>
-          </div>
-          {slideList.map((v) => {
-            return (
-              <button key={v.id} onClick={() => slideBtn(v.id)}>
-                {v.id}
-              </button>
-            );
-          })}
-        </div>
-      </SlideWrapper>
+      {/*<SlideWrapper>*/}
+      {/*  <Slide>*/}
+      {/*    <SlideList ref={ref}>*/}
+      {/*      {slideList.map((v) => {*/}
+      {/*        return (*/}
+      {/*          <Inner key={v.id}>*/}
+      {/*            <img src={v.src} alt={v.alt} />*/}
+      {/*          </Inner>*/}
+      {/*        );*/}
+      {/*      })}*/}
+      {/*    </SlideList>*/}
+      {/*  </Slide>*/}
+      {/*  <div>*/}
+      {/*    <div>*/}
+      {/*      <button onClick={prevButton}>prev</button>*/}
+      {/*      <button onClick={nextButton}>next</button>*/}
+      {/*    </div>*/}
+      {/*    {slideList.map((v) => {*/}
+      {/*      return (*/}
+      {/*        <button key={v.id} onClick={() => slideBtn(v.id)}>*/}
+      {/*          {v.id}*/}
+      {/*        </button>*/}
+      {/*      );*/}
+      {/*    })}*/}
+      {/*  </div>*/}
+      {/*</SlideWrapper>*/}
+      <SliderImage />
       <MainItem />
       {/*<button onClick={onLogout}>로그아웃 버튼버튼버튼</button>*/}
     </div>
