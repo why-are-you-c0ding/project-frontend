@@ -17,7 +17,6 @@ import axios from "axios";
 const Sell = () => {
   const [itemName, onChangeItemname, setItemName] = useInput("");
   const [itemExplain, onChangeItemExplain, setItemExplain] = useInput("");
-  const [itemPrice, onChangeItemPrice, setItemPrice] = useInput("");
 
   const [files, setFiles] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -44,6 +43,8 @@ const Sell = () => {
     encodeFileToBase64(e.target.files[0]);
   };
 
+  const [imageUrl, setImageUrl] = useState("");
+
   const handleClick = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -55,10 +56,11 @@ const Sell = () => {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((response) => {
-        alert("성공");
+        setImageUrl(response.data.imageUrl);
+        alert("이미지 등록에 성공하셨습니다.");
       })
       .catch((error) => {
-        alert("실패");
+        alert("이미지 등록에 실패하셨습니다.");
       });
 
     // 이거도 되는 방법
@@ -72,6 +74,38 @@ const Sell = () => {
     // });
   };
 
+  const onDrag = (ev: any) => {
+    console.log("File(s) dropped");
+
+    // Prevent default behavior (Prevent file from being opened)
+    ev.preventDefault();
+
+    if (ev.dataTransfer.items) {
+      // Use DataTransferItemList interface to access the file(s)
+      [...ev.dataTransfer.items].forEach((item, i) => {
+        // If dropped items aren't files, reject them
+        if (item.kind === "file") {
+          const file = item.getAsFile();
+          onLoadFile(ev);
+
+          console.log(`… file[${i}].name = ${file.name}`);
+        }
+      });
+    } else {
+      // Use DataTransfer interface to access the file(s)
+      [...ev.dataTransfer.files].forEach((file, i) => {
+        console.log(`… file[${i}].name = ${file.name}`);
+      });
+    }
+  };
+
+  const onDragOver = (ev: any) => {
+    console.log("File(s) in drop zone");
+
+    // Prevent default behavior (Prevent file from being opened)
+    ev.preventDefault();
+  };
+
   return (
     <div>
       <StatusBar />
@@ -83,6 +117,21 @@ const Sell = () => {
             <Preview>
               {imageSrc && <img src={imageSrc} alt="preview-img" />}
             </Preview>
+
+            {/*<div*/}
+            {/*  id="drop_zone"*/}
+            {/*  style={{*/}
+            {/*    border: "5px solid blue",*/}
+            {/*    width: "200px",*/}
+            {/*    height: "100px",*/}
+            {/*  }}*/}
+            {/*  onDrop={onDrag}*/}
+            {/*  onDragOver={onDragOver}*/}
+            {/*>*/}
+            {/*  <p>*/}
+            {/*    Drag one or more files to this <i>drop zone</i>.*/}
+            {/*  </p>*/}
+            {/*</div>*/}
 
             <div>
               <input
@@ -118,17 +167,11 @@ const Sell = () => {
                   placeholder=" 예시) 잠만보 진짜 잠만 잠"
                 />
               </label>
-              {/*<label>*/}
-              {/*  <ItemTitle>기본 가격</ItemTitle>*/}
-              {/*  <Input*/}
-              {/*    type="text"*/}
-              {/*    name="item-fullname"*/}
-              {/*    value={itemExplain}*/}
-              {/*    onChange={onChangeItemExplain}*/}
-              {/*    placeholder=" 예시) 20000"*/}
-              {/*  />*/}
-              {/*</label>*/}
-              <Option itemName={itemName} />
+              <Option
+                itemName={itemName}
+                imageUrl={imageUrl}
+                itemExplain={itemExplain}
+              />
             </ItemInfo>
           </div>
         </OptionInfo>
