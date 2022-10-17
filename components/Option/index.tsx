@@ -13,9 +13,10 @@ import { Redirect } from "react-router";
 
 interface Props {
   itemName: string;
+  imageUrl: string;
 }
 
-const Option: FC<Props> = ({ itemName }) => {
+const Option: FC<Props> = ({ itemName, imageUrl }) => {
   const [toggleTable, setToggleTable] = useState(false);
 
   //optName
@@ -114,10 +115,9 @@ const Option: FC<Props> = ({ itemName }) => {
     price,
     optNameAll,
     opt,
-    itemName
+    itemName,
+    imageUrl
   );
-
-  console.log(Data);
 
   const onClickToggleTable = useCallback(() => {
     if (itemName === "") {
