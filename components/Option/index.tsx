@@ -14,9 +14,10 @@ import { Redirect } from "react-router";
 interface Props {
   itemName: string;
   imageUrl: string;
+  itemExplain: string;
 }
 
-const Option: FC<Props> = ({ itemName, imageUrl }) => {
+const Option: FC<Props> = ({ itemName, imageUrl, itemExplain }) => {
   const [toggleTable, setToggleTable] = useState(false);
 
   //optName
@@ -116,7 +117,8 @@ const Option: FC<Props> = ({ itemName, imageUrl }) => {
     optNameAll,
     opt,
     itemName,
-    imageUrl
+    imageUrl,
+    itemExplain
   );
 
   const onClickToggleTable = useCallback(() => {
@@ -316,7 +318,6 @@ const Option: FC<Props> = ({ itemName, imageUrl }) => {
           </OptTable>
         )}
       </div>
-      {/*<BuyBtn onClick={onSubmitItems}>상품 등록</BuyBtn>*/}
     </Wrapper>
   );
 };

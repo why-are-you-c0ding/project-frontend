@@ -17,7 +17,6 @@ import axios from "axios";
 const Sell = () => {
   const [itemName, onChangeItemname, setItemName] = useInput("");
   const [itemExplain, onChangeItemExplain, setItemExplain] = useInput("");
-  const [itemPrice, onChangeItemPrice, setItemPrice] = useInput("");
 
   const [files, setFiles] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -119,30 +118,30 @@ const Sell = () => {
               {imageSrc && <img src={imageSrc} alt="preview-img" />}
             </Preview>
 
-            <div
-              id="drop_zone"
-              style={{
-                border: "5px solid blue",
-                width: "200px",
-                height: "100px",
-              }}
-              onDrop={onDrag}
-              onDragOver={onDragOver}
-            >
-              <p>
-                Drag one or more files to this <i>drop zone</i>.
-              </p>
-            </div>
-
-            {/*<div>*/}
-            {/*  <input*/}
-            {/*    type="file"*/}
-            {/*    name="image"*/}
-            {/*    accept="image/*"*/}
-            {/*    onChange={onLoadFile}*/}
-            {/*  />*/}
-            {/*  <button type="submit">상품 사진 등록</button>*/}
+            {/*<div*/}
+            {/*  id="drop_zone"*/}
+            {/*  style={{*/}
+            {/*    border: "5px solid blue",*/}
+            {/*    width: "200px",*/}
+            {/*    height: "100px",*/}
+            {/*  }}*/}
+            {/*  onDrop={onDrag}*/}
+            {/*  onDragOver={onDragOver}*/}
+            {/*>*/}
+            {/*  <p>*/}
+            {/*    Drag one or more files to this <i>drop zone</i>.*/}
+            {/*  </p>*/}
             {/*</div>*/}
+
+            <div>
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={onLoadFile}
+              />
+              <button type="submit">상품 사진 등록</button>
+            </div>
           </form>
         </Image>
         <OptionInfo>
@@ -168,7 +167,11 @@ const Sell = () => {
                   placeholder=" 예시) 잠만보 진짜 잠만 잠"
                 />
               </label>
-              <Option itemName={itemName} imageUrl={imageUrl} />
+              <Option
+                itemName={itemName}
+                imageUrl={imageUrl}
+                itemExplain={itemExplain}
+              />
             </ItemInfo>
           </div>
         </OptionInfo>

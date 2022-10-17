@@ -26,6 +26,7 @@ const MainItem = () => {
         itemName: string;
         shopName: string;
         basicPrice: number;
+        imageUrl: string;
       }>
     | false
   >("https://waycabvav.shop/items", fetcher);
@@ -52,15 +53,13 @@ const MainItem = () => {
         {allData &&
           allData?.map((v, index) => {
             const itemId = item[index][0];
+            console.log(v.imageUrl);
 
             return (
               <Link to={`/shop/${itemId}`} key={index}>
                 <ItemBox>
                   <Item>
-                    <img
-                      src="https://post-phinf.pstatic.net/MjAyMTAzMTNfODUg/MDAxNjE1NjAxNjIwOTQz.81Ruw-E3aK-7V89c5JacxvnbWFe8ez_6dGT3S3AC-g8g.ZcQgsuG13-tR16wrj6B32vOIi3axULarz9eoWwBjo2kg.PNG/%EC%B9%98%EC%BD%94%EB%A6%AC%ED%83%80_%EA%B3%B5%EC%8B%9D_%EC%9D%BC%EB%9F%AC%EC%8A%A4%ED%8A%B8-downDFG.png?type=w1200"
-                      alt=""
-                    />
+                    <img src={v.imageUrl} alt="" />
                   </Item>
                   <Itemdetail>
                     <ItemName>{item[index][1]}</ItemName>
