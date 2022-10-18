@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useCallback, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import Option from "@components/Option";
 import {
@@ -8,6 +8,7 @@ import {
   Preview,
   Image,
   OptionInfo,
+  DragOver,
 } from "@components/Sell/styles";
 import { Input } from "@pages/SignUp/styles";
 import useInput from "@hooks/useInput";
@@ -19,6 +20,7 @@ const Sell = () => {
 
   const [files, setFiles] = useState("");
   const [imageSrc, setImageSrc] = useState("");
+  const [dragOver, setDragOver] = useState(false);
 
   const encodeFileToBase64 = (fileBlob: any) => {
     const reader: any = new FileReader();
@@ -36,6 +38,8 @@ const Sell = () => {
 
   const onLoadFile = (e: any) => {
     const file = e.target.files;
+    console.log(file);
+    console.log(file);
     console.log(file);
     setFiles(file);
 
@@ -63,49 +67,67 @@ const Sell = () => {
       .catch((error) => {
         alert("이미지 등록에 실패하셨습니다.");
       });
-
-    // 이거도 되는 방법
-    // axios({
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    //   url: "https://waycabvav.shop/images",
-    //   method: "post",
-    //   data: formdata,
-    // });
   };
 
-  const onDrag = (ev: any) => {
-    console.log("File(s) dropped");
-
-    // Prevent default behavior (Prevent file from being opened)
-    ev.preventDefault();
-
-    if (ev.dataTransfer.items) {
-      // Use DataTransferItemList interface to access the file(s)
-      [...ev.dataTransfer.items].forEach((item, i) => {
+  const onDrop = useCallback((e: any) => {
+    e.preventDefault();
+    const formData = new FormData();
+    if (e.dataTransfer.item) {
+      for (let i = 0; i < e.dataTransfer.items.length; i++) {
         // If dropped items aren't files, reject them
-        if (item.kind === "file") {
-          const file = item.getAsFile();
-          onLoadFile(ev);
-
-          console.log(`… file[${i}].name = ${file.name}`);
+        if (e.dataTransfer.items[i].kind === "file") {
+          const file = e.dataTransfer.items[i].getAsFile();
+          console.log("file[" + i + "].name = " + file.name);
+          formData.append("images", file);
         }
-      });
+      }
     } else {
-      // Use DataTransfer interface to access the file(s)
-      [...ev.dataTransfer.files].forEach((file, i) => {
-        console.log(`… file[${i}].name = ${file.name}`);
-      });
+      for (let i = 0; i < e.dataTransfer.files.length; i++) {
+        console.log("file[" + i + "].name = " + e.dataTransfer.files[i].name);
+        formData.append("images", e.dataTransfer.files[i]);
+      }
     }
-  };
+    axios.post("https://waycabvav.shop/images", formData).then((response) => {
+      setDragOver(false);
+      alert("이미지 등록에 성공하셨습니다.");
+    });
+  }, []);
 
-  const onDragOver = (ev: any) => {
-    console.log("File(s) in drop zone");
+  // const onDrop = useCallback((e: any) => {
+  //   e.preventDefault();
+  //   console.log(e);
+  //   const formData = new FormData();
+  //   formData.append("images", files);
+  //   if (e.dataTransfer.items) {
+  //     for (let i = 0; i < e.dataTransfer.items.length; i++) {
+  //       if (e.dataTransfer.items[i].kind === "file") {
+  //         const file = e.dataTransfer.items[i].getAsFile();
+  //         console.log("... file[" + i + "].name = " + file.name);
+  //         formData.append("image", file);
+  //       }
+  //     }
+  //   } else {
+  //     for (let i = 0; i < e.dataTransfer.files.length; i++) {
+  //       console.log(
+  //         "... file[" + i + "].name = " + e.dataTransfer.files[i].name
+  //       );
+  //       formData.append("image", e.dataTransfer.files[i]);
+  //     }
+  //   }
+  //   axios
+  //     .post("https://waycabvav.shop/images", formData, {
+  //       headers: { "Content-Type": "multipart/form-data" },
+  //     })
+  //     .then((response) => {
+  //       setDragOver(false);
+  //     });
+  // }, []);
 
-    // Prevent default behavior (Prevent file from being opened)
-    ev.preventDefault();
-  };
+  const onDragOver = useCallback((e) => {
+    e.preventDefault();
+    console.log(e);
+    setDragOver(true);
+  }, []);
 
   return (
     <div>
@@ -115,7 +137,8 @@ const Sell = () => {
           <h2>등록 상품 이미지</h2>
 
           <form onSubmit={handleClick}>
-            <Preview>
+            <Preview onDrop={onDrop} onDragOver={onDragOver}>
+              {dragOver && <DragOver>업로드!</DragOver>}
               {imageSrc && <img src={imageSrc} alt="preview-img" />}
             </Preview>
 
