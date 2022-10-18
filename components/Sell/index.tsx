@@ -3,7 +3,6 @@ import StatusBar from "@components/StatusBar";
 import Option from "@components/Option";
 import {
   Wrapper,
-  BuyBtn,
   ItemInfo,
   ItemTitle,
   Preview,
@@ -44,6 +43,7 @@ const Sell = () => {
   };
 
   const [imageUrl, setImageUrl] = useState("");
+  const [checkImg, setCheckImg] = useState(false);
 
   const handleClick = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,6 +57,7 @@ const Sell = () => {
       })
       .then((response) => {
         setImageUrl(response.data.imageUrl);
+        setCheckImg(true);
         alert("이미지 등록에 성공하셨습니다.");
       })
       .catch((error) => {
@@ -171,6 +172,7 @@ const Sell = () => {
                 itemName={itemName}
                 imageUrl={imageUrl}
                 itemExplain={itemExplain}
+                checkImg={checkImg}
               />
             </ItemInfo>
           </div>

@@ -15,9 +15,10 @@ interface Props {
   itemName: string;
   imageUrl: string;
   itemExplain: string;
+  checkImg: boolean;
 }
 
-const Option: FC<Props> = ({ itemName, imageUrl, itemExplain }) => {
+const Option: FC<Props> = ({ itemName, imageUrl, itemExplain, checkImg }) => {
   const [toggleTable, setToggleTable] = useState(false);
 
   //optName
@@ -122,8 +123,18 @@ const Option: FC<Props> = ({ itemName, imageUrl, itemExplain }) => {
   );
 
   const onClickToggleTable = useCallback(() => {
+    if (!checkImg) {
+      alert("사진 등록을 해주세요.");
+      return;
+    }
+
+    if (itemExplain === "") {
+      alert("상세 설명을 입력해주세요.");
+      return;
+    }
+
     if (itemName === "") {
-      alert("상품 이름을 입력해주세요");
+      alert("상품 이름을 입력해주세요.");
       return;
     }
 
@@ -143,6 +154,16 @@ const Option: FC<Props> = ({ itemName, imageUrl, itemExplain }) => {
   const onSubmitItems = useCallback(
     (e: any) => {
       e.preventDefault();
+
+      if (!checkImg) {
+        alert("사진 등록을 해주세요");
+        return;
+      }
+
+      if (itemExplain === "") {
+        alert("상세 설명을 입력해주세요.");
+        return;
+      }
 
       if (optName1 === "") {
         alert("옵션명을 입력해주세요.");
