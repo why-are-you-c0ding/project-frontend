@@ -18,7 +18,7 @@ const SliderImage = () => {
 
   return (
     <div>
-      <h2> Single Item</h2>
+      <h2> 인기 상품</h2>
       <Slider {...settings}>
         {slideList.map((v, index) => (
           <SliderItem key={index}>
