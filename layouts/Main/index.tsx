@@ -15,11 +15,6 @@ const Main = () => {
       .finally(() => {});
   }, []);
 
-  //로그인 안되어 있으면 로그인 창으로 가세요
-  // if(!data){
-  //   return <Redirect to="/login"/>
-  // }
-
   return (
     <div>
       <StatusBar />
