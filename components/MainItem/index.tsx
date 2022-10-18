@@ -31,8 +31,6 @@ const MainItem = () => {
     | false
   >("https://waycabvav.shop/items", fetcher);
 
-  console.log(allData);
-
   let item: any = [];
 
   if (allData) item = Object.values(allData);
@@ -59,7 +57,7 @@ const MainItem = () => {
               <Link to={`/shop/${itemId}`} key={index}>
                 <ItemBox>
                   <Item>
-                    <img src={v.imageUrl} alt="" />
+                    <img src={v.imageUrl} alt="으악" />
                   </Item>
                   <Itemdetail>
                     <ItemName>{item[index][1]}</ItemName>
