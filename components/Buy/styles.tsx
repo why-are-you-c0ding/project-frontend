@@ -14,10 +14,7 @@ export const Wrapper = styled.section`
   }
 `;
 
-export const LeftSide = styled.section`
-  padding: 1rem 1rem;
-  margin-right: 1rem;
-`;
+export const LeftSide = styled.section``;
 
 export const MiddleSide = styled.div`
   border-left: 2px solid #c1b6b6;
@@ -37,19 +34,33 @@ export const RightSide = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    margin-left: 0;
   }
 `;
 
 export const Item = styled.div`
-  padding-bottom: 1.3rem;
-  padding-right: 1.3rem;
+  margin-top: 2rem;
+  margin-right: 1rem;
+
   display: flex;
   justify-content: center;
   align-content: center;
 
+  @media (max-width: 769px) {
+    margin-right: 0;
+  }
+
   & img {
-    width: 20rem;
-    height: 20rem;
+    width: 24rem;
+    height: 24rem;
+
+    @media (max-width: 769px) {
+      width: 20rem;
+      height: 20rem;
+
+      margin-top: -2rem;
+    }
   }
 `;
 
@@ -60,13 +71,14 @@ export const Itemdetail = styled.div`
 `;
 
 export const ItemName = styled.div`
-  font-weight: bold;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  //text-decoration: underline;
+  padding-bottom: 0.5rem;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 
   @media (max-width: 940px) {
-    margin-left: 3rem;
+    //margin-left: 3rem;
   }
 `;
 
@@ -74,7 +86,7 @@ export const Option = styled.div`
   margin-top: 1rem;
 
   @media (max-width: 940px) {
-    margin-left: 3rem;
+    //margin-left: 3rem;
   }
 
   & > div {
@@ -103,14 +115,18 @@ export const Option = styled.div`
   }
 `;
 
+export const ItemInfo = styled.div`
+  margin: 1rem 0;
+  color: rgba(0, 0, 0, 0.4);
+`;
+
 export const TotalPrice = styled.div`
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-size: 1.5rem;
 
   margin-bottom: -2rem;
 
   @media (max-width: 940px) {
-    margin-left: 3rem;
   }
 `;
 
@@ -124,7 +140,11 @@ export const Btn = styled.section`
   margin-right: 7rem;
 
   @media (max-width: 940px) {
-    margin-left: 3rem;
+    //margin-left: 1rem;
+
+    margin-right: 0;
+
+    width: 100%;
   }
 
   & > div {
@@ -132,8 +152,6 @@ export const Btn = styled.section`
     justify-content: center;
     align-items: center;
   }
-
-  //border: 1px solid;
 `;
 
 export const BuyBtn = styled.button`
@@ -164,12 +182,9 @@ export const CountBtn = styled.div`
 
   padding: 1rem 0;
 
-  //border: 1px solid rgba(0, 0, 0, 0.4);
-
   & > span {
     font-size: 1.2rem;
     margin: 0 1rem;
-    //margin-right: 0.5rem;
   }
 
   & button {
@@ -195,26 +210,4 @@ export const SelectBtn = styled.button`
   font-size: 1.5rem;
   font-weight: bold;
   cursor: pointer;
-`;
-
-export const Delivery = styled.div`
-  margin-top: 3rem;
-`;
-
-export const DeliveryTitle = styled.div`
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-`;
-
-export const DeliveryInfo = styled.div``;
-
-export const DeliveryPrice = styled.div`
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-`;
-
-export const DeliverySub = styled.div`
-  font-size: 0.8rem;
-  color: gray;
 `;

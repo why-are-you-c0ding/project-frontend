@@ -12,12 +12,9 @@ import {
   Btn,
   BuyBtn,
   SelectBtn,
-  Delivery,
-  DeliveryTitle,
-  DeliveryInfo,
-  DeliveryPrice,
   CountBtn,
   TotalPrice,
+  ItemInfo,
 } from "@components/Buy/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketShopping, faTruck } from "@fortawesome/free-solid-svg-icons";
@@ -163,10 +160,7 @@ const Buy = () => {
       <Wrapper>
         <LeftSide>
           <Item>
-            <img
-              src="https://mblogthumb-phinf.pstatic.net/MjAxNzAzMzFfNjEg/MDAxNDkwOTM2NjE4MDQy.eIMvlKaVriccpz8TPo-Wyagr3J6oEz_pRe3S32gADVIg.jQUkh4ws9TiGn6y2h2iu3z5xmyKvxrRMgS0rjJVTRPQg.PNG.jkirby/%EC%9E%A0%EB%A7%8C%EB%B3%B4.png?type=w800"
-              alt="상품 사진"
-            />
+            <img src={eachData?.imageUrl} alt="상품 사진" />
           </Item>
         </LeftSide>
         <MiddleSide></MiddleSide>
@@ -179,14 +173,14 @@ const Buy = () => {
               {optGroupNames.map((v, index) => {
                 return (
                   <div key={index}>
-                    <h3>{v}</h3>
+                    <h4>{v}</h4>
                     <select
                       name={`optSelect${index}`}
                       onChange={onChangeSelect}
                     >
                       {[...Array(eachOptLen[index])].map((w, idx) => (
                         <option value={optGroupValue[index][idx]} key={idx}>
-                          {optGroupValue[index][idx]}{" "}
+                          {optGroupValue[index][idx]}
                           {index !== 0 && `(+${optPrice[index][idx]})`}
                         </option>
                       ))}
@@ -196,6 +190,8 @@ const Buy = () => {
               })}
             </div>
           </Option>
+
+          <ItemInfo>{eachData?.information}</ItemInfo>
 
           <TotalPrice>총 가격: {total}원</TotalPrice>
 
@@ -225,16 +221,6 @@ const Buy = () => {
               <BuyBtn type="submit">구매</BuyBtn>
             </Link>
           </Btn>
-
-          {/*<Delivery>*/}
-          {/*  <DeliveryTitle>*/}
-          {/*    배송정보*/}
-          {/*    <FontAwesomeIcon icon={faTruck} />*/}
-          {/*  </DeliveryTitle>*/}
-          {/*  <DeliveryInfo>*/}
-          {/*    <DeliveryPrice>일반배송 3000원</DeliveryPrice>*/}
-          {/*  </DeliveryInfo>*/}
-          {/*</Delivery>*/}
         </RightSide>
       </Wrapper>
     </div>
