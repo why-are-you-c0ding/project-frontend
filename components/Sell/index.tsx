@@ -39,8 +39,6 @@ const Sell = () => {
   const onLoadFile = (e: any) => {
     const file = e.target.files;
     console.log(file);
-    console.log(file);
-    console.log(file);
     setFiles(file);
 
     encodeFileToBase64(e.target.files[0]);
@@ -89,39 +87,11 @@ const Sell = () => {
     }
     axios.post("https://waycabvav.shop/images", formData).then((response) => {
       setDragOver(false);
+      setImageUrl(response.data.imageUrl);
+      setCheckImg(true);
       alert("이미지 등록에 성공하셨습니다.");
     });
   }, []);
-
-  // const onDrop = useCallback((e: any) => {
-  //   e.preventDefault();
-  //   console.log(e);
-  //   const formData = new FormData();
-  //   formData.append("images", files);
-  //   if (e.dataTransfer.items) {
-  //     for (let i = 0; i < e.dataTransfer.items.length; i++) {
-  //       if (e.dataTransfer.items[i].kind === "file") {
-  //         const file = e.dataTransfer.items[i].getAsFile();
-  //         console.log("... file[" + i + "].name = " + file.name);
-  //         formData.append("image", file);
-  //       }
-  //     }
-  //   } else {
-  //     for (let i = 0; i < e.dataTransfer.files.length; i++) {
-  //       console.log(
-  //         "... file[" + i + "].name = " + e.dataTransfer.files[i].name
-  //       );
-  //       formData.append("image", e.dataTransfer.files[i]);
-  //     }
-  //   }
-  //   axios
-  //     .post("https://waycabvav.shop/images", formData, {
-  //       headers: { "Content-Type": "multipart/form-data" },
-  //     })
-  //     .then((response) => {
-  //       setDragOver(false);
-  //     });
-  // }, []);
 
   const onDragOver = useCallback((e) => {
     e.preventDefault();
