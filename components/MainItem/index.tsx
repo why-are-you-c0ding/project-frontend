@@ -3,17 +3,12 @@ import React from "react";
 import {
   Wrapper,
   TitleContainer,
-  More,
-  TitleBox,
-  Title,
-  SubTitle,
   ItemContainer,
   ItemBox,
-  Item,
-  Itemdetail,
   ItemName,
   ItemPrice,
-  MoreBtn,
+  ItemImg,
+  ItemInfo,
 } from "@components/MainItem/styles";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
@@ -42,35 +37,28 @@ const MainItem = () => {
   return (
     <Wrapper>
       <TitleContainer>
-        <TitleBox>
-          <Title>전체 상품</Title>
-          <SubTitle>발매 상품</SubTitle>
-        </TitleBox>
+        <h2>전체 상품</h2>
       </TitleContainer>
       <ItemContainer>
         {allData &&
           allData?.map((v, index) => {
             const itemId = item[index][0];
-            console.log(v.imageUrl);
 
             return (
               <Link to={`/shop/${itemId}`} key={index}>
                 <ItemBox>
-                  <Item>
+                  <ItemImg>
                     <img src={v.imageUrl} alt="으악" />
-                  </Item>
-                  <Itemdetail>
+                  </ItemImg>
+                  <ItemInfo>
                     <ItemName>{item[index][1]}</ItemName>
                     <ItemPrice>{item[index][3]}원</ItemPrice>
-                  </Itemdetail>
+                  </ItemInfo>
                 </ItemBox>
               </Link>
             );
           })}
       </ItemContainer>
-      <More>
-        <MoreBtn>더보기</MoreBtn>
-      </More>
     </Wrapper>
   );
 };
