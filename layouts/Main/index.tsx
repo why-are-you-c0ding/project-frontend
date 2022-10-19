@@ -3,6 +3,7 @@ import StatusBar from "@components/StatusBar";
 import MainItem from "@components/MainItem";
 import axios from "axios";
 import SliderImage from "@components/SliderImage";
+import { Scrollbars } from "react-custom-scrollbars";
 
 const Main = () => {
   const onLogout = useCallback(() => {
@@ -14,13 +15,20 @@ const Main = () => {
       .catch(() => {})
       .finally(() => {});
   }, []);
+  const scrollbarRef = useRef(null);
+  const onScroll = useCallback((values) => {
+    if (values.scrollTop === 0) {
+      console.log("가장 위인듯");
+    }
+  }, []);
 
   return (
     <div>
       <StatusBar />
-
-      <SliderImage />
-      <MainItem />
+      <Scrollbars autoHide ref={scrollbarRef} onScrollFrame={onScroll}>
+        <SliderImage />
+        <MainItem />
+      </Scrollbars>
     </div>
   );
 };
