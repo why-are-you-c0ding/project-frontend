@@ -16,6 +16,7 @@ const SellInfo = loadable(() => import("@components/SellInfo"));
 const SellRegister = loadable(() => import("@components/SellRegister"));
 const SellStock = loadable(() => import("@components/SellStock"));
 const SellStockLook = loadable(() => import("@components/SellStockLook"));
+const SellList = loadable(() => import("@components/SellList"));
 
 const SellPage = () => {
   const location = useLocation();
@@ -42,6 +43,7 @@ const SellPage = () => {
             <Route path="/sellpage/sellregister" component={SellRegister} />
             <Route path="/sellpage/sellstock" component={SellStock} />
             <Route path="/sellpage/sellstocklook" component={SellStockLook} />
+            <Route path="/sellpage/selllist" component={SellList} />
           </Switch>
         </RightSide>
       </Wrapper>

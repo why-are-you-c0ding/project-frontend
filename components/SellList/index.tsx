@@ -25,6 +25,10 @@ const SellList = () => {
   // if (Array.isArray(list) && list.length) {
   //   return <TopHeader>등록하신 상품이 없습니다.</TopHeader>;
   // }
+
+  if (list == null) {
+    return <TopHeader>등록하신 상품이 없습니다.</TopHeader>;
+  }
   return (
     <div>
       <ReponsiveBar title={"판매 리스트"} />
