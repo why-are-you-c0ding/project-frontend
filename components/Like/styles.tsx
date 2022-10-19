@@ -15,8 +15,10 @@ export const CartItem = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 
   & img {
-    min-width: 100px;
-    max-width: 8vw;
+    min-width: 8rem;
+    max-width: 8rem;
+    min-height: 8rem;
+    max-height: 8rem;
 
     margin-right: 1rem;
   }
@@ -40,7 +42,6 @@ export const ItemInfo = styled.div`
 `;
 
 export const InfoTop = styled.div`
-  //border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   margin-bottom: -1rem;
@@ -55,7 +56,7 @@ export const InfoTop = styled.div`
     }
 
     & span:first-of-type {
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 500;
 
       width: 70%;

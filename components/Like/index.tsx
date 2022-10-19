@@ -140,14 +140,11 @@ const Like = () => {
     <div>
       <ReponsiveBar title={"장바구니"} />
       <Wrapper>
-        <TopHeader>관심 상품</TopHeader>
+        <TopHeader>장바구니</TopHeader>
         {[...Array(item?.length)].map((v, index) => {
           return (
             <CartItem key={index}>
-              <img
-                src="http://image.dongascience.com/Photo/2022/06/6982fdc1054c503af88bdefeeb7c8fa8.jpg"
-                alt=""
-              />
+              <img src={item[index]?.imageUrl} alt={item[index]?.name} />
               <ItemInfo>
                 <InfoTop>
                   <div>
