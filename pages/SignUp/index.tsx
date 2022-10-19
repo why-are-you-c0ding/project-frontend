@@ -33,7 +33,7 @@ const SignUp = () => {
   const [nickname, onChangeNickname, setNickname] = useInput("");
   const [birthDay, onChangeBirthDay, setBirthDay] = useInput("");
   const [age, setAge] = useState(0);
-  const [authKey, onChangeAuthKey, setAuthkey] = useInput("");
+  const [authKey, onChangeAuthKey, setAuthKey] = useInput("");
   const [seller, setSeller] = useState(false);
 
   const [signUpError, setSignUpError] = useState(false);
@@ -143,7 +143,7 @@ const SignUp = () => {
           setNickname("");
           setBirthDay("");
           setAge(0);
-          setAuthkey("");
+          setAuthKey("");
         })
         .catch((error) => {
           alert("에러!!!!!!");
@@ -273,20 +273,6 @@ const SignUp = () => {
 
           <Div>
             <Label>
-              <span>이메일 인증키 *</span>
-              <Input
-                type="text"
-                id="authKey"
-                name="authKey"
-                value={authKey}
-                onChange={onChangeAuthKey}
-                placeholder="예)123456"
-              />
-            </Label>
-          </Div>
-
-          <Div>
-            <Label>
               <span>닉네임*</span>
               <Input
                 type="text"
@@ -354,8 +340,9 @@ const SignUp = () => {
                 email={email}
                 onChangeEmail={onChangeEmail}
                 onCloseCheckEmailModal={onCloseCheckEmailModal}
-                setEmail={setEmail}
                 setCheckEmail={setCheckEmail}
+                authKey={authKey}
+                onChangeAuthKey={onChangeAuthKey}
               />
             }
           </Menu>

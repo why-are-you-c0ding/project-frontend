@@ -24,19 +24,20 @@ interface Props {
   email: string;
   onChangeEmail: (e: ChangeEvent<HTMLInputElement>) => void;
   onCloseCheckEmailModal: () => void;
-  setEmail: Dispatch<SetStateAction<string>>;
   setCheckEmail: (frag: boolean) => void;
+  authKey: string;
+  onChangeAuthKey: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const SendProveEmail: FC<Props> = ({
   email,
   onChangeEmail,
   onCloseCheckEmailModal,
-  setEmail,
   setCheckEmail,
+  authKey,
+  onChangeAuthKey,
 }) => {
   const [failUseEmail, setFailUseEmail] = useState(false);
-  const [authKey, onChangeAuthKey, setAuthKey] = useInput("");
   const [proveEamil, setProveEamil] = useState(false);
 
   const onSubmitEmail = useCallback(
