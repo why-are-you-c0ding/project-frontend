@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useState } from "react";
+import React, { FormEvent, useCallback, useEffect, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import Option from "@components/Option";
 import {
@@ -20,7 +20,7 @@ const Sell = () => {
 
   const [files, setFiles] = useState("");
   const [imageSrc, setImageSrc] = useState("");
-  const [dragOver, setDragOver] = useState(false);
+  const [dragOver, setDragOver] = useState(true);
 
   const encodeFileToBase64 = (fileBlob: any) => {
     const reader: any = new FileReader();
@@ -30,6 +30,7 @@ const Sell = () => {
     return new Promise((resolve: any) => {
       reader.onload = () => {
         setImageSrc(reader.result);
+        setDragOver(false);
 
         resolve();
       };
@@ -38,38 +39,34 @@ const Sell = () => {
 
   const onLoadFile = (e: any) => {
     const file = e.target.files;
-    console.log(file);
     setFiles(file);
 
     encodeFileToBase64(e.target.files[0]);
   };
 
   const [imageUrl, setImageUrl] = useState("");
-  const [checkImg, setCheckImg] = useState(false);
 
-  const handleClick = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (files && imageSrc) {
+      const formdata = new FormData();
+      formdata.append("images", files[0]);
 
-    const formdata = new FormData();
-    formdata.append("images", files[0]);
+      axios
+        .post("https://waycabvav.shop/images", formdata, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((response) => {
+          setImageUrl(response.data.imageUrl);
+          console.log(response);
+        })
+        .catch((error) => {});
+    }
+  }, [files, imageSrc]);
 
-    axios
-      .post("https://waycabvav.shop/images", formdata, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((response) => {
-        setImageUrl(response.data.imageUrl);
-        setCheckImg(true);
-        alert("이미지 등록에 성공하셨습니다.");
-      })
-      .catch((error) => {
-        alert("이미지 등록에 실패하셨습니다.");
-      });
-  };
+  const formData = new FormData();
 
   const onDrop = useCallback((e: any) => {
     e.preventDefault();
-    const formData = new FormData();
     if (e.dataTransfer.item) {
       for (let i = 0; i < e.dataTransfer.items.length; i++) {
         // If dropped items aren't files, reject them
@@ -85,15 +82,13 @@ const Sell = () => {
         formData.append("images", e.dataTransfer.files[i]);
       }
     }
-    axios.post("https://waycabvav.shop/images", formData).then((response) => {
-      setDragOver(false);
-      setImageUrl(response.data.imageUrl);
-      setCheckImg(true);
-      alert("이미지 등록에 성공하셨습니다.");
-    });
+
+    setFiles(e.dataTransfer.files);
+
+    encodeFileToBase64(e.dataTransfer.files[0]);
   }, []);
 
-  const onDragOver = useCallback((e) => {
+  const onDragOver = useCallback((e: any) => {
     e.preventDefault();
     console.log(e);
     setDragOver(true);
@@ -106,41 +101,35 @@ const Sell = () => {
         <Image>
           <h2>등록 상품 이미지</h2>
 
-          <form onSubmit={handleClick}>
+          <div>
             <Preview onDrop={onDrop} onDragOver={onDragOver}>
-              {dragOver && <DragOver>업로드!</DragOver>}
+              {dragOver && (
+                <DragOver>
+                  <div>상품 사진</div>
+                </DragOver>
+              )}
               {imageSrc && <img src={imageSrc} alt="preview-img" />}
             </Preview>
 
-            {/*<div*/}
-            {/*  id="drop_zone"*/}
-            {/*  style={{*/}
-            {/*    border: "5px solid blue",*/}
-            {/*    width: "200px",*/}
-            {/*    height: "100px",*/}
-            {/*  }}*/}
-            {/*  onDrop={onDrag}*/}
-            {/*  onDragOver={onDragOver}*/}
-            {/*>*/}
-            {/*  <p>*/}
-            {/*    Drag one or more files to this <i>drop zone</i>.*/}
-            {/*  </p>*/}
-            {/*</div>*/}
+            {dragOver && <span>사진은 정사각형을 권장합니다.</span>}
 
             <div>
+              <label htmlFor="file">
+                <div>파일 업로드</div>
+              </label>
               <input
                 type="file"
-                name="image"
-                accept="image/*"
+                id="file"
+                accept="image/jpeg"
                 onChange={onLoadFile}
               />
-              <button type="submit">상품 사진 등록</button>
             </div>
-          </form>
+          </div>
         </Image>
         <OptionInfo>
           <div>
             <ItemInfo>
+              <h2>상품 정보</h2>
               <label>
                 <ItemTitle>상품 이름</ItemTitle>
                 <Input
@@ -165,7 +154,6 @@ const Sell = () => {
                 itemName={itemName}
                 imageUrl={imageUrl}
                 itemExplain={itemExplain}
-                checkImg={checkImg}
               />
             </ItemInfo>
           </div>

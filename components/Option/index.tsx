@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC, useCallback, useState } from "react";
 import { BuyBtn, Explain } from "@components/Sell/styles";
 import {
   Input,
-  MakeTable,
+  MakeTableBtn,
   OptNameInput,
   OptTable,
   Wrapper,
@@ -15,10 +15,9 @@ interface Props {
   itemName: string;
   imageUrl: string;
   itemExplain: string;
-  checkImg: boolean;
 }
 
-const Option: FC<Props> = ({ itemName, imageUrl, itemExplain, checkImg }) => {
+const Option: FC<Props> = ({ itemName, imageUrl, itemExplain }) => {
   const [toggleTable, setToggleTable] = useState(false);
 
   //optName
@@ -103,15 +102,6 @@ const Option: FC<Props> = ({ itemName, imageUrl, itemExplain, checkImg }) => {
 
   let price: string[] = Object.values(optPrice);
 
-  //select
-  const optionCount = [1, 2, 3, 4, 5];
-  const [count, setCount] = useState(1);
-
-  const handleCountSelect = useCallback((e: any) => {
-    const cnt = parseInt(e.target.value);
-    setCount(cnt);
-  }, []);
-
   const Data = makeOptionGroupRequests(
     optFlat,
     price,
@@ -123,10 +113,10 @@ const Option: FC<Props> = ({ itemName, imageUrl, itemExplain, checkImg }) => {
   );
 
   const onClickToggleTable = useCallback(() => {
-    if (!checkImg) {
-      alert("사진 등록을 해주세요.");
-      return;
-    }
+    // if (!checkImg) {
+    //   alert("사진 등록을 해주세요.");
+    //   return;
+    // }
 
     if (itemExplain === "") {
       alert("상세 설명을 입력해주세요.");
@@ -151,14 +141,16 @@ const Option: FC<Props> = ({ itemName, imageUrl, itemExplain, checkImg }) => {
     setToggleTable((prev) => !prev);
   }, [itemName, optName1, Data]);
 
+  console.log(Data);
+
   const onSubmitItems = useCallback(
     (e: any) => {
       e.preventDefault();
 
-      if (!checkImg) {
-        alert("사진 등록을 해주세요");
-        return;
-      }
+      // if (!checkImg) {
+      //   alert("사진 등록을 해주세요");
+      //   return;
+      // }
 
       if (itemExplain === "") {
         alert("상세 설명을 입력해주세요.");
@@ -208,21 +200,6 @@ const Option: FC<Props> = ({ itemName, imageUrl, itemExplain, checkImg }) => {
         옵션명 5자 이상, 옵션값 4자 이상
       </Explain>
       <div>
-        {/*<OptCount>*/}
-        {/*  <ItemTitle style={{ fontSize: "1.2rem" }}>옵션 개수</ItemTitle>*/}
-        {/*  <div>*/}
-        {/*    <select onChange={handleCountSelect} value={count}>*/}
-        {/*      {optionCount.map((item) => (*/}
-        {/*        <option value={item} key={item}>*/}
-        {/*          {item}*/}
-        {/*        </option>*/}
-        {/*      ))}*/}
-        {/*    </select>*/}
-        {/*  </div>*/}
-        {/*</OptCount>*/}
-
-        {/*<ItemTitle style={{ fontSize: "1.2rem" }}>옵션 입력</ItemTitle>*/}
-
         <OptNameInput>
           <div>
             <span>옵션명</span>
@@ -306,9 +283,9 @@ const Option: FC<Props> = ({ itemName, imageUrl, itemExplain, checkImg }) => {
           </div>
         </OptNameInput>
 
-        <MakeTable>
+        <MakeTableBtn>
           <button onClick={onClickToggleTable}>목록 만들기</button>
-        </MakeTable>
+        </MakeTableBtn>
 
         {toggleTable && (
           <OptTable>
