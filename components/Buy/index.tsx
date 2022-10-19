@@ -126,7 +126,8 @@ const Buy = () => {
     optPrice,
     eachData?.itemId,
     count,
-    eachData?.itemName
+    eachData?.itemName,
+    eachData?.imageUrl
   );
 
   const Data = DataPrice[0];
