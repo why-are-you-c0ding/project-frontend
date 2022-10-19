@@ -8,7 +8,8 @@ export const makeCartItems = (
   g: number[][],
   itemId: number,
   count: number,
-  names: string
+  names: string,
+  image: string
 ) => {
   let Chose: number[] = [];
   let strA: string[] = Object.keys(a).map((item) => a[item]);
@@ -45,6 +46,7 @@ export const makeCartItems = (
     itemId: itemId,
     name: names,
     count: count,
+    imageUrl: image,
     cartOptionGroups: cartOption,
   };
 
