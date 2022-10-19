@@ -72,14 +72,14 @@ export const InfoTop = styled.div`
   }
 
   & > div:last-of-type {
+    font-size: 0.8rem;
     display: flex;
     justify-content: flex-start;
 
     width: 98%;
     height: 2rem;
 
-    margin-left: -1rem;
-    margin-top: -0.8rem;
+    margin-top: 0.5rem;
 
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   }

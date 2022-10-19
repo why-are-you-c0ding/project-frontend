@@ -18,6 +18,7 @@ const Profile = loadable(() => import("@components/Profile"));
 const Address = loadable(() => import("@components/Address"));
 const Payment = loadable(() => import("@components/Payment"));
 const My = loadable(() => import("@components/My"));
+const SellList = loadable(() => import("@components/SellList"));
 
 const MyPage = () => {
   const location = useLocation();
@@ -44,6 +45,7 @@ const MyPage = () => {
             <Route path="/mypage/profile" component={Profile} />
             <Route path="/mypage/address" component={Address} />
             <Route path="/mypage/payment" component={Payment} />
+            <Route path="/mypage/selllist" component={SellList} />
           </Switch>
         </RightSide>
       </Wrapper>
