@@ -7,39 +7,74 @@ export const Wrapper = styled.section`
 `;
 
 export const Image = styled.section`
-  position: relative;
-
-  height: 50vh;
-
-  & div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+  & > div {
     margin-top: 2rem;
 
-    & button {
-      border: none;
-      border-radius: 10px;
-      padding: 1rem 2rem;
+    & > span {
+      display: flex;
+      justify-content: center;
 
-      background-color: cornflowerblue;
-      color: white;
-      cursor: pointer;
+      margin-top: 1rem;
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    & > div:last-of-type {
+      margin-top: 1rem;
+
+      display: flex;
+      justify-content: center;
+
+      padding: 0.5rem 0;
+
+      & > label {
+        padding: 0.4rem 1rem;
+        background-color: cornflowerblue;
+        color: white;
+        border: 1px solid rgb(77, 77, 77);
+        border-radius: 10px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background-color: #d63535;
+          border: none;
+        }
+      }
+
+      #file {
+        display: none;
+      }
     }
   }
 `;
 
 export const Preview = styled.div`
-  width: 80%;
-  height: 70%;
+  width: 18rem;
+  height: 18rem;
+
   margin: 0 auto;
-  margin-top: 2rem;
+  //margin-top: 2rem;
 
   & img {
     width: 100%;
     height: 100%;
   }
+`;
+
+export const DragOver = styled.div`
+  width: 100%;
+  height: 100%;
+
+  color: rgba(0, 0, 0, 0.4);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  border: 2px dashed rgba(0, 0, 0, 0.4);
 `;
 
 export const Explain = styled.div`
@@ -82,6 +117,10 @@ export const ItemInfo = styled.div`
   margin: 0 auto;
   margin-top: 3rem;
 
+  & > h2 {
+    margin-bottom: 0.5rem;
+  }
+
   & label {
     display: flex;
     flex-direction: column;
@@ -96,19 +135,4 @@ export const ItemInfo = styled.div`
 
 export const ItemTitle = styled.header`
   align-self: flex-start;
-`;
-
-export const DragOver = styled.div`
-  position: absolute;
-  top: 3rem;
-  left: 0;
-  width: 100%;
-  height: calc(100% - 6rem);
-  background: white;
-  opacity: 0.7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-  border: 1px solid #f2d5d5;
 `;

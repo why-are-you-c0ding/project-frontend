@@ -46,11 +46,11 @@ export const Input = styled.input`
   }
 `;
 
-export const MakeTable = styled.div`
+export const MakeTableBtn = styled.div`
   display: flex;
   justify-content: center;
 
-  margin-top: 0.5rem;
+  margin-top: 2rem;
 
   & button {
     width: 50%;
