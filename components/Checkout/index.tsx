@@ -13,8 +13,8 @@ import { useLocation } from "react-router-dom";
 import { makeOrder } from "@utils/makeOrder";
 import axios from "axios";
 import Menu from "@components/Menu";
-import AddressSearchModal from "@components/AddressSearchModal";
 import useInput from "@hooks/useInput";
+import AddressSearchModal from "@components/AddressSearchModal";
 
 const Checkout = () => {
   const [addrSearch, setAddrSearch] = useState(false);
