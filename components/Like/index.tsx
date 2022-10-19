@@ -151,7 +151,9 @@ const Like = () => {
                     <span>{item[index]?.name}</span>
                     <span>{getTotalPrice(item, index)}원</span>
                   </div>
-                  <div></div>
+                  <div>
+                    {item[index]?.cartOptionGroups[0]?.cartOptions[0]?.name}
+                  </div>
                 </InfoTop>
                 <InfoBottom>
                   <div>
