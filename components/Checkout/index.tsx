@@ -2,42 +2,62 @@ import React, { ChangeEvent, useCallback, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import {
   Button,
+  DetailInput,
   Header,
   Info,
+  SearchBtn,
   Title,
   Wrapper,
 } from "@components/Checkout/styles";
 import { useLocation } from "react-router-dom";
 import { makeOrder } from "@utils/makeOrder";
 import axios from "axios";
-import Post from "@components/Post";
 import Menu from "@components/Menu";
+import AddressSearchModal from "@components/AddressSearchModal";
+import useInput from "@hooks/useInput";
 
 const Checkout = () => {
+  const [addrSearch, setAddrSearch] = useState(false);
+  const [popup, setPopup] = useState(false);
+  const [address, setAddress] = useState("");
+  const [zoneCode, setZoneCode] = useState("");
+  const [detailAddr, onChangeDetailAddr, setDetailAddr] = useInput("");
+
+  const onClickAddrSearch = useCallback(() => {
+    setAddrSearch((prev) => !prev);
+    setPopup((prev) => !prev);
+  }, []);
+
   const location: any = useLocation();
 
   const order = makeOrder(
     location.state.eachData,
     location.state.optInfo,
-    location.state.count
+    location.state.count,
+    address,
+    zoneCode,
+    detailAddr
   );
-
-  console.log(JSON.stringify(order));
 
   const onClickBuyBtn = useCallback(
     (e: any) => {
       e.preventDefault();
 
+      if (address === "") {
+        alert("주소를 입력해주세요");
+        return;
+      }
+      if (detailAddr === "") {
+        alert("상세 주소를 입력해주세요");
+        return;
+      }
+
       axios
-        .post(
-          "https://waycabvav.shop/orders",
-          { order },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-            },
-          }
-        )
+        .post("https://waycabvav.shop/orders", order, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        })
         .then((res) => {
           alert("성공");
         })
@@ -48,40 +68,17 @@ const Checkout = () => {
     [order]
   );
 
-  const [popup, setPopup] = useState(false);
-  const [address, setAddress] = useState("");
+  let option: string = "";
 
-  const zip = (
-    <div
-      onClick={() => {
-        setPopup(!popup);
-      }}
-    >
-      주소 검색
-    </div>
-  );
+  for (let i = 0; i < location.state.optInfo.cartOptionGroups.length; i++) {
+    if (i !== 0) option += ", ";
+    option += location.state.optInfo.cartOptionGroups[i].cartOptions[0].name;
+  }
 
   return (
     <div>
       <StatusBar />
-      <Menu
-        show={popup}
-        onCloseModal={() => {
-          setPopup(!popup);
-        }}
-      >
-        {
-          <div
-            onClick={() => {
-              setPopup(!popup);
-            }}
-          >
-            주소 검색
-          </div>
-        }
-      </Menu>
 
-      {popup && <Post address={address} setAddress={setAddress}></Post>}
       <Wrapper>
         <Header>
           <h2>주문/결제</h2>
@@ -97,7 +94,24 @@ const Checkout = () => {
           </div>
           <div>
             <span>배송주소</span>
-            <span>우주 우리은하 태양계 지구 대한민국</span>
+            <span>
+              {address}{" "}
+              <SearchBtn onClick={onClickAddrSearch}>주소 검색</SearchBtn>
+            </span>
+          </div>
+          <div>
+            <span>우편 번호</span>
+            <span>{zoneCode}</span>
+          </div>
+          <div>
+            <span>상세 주소</span>
+            <span>
+              <DetailInput
+                type="text"
+                value={detailAddr}
+                onChange={onChangeDetailAddr}
+              />
+            </span>
           </div>
         </Info>
 
@@ -108,6 +122,10 @@ const Checkout = () => {
           <div>
             <span>상품명</span>
             <span>{location.state.eachData.itemName}</span>
+          </div>
+          <div>
+            <span>선택 옵셥</span>
+            <span>{option}</span>
           </div>
           <div>
             <span>수량</span>
@@ -131,6 +149,18 @@ const Checkout = () => {
           <button onClick={onClickBuyBtn}>결제하기</button>
         </Button>
       </Wrapper>
+
+      <Menu show={addrSearch} onCloseModal={onClickAddrSearch}>
+        {
+          <AddressSearchModal
+            popup={popup}
+            address={address}
+            setZoneCode={setZoneCode}
+            setAddress={setAddress}
+            onClickAddrSearch={onClickAddrSearch}
+          />
+        }
+      </Menu>
     </div>
   );
 };

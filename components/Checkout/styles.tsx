@@ -15,6 +15,26 @@ export const Title = styled.header`
   margin-bottom: 0.5rem;
 `;
 
+export const SearchBtn = styled.button`
+  padding: 0.2rem 0.5rem;
+  border: transparent;
+  border-radius: 10px;
+
+  font-size: 0.8rem;
+  color: white;
+  background-color: cornflowerblue;
+
+  &:hover {
+    background-color: blueviolet;
+    border: none;
+  }
+`;
+
+export const DetailInput = styled.input`
+  font-size: 1.1rem;
+  border: none;
+`;
+
 export const Info = styled.div`
   margin-bottom: 1rem;
 
@@ -49,6 +69,8 @@ export const Info = styled.div`
 export const Button = styled.div`
   display: flex;
   justify-content: center;
+
+  margin-bottom: 1rem;
 
   & button {
     padding: 1.3rem 6rem;

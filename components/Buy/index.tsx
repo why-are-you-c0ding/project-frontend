@@ -133,8 +133,6 @@ const Buy = () => {
   const Data = DataPrice[0];
   const total = DataPrice[1];
 
-  console.log(eachData);
-
   const onClickCart = useCallback(
     (e: any) => {
       e.preventDefault();

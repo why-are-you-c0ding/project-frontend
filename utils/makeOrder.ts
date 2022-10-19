@@ -1,26 +1,31 @@
-export const makeOrder = (eachData: any, optInfo: any, count: number) => {
+export const makeOrder = (
+  eachData: any,
+  optInfo: any,
+  count: number,
+  address: string,
+  zoneCode: string,
+  detailAddr: string
+) => {
   let orderOptionGroups = [];
 
   for (let i = 0; i < optInfo.cartOptionGroups.length; i++) {
-    console.log(optInfo.cartOptionGroups[i].cartOptionGroups);
     const temp = {
       name: optInfo.cartOptionGroups[i].name,
-      orderOptions: optInfo.cartOptionGroups[i].cartOptions,
+      orderOption: optInfo.cartOptionGroups[i].cartOptions[0],
     };
 
     orderOptionGroups.push(temp);
   }
 
-  const orderLineItems = [
+  const request: Array<object> = [
     {
       itemId: eachData.itemId,
       name: eachData.itemName,
       count: count,
       orderOptionGroups,
+      address: { major: address, detail: detailAddr, zipcode: zoneCode },
     },
   ];
-
-  const request = { shopId: eachData.shopId, orderLineItems };
 
   return request;
 };
