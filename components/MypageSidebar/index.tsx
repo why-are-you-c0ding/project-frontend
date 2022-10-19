@@ -25,6 +25,11 @@ const MypageSidebar: FC<Props> = ({ sideBar }) => {
             장바구니
           </NavLink>
         </span>
+        <span>
+          <NavLink activeClassName="selected" to={`/mypage/selllist`}>
+            판매 리스트
+          </NavLink>
+        </span>
       </Info>
 
       <Info>
