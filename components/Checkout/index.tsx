@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback } from "react";
+import React, { ChangeEvent, useCallback, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import {
   Button,
@@ -10,6 +10,8 @@ import {
 import { useLocation } from "react-router-dom";
 import { makeOrder } from "@utils/makeOrder";
 import axios from "axios";
+import Post from "@components/Post";
+import Menu from "@components/Menu";
 
 const Checkout = () => {
   const location: any = useLocation();
@@ -46,9 +48,40 @@ const Checkout = () => {
     [order]
   );
 
+  const [popup, setPopup] = useState(false);
+  const [address, setAddress] = useState("");
+
+  const zip = (
+    <div
+      onClick={() => {
+        setPopup(!popup);
+      }}
+    >
+      주소 검색
+    </div>
+  );
+
   return (
     <div>
       <StatusBar />
+      <Menu
+        show={popup}
+        onCloseModal={() => {
+          setPopup(!popup);
+        }}
+      >
+        {
+          <div
+            onClick={() => {
+              setPopup(!popup);
+            }}
+          >
+            주소 검색
+          </div>
+        }
+      </Menu>
+
+      {popup && <Post address={address} setAddress={setAddress}></Post>}
       <Wrapper>
         <Header>
           <h2>주문/결제</h2>

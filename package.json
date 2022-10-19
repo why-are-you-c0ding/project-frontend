@@ -36,6 +36,7 @@
     "react": "^17.0.1",
     "react-cookie": "^4.1.1",
     "react-custom-scrollbars": "^4.2.1",
+    "react-daum-postcode": "^3.1.1",
     "react-dom": "^17.0.1",
     "react-mentions": "^4.4.7",
     "react-router": "^5.2.0",
