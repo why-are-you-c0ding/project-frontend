@@ -16,8 +16,6 @@ const SliderImage = () => {
     slidesToScroll: 1,
   };
 
-  const a = useCallback(() => {}, []);
-
   return (
     <Wrapper>
       <Slider {...settings} className={"slide"}>
