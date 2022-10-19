@@ -33,6 +33,7 @@ const SignUp = () => {
   const [nickname, onChangeNickname, setNickname] = useInput("");
   const [birthDay, onChangeBirthDay, setBirthDay] = useInput("");
   const [age, setAge] = useState(0);
+  const [authKey, onChangeAuthKey, setAuthkey] = useInput("");
   const [seller, setSeller] = useState(false);
 
   const [signUpError, setSignUpError] = useState(false);
@@ -127,6 +128,7 @@ const SignUp = () => {
             password: password,
             checkPassword: passwordCheck,
             age: age,
+            authKey: authKey,
           },
           { withCredentials: true, headers }
         )
@@ -141,6 +143,7 @@ const SignUp = () => {
           setNickname("");
           setBirthDay("");
           setAge(0);
+          setAuthkey("");
         })
         .catch((error) => {
           alert("에러!!!!!!");
@@ -160,6 +163,7 @@ const SignUp = () => {
       mismatchError,
       mismatchCondition,
       seller,
+      authKey,
     ]
   );
 
@@ -265,6 +269,20 @@ const SignUp = () => {
             <Button type="button" onClick={onCloseCheckEmailModal}>
               인증 번호
             </Button>
+          </Div>
+
+          <Div>
+            <Label>
+              <span>이메일 인증키 *</span>
+              <Input
+                type="text"
+                id="authKey"
+                name="authKey"
+                value={authKey}
+                onChange={onChangeAuthKey}
+                placeholder="예)123456"
+              />
+            </Label>
           </Div>
 
           <Div>
