@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getCookie } from "@utils/cookie";
 
 const fetcher = (url: string) =>
   axios
