@@ -1,4 +1,10 @@
-import React, { FormEvent, useCallback, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import useInput from "@hooks/useInput";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -65,7 +71,7 @@ const SignUp = () => {
   }, [password, setPassword]);
 
   const onChangePassword = useCallback(
-    (e) => {
+    (e: ChangeEvent<HTMLInputElement>) => {
       setPassword(e.target.value);
       setMismatchError(e.target.value === passwordCheck);
     },
@@ -73,7 +79,7 @@ const SignUp = () => {
   );
 
   const onChangePasswordCheck = useCallback(
-    (e) => {
+    (e: ChangeEvent<HTMLInputElement>) => {
       setPasswordCheck(e.target.value);
       setMismatchError(e.target.value === password);
     },
@@ -94,7 +100,6 @@ const SignUp = () => {
 
   const onChangeSeller = useCallback(() => {
     setSeller((prev) => !prev);
-    console.log(seller);
   }, [seller]);
 
   const headers = {
@@ -134,7 +139,6 @@ const SignUp = () => {
         )
         .then((response) => {
           alert("회원가입에 성공하셨습니다. 로그인을 해주세요");
-          console.log(response);
           setSignUpSuccess(true);
           setId("");
           setPassword("");
@@ -146,7 +150,7 @@ const SignUp = () => {
           setAuthKey("");
         })
         .catch((error) => {
-          alert("에러!!!!!!");
+          alert("아이디, 패스워드를 확인해주세요.");
           console.log(error.response);
         });
     },
@@ -191,6 +195,27 @@ const SignUp = () => {
           </Div>
           <Label>
             <span>비밀 번호*</span>
+            <div>
+              <span
+                style={{
+                  fontSize: "0.7rem",
+                  color: "rgba(0,0,0,0.4)",
+                  marginTop: "0.5rem",
+                }}
+              >
+                비밀번호는 8자 이상 및 영문, 숫자, 특수 문자 1자 이상 포함
+              </span>
+              <Input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={onChangePassword}
+                placeholder="예) 영문, 숫자, 특수문자 조합 8-15자"
+                minLength={8}
+                maxLength={15}
+              />
+            </div>
             {!mismatchCondition && password.length > 0 && (
               <Error>
                 비밀번호 조건에 일치하지 않습니다!
@@ -203,21 +228,21 @@ const SignUp = () => {
                 <CorrectCircle></CorrectCircle>
               </Correct>
             )}
+          </Label>
+          <Label>
+            <span>비밀 번호 체크* </span>
             <div>
               <Input
                 type="password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={onChangePassword}
+                id="password-check"
+                name="password-check"
+                value={passwordCheck}
+                onChange={onChangePasswordCheck}
                 placeholder="예) 영문, 숫자, 특수문자 조합 8-15자"
                 minLength={8}
                 maxLength={15}
               />
             </div>
-          </Label>
-          <Label>
-            <span>비밀 번호 체크* </span>
             {!mismatchError && passwordCheck.length > 0 && (
               <Error>
                 {" "}
@@ -232,19 +257,6 @@ const SignUp = () => {
                 <CorrectCircle></CorrectCircle>
               </Correct>
             )}
-
-            <div>
-              <Input
-                type="password"
-                id="password-check"
-                name="password-check"
-                value={passwordCheck}
-                onChange={onChangePasswordCheck}
-                placeholder="예) 영문, 숫자, 특수문자 조합 8-15자"
-                minLength={8}
-                maxLength={15}
-              />
-            </div>
           </Label>
           <Label>
             <span>생년 월일*</span>
