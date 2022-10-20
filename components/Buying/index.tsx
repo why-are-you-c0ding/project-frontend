@@ -15,7 +15,8 @@ import {
 } from "@components/Like/styles";
 import useSWRInfinite from "swr/infinite";
 import fetcher from "@utils/fetcher";
-import { Scrollbars } from "react-custom-scrollbars";
+import { Wrapper } from "@components/Buying/styles";
+import { useInView } from "react-intersection-observer";
 
 const Buying = () => {
   const {
@@ -42,73 +43,97 @@ const Buying = () => {
 
   orderList = orderList.flat();
 
-  const scrollbarRef = useRef<Scrollbars>(null);
+  const [ref, inView] = useInView();
 
-  const onScroll = useCallback((values: any) => {
-    const current = (scrollbarRef as MutableRefObject<Scrollbars>)?.current;
-
-    // if (current) console.log(current.getValues().top);
-    if (current) {
-      if (current.getValues().top === 1) {
-        setSize((prev) => prev + 1);
-      }
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (inView) {
+      setSize((prevState) => prevState + 1);
     }
-  }, []);
+  }, [inView]);
 
   return (
-    <div>
-      <Scrollbars autoHide ref={scrollbarRef} onScrollFrame={onScroll}>
-        <ReponsiveBar title={"주문 내역"} />
+    <Wrapper id="sc">
+      <ReponsiveBar title={"주문 내역"} />
 
-        <TopHeader>주문 내역</TopHeader>
+      <TopHeader>주문 내역</TopHeader>
 
-        <div style={{ marginTop: "6rem", padding: "0 2rem" }}>
-          {orderData &&
-            orderList &&
-            orderList?.map((v: any, index: number) => {
-              return (
-                <div key={index}>
-                  <CartItem>
-                    <img src={v.itemImageUrl} alt="" />
-                    <ItemInfo>
-                      <InfoTop>
-                        <div>
-                          <span>{v.itemName}</span>
-                          {/*<span>{v.}</span>*/}
-                        </div>
-                        <div></div>
-                      </InfoTop>
-                      <InfoBottom>
-                        <div>
-                          <span>2~3일 내 도착</span>
-                        </div>
-                        <div>
-                          <div>
-                            <span>2개</span>
-                          </div>
+      <div style={{ marginTop: "6rem", padding: "0 2rem" }}>
+        {orderData &&
+          orderList &&
+          orderList?.map((v: any, index: number) => {
+            return index === orderList.length / 2 ? (
+              <CartItem key={index} ref={ref}>
+                <img src={v.itemImageUrl} alt="" />
+                <ItemInfo>
+                  <InfoTop>
+                    <div>
+                      <span>{v.itemName}</span>
+                      {/*<span>{v.}</span>*/}
+                    </div>
+                    <div></div>
+                  </InfoTop>
+                  <InfoBottom>
+                    <div>
+                      <span>2~3일 내 도착</span>
+                    </div>
+                    <div>
+                      <div>
+                        <span>2개</span>
+                      </div>
 
-                          <div>
-                            <span>총 금액: 20000원</span>
-                            <span>
-                              <button onClick={(event) => {}}>
-                                <span
-                                  style={{ fontSize: "1rem", color: "red" }}
-                                >
-                                  주문 취소
-                                </span>
-                              </button>
+                      <div>
+                        <span>총 금액: 20000원</span>
+                        <span>
+                          <button onClick={(event) => {}}>
+                            <span style={{ fontSize: "1rem", color: "red" }}>
+                              주문 취소
                             </span>
-                          </div>
-                        </div>
-                      </InfoBottom>
-                    </ItemInfo>
-                  </CartItem>
-                </div>
-              );
-            })}
-        </div>
-      </Scrollbars>
-    </div>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </InfoBottom>
+                </ItemInfo>
+              </CartItem>
+            ) : (
+              <CartItem key={index}>
+                <img src={v.itemImageUrl} alt="" />
+                <ItemInfo>
+                  <InfoTop>
+                    <div>
+                      <span>{v.itemName}</span>
+                      {/*<span>{v.}</span>*/}
+                    </div>
+                    <div></div>
+                  </InfoTop>
+                  <InfoBottom>
+                    <div>
+                      <span>2~3일 내 도착</span>
+                    </div>
+                    <div>
+                      <div>
+                        <span>2개</span>
+                      </div>
+
+                      <div>
+                        <span>총 금액: 20000원</span>
+                        <span>
+                          <button onClick={(event) => {}}>
+                            <span style={{ fontSize: "1rem", color: "red" }}>
+                              주문 취소
+                            </span>
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </InfoBottom>
+                </ItemInfo>
+              </CartItem>
+            );
+          })}
+      </div>
+    </Wrapper>
   );
 };
 
