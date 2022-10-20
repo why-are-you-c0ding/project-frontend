@@ -62,7 +62,7 @@ const Buying = () => {
         {orderData &&
           orderList &&
           orderList?.map((v: any, index: number) => {
-            return index === orderList.length / 2 ? (
+            return index === orderList.length - 3 ? (
               <CartItem key={index} ref={ref}>
                 <img src={v.itemImageUrl} alt="" />
                 <ItemInfo>
