@@ -14,15 +14,9 @@ import StatusBar from "@components/StatusBar";
 import useInput from "@hooks/useInput";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import useSWR from "swr";
-import fetcher from "@utils/fetcher";
 import { Redirect, Route } from "react-router";
-import { setCookie } from "@utils/cookie";
 
 const LogIn = () => {
-  // const { data, error, mutate} = useSWR("https://waycabvav.shop/docs/login.html", fetcher);
-  //요기 주소도 수빈이(로그인 정보 받아올곳)
-
   const [id, onChangeId, setId] = useInput("");
   const [password, onChangePassword, setPassword] = useInput("");
   const [logInError, setLogInError] = useState(false);
