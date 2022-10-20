@@ -11,8 +11,8 @@ import {
   ItemInfo,
 } from "@components/MainItem/styles";
 import useSWR from "swr";
-import fetcher from "@utils/fetcher";
 import { Link } from "react-router-dom";
+import fetcher_noneHeaders from "@utils/fetcher_noneHeaders";
 
 const MainItem = () => {
   const { data: allData, error } = useSWR<
@@ -24,7 +24,9 @@ const MainItem = () => {
         imageUrl: string;
       }>
     | false
-  >("https://waycabvav.shop/items", fetcher);
+  >("https://waycabvav.shop/items", fetcher_noneHeaders);
+
+  console.log(allData);
 
   let item: any = [];
 
@@ -34,13 +36,19 @@ const MainItem = () => {
     item[i] = Object.values(item[i]);
   }
 
+  if (!allData) {
+    return <div>로딩중입니다...</div>;
+  }
+
   return (
     <Wrapper>
       <TitleContainer>
         <h2>전체 상품</h2>
       </TitleContainer>
       <ItemContainer>
-        {allData &&
+        {
+          // allData
+          // &&
           allData?.map((v, index) => {
             const itemId = item[index][0];
 
@@ -57,7 +65,8 @@ const MainItem = () => {
                 </ItemBox>
               </Link>
             );
-          })}
+          })
+        }
       </ItemContainer>
     </Wrapper>
   );
