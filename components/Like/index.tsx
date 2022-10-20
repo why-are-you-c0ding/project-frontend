@@ -167,22 +167,31 @@ const Like = () => {
                     <span>{getTotalPrice(item, index)}원</span>
                   </div>
                   <div>
-                    {[...Array(item[index]?.cartOptionGroups?.length)].map(
-                      (w, idx) => {
-                        {
-                          item[index]?.cartOptionGroups[idx]?.cartOptions[0]
-                            ?.name;
-                        }
-                        {
-                          item[index]?.cartOptionGroups[idx]?.cartOptions[0]
-                            ?.name;
-                        }
-                        {
-                          item[index]?.cartOptionGroups[idx]?.cartOptions[0]
-                            ?.name;
-                        }
-                      }
-                    )}
+                    {/*{[...Array(item[index]?.cartOptionGroups?.length)].map(*/}
+                    {/*  (w, idx) => {*/}
+                    {/*    {*/}
+                    {/*      item[index]?.cartOptionGroups[idx]?.cartOptions[0]*/}
+                    {/*        ?.name;*/}
+                    {/*    }*/}
+                    {/*    {*/}
+                    {/*      item[index]?.cartOptionGroups[idx]?.cartOptions[0]*/}
+                    {/*        ?.name;*/}
+                    {/*    }*/}
+                    {/*    {*/}
+                    {/*      item[index]?.cartOptionGroups[idx]?.cartOptions[0]*/}
+                    {/*        ?.name;*/}
+                    {/*    }*/}
+                    {/*  }*/}
+                    {/*)}*/}
+                    {item[index]?.cartOptionGroups[0]?.cartOptions[0]?.name}
+                    &nbsp;&nbsp;
+                    {item[index]?.cartOptionGroups[1]?.cartOptions[0]?.name}
+                    &nbsp;&nbsp;
+                    {item[index]?.cartOptionGroups[2]?.cartOptions[0]?.name}
+                    &nbsp;&nbsp;
+                    {item[index]?.cartOptionGroups[3]?.cartOptions[0]?.name}
+                    &nbsp;&nbsp;
+                    {item[index]?.cartOptionGroups[4]?.cartOptions[0]?.name}
                   </div>
                 </InfoTop>
                 <InfoBottom>
