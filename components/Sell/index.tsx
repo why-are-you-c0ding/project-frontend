@@ -90,7 +90,6 @@ const Sell = () => {
 
   const onDragOver = useCallback((e: any) => {
     e.preventDefault();
-    console.log(e);
     setDragOver(true);
   }, []);
 
