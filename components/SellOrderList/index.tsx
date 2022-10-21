@@ -22,6 +22,9 @@ const SellOrderList = () => {
   const list = OrderData?.orders;
   //내가 등록한 아이템 리스트
   console.log(list);
+  console.log(list);
+  console.log(list);
+  console.log(list);
   return (
     <div>
       <ReponsiveBar title={"받은 주문 리스트"} />
@@ -48,6 +51,7 @@ const SellOrderList = () => {
                     <InfoBottom>
                       <div>
                         <span>주문 진행 상태 : {list[index]?.orderStatus}</span>
+                        <div>주문 가격:{list[index]?.price}원</div>
                       </div>
                     </InfoBottom>
                   </ItemInfo>
