@@ -83,14 +83,14 @@ const Buying = () => {
                       </div>
 
                       <div>
-                        <span>총 금액: 20000원</span>
-                        <span>
-                          <button onClick={(event) => {}}>
-                            <span style={{ fontSize: "1rem", color: "red" }}>
-                              주문 취소
-                            </span>
-                          </button>
-                        </span>
+                        <span style={{}}>총 금액: 20000원</span>
+                        {/*<span>*/}
+                        {/*  <button onClick={(event) => {}}>*/}
+                        {/*    <span style={{ fontSize: "1rem", color: "red" }}>*/}
+                        {/*      주문 취소*/}
+                        {/*    </span>*/}
+                        {/*  </button>*/}
+                        {/*</span>*/}
                       </div>
                     </div>
                   </InfoBottom>
@@ -98,33 +98,37 @@ const Buying = () => {
               </CartItem>
             ) : (
               <CartItem key={index}>
-                <img src={v.itemImageUrl} alt="" />
+                <img src={v.itemImageUrl} alt={v.itemName} />
                 <ItemInfo>
                   <InfoTop>
-                    <div>
+                    <div style={{ paddingBottom: "2.5rem" }}>
                       <span>{v.itemName}</span>
-                      <span>{v.itemName}</span>
+                      <span>{v.itemName}원</span>
                     </div>
-                    <div></div>
+                    {/*<div style={{ color: "rgba(0,0,0,0.4)" }}>*/}
+                    {/*  /!*{item[index]?.cartOptionGroups[0]?.cartOptions[0]?.name}*!/*/}
+                    {/*  /!*&nbsp;&nbsp;*!/*/}
+                    {/*  /!*{item[index]?.cartOptionGroups[1]?.cartOptions[0]?.name}*!/*/}
+                    {/*  /!*&nbsp;&nbsp;*!/*/}
+                    {/*  /!*{item[index]?.cartOptionGroups[2]?.cartOptions[0]?.name}*!/*/}
+                    {/*  /!*&nbsp;&nbsp;*!/*/}
+                    {/*  /!*{item[index]?.cartOptionGroups[3]?.cartOptions[0]?.name}*!/*/}
+                    {/*  /!*&nbsp;&nbsp;*!/*/}
+                    {/*  /!*{item[index]?.cartOptionGroups[4]?.cartOptions[0]?.name}*!/*/}
+                    {/*</div>*/}
                   </InfoTop>
-                  <InfoBottom>
+                  <InfoBottom style={{ marginTop: "0" }}>
                     <div>
                       <span>2~3일 내 도착</span>
                     </div>
                     <div>
                       <div>
-                        <span>{v.count}개</span>
+                        <span>{v.itemName}개</span>
                       </div>
 
                       <div>
-                        <span>총 금액: {v.price}원</span>
-                        <span>
-                          <button onClick={(event) => {}}>
-                            <span style={{ fontSize: "1rem", color: "red" }}>
-                              주문 취소
-                            </span>
-                          </button>
-                        </span>
+                        <span>{v.itemName}원</span>
+                        <span></span>
                       </div>
                     </div>
                   </InfoBottom>
