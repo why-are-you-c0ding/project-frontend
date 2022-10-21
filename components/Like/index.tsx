@@ -139,18 +139,6 @@ const Like = () => {
     []
   );
 
-  // if (cartData) {
-  //   return (
-  //     <div>
-  //       <NullData />
-  //     </div>
-  //   );
-  // }
-
-  console.log("여기다: ", item[0]?.cartOptionGroups.length);
-  console.log("여기다: ", item[1]?.cartOptionGroups.length);
-  console.log("여기다: ", item[0]?.cartOptionGroups[0].name);
-
   return (
     <div>
       <ReponsiveBar title={"장바구니"} />
