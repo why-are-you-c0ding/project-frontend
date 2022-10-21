@@ -4,7 +4,8 @@ export const makeOrder = (
   count: number,
   address: string,
   zoneCode: string,
-  detailAddr: string
+  detailAddr: string,
+  totalPrice: number
 ) => {
   let orderOptionGroups = [];
 
@@ -22,6 +23,7 @@ export const makeOrder = (
       itemId: eachData.itemId,
       name: eachData.itemName,
       count: count,
+      price: totalPrice,
       orderOptionGroups,
       address: { major: address, detail: detailAddr, zipcode: zoneCode },
     },
