@@ -32,7 +32,7 @@ export const SearchBtn = styled.button`
 
 export const DetailInput = styled.input`
   font-size: 1rem;
-  border: 1px solid gray;
+  border: none;
 `;
 
 export const Info = styled.div`
