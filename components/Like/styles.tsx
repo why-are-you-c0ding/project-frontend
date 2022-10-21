@@ -101,7 +101,6 @@ export const InfoBottom = styled.div`
     color: #199530;
     margin-right: 1rem;
     width: 30%;
-    border: 1px solid;
 
     @media (max-width: 975px) {
       display: none;
