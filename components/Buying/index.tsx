@@ -69,7 +69,7 @@ const Buying = () => {
                   <InfoTop>
                     <div>
                       <span>{v.itemName}</span>
-                      {/*<span>{v.}</span>*/}
+                      <span>{v.shopName}</span>
                     </div>
                     <div></div>
                   </InfoTop>
@@ -103,7 +103,7 @@ const Buying = () => {
                   <InfoTop>
                     <div>
                       <span>{v.itemName}</span>
-                      {/*<span>{v.}</span>*/}
+                      <span>{v.itemName}</span>
                     </div>
                     <div></div>
                   </InfoTop>
@@ -113,11 +113,11 @@ const Buying = () => {
                     </div>
                     <div>
                       <div>
-                        <span>2개</span>
+                        <span>{v.count}개</span>
                       </div>
 
                       <div>
-                        <span>총 금액: 20000원</span>
+                        <span>총 금액: {v.price}원</span>
                         <span>
                           <button onClick={(event) => {}}>
                             <span style={{ fontSize: "1rem", color: "red" }}>

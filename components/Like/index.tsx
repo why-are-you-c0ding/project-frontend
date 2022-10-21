@@ -12,6 +12,7 @@ import ReponsiveBar from "@components/ReponsiveBar";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import axios from "axios";
+import NullData from "@components/NullData";
 
 const Like = () => {
   const {
@@ -34,19 +35,6 @@ const Like = () => {
 
     return ary;
   };
-
-  // console.log(item);
-  // console.log(item[0]?.cartOptionGroups[1].cartOptions[0].name);
-  //
-  // //아이템 개수
-  // console.log(item.length);
-  // //3번 아이템 선택한 옵션 몇개있나
-  // console.log(item[2]?.cartOptionGroups.length);
-  //
-  // //3번째 아이템의 첫번쨰로 선택한 옵션이름
-  // console.log(item[2]?.cartOptionGroups[0].cartOptions[0].name);
-  // //3번째 아이템의 두번쨰로 선택한 옵션이름
-  // console.log(item[2]?.cartOptionGroups[1].cartOptions[0].name);
 
   let eachOptLen: number[] = [];
 
@@ -151,11 +139,22 @@ const Like = () => {
     []
   );
 
+  // if (cartData) {
+  //   return (
+  //     <div>
+  //       <NullData />
+  //     </div>
+  //   );
+  // }
+
   return (
     <div>
       <ReponsiveBar title={"장바구니"} />
       <Wrapper>
         <TopHeader>장바구니</TopHeader>
+
+        {item.length === 0 && <NullData />}
+
         {[...Array(item?.length)].map((v, index) => {
           return (
             <CartItem key={index}>
