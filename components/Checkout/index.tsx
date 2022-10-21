@@ -36,7 +36,8 @@ const Checkout = () => {
     location.state.count,
     address,
     zoneCode,
-    detailAddr
+    detailAddr,
+    location.state.total
   );
 
   const onClickBuyBtn = useCallback(
@@ -110,7 +111,7 @@ const Checkout = () => {
                 type="text"
                 value={detailAddr}
                 onChange={onChangeDetailAddr}
-                placeholder="상세 주소를 입력해주세요"
+                placeholder="상세 주소를 입력"
               />
             </span>
           </div>
