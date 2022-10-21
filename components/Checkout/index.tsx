@@ -110,6 +110,7 @@ const Checkout = () => {
                 type="text"
                 value={detailAddr}
                 onChange={onChangeDetailAddr}
+                placeholder="상세 주소를 입력해주세요"
               />
             </span>
           </div>
