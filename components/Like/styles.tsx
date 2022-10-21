@@ -10,9 +10,15 @@ export const Wrapper = styled.section`
 export const CartItem = styled.div`
   display: flex;
 
-  padding-bottom: 1rem;
+  position: relative;
+
+  padding: 1rem 0rem 1rem 1rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+
+  &:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+  }
 
   & img {
     min-width: 8rem;
@@ -76,7 +82,7 @@ export const InfoTop = styled.div`
     display: flex;
     justify-content: flex-start;
 
-    width: 98%;
+    width: 100%;
     height: 2rem;
 
     margin-top: 0.5rem;
@@ -89,12 +95,13 @@ export const InfoBottom = styled.div`
   display: flex;
   align-items: center;
 
-  margin-top: 0.6rem;
+  margin-top: 1rem;
 
   & > div:first-of-type {
     color: #199530;
     margin-right: 1rem;
     width: 30%;
+    border: 1px solid;
 
     @media (max-width: 975px) {
       display: none;
@@ -108,6 +115,7 @@ export const InfoBottom = styled.div`
     position: relative;
 
     width: 60%;
+
     @media (max-width: 769px) {
       width: 100%;
     }
@@ -117,10 +125,10 @@ export const InfoBottom = styled.div`
     }
 
     & > div:first-of-type {
-      width: 50%;
+      width: 60%;
 
       @media (max-width: 975px) {
-        width: 38%;
+        width: 60%;
         font-size: 0.9rem;
       }
 
@@ -151,10 +159,13 @@ export const InfoBottom = styled.div`
 
     & > div:last-of-type {
       text-align: right;
-      width: 80%;
+      width: 85%;
+
+      margin-right: -2rem;
 
       @media (max-width: 769px) {
         font-size: 0.9rem;
+        margin-right: -1rem;
       }
 
       & span:first-of-type {
@@ -166,9 +177,11 @@ export const InfoBottom = styled.div`
         border: none;
         background-color: inherit;
 
+        cursor: pointer;
+
         @media (max-width: 975px) {
           position: absolute;
-          top: 3;
+          top: 0;
           right: -20;
         }
       }
