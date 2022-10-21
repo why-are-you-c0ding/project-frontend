@@ -34,7 +34,6 @@ const EachOrder = () => {
 
   console.log(OrderData?.orderOptionGroups[0].option.name);
   console.log(OrderData?.orderOptionGroups[1].option.name);
-
   return (
     <div>
       <StatusBar />

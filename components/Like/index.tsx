@@ -35,18 +35,18 @@ const Like = () => {
     return ary;
   };
 
-  console.log(item);
-  console.log(item[0]?.cartOptionGroups[1].cartOptions[0].name);
-
-  //아이템 개수
-  console.log(item.length);
-  //3번 아이템 선택한 옵션 몇개있나
-  console.log(item[2]?.cartOptionGroups.length);
-
-  //3번째 아이템의 첫번쨰로 선택한 옵션이름
-  console.log(item[2]?.cartOptionGroups[0].cartOptions[0].name);
-  //3번째 아이템의 두번쨰로 선택한 옵션이름
-  console.log(item[2]?.cartOptionGroups[1].cartOptions[0].name);
+  // console.log(item);
+  // console.log(item[0]?.cartOptionGroups[1].cartOptions[0].name);
+  //
+  // //아이템 개수
+  // console.log(item.length);
+  // //3번 아이템 선택한 옵션 몇개있나
+  // console.log(item[2]?.cartOptionGroups.length);
+  //
+  // //3번째 아이템의 첫번쨰로 선택한 옵션이름
+  // console.log(item[2]?.cartOptionGroups[0].cartOptions[0].name);
+  // //3번째 아이템의 두번쨰로 선택한 옵션이름
+  // console.log(item[2]?.cartOptionGroups[1].cartOptions[0].name);
 
   let eachOptLen: number[] = [];
 
@@ -167,22 +167,6 @@ const Like = () => {
                     <span>{getTotalPrice(item, index)}원</span>
                   </div>
                   <div>
-                    {/*{[...Array(item[index]?.cartOptionGroups?.length)].map(*/}
-                    {/*  (w, idx) => {*/}
-                    {/*    {*/}
-                    {/*      item[index]?.cartOptionGroups[idx]?.cartOptions[0]*/}
-                    {/*        ?.name;*/}
-                    {/*    }*/}
-                    {/*    {*/}
-                    {/*      item[index]?.cartOptionGroups[idx]?.cartOptions[0]*/}
-                    {/*        ?.name;*/}
-                    {/*    }*/}
-                    {/*    {*/}
-                    {/*      item[index]?.cartOptionGroups[idx]?.cartOptions[0]*/}
-                    {/*        ?.name;*/}
-                    {/*    }*/}
-                    {/*  }*/}
-                    {/*)}*/}
                     {item[index]?.cartOptionGroups[0]?.cartOptions[0]?.name}
                     &nbsp;&nbsp;
                     {item[index]?.cartOptionGroups[1]?.cartOptions[0]?.name}
