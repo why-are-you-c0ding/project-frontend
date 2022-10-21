@@ -27,7 +27,9 @@ const MenuList: FC<Props> = ({ onCloseModal }) => {
       <List>
         <CloseBtn onClick={onCloseModal}>X</CloseBtn>
         <div>
-          <span>Shop</span>
+          <span>
+            <Link to="/EachOrder">잠깐 쓸게</Link>
+          </span>
           <span>
             <Link to="/mypage/like">장바구니</Link>
           </span>

@@ -31,8 +31,8 @@ export const SearchBtn = styled.button`
 `;
 
 export const DetailInput = styled.input`
-  font-size: 1.1rem;
-  border: none;
+  font-size: 1rem;
+  border: 1px solid gray;
 `;
 
 export const Info = styled.div`
