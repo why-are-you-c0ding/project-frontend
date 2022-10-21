@@ -139,14 +139,6 @@ const Like = () => {
     []
   );
 
-  // if (cartData) {
-  //   return (
-  //     <div>
-  //       <NullData />
-  //     </div>
-  //   );
-  // }
-
   return (
     <div>
       <ReponsiveBar title={"장바구니"} />
@@ -165,7 +157,7 @@ const Like = () => {
                     <span>{item[index]?.name}</span>
                     <span>{getTotalPrice(item, index)}원</span>
                   </div>
-                  <div>
+                  <div style={{ color: "rgba(0,0,0,0.4)" }}>
                     {item[index]?.cartOptionGroups[0]?.cartOptions[0]?.name}
                     &nbsp;&nbsp;
                     {item[index]?.cartOptionGroups[1]?.cartOptions[0]?.name}
@@ -202,7 +194,7 @@ const Like = () => {
 
                     <div>
                       <span>
-                        총 금액: {getTotalPrice(item, index) * eachLen[index]}원
+                        {getTotalPrice(item, index) * eachLen[index]}원
                       </span>
                       <span>
                         <button

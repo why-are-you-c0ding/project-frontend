@@ -1,10 +1,4 @@
-import React, {
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect } from "react";
 import ReponsiveBar from "@components/ReponsiveBar";
 import { TopHeader } from "@pages/MyPage/styles";
 import {
@@ -36,11 +30,6 @@ const Buying = () => {
     }
   }
 
-  const onClick = useCallback(() => {
-    if (!orderData?.[orderList.length - 1]?.finalPage)
-      setSize((prev) => prev + 1);
-  }, [orderData]);
-
   orderList = orderList.flat();
 
   const [ref, inView] = useInView();
@@ -53,44 +42,36 @@ const Buying = () => {
   }, [inView]);
 
   return (
-    <Wrapper id="sc">
-      <ReponsiveBar title={"주문 내역"} />
+    <div>
+      <ReponsiveBar title={"장바구니"} />
+      <Wrapper>
+        <TopHeader>주문 내역</TopHeader>
 
-      <TopHeader>주문 내역</TopHeader>
-
-      <div style={{ marginTop: "6rem", padding: "0 2rem" }}>
         {orderData &&
           orderList &&
           orderList?.map((v: any, index: number) => {
             return index === orderList.length - 3 ? (
               <CartItem key={index} ref={ref}>
-                <img src={v.itemImageUrl} alt="" />
+                <img src={v.itemImageUrl} alt={v.itemName} />
                 <ItemInfo>
                   <InfoTop>
-                    <div>
+                    <div style={{ paddingBottom: "2.5rem" }}>
                       <span>{v.itemName}</span>
                       <span>{v.shopName}</span>
                     </div>
-                    <div></div>
                   </InfoTop>
-                  <InfoBottom>
+                  <InfoBottom style={{ marginTop: "0" }}>
                     <div>
                       <span>2~3일 내 도착</span>
                     </div>
                     <div>
                       <div>
-                        <span>2개</span>
+                        <span>수량: {v.count}개</span>
                       </div>
 
                       <div>
-                        <span>총 금액: 20000원</span>
-                        <span>
-                          <button onClick={(event) => {}}>
-                            <span style={{ fontSize: "1rem", color: "red" }}>
-                              주문 취소
-                            </span>
-                          </button>
-                        </span>
+                        <span>{v.price}원</span>
+                        <span></span>
                       </div>
                     </div>
                   </InfoBottom>
@@ -98,33 +79,26 @@ const Buying = () => {
               </CartItem>
             ) : (
               <CartItem key={index}>
-                <img src={v.itemImageUrl} alt="" />
+                <img src={v.itemImageUrl} alt={v.itemName} />
                 <ItemInfo>
                   <InfoTop>
-                    <div>
+                    <div style={{ paddingBottom: "2.5rem" }}>
                       <span>{v.itemName}</span>
-                      <span>{v.itemName}</span>
+                      <span>{v.shopName}</span>
                     </div>
-                    <div></div>
                   </InfoTop>
-                  <InfoBottom>
+                  <InfoBottom style={{ marginTop: "0" }}>
                     <div>
                       <span>2~3일 내 도착</span>
                     </div>
                     <div>
                       <div>
-                        <span>{v.count}개</span>
+                        <span>수량: {v.count}개</span>
                       </div>
 
                       <div>
-                        <span>총 금액: {v.price}원</span>
-                        <span>
-                          <button onClick={(event) => {}}>
-                            <span style={{ fontSize: "1rem", color: "red" }}>
-                              주문 취소
-                            </span>
-                          </button>
-                        </span>
+                        <span>{v.price * v.count}원</span>
+                        <span></span>
                       </div>
                     </div>
                   </InfoBottom>
@@ -132,8 +106,8 @@ const Buying = () => {
               </CartItem>
             );
           })}
-      </div>
-    </Wrapper>
+      </Wrapper>
+    </div>
   );
 };
 
