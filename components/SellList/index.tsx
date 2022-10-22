@@ -11,6 +11,7 @@ import { TopHeader } from "@pages/MyPage/styles";
 import { SubHeader } from "@components/SellList/style";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
+import NullData from "@components/NullData";
 
 const SellList = () => {
   const { data: ListData, error } = useSWR<any>(
@@ -26,14 +27,16 @@ const SellList = () => {
   //   return <TopHeader>등록하신 상품이 없습니다.</TopHeader>;
   // }
 
-  if (list == null) {
-    return <TopHeader>등록하신 상품이 없습니다.</TopHeader>;
-  }
+  // if (list == null) {
+  //   return <TopHeader>등록하신 상품이 없습니다.</TopHeader>;
+  // }
   return (
     <div>
       <ReponsiveBar title={"판매 리스트"} />
       <Wrapper>
         <TopHeader>판매 리스트</TopHeader>
+
+        {list == null && <NullData />}
         {list && <SubHeader>{list[0].shopName}님이 등록한 상품</SubHeader>}
         {list &&
           [...Array(list?.length)].map((v, index) => {
