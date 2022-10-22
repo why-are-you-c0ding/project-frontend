@@ -33,16 +33,7 @@ const EachOrder = () => {
     fetcher
   );
 
-  let data = {
-    orderId: OrderData?.orderId,
-    itemId: OrderData?.itemId,
-    orderStatus: "COMPLETED",
-  };
-  if (OrderData) {
-    console.log(data);
-  }
-
-  const onClickLenUp = useCallback(
+  const onClickUpdate = useCallback(
     (
       e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
       orderId: number,
@@ -116,7 +107,7 @@ const EachOrder = () => {
 
           <Button
             onClick={(event) =>
-              onClickLenUp(event, OrderData?.orderId, OrderData?.itemId)
+              onClickUpdate(event, OrderData?.orderId, OrderData?.itemId)
             }
           >
             주문 완료 하기
