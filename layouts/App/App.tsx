@@ -31,14 +31,13 @@ const App = () => {
       <Route path="/sellpage/:id" component={SellPage} />
       <Route path="/shop" component={Shop} />
       <Route path="/shop/:itemId" component={Shop} />
-      <Route path="/order" component={Order} />
-      <Route path="/order/:orderId" component={Order} />
+      <Route path="/orders" component={Order} />
+      <Route path="/orders/:orderId" component={Order} />
       <Route path="/sellshop" component={SellShop} />
       <Route path="/productpage" component={ProductPage} />
       <Route path="/productpage/:itemId" component={ProductPage} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/checkout/:id" component={Checkout} />
-      <Route path="/eachorder" component={EachOrder} />
     </Switch>
   );
 };
