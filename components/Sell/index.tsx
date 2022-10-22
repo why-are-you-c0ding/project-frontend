@@ -16,7 +16,7 @@ import axios from "axios";
 
 const Sell = () => {
   const [itemName, onChangeItemname, setItemName] = useInput("");
-  const [itemExplain, onChangeItemExplain, setItemExplain] = useInput("");
+  const [information, onChangeInformation, setItemExplain] = useInput("");
 
   const [files, setFiles] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -144,15 +144,15 @@ const Sell = () => {
                 <Input
                   type="text"
                   name="item-fullname"
-                  value={itemExplain}
-                  onChange={onChangeItemExplain}
+                  value={information}
+                  onChange={onChangeInformation}
                   placeholder=" 예시) 잠만보 진짜 잠만 잠"
                 />
               </label>
               <Option
                 itemName={itemName}
                 imageUrl={imageUrl}
-                itemExplain={itemExplain}
+                information={information}
               />
             </ItemInfo>
           </div>

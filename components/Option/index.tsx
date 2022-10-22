@@ -14,10 +14,10 @@ import { Redirect } from "react-router";
 interface Props {
   itemName: string;
   imageUrl: string;
-  itemExplain: string;
+  information: string;
 }
 
-const Option: FC<Props> = ({ itemName, imageUrl, itemExplain }) => {
+const Option: FC<Props> = ({ itemName, imageUrl, information }) => {
   const [toggleTable, setToggleTable] = useState(false);
 
   //optName
@@ -109,7 +109,7 @@ const Option: FC<Props> = ({ itemName, imageUrl, itemExplain }) => {
     opt,
     itemName,
     imageUrl,
-    itemExplain
+    information
   );
 
   const onClickToggleTable = useCallback(() => {
@@ -118,7 +118,7 @@ const Option: FC<Props> = ({ itemName, imageUrl, itemExplain }) => {
     //   return;
     // }
 
-    if (itemExplain === "") {
+    if (information === "") {
       alert("상세 설명을 입력해주세요.");
       return;
     }
@@ -133,7 +133,7 @@ const Option: FC<Props> = ({ itemName, imageUrl, itemExplain }) => {
       return;
     }
 
-    if (Data?.optionGroupRequests.length === 0) {
+    if (Data?.optionGroups.length === 0) {
       alert("옵션값을 입력해주세요.");
       return;
     }
@@ -152,7 +152,7 @@ const Option: FC<Props> = ({ itemName, imageUrl, itemExplain }) => {
       //   return;
       // }
 
-      if (itemExplain === "") {
+      if (information === "") {
         alert("상세 설명을 입력해주세요.");
         return;
       }
@@ -162,14 +162,12 @@ const Option: FC<Props> = ({ itemName, imageUrl, itemExplain }) => {
         return;
       }
 
-      if (Data?.optionGroupRequests.length === 0) {
+      if (Data?.optionGroups.length === 0) {
         alert("옵션값을 입력해주세요.");
         return;
       }
 
-      if (
-        Data?.optionGroupRequests[0]?.optionRequests[0]?.price === undefined
-      ) {
+      if (Data?.optionGroups[0]?.options[0]?.price === undefined) {
         alert("가격을 입력해주세요");
         return;
       }

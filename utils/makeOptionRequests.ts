@@ -1,5 +1,5 @@
 const makeOptionRequests = (a: string[], b: any, d: any) => {
-  let optionRequests: Array<Object> = [];
+  let options: Array<Object> = [];
 
   let aryB: string[] = Object.keys(b).map((item) => b[item]);
 
@@ -13,12 +13,12 @@ const makeOptionRequests = (a: string[], b: any, d: any) => {
         price: parseInt(b[count]),
       };
 
-      optionRequests.push(option);
+      options.push(option);
       count++;
     }
   }
 
-  return optionRequests;
+  return options;
 };
 
 export const makeOptionGroupRequests = (
@@ -44,8 +44,8 @@ export const makeOptionGroupRequests = (
 
   for (let i = 0; i < optLen.length; i++) {
     eachGroup.push({
-      ["optionRequests"]: optRequests.slice(start, start + optLen[i]),
-      ["optionGroupName"]: c[i],
+      ["options"]: optRequests.slice(start, start + optLen[i]),
+      ["optionName"]: c[i],
       ["basic"]: i === 0 ? "true" : "false",
     });
 
@@ -56,7 +56,7 @@ export const makeOptionGroupRequests = (
     ["itemName"]: optName,
     ["imageUrl"]: imageUrl,
     ["information"]: itemExplain,
-    ["optionGroupRequests"]: eachGroup,
+    ["optionGroups"]: eachGroup,
   };
 
   return eachGroup;
