@@ -8,7 +8,7 @@ import {
   InfoTop,
   ItemInfo,
   Wrapper,
-} from "@components/Like/styles";
+} from "@components/SellOrderList/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 import { SubHeader } from "@components/SellList/style";
 import { Link } from "react-router-dom";
@@ -78,15 +78,15 @@ const SellOrderList = () => {
                     <InfoTop>
                       <div>
                         <span>{orderList[index]?.itemName}</span>
-                        <span>주문 시각:{orderList[index]?.createdAt}</span>
+                        <span>주문 가격:{orderList[index]?.price}원</span>
                       </div>
                     </InfoTop>
                     <InfoBottom>
                       <div>
-                        <span>
+                        <div>
                           주문 진행 상태 : {orderList[index]?.orderStatus}
-                        </span>
-                        <div>주문 가격:{orderList[index]?.price}원</div>
+                        </div>
+                        <div>주문 시각:{orderList[index]?.createdAt}</div>
                       </div>
                     </InfoBottom>
                   </ItemInfo>
