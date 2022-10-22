@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import ReponsiveBar from "@components/ReponsiveBar";
 import {
@@ -15,13 +14,9 @@ import { Link } from "react-router-dom";
 import NullData from "@components/NullData";
 import useSWRInfinite from "swr/infinite";
 import { useInView } from "react-intersection-observer";
+import { css } from "@emotion/css";
 
 const SellOrderList = () => {
-  // const { data: OrderData, error } = useSWR<any>(
-  //   "https://waycabvav.shop/orders/sellers?page=0",
-  //   fetcher
-  // );
-
   const {
     data: orderData,
     size,
@@ -50,21 +45,19 @@ const SellOrderList = () => {
     }
   }, [inView]);
 
-  console.log(orderList);
-  console.log(orderList);
-  console.log(orderList);
-
-  // console.log(orderList[0][0]);
   return (
     <div>
       <ReponsiveBar title={"받은 주문 리스트"} />
       <Wrapper>
         <TopHeader>받은 주문 리스트</TopHeader>
-        {orderList == null && <NullData />}
         {orderData && orderList && (
-          <SubHeader>{orderList[0].shopName}주문 들어온 상품</SubHeader>
+          <SubHeader>{orderList[0]?.shopName}주문 들어온 상품</SubHeader>
         )}
-        {orderList &&
+
+        {orderList.length === 0 && <NullData />}
+
+        {orderData &&
+          orderList &&
           [...Array(orderList?.length)].map((v, index) => {
             const orderId = orderList[index].itemId;
             return (
@@ -77,16 +70,37 @@ const SellOrderList = () => {
                   <ItemInfo>
                     <InfoTop>
                       <div>
-                        <span>{orderList[index]?.itemName}</span>
-                        <span>주문 시각:{orderList[index]?.createdAt}</span>
+                        <span
+                          style={{
+                            width: "50%",
+                          }}
+                        >
+                          {orderList[index]?.itemName}
+                        </span>
+                        <span
+                          style={{
+                            width: "54%",
+                            marginRight: "-0.4rem",
+                          }}
+                        >
+                          {orderList[index]?.createdAt.slice(0, 16)}
+                        </span>
                       </div>
                     </InfoTop>
                     <InfoBottom>
                       <div>
-                        <span>
-                          주문 진행 상태 : {orderList[index]?.orderStatus}
+                        <span
+                          style={{
+                            width: "40%",
+                          }}
+                        >
+                          {orderList[index]?.orderStatus === "ONGOING"
+                            ? "주문 진행"
+                            : "주문 완료"}
                         </span>
-                        <div>주문 가격:{orderList[index]?.price}원</div>
+                        <div style={{ color: "black" }}>
+                          주문 가격:{orderList[index]?.price}원
+                        </div>
                       </div>
                     </InfoBottom>
                   </ItemInfo>
