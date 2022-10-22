@@ -211,3 +211,8 @@ export const SelectBtn = styled.button`
   font-weight: bold;
   cursor: pointer;
 `;
+
+export const Button = styled.button`
+  width: 6rem;
+  height: 2rem;
+`;
