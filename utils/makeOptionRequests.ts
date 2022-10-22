@@ -45,7 +45,7 @@ export const makeOptionGroupRequests = (
   for (let i = 0; i < optLen.length; i++) {
     eachGroup.push({
       ["options"]: optRequests.slice(start, start + optLen[i]),
-      ["optionName"]: c[i],
+      ["optionGroupName"]: c[i],
       ["basic"]: i === 0 ? "true" : "false",
     });
 
