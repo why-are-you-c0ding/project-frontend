@@ -181,7 +181,6 @@ export const InfoBottom = styled.div`
         @media (max-width: 975px) {
           position: absolute;
           top: 0;
-          right: -20;
         }
       }
     }
