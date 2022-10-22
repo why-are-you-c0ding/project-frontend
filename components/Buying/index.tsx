@@ -11,6 +11,7 @@ import useSWRInfinite from "swr/infinite";
 import fetcher from "@utils/fetcher";
 import { Wrapper } from "@components/Buying/styles";
 import { useInView } from "react-intersection-observer";
+import NullData from "@components/NullData";
 
 const Buying = () => {
   const {
@@ -47,10 +48,12 @@ const Buying = () => {
       <Wrapper>
         <TopHeader>주문 내역</TopHeader>
 
+        {orderList.length === 0 && <NullData />}
+
         {orderData &&
           orderList &&
           orderList?.map((v: any, index: number) => {
-            return index === orderList.length - 3 ? (
+            return (
               <CartItem key={index} ref={ref}>
                 <img src={v.itemImageUrl} alt={v.itemName} />
                 <ItemInfo>
@@ -71,33 +74,6 @@ const Buying = () => {
 
                       <div>
                         <span>{v.price}원</span>
-                        <span></span>
-                      </div>
-                    </div>
-                  </InfoBottom>
-                </ItemInfo>
-              </CartItem>
-            ) : (
-              <CartItem key={index}>
-                <img src={v.itemImageUrl} alt={v.itemName} />
-                <ItemInfo>
-                  <InfoTop>
-                    <div style={{ paddingBottom: "2.5rem" }}>
-                      <span>{v.itemName}</span>
-                      <span>{v.shopName}</span>
-                    </div>
-                  </InfoTop>
-                  <InfoBottom style={{ marginTop: "0" }}>
-                    <div>
-                      <span>2~3일 내 도착</span>
-                    </div>
-                    <div>
-                      <div>
-                        <span>수량: {v.count}개</span>
-                      </div>
-
-                      <div>
-                        <span>{v.price * v.count}원</span>
                         <span></span>
                       </div>
                     </div>
