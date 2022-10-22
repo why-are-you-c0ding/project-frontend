@@ -1,9 +1,6 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router";
 import loadable from "@loadable/component";
-import Product from "@components/Product";
-import Checkout from "@components/Checkout";
-import EachOrder from "@components/EachOrder";
 
 const SignUp = loadable(() => import("@pages/SignUp"));
 const LogIn = loadable(() => import("@pages/LogIn"));
@@ -12,6 +9,8 @@ const MyPage = loadable(() => import(`@pages/MyPage`));
 const SellPage = loadable(() => import(`@pages/SellPage`));
 const Shop = loadable(() => import(`@pages/Shop`));
 const Order = loadable(() => import(`@pages/Order`));
+const CustomerOrder = loadable(() => import(`@pages/CustomerOrder`));
+const Checkout = loadable(() => import("@components/Checkout"));
 const SellShop = loadable(() => import(`@pages/SellShop`));
 const ProductPage = loadable(() => import(`@pages/ProductPage`));
 
@@ -33,6 +32,8 @@ const App = () => {
       <Route path="/shop/:itemId" component={Shop} />
       <Route path="/orders" component={Order} />
       <Route path="/orders/:orderId" component={Order} />
+      <Route path="/customerorders" component={CustomerOrder} />
+      <Route path="/customerorders/:orderId" component={CustomerOrder} />
       <Route path="/sellshop" component={SellShop} />
       <Route path="/productpage" component={ProductPage} />
       <Route path="/productpage/:itemId" component={ProductPage} />

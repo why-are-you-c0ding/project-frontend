@@ -1,38 +1,35 @@
-import React, { useCallback } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useCallback, useState } from "react";
+import { useLocation } from "react-router-dom";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import StatusBar from "@components/StatusBar";
 import {
-  Btn,
-  BuyBtn,
-  CountBtn,
   Item,
-  Itemdetail,
   ItemInfo,
   ItemName,
   LeftSide,
   MiddleSide,
-  Option,
   RightSide,
-  SelectBtn,
-  TotalPrice,
   Wrapper,
   Button,
+  OptInfo,
+  DeliState,
 } from "@components/EachOrder/styles";
 import axios from "axios";
 
 const EachOrder = () => {
   const location = useLocation();
-  const { data: OrderData, error } = useSWR<any>(
+  const {
+    data: orderData,
+    mutate: mutateOrder,
+    error,
+  } = useSWR<any>(
     `https://waycabvav.shop/orders/${location.pathname.split("/")[2]}`,
 
     fetcher
   );
 
-  console.log();
-
-  const onClickUpdate = useCallback(
+  const onClickUpdateCplete = useCallback(
     (
       e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
       orderId: number,
@@ -55,13 +52,51 @@ const EachOrder = () => {
           }
         )
         .then((res) => {
-          alert("수정 성공");
+          alert("주문 상태가 변경되었습니다.");
+          mutateOrder();
         })
         .catch((err) => {
-          alert("수정 실패");
+          alert("주문 상태 변경에 실패하였습니다.");
         });
     },
     []
+  );
+
+  const onClickUpdateOngoing = useCallback(
+    (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+      orderId: number,
+      itemId: number
+    ) => {
+      e.preventDefault();
+
+      axios
+        .patch(
+          "https://waycabvav.shop/orders",
+          {
+            orderId: orderId,
+            itemId: itemId,
+            orderStatus: "ONGOING",
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+          }
+        )
+        .then((res) => {
+          alert("주문 상태가 변경되었습니다.");
+          mutateOrder();
+        })
+        .catch((err) => {
+          alert("주문 상태 변경에 실패하였습니다.");
+        });
+    },
+    []
+  );
+
+  const [isComplete, setIsComplete] = useState(
+    orderData?.orderStatus !== "ONGOING"
   );
 
   return (
@@ -70,47 +105,84 @@ const EachOrder = () => {
       <Wrapper>
         <LeftSide>
           <Item>
-            <img src={OrderData?.itemImageUrl} alt="상품 사진" />
+            <img src={orderData?.itemImageUrl} alt="상품 사진" />
           </Item>
         </LeftSide>
         <MiddleSide></MiddleSide>
         <RightSide>
-          <Itemdetail>
-            <ItemName>
-              <span>{OrderData?.itemName}</span>
-              <span>수량: {OrderData?.count}</span>
-            </ItemName>
-          </Itemdetail>
-          <Option>
-            <div>
-              <div>
-                <div>배송 상태: {OrderData?.orderStatus}</div>
-              </div>
-            </div>
-          </Option>
+          <ItemName>
+            <h2>{orderData?.itemName}</h2>
+            <ItemInfo
+              style={{
+                fontSize: "0.9rem",
+                color: "rgba(0,0,0,0.4)",
+              }}
+            >
+              {orderData?.shopName}
+            </ItemInfo>
+          </ItemName>
 
-          <ItemInfo>주소: {OrderData?.address?.major}</ItemInfo>
-          <ItemInfo>상세 주소: {OrderData?.address?.detail}</ItemInfo>
-          <ItemInfo>도로 번호: {OrderData?.address?.zipcode}</ItemInfo>
-          {[...Array(OrderData?.orderOptionGroups.length)].map((v, index) => {
-            return (
+          <div style={{ padding: "0 1rem" }}>
+            <h3>고객 주소</h3>
+            <ItemInfo>도로 번호: {orderData?.address?.zipcode}</ItemInfo>
+            <ItemInfo>주소: {orderData?.address?.major}</ItemInfo>
+            <ItemInfo>상세 주소: {orderData?.address?.detail}</ItemInfo>
+
+            <h3>선택 옵션</h3>
+            {[...Array(orderData?.orderOptionGroups.length)].map((v, index) => {
+              return (
+                <OptInfo key={index}>
+                  {orderData?.orderOptionGroups[index].option.name}
+                  {index !== orderData?.orderOptionGroups.length - 1
+                    ? ", "
+                    : ""}
+                </OptInfo>
+              );
+            })}
+
+            <h3>수량</h3>
+            <ItemInfo>{orderData?.count}개</ItemInfo>
+
+            <h3>배송 상태</h3>
+            <DeliState>
               <ItemInfo>
-                option {index + 1}:{" "}
-                {OrderData?.orderOptionGroups[index].option.name}
+                {orderData?.orderStatus === "ONGOING"
+                  ? "주문 진행중"
+                  : "주문 완료"}
               </ItemInfo>
-            );
-          })}
+              {!isComplete && (
+                <Button
+                  onClick={(event) => {
+                    onClickUpdateCplete(
+                      event,
+                      orderData?.orderId,
+                      orderData?.itemId
+                    );
+                    setIsComplete((prev) => !prev);
+                  }}
+                >
+                  주문 완료 상태
+                </Button>
+              )}
+              {isComplete && (
+                <Button
+                  onClick={(event) => {
+                    onClickUpdateOngoing(
+                      event,
+                      orderData?.orderId,
+                      orderData?.itemId
+                    );
+                    setIsComplete((prev) => !prev);
+                  }}
+                >
+                  주문 진행 상태
+                </Button>
+              )}
+            </DeliState>
 
-          <ItemInfo>주문한 가게 이름: {OrderData?.shopName}</ItemInfo>
-          <TotalPrice>총가격: {OrderData?.price}원</TotalPrice>
-
-          <Button
-            onClick={(event) =>
-              onClickUpdate(event, OrderData?.orderId, OrderData?.itemId)
-            }
-          >
-            주문 완료 하기
-          </Button>
+            <h3>총 가격</h3>
+            <ItemInfo>{orderData?.price}원</ItemInfo>
+          </div>
         </RightSide>
       </Wrapper>
     </div>

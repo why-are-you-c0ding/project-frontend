@@ -12,6 +12,7 @@ import fetcher from "@utils/fetcher";
 import { Wrapper } from "@components/Buying/styles";
 import { useInView } from "react-intersection-observer";
 import NullData from "@components/NullData";
+import { Link } from "react-router-dom";
 
 const Buying = () => {
   const {
@@ -42,6 +43,8 @@ const Buying = () => {
     }
   }, [inView]);
 
+  console.log("여기 : ", orderList);
+
   return (
     <div>
       <ReponsiveBar title={"장바구니"} />
@@ -54,32 +57,34 @@ const Buying = () => {
           orderList &&
           orderList?.map((v: any, index: number) => {
             return (
-              <CartItem key={index} ref={ref}>
-                <img src={v.itemImageUrl} alt={v.itemName} />
-                <ItemInfo>
-                  <InfoTop>
-                    <div style={{ paddingBottom: "2.5rem" }}>
-                      <span>{v.itemName}</span>
-                      <span>{v.shopName}</span>
-                    </div>
-                  </InfoTop>
-                  <InfoBottom style={{ marginTop: "0" }}>
-                    <div>
-                      <span>2~3일 내 도착</span>
-                    </div>
-                    <div>
-                      <div>
-                        <span>수량: {v.count}개</span>
+              <Link key={index} to={`/customerorders/${v.orderId}`}>
+                <CartItem ref={ref}>
+                  <img src={v.itemImageUrl} alt={v.itemName} />
+                  <ItemInfo>
+                    <InfoTop>
+                      <div style={{ paddingBottom: "2.5rem" }}>
+                        <span>{v.itemName}</span>
+                        <span>{v.shopName}</span>
                       </div>
+                    </InfoTop>
+                    <InfoBottom style={{ marginTop: "0" }}>
+                      <div>
+                        <span>2~3일 내 도착</span>
+                      </div>
+                      <div>
+                        <div>
+                          <span>수량: {v.count}개</span>
+                        </div>
 
-                      <div>
-                        <span>{v.price}원</span>
-                        <span></span>
+                        <div>
+                          <span>{v.price}원</span>
+                          <span></span>
+                        </div>
                       </div>
-                    </div>
-                  </InfoBottom>
-                </ItemInfo>
-              </CartItem>
+                    </InfoBottom>
+                  </ItemInfo>
+                </CartItem>
+              </Link>
             );
           })}
       </Wrapper>
