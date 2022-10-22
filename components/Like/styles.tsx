@@ -12,7 +12,7 @@ export const CartItem = styled.div`
 
   position: relative;
 
-  padding: 1rem 0rem 1rem 1rem;
+  padding: 1rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 
@@ -26,7 +26,14 @@ export const CartItem = styled.div`
     min-height: 8rem;
     max-height: 8rem;
 
-    margin-right: 1rem;
+    margin-right: 0.5rem;
+
+    @media (max-width: 769px) {
+      min-width: 6rem;
+      max-width: 6rem;
+      min-height: 6rem;
+      max-height: 6rem;
+    }
   }
 `;
 
@@ -35,6 +42,10 @@ export const ItemInfo = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  & .time {
+    display: none;
+  }
 
   & > div {
     width: 100%;
