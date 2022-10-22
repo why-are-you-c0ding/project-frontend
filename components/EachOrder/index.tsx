@@ -18,7 +18,7 @@ import {
   SelectBtn,
   TotalPrice,
   Wrapper,
-} from "@components/Buy/styles";
+} from "@components/EachOrder/styles";
 import option from "@components/Option";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
@@ -43,29 +43,32 @@ const EachOrder = () => {
         <MiddleSide></MiddleSide>
         <RightSide>
           <Itemdetail>
-            <ItemName>{OrderData?.itemName}</ItemName>
+            <ItemName>
+              <span>{OrderData?.itemName}</span>
+              <span>수량: {OrderData?.count}</span>
+            </ItemName>
           </Itemdetail>
           <Option>
             <div>
               <div>
-                <h4>수량: {OrderData?.count}</h4>
                 <div>배송 상태: {OrderData?.orderStatus}</div>
               </div>
             </div>
           </Option>
 
-          <ItemInfo>{OrderData?.address?.major}</ItemInfo>
-          <ItemInfo>{OrderData?.address?.detail}</ItemInfo>
-          <ItemInfo>{OrderData?.address?.zipcode}</ItemInfo>
+          <ItemInfo>주소: {OrderData?.address?.major}</ItemInfo>
+          <ItemInfo>상세 주소: {OrderData?.address?.detail}</ItemInfo>
+          <ItemInfo>도로 번호: {OrderData?.address?.zipcode}</ItemInfo>
           {[...Array(OrderData?.orderOptionGroups.length)].map((v, index) => {
             return (
               <ItemInfo>
-                {OrderData?.orderOptionGroups[index].option.name}
+                선택 옵션: {OrderData?.orderOptionGroups[index].option.name}
               </ItemInfo>
             );
           })}
 
-          <TotalPrice>가게 이름: {OrderData?.shopName}</TotalPrice>
+          <ItemInfo>주문한 가게 이름: {OrderData?.shopName}</ItemInfo>
+          <TotalPrice>총가격: {OrderData?.price}원</TotalPrice>
 
           <Btn>
             <div></div>
