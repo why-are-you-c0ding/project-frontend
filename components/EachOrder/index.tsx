@@ -26,14 +26,11 @@ import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 const EachOrder = () => {
   const location = useLocation();
   const { data: OrderData, error } = useSWR<any>(
-    // `https://waycabvav.shop/orders/${location.pathname.split("/")[2]}`,
-    `https://waycabvav.shop/orders/50`,
+    `https://waycabvav.shop/orders/${location.pathname.split("/")[2]}`,
 
     fetcher
   );
 
-  console.log(OrderData?.orderOptionGroups[0].option.name);
-  console.log(OrderData?.orderOptionGroups[1].option.name);
   return (
     <div>
       <StatusBar />
