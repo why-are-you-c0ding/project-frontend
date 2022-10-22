@@ -53,7 +53,10 @@ const Sell = () => {
 
       axios
         .post("https://waycabvav.shop/images", formdata, {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            "Content-Type": "multipart/form-data",
+          },
         })
         .then((response) => {
           setImageUrl(response.data.imageUrl);
