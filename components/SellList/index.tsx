@@ -21,24 +21,20 @@ const SellList = () => {
 
   const list = ListData?.items;
   //내가 등록한 아이템 리스트
-  console.log(list);
 
-  // if (Array.isArray(list) && list.length) {
-  //   return <TopHeader>등록하신 상품이 없습니다.</TopHeader>;
-  // }
-
-  // if (list == null) {
-  //   return <TopHeader>등록하신 상품이 없습니다.</TopHeader>;
-  // }
   return (
     <div>
       <ReponsiveBar title={"판매 리스트"} />
       <Wrapper>
         <TopHeader>판매 리스트</TopHeader>
 
-        {list == null && <NullData />}
-        {list && <SubHeader>{list[0].shopName}님이 등록한 상품</SubHeader>}
-        {list &&
+        {ListData && list.length === 0 && <NullData />}
+
+        {ListData && list.length !== 0 && (
+          <SubHeader>{list[0]?.shopName}님이 등록한 상품</SubHeader>
+        )}
+        {ListData &&
+          list &&
           [...Array(list?.length)].map((v, index) => {
             return (
               <CartItem key={index}>
