@@ -14,7 +14,6 @@ import { Link } from "react-router-dom";
 import NullData from "@components/NullData";
 import useSWRInfinite from "swr/infinite";
 import { useInView } from "react-intersection-observer";
-import { css } from "@emotion/css";
 
 const SellOrderList = () => {
   const {
@@ -59,7 +58,7 @@ const SellOrderList = () => {
         {orderData &&
           orderList &&
           [...Array(orderList?.length)].map((v, index) => {
-            const orderId = orderList[index].itemId;
+            const orderId = orderList[index].orderId;
             return (
               <Link to={`/orders/${orderId}`}>
                 <CartItem key={index} ref={ref}>

@@ -20,9 +20,6 @@ import {
   Wrapper,
   Button,
 } from "@components/EachOrder/styles";
-import option from "@components/Option";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const EachOrder = () => {
@@ -32,6 +29,8 @@ const EachOrder = () => {
 
     fetcher
   );
+
+  console.log();
 
   const onClickUpdate = useCallback(
     (
