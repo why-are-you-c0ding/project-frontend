@@ -75,13 +75,11 @@ const Sell = () => {
         // If dropped items aren't files, reject them
         if (e.dataTransfer.items[i].kind === "file") {
           const file = e.dataTransfer.items[i].getAsFile();
-          console.log("file[" + i + "].name = " + file.name);
           formData.append("images", file);
         }
       }
     } else {
       for (let i = 0; i < e.dataTransfer.files.length; i++) {
-        console.log("file[" + i + "].name = " + e.dataTransfer.files[i].name);
         formData.append("images", e.dataTransfer.files[i]);
       }
     }

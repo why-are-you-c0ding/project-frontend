@@ -141,8 +141,6 @@ const Option: FC<Props> = ({ itemName, imageUrl, information }) => {
     setToggleTable((prev) => !prev);
   }, [itemName, optName1, Data]);
 
-  console.log(Data);
-
   const onSubmitItems = useCallback(
     (e: any) => {
       e.preventDefault();
