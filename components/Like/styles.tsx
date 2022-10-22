@@ -12,7 +12,7 @@ export const CartItem = styled.div`
 
   position: relative;
 
-  padding: 1rem;
+  padding: 2rem 1.5rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 
