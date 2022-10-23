@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
@@ -28,6 +28,14 @@ const EachOrder = () => {
 
     fetcher
   );
+
+  const [isComplete, setIsComplete] = useState(
+    orderData?.orderStatus === "COMPLETED"
+  );
+
+  useEffect(() => {
+    setIsComplete(orderData?.orderStatus === "COMPLETED");
+  }, [orderData]);
 
   const onClickUpdateCplete = useCallback(
     (
@@ -95,10 +103,6 @@ const EachOrder = () => {
     []
   );
 
-  const [isComplete, setIsComplete] = useState(
-    orderData?.orderStatus !== "ONGOING"
-  );
-
   return (
     <div>
       <StatusBar />
@@ -145,11 +149,7 @@ const EachOrder = () => {
 
             <h3>배송 상태</h3>
             <DeliState>
-              <ItemInfo>
-                {orderData?.orderStatus === "ONGOING"
-                  ? "주문 진행중"
-                  : "주문 완료"}
-              </ItemInfo>
+              <ItemInfo>{isComplete ? "주문 완료" : "주문 진행중"}</ItemInfo>
               {!isComplete && (
                 <Button
                   onClick={(event) => {
