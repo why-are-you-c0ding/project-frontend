@@ -4,10 +4,10 @@ export const makeCartItems = (
   optGroupValue: string[][],
   optionLen: number,
   optPrice: number[][],
-  itemId: number,
+  itemId: number | undefined,
   count: number,
-  names: string,
-  image: string
+  names: string | undefined,
+  image: string | undefined
 ) => {
   let Chose: number[] = [];
   let strA: string[] = Object.keys(optSelect).map((item) => optSelect[item]);

@@ -13,13 +13,10 @@ import { Wrapper } from "@components/Buying/styles";
 import { useInView } from "react-intersection-observer";
 import NullData from "@components/NullData";
 import { Link } from "react-router-dom";
+import { IOrderData, orders } from "@typings/db";
 
 const Buying = () => {
-  const {
-    data: orderData,
-    size,
-    setSize,
-  } = useSWRInfinite<any>(
+  const { data: orderData, setSize } = useSWRInfinite<IOrderData>(
     (index) => `https://waycabvav.shop/orders/customers?page=${index}`,
     fetcher
   );
@@ -34,6 +31,8 @@ const Buying = () => {
 
   orderList = orderList.flat();
 
+  console.log(orderList);
+
   const [ref, inView] = useInView();
 
   useEffect(() => {
@@ -45,7 +44,7 @@ const Buying = () => {
 
   return (
     <div>
-      <ReponsiveBar title={"장바구니"} />
+      <ReponsiveBar title={"주문 내역"} />
       <Wrapper>
         <TopHeader>주문 내역</TopHeader>
 

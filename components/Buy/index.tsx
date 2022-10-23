@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import {
   Wrapper,
@@ -17,18 +17,19 @@ import {
   ItemInfo,
 } from "@components/Buy/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBasketShopping, faTruck } from "@fortawesome/free-solid-svg-icons";
+import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import option from "@components/Option";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { makeCartItems } from "@utils/makeCartItems";
 import axios from "axios";
+import { IEachData } from "@typings/db";
 
 const Buy = () => {
   const location = useLocation();
 
-  const { data: eachData, error } = useSWR<any>(
+  const { data: eachData, error } = useSWR<IEachData | undefined>(
     `https://waycabvav.shop/items/${location.pathname.split("/")[2]}`,
     fetcher
   );
@@ -46,7 +47,9 @@ const Buy = () => {
   };
 
   // 옵션의 개수
-  const optionLen: any = eachData?.optionGroups?.length;
+  const optionLen: number = eachData ? eachData?.optionGroups?.length : 0;
+
+  console.log(optionLen);
 
   // 옵션의 이름
   let optGroupNames: Array<string> = [];
@@ -64,7 +67,7 @@ const Buy = () => {
 
     let temp = eachData?.optionGroups[i].options.length;
 
-    if (temp) {
+    if (temp && eachData) {
       for (let j = 0; j < temp; j++) {
         optGroupValue[i].push(
           eachData?.optionGroups[i]?.options[j]?.optionName
@@ -97,7 +100,7 @@ const Buy = () => {
   const { optSelect0, optSelect1, optSelect2, optSelect3, optSelect4 } =
     optSelect;
 
-  const onChangeSelect = (e: any) => {
+  const onChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
 
     setOptSelect({
@@ -109,10 +112,12 @@ const Buy = () => {
   // 이게 값 모음
   let optPrice: number[][] = [];
 
-  for (let i = 0; i < optionLen; i++) {
-    optPrice.push([]);
-    for (let j = 0; j < eachOptLen[i]; j++) {
-      optPrice[i].push(eachData.optionGroups[i].options[j].price);
+  if (eachData) {
+    for (let i = 0; i < optionLen; i++) {
+      optPrice.push([]);
+      for (let j = 0; j < eachOptLen[i]; j++) {
+        optPrice[i].push(eachData.optionGroups[i].options[j].price);
+      }
     }
   }
 
@@ -132,7 +137,7 @@ const Buy = () => {
   const total = DataPrice[1];
 
   const onClickCart = useCallback(
-    (e: any) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
       axios
@@ -199,10 +204,12 @@ const Buy = () => {
                 <span>{count}</span>
                 <button onClick={Plus}>+</button>
               </CountBtn>
-              <SelectBtn onClick={onClickCart}>
-                <FontAwesomeIcon icon={faBasketShopping} />
-                장바구니
-              </SelectBtn>
+              <form onSubmit={onClickCart}>
+                <SelectBtn type={"submit"}>
+                  <FontAwesomeIcon icon={faBasketShopping} />
+                  장바구니
+                </SelectBtn>
+              </form>
             </div>
             <Link
               to={{

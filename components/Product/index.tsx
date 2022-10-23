@@ -4,20 +4,20 @@ import { Wrapper } from "@components/Product/styles";
 
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
-import { EachProduct } from "@typings/db";
+// import { EachProduct } from "@typings/db";
 import { Link, NavLink } from "react-router-dom";
 import { useParams } from "react-router";
 
 const Product = (props: any) => {
-  const { data: eachData, error } = useSWR<EachProduct | undefined>(
-    "https://waycabvav.shop/items/23",
-    fetcher
-  );
-  let { id } = useParams<{ id: any }>();
+  // const { data: eachData, error } = useSWR<EachProduct | undefined>(
+  //   "https://waycabvav.shop/items/23",
+  //   fetcher
+  // );
+  // let { id } = useParams<{ id: any }>();
 
-  id = eachData?.itemId;
-
-  id = eachData?.itemId;
+  // id = eachData?.itemId;
+  //
+  // id = eachData?.itemId;
   // for (let x in eachData) {
   //   console.log("x", x);
   // }

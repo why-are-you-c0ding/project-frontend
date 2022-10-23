@@ -30,6 +30,8 @@ const Checkout = () => {
 
   const location: any = useLocation();
 
+  console.log(location.state.optInfo);
+
   const order = makeOrder(
     location.state.eachData,
     location.state.optInfo,

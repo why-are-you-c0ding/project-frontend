@@ -1,14 +1,18 @@
-const makeOptionRequests = (a: string[], b: any, d: any) => {
+const makeOptionRequests = (
+  optFlat: string[],
+  price: string[],
+  opt: string[][]
+) => {
   let options: Array<Object> = [];
 
-  const len = a.length;
+  const len = optFlat.length;
 
   let count = 0;
-  for (let i = 0; i < len + d.length; i++) {
-    if (a[i] !== "") {
+  for (let i = 0; i < len + opt.length; i++) {
+    if (optFlat[i] !== "") {
       const option: object = {
-        optionName: a[i],
-        price: parseInt(b[count]),
+        optionName: optFlat[i],
+        price: parseInt(price[count]),
       };
 
       options.push(option);
@@ -20,21 +24,21 @@ const makeOptionRequests = (a: string[], b: any, d: any) => {
 };
 
 export const makeOptionGroupRequests = (
-  a: any,
-  b: any,
-  c: any,
-  d: any,
+  optFlat: string[],
+  price: string[],
+  optNameAll: string[],
+  opt: string[][],
   optName: string,
   imageUrl: string,
   itemExplain: string
 ) => {
   let optLen = [];
 
-  for (let i = 0; i < d.length; i++) {
-    optLen.push(d[i].length);
+  for (let i = 0; i < opt.length; i++) {
+    optLen.push(opt[i].length);
   }
 
-  const optRequests = makeOptionRequests(a, b, d);
+  const optRequests = makeOptionRequests(optFlat, price, opt);
 
   let eachGroup: any = [];
 
@@ -43,7 +47,7 @@ export const makeOptionGroupRequests = (
   for (let i = 0; i < optLen.length; i++) {
     eachGroup.push({
       ["options"]: optRequests.slice(start, start + optLen[i]),
-      ["optionGroupName"]: c[i],
+      ["optionGroupName"]: optNameAll[i],
       ["basic"]: i === 0 ? "true" : "false",
     });
 

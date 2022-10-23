@@ -1,5 +1,7 @@
+import { IEachData } from "@typings/db";
+
 export const makeOrder = (
-  eachData: any,
+  eachData: IEachData,
   optInfo: any,
   count: number,
   address: string,
