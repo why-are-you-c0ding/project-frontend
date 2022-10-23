@@ -58,8 +58,6 @@ const CheckIdModal: FC<Props> = ({
             setFailUseId(false);
             setCheckId(false);
           }
-
-          console.log(response);
         })
         .catch((error) => {
           setFailUseId(false);

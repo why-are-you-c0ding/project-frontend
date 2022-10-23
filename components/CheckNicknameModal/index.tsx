@@ -58,8 +58,6 @@ const CheckNicknameModal: FC<Props> = ({
             setFailUseNickname(false);
             setCheckNickname(false);
           }
-
-          console.log(response);
         })
         .catch((error) => {
           setFailUseNickname(false);

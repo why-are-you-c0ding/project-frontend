@@ -43,8 +43,6 @@ const Buying = () => {
     }
   }, [inView]);
 
-  console.log("여기 : ", orderList);
-
   return (
     <div>
       <ReponsiveBar title={"장바구니"} />

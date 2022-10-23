@@ -24,8 +24,6 @@ const SellPage = () => {
   const [sideBar, setSideBar] = useState(false);
 
   useEffect(() => {
-    console.log(location.pathname);
-
     if (location.pathname === "/sellpage/info") {
       setSideBar(true);
     } else setSideBar(false);

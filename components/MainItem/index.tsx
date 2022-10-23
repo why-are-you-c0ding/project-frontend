@@ -26,8 +26,6 @@ const MainItem = () => {
     | false
   >("https://waycabvav.shop/items", fetcher_noneHeaders);
 
-  console.log(allData);
-
   let item: any = [];
 
   if (allData) item = Object.values(allData);

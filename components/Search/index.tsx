@@ -15,7 +15,6 @@ const Search = () => {
   >("https://waycabvav.shop/items", fetcher);
 
   //전체 아이템 조회
-  console.log(Allitem);
 
   let item: any = [];
 
@@ -25,7 +24,6 @@ const Search = () => {
   for (let i = 0; i < item.length; i++) {
     item[i] = Object.values(item[i]);
   }
-  console.log(item);
 
   //만든 배열 길이
   let itemlen = item.length;
@@ -36,10 +34,8 @@ const Search = () => {
   for (let j = 0; j < itemlen; j++) {
     itemList.push(item[j][1]);
   }
-  console.log(itemList);
 
   const result = makeSearch(itemList, itemlen);
-  console.log(result);
 
   return (
     <div>

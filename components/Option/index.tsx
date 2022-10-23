@@ -93,8 +93,6 @@ const Option: FC<Props> = ({ itemName, imageUrl, information }) => {
     if (i !== opt.length - 1) dummyOpt.push([""]);
   }
 
-  // console.log(dummyOpt);
-
   optFlat = dummyOpt.flat();
 
   // 옵션값들 각각 추가 가격
