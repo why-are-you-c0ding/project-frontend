@@ -1,10 +1,6 @@
 import React, { VFC } from "react";
 import { Wrapper } from "./styles";
 import Product from "@components/Product";
-import useSWR from "swr";
-import fetcher from "@utils/fetcher";
-import { EachProduct } from "@typings/db";
-import { Route, Switch, useHistory, useParams } from "react-router";
 
 const ProductPage: VFC = () => {
   return (

@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useEffect, useState } from "react";
+import React, { FormEvent, useCallback, useState } from "react";
 import {
   Form,
   Header,
@@ -14,7 +14,7 @@ import StatusBar from "@components/StatusBar";
 import useInput from "@hooks/useInput";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Redirect, Route } from "react-router";
+import { Redirect } from "react-router";
 
 const LogIn = () => {
   const [id, onChangeId, setId] = useInput("");
@@ -31,6 +31,7 @@ const LogIn = () => {
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setLogInError(false);
+
       axios
         .post(
           "https://waycabvav.shop/login",
@@ -40,11 +41,9 @@ const LogIn = () => {
           },
           { withCredentials: true, headers }
         )
-
         .then((response) => {
           alert("성공");
           localStorage.setItem("jwt", response.data.jwt);
-
           setIsLogin(true);
         })
         .catch((error) => {

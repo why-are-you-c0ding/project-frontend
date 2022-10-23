@@ -1,8 +1,6 @@
 const makeOptionRequests = (a: string[], b: any, d: any) => {
   let options: Array<Object> = [];
 
-  let aryB: string[] = Object.keys(b).map((item) => b[item]);
-
   const len = a.length;
 
   let count = 0;

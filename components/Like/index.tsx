@@ -36,8 +36,6 @@ const Like = () => {
     return ary;
   };
 
-  let eachOptLen: number[] = [];
-
   const eachLen = getItemLen(item);
 
   const getTotalPrice = (item: any, len: number) => {

@@ -120,8 +120,6 @@ const Buy = () => {
     optSelect,
     optGroupNames,
     optGroupValue,
-    eachOptBase,
-    eachOptLen,
     optionLen,
     optPrice,
     eachData?.itemId,
