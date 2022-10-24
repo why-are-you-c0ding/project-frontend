@@ -97,3 +97,27 @@ export interface AllData {
   basicPrice: number;
   imageUrl: string;
 }
+
+// sellList 컴포넌트에서 사용, 판매자가 등록한 상품 조회
+export interface ListData {
+  ["finalPage"]: boolean;
+  ["items"]: AllData[];
+}
+
+// sellOrder 컴포넌트에서 사용, 판매자가 받은 주문 조회
+export interface orderData {
+  ["finalPage"]: boolean;
+  ["orders"]: sellOrders[];
+}
+
+export interface sellOrders {
+  ["itemImageUrl"]: string;
+  ["itemName"]: string;
+  ["count"]: number;
+  ["shopId"]: number;
+  ["itemId"]: number;
+  ["orderId"]: number;
+  ["orderStatus"]: string;
+  ["price"]: number;
+  ["createdAt"]: string;
+}

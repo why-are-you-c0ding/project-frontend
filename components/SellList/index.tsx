@@ -12,9 +12,10 @@ import { SubHeader } from "@components/SellList/style";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import NullData from "@components/NullData";
+import { ListData } from "@typings/db";
 
 const SellList = () => {
-  const { data: ListData, error } = useSWR<any>(
+  const { data: ListData, error } = useSWR<ListData | undefined>(
     "https://waycabvav.shop/items/sellers?page=0",
     fetcher
   );
@@ -28,9 +29,9 @@ const SellList = () => {
       <Wrapper>
         <TopHeader>판매 리스트</TopHeader>
 
-        {ListData && list.length === 0 && <NullData />}
+        {ListData && list && list.length === 0 && <NullData />}
 
-        {ListData && list.length !== 0 && (
+        {ListData && list && list.length !== 0 && (
           <SubHeader>{list[0]?.shopName}님이 등록한 상품</SubHeader>
         )}
         {ListData &&
