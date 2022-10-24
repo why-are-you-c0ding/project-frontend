@@ -47,3 +47,53 @@ export interface orderOptionGroups {
     ["name"]: string;
   };
 }
+
+// EachOrder, CustomerEachOrder 컴포넌트에서 사용, 판매자 주문 들어온 내역, 소비자 주문내역
+export interface IEachOrder {
+  ["orderId"]: number;
+  ["itemId"]: number;
+  ["itemName"]: string;
+  ["itemImageUrl"]: string;
+  ["count"]: number;
+  ["orderStatus"]: string;
+  ["address"]: {
+    ["major"]: string;
+    ["detail"]: string;
+    ["zipcode"]: string;
+  };
+  ["shopName"]: string;
+  ["shopId"]: number;
+  ["price"]: number;
+  ["orderOptionGroups"]: orderOptionGroups[];
+}
+
+//Like 컴포넌트에서 사용, 장바구니 조회
+export interface ICartData {
+  ["cartLineItems"]: cartLineItems;
+}
+
+export interface cartLineItems {
+  ["id"]: number;
+  ["itemId"]: number;
+  ["name"]: string;
+  ["count"]: number;
+  ["imageUrl"]: string;
+  ["cartOptionGroups"]: Array<{
+    ["id"]: number;
+    ["cartOptions"]: Array<{
+      ["id"]: number;
+      ["name"]: string;
+      ["price"]: number;
+    }>;
+    ["name"]: string;
+  }>;
+}
+
+// MainItem 컴포넌트에서 사용, 전체 상품 조회
+export interface AllData {
+  itemId: number;
+  itemName: string;
+  shopName: string;
+  basicPrice: number;
+  imageUrl: string;
+}

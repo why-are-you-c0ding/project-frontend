@@ -25,6 +25,7 @@ import { Link, useLocation } from "react-router-dom";
 import { makeCartItems } from "@utils/makeCartItems";
 import axios from "axios";
 import { IEachData } from "@typings/db";
+import NullData from "@components/NullData";
 
 const Buy = () => {
   const location = useLocation();
@@ -48,8 +49,6 @@ const Buy = () => {
 
   // 옵션의 개수
   const optionLen: number = eachData ? eachData?.optionGroups?.length : 0;
-
-  console.log(optionLen);
 
   // 옵션의 이름
   let optGroupNames: Array<string> = [];

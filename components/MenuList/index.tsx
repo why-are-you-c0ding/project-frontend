@@ -9,7 +9,7 @@ interface Props {
 const MenuList: FC<Props> = ({ onCloseModal }) => {
   const [isLogin, setIsLogin] = useState(localStorage.getItem("jwt") !== null);
 
-  const onLogout = useCallback((e: any) => {
+  const onLogout = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     localStorage.removeItem("jwt");
     setIsLogin(false);
   }, []);

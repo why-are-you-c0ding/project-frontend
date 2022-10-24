@@ -185,6 +185,8 @@ const Option: FC<Props> = ({ itemName, imageUrl, information }) => {
     [Data]
   );
 
+  console.log(optPrice);
+
   return (
     <Wrapper>
       <h2>옵션</h2>

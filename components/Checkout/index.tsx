@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import {
   Button,
@@ -30,7 +30,7 @@ const Checkout = () => {
 
   const location: any = useLocation();
 
-  console.log(location.state.optInfo);
+  console.log(location);
 
   const order = makeOrder(
     location.state.eachData,

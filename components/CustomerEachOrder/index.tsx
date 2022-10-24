@@ -16,14 +16,11 @@ import {
   DeliState,
 } from "@components/EachOrder/styles";
 import axios from "axios";
+import { IEachOrder } from "@typings/db";
 
 const CustomerEachOrder = () => {
   const location = useLocation();
-  const {
-    data: orderData,
-    mutate: mutateOrder,
-    error,
-  } = useSWR<any>(
+  const { data: orderData, error } = useSWR<IEachOrder | undefined>(
     `https://waycabvav.shop/orders/${location.pathname.split("/")[2]}`,
 
     fetcher
@@ -63,7 +60,10 @@ const CustomerEachOrder = () => {
               return (
                 <OptInfo key={index}>
                   {orderData?.orderOptionGroups[index].option.name}
-                  {index !== orderData?.orderOptionGroups.length - 1
+                  {index !==
+                  (orderData?.orderOptionGroups.length
+                    ? orderData?.orderOptionGroups.length - 1
+                    : 0)
                     ? ", "
                     : ""}
                 </OptInfo>

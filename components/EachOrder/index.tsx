@@ -16,6 +16,7 @@ import {
   DeliState,
 } from "@components/EachOrder/styles";
 import axios from "axios";
+import { IEachOrder } from "@typings/db";
 
 const EachOrder = () => {
   const location = useLocation();
@@ -23,7 +24,7 @@ const EachOrder = () => {
     data: orderData,
     mutate: mutateOrder,
     error,
-  } = useSWR<any>(
+  } = useSWR<IEachOrder | undefined>(
     `https://waycabvav.shop/orders/${location.pathname.split("/")[2]}`,
 
     fetcher
@@ -37,11 +38,11 @@ const EachOrder = () => {
     setIsComplete(orderData?.orderStatus === "COMPLETED");
   }, [orderData]);
 
-  const onClickUpdateCplete = useCallback(
+  const onClickUpdate = useCallback(
     (
       e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-      orderId: number,
-      itemId: number
+      orderId: number | undefined,
+      itemId: number | undefined
     ) => {
       e.preventDefault();
 
@@ -51,7 +52,7 @@ const EachOrder = () => {
           {
             orderId: orderId,
             itemId: itemId,
-            orderStatus: "COMPLETED",
+            orderStatus: isComplete ? "ONGOING" : "COMPLETED",
           },
           {
             headers: {
@@ -67,14 +68,14 @@ const EachOrder = () => {
           alert("주문 상태 변경에 실패하였습니다.");
         });
     },
-    []
+    [isComplete]
   );
 
   const onClickUpdateOngoing = useCallback(
     (
       e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-      orderId: number,
-      itemId: number
+      orderId: number | undefined,
+      itemId: number | undefined
     ) => {
       e.preventDefault();
 
@@ -137,7 +138,10 @@ const EachOrder = () => {
               return (
                 <OptInfo key={index}>
                   {orderData?.orderOptionGroups[index].option.name}
-                  {index !== orderData?.orderOptionGroups.length - 1
+                  {index !==
+                  (orderData?.orderOptionGroups.length
+                    ? orderData?.orderOptionGroups.length - 1
+                    : 0)
                     ? ", "
                     : ""}
                 </OptInfo>
@@ -150,34 +154,14 @@ const EachOrder = () => {
             <h3>배송 상태</h3>
             <DeliState>
               <ItemInfo>{isComplete ? "주문 완료" : "주문 진행중"}</ItemInfo>
-              {!isComplete && (
-                <Button
-                  onClick={(event) => {
-                    onClickUpdateCplete(
-                      event,
-                      orderData?.orderId,
-                      orderData?.itemId
-                    );
-                    setIsComplete((prev) => !prev);
-                  }}
-                >
-                  주문 완료 상태
-                </Button>
-              )}
-              {isComplete && (
-                <Button
-                  onClick={(event) => {
-                    onClickUpdateOngoing(
-                      event,
-                      orderData?.orderId,
-                      orderData?.itemId
-                    );
-                    setIsComplete((prev) => !prev);
-                  }}
-                >
-                  주문 진행 상태
-                </Button>
-              )}
+              <Button
+                onClick={(event) => {
+                  onClickUpdate(event, orderData?.orderId, orderData?.itemId);
+                  setIsComplete((prev) => !prev);
+                }}
+              >
+                {isComplete ? "주문 진행 상태" : "주문 완료 상태"}
+              </Button>
             </DeliState>
 
             <h3>총 가격</h3>

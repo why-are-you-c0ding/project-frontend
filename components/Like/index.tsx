@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback } from "react";
 
 import {
   CartItem,
@@ -13,19 +13,20 @@ import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import axios from "axios";
 import NullData from "@components/NullData";
+import { cartLineItems, ICartData } from "@typings/db";
 
 const Like = () => {
   const {
     data: cartData,
     mutate: mutateCart,
     error,
-  } = useSWR<any>("https://waycabvav.shop/carts", fetcher);
+  } = useSWR<ICartData>("https://waycabvav.shop/carts", fetcher);
 
-  let item: any = [];
+  let item: cartLineItems[] = [];
 
   if (cartData) item = Object.values(cartData)[0];
 
-  const getItemLen = (item: any) => {
+  const getItemLen = (item: cartLineItems[]) => {
     let ary: number[] = [];
     const itemLen = item?.length;
 
@@ -38,7 +39,7 @@ const Like = () => {
 
   const eachLen = getItemLen(item);
 
-  const getTotalPrice = (item: any, len: number) => {
+  const getTotalPrice = (item: cartLineItems[], len: number) => {
     let total = 0;
 
     for (let j = 0; j < item[len]?.cartOptionGroups.length; j++) {

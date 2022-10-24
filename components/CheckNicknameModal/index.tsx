@@ -2,6 +2,7 @@ import React, {
   ChangeEvent,
   Dispatch,
   FC,
+  FormEvent,
   SetStateAction,
   useCallback,
   useState,
@@ -36,7 +37,7 @@ const CheckNicknameModal: FC<Props> = ({
   const [clickCheck, setClickCheck] = useState(false);
 
   const onSubmitNickname = useCallback(
-    (e) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
       if (!nickname && !nickname.trim()) return;

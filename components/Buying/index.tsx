@@ -21,17 +21,15 @@ const Buying = () => {
     fetcher
   );
 
-  let orderList: any = [];
+  let orderTemp: Array<orders[]> = [];
 
   if (orderData) {
     for (let i = 0; i < orderData?.length; i++) {
-      orderList.push(orderData[i].orders);
+      orderTemp.push(orderData[i].orders);
     }
   }
 
-  orderList = orderList.flat();
-
-  console.log(orderList);
+  const orderList = orderTemp.flat();
 
   const [ref, inView] = useInView();
 

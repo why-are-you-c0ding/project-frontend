@@ -13,25 +13,22 @@ import {
 import useSWR from "swr";
 import { Link } from "react-router-dom";
 import fetcher_noneHeaders from "@utils/fetcher_noneHeaders";
+import { AllData } from "@typings/db";
 
 const MainItem = () => {
-  const { data: allData, error } = useSWR<
-    | Array<{
-        itemId: number;
-        itemName: string;
-        shopName: string;
-        basicPrice: number;
-        imageUrl: string;
-      }>
-    | false
-  >("https://waycabvav.shop/items", fetcher_noneHeaders);
+  const { data: allData, error } = useSWR<AllData[]>(
+    "https://waycabvav.shop/items",
+    fetcher_noneHeaders
+  );
 
-  let item: any = [];
+  let itemList: AllData[] = [];
 
-  if (allData) item = Object.values(allData);
+  if (allData) itemList = Object.values(allData);
 
-  for (let i = 0; i < item.length; i++) {
-    item[i] = Object.values(item[i]);
+  let item: Array<Array<string | number>> = [];
+
+  for (let i = 0; i < itemList.length; i++) {
+    item[i] = Object.values(itemList[i]);
   }
 
   if (!allData) {
