@@ -4,12 +4,18 @@ import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 
 import { makeSearch } from "@utils/makeSearch";
+import { Link } from "react-router-dom";
+import { Redirect } from "react-router";
 
 // import { makeSearch } from "@utils/makeSearch";
 const Search = () => {
   const { data: Allitem, error } = useSWR<
     | Array<{
         itemName: string;
+        itemId: number;
+        shopName: string;
+        basicPrice: number;
+        imageUrl: string;
       }>
     | false
   >("https://waycabvav.shop/items", fetcher);
@@ -42,13 +48,13 @@ const Search = () => {
       <ReactSearchBox
         placeholder="검색 창"
         data={result}
-        onSelect={(record: any) => console.log(record)}
+        onSelect={(record: any) => console.log(record.item.key)}
         onFocus={() => {
           console.log("This function is called when is focussed");
         }}
         onChange={(value) => console.log(value)}
         autoFocus
-        iconBoxSize="48px"
+        iconBoxSize="3rem"
       />
     </div>
   );
