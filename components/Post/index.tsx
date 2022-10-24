@@ -1,11 +1,10 @@
 import React, {
+  ChangeEvent,
   CSSProperties,
   Dispatch,
   FC,
   SetStateAction,
   useCallback,
-  useEffect,
-  useState,
 } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { Wrapper } from "@components/Post/styles";
@@ -45,7 +44,7 @@ const Post: FC<Props> = ({
     zIndex: 100,
   };
 
-  const stopPropagation = useCallback((e: any) => {
+  const stopPropagation = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   }, []);
 

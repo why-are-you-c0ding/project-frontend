@@ -14,13 +14,14 @@ import { Link } from "react-router-dom";
 import NullData from "@components/NullData";
 import useSWRInfinite from "swr/infinite";
 import { useInView } from "react-intersection-observer";
+import { orderData } from "@typings/db";
 
 const SellOrderList = () => {
   const {
     data: orderData,
     size,
     setSize,
-  } = useSWRInfinite<any>(
+  } = useSWRInfinite<orderData>(
     (index) => `https://waycabvav.shop/orders/sellers?page=${index}`,
     fetcher
   );

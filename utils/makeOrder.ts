@@ -1,8 +1,26 @@
 import { IEachData } from "@typings/db";
 
+interface optInfo {
+  ["itemId"]: number;
+  ["name"]: string;
+  ["count"]: number;
+  ["imageUrl"]: string;
+  ["cartOptionGroups"]: cartOptionGroups[];
+}
+
+interface cartOptionGroups {
+  ["name"]: string;
+  ["cartOptions"]: cartOptions[];
+}
+
+interface cartOptions {
+  ["name"]: string;
+  ["price"]: number;
+}
+
 export const makeOrder = (
   eachData: IEachData,
-  optInfo: any,
+  optInfo: optInfo,
   count: number,
   address: string,
   zoneCode: string,

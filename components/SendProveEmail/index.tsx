@@ -18,7 +18,6 @@ import { Correct } from "@pages/SignUp/styles";
 import axios from "axios";
 import { Wrapper } from "@components/CheckNicknameModal/styles";
 import { InputKey } from "@components/SendProveEmail/styles";
-import useInput from "@hooks/useInput";
 
 interface Props {
   email: string;

@@ -22,7 +22,7 @@ const Sell = () => {
   const [imageSrc, setImageSrc] = useState("");
   const [dragOver, setDragOver] = useState(true);
 
-  const encodeFileToBase64 = (fileBlob: any) => {
+  const encodeFileToBase64 = (fileBlob: Blob) => {
     const reader: any = new FileReader();
 
     reader.readAsDataURL(fileBlob);
@@ -89,7 +89,7 @@ const Sell = () => {
     encodeFileToBase64(e.dataTransfer.files[0]);
   }, []);
 
-  const onDragOver = useCallback((e: any) => {
+  const onDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setDragOver(true);
   }, []);
