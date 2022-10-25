@@ -15,6 +15,34 @@ import axios from "axios";
 import Menu from "@components/Menu";
 import useInput from "@hooks/useInput";
 import AddressSearchModal from "@components/AddressSearchModal";
+import { IEachData } from "@typings/db";
+
+interface location {
+  ["hash"]: string;
+  ["key"]: string;
+  ["pathname"]: string;
+  ["search"]: string;
+  ["state"]: {
+    ["count"]: number;
+    ["eachData"]: IEachData;
+    ["optInfo"]: {
+      ["count"]: number;
+      ["imageUrl"]: string;
+      ["itemId"]: number;
+      ["name"]: string;
+      ["cartOptionGroups"]: {
+        ["cartOptions"]: cartOptions[];
+        ["name"]: string;
+      };
+    };
+    ["total"]: number;
+  };
+}
+
+interface cartOptions {
+  ["name"]: string;
+  ["price"]: number;
+}
 
 const Checkout = () => {
   const [addrSearch, setAddrSearch] = useState(false);
@@ -29,6 +57,8 @@ const Checkout = () => {
   }, []);
 
   const location: any = useLocation();
+
+  console.log(location);
 
   const order = makeOrder(
     location.state.eachData,
