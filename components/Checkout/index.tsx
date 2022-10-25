@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { FC, useCallback, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import {
   Button,
@@ -17,26 +17,22 @@ import useInput from "@hooks/useInput";
 import AddressSearchModal from "@components/AddressSearchModal";
 import { IEachData } from "@typings/db";
 
-interface location {
-  ["hash"]: string;
-  ["key"]: string;
-  ["pathname"]: string;
-  ["search"]: string;
-  ["state"]: {
+interface state {
+  ["count"]: number;
+  ["eachData"]: IEachData;
+  ["optInfo"]: {
+    ["itemId"]: number;
+    ["name"]: string;
     ["count"]: number;
-    ["eachData"]: IEachData;
-    ["optInfo"]: {
-      ["count"]: number;
-      ["imageUrl"]: string;
-      ["itemId"]: number;
-      ["name"]: string;
-      ["cartOptionGroups"]: {
-        ["cartOptions"]: cartOptions[];
-        ["name"]: string;
-      };
-    };
-    ["total"]: number;
+    ["imageUrl"]: string;
+    ["cartOptionGroups"]: cartOptionGroups[];
   };
+  ["total"]: number;
+}
+
+interface cartOptionGroups {
+  ["name"]: string;
+  ["cartOptions"]: cartOptions[];
 }
 
 interface cartOptions {
@@ -44,7 +40,7 @@ interface cartOptions {
   ["price"]: number;
 }
 
-const Checkout = () => {
+const Checkout: FC = () => {
   const [addrSearch, setAddrSearch] = useState(false);
   const [popup, setPopup] = useState(false);
   const [address, setAddress] = useState("");
@@ -56,9 +52,7 @@ const Checkout = () => {
     setPopup((prev) => !prev);
   }, []);
 
-  const location: any = useLocation();
-
-  console.log(location);
+  const location = useLocation<state>();
 
   const order = makeOrder(
     location.state.eachData,
@@ -71,7 +65,7 @@ const Checkout = () => {
   );
 
   const onClickBuyBtn = useCallback(
-    (e: any) => {
+    (e: React.MouseEvent) => {
       e.preventDefault();
 
       if (address === "") {
