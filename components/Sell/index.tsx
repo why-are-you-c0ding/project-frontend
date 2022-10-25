@@ -27,7 +27,7 @@ const Sell = () => {
 
     reader.readAsDataURL(fileBlob);
 
-    return new Promise((resolve: any) => {
+    return new Promise<void>((resolve) => {
       reader.onload = () => {
         setImageSrc(reader.result);
         setDragOver(false);
