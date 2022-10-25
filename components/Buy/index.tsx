@@ -1,4 +1,10 @@
-import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
+import React, {
+  ChangeEvent,
+  FormEvent,
+  FormEventHandler,
+  useCallback,
+  useState,
+} from "react";
 import StatusBar from "@components/StatusBar";
 import {
   Wrapper,
@@ -146,14 +152,50 @@ const Buy = () => {
           },
         })
         .then((res) => {
-          alert("장바구니에 담겼습니다.");
+          // alert("장바구니에 담겼습니다");
         })
-        .catch((err) => {
-          alert("실패");
-        });
+        .catch((err) => {});
     },
     [Data]
   );
+
+  const PlusLike = useCallback((e: FormEvent<HTMLFormElement>, id: number) => {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:8000/recommend", {
+        data: {
+          item_id: eachData?.itemId,
+          rating: 3.5,
+        },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+      .then((res) => {
+        alert("증가");
+      })
+      .catch((err) => {});
+  }, []);
+
+  const PlusBuy = useCallback((e: any) => {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:8000/recommend", {
+        data: {
+          item_id: eachData?.itemId,
+          rating: 4.5,
+        },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+      .then((res) => {
+        alert("증가");
+      })
+      .catch((err) => {});
+  }, []);
 
   console.log(Data);
 
@@ -212,19 +254,21 @@ const Buy = () => {
                 </SelectBtn>
               </form>
             </div>
-            <Link
-              to={{
-                pathname: `/checkout/${location.pathname.split("/")[2]}`,
-                state: {
-                  eachData: eachData,
-                  optInfo: Data,
-                  count: count,
-                  total: total,
-                },
-              }}
-            >
-              <BuyBtn type="submit">구매</BuyBtn>
-            </Link>
+            <form onSubmit={PlusBuy}>
+              <Link
+                to={{
+                  pathname: `/checkout/${location.pathname.split("/")[2]}`,
+                  state: {
+                    eachData: eachData,
+                    optInfo: Data,
+                    count: count,
+                    total: total,
+                  },
+                }}
+              >
+                <BuyBtn type="submit">구매</BuyBtn>
+              </Link>
+            </form>
           </Btn>
         </RightSide>
       </Wrapper>
