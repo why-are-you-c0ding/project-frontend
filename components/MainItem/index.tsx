@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   Wrapper,
@@ -12,35 +12,66 @@ import {
 } from "@components/MainItem/styles";
 import useSWR from "swr";
 import { Link } from "react-router-dom";
-import fetcher_noneHeaders from "@utils/fetcher_noneHeaders";
-import { AllData } from "@typings/db";
-// import { AllData } from "@typings/db";
+import { AllData, ListData } from "@typings/db";
+import useSWRInfinite from "swr/infinite";
+import fetcher from "@utils/fetcher";
+import { useInView } from "react-intersection-observer";
+import NullData from "@components/NullData";
 
 const MainItem = () => {
-  const { data: allData, error } = useSWR(
-    "https://waycabvav.shop/items?page=0",
-    fetcher_noneHeaders
+  const {
+    data: allData,
+    size,
+    setSize,
+  } = useSWRInfinite<ListData>(
+    (index) => `https://waycabvav.shop/items?page=${index}`,
+    fetcher
   );
+
+  let MainList: any = [];
+
+  if (allData) {
+    for (let i = 0; i < allData?.length; i++) {
+      MainList.push(allData[i].items);
+    }
+  }
+
+  MainList = MainList.flat();
+
+  const [ref, inView] = useInView({
+    threshold: [0, 0.25, 0.5, 0.75, 1],
+  });
+
+  useEffect(() => {
+    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
+    if (inView) {
+      setSize((prevState) => prevState + 1);
+    }
+  }, [inView]);
 
   return (
     <Wrapper>
-      <TitleContainer>
-        <h2>전체 상품</h2>
-      </TitleContainer>
-      <ItemContainer>
-        {allData?.items &&
-          allData?.items.map((v: AllData, index: number) => {
-            const itemId = allData?.items[index].itemId;
+      {allData && MainList && (
+        <TitleContainer>
+          <h2>전체 상품</h2>
+        </TitleContainer>
+      )}
 
+      {MainList.length === 0 && <NullData />}
+      <ItemContainer>
+        {allData &&
+          MainList &&
+          [...Array(MainList?.length)].map((e, ind) => {
+            const MainId = MainList[ind].itemId;
             return (
-              <Link to={`/shop/${itemId}`} key={index}>
-                <ItemBox>
+              <Link to={`/shop/${MainId}`}>
+                <ItemBox key={ind} ref={ref}>
                   <ItemImg>
-                    <img src={allData?.items[index].imageUrl} alt="으악" />
+                    <img src={MainList[ind].imageUrl} alt="으악" />
                   </ItemImg>
                   <ItemInfo>
-                    <ItemName>{allData?.items[index].itemName}</ItemName>
-                    <ItemPrice>{allData?.items[index].basicPrice}원</ItemPrice>
+                    <ItemName>{MainList[ind].itemName}</ItemName>
+                    <ItemPrice>{MainList[ind].basicPrice}원</ItemPrice>
                   </ItemInfo>
                 </ItemBox>
               </Link>
