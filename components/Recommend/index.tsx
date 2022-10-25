@@ -1,7 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import { AllData, bestData } from "@typings/db";
+import {
+  ItemBox,
+  ItemContainer,
+  ItemImg,
+  ItemInfo,
+  ItemName,
+  ItemPrice,
+  TitleContainer,
+  Wrapper,
+} from "@components/MainItem/styles";
+import { Link } from "react-router-dom";
+import { Btn } from "@components/Recommend/styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import Menu from "@components/Menu";
+import CutItem from "@components/CutItem";
 
 const Recommend = () => {
   const { data: bestData } = useSWR<bestData>(
@@ -10,8 +26,6 @@ const Recommend = () => {
   );
 
   const bestList = bestData ? bestData.itemName : ["electronic"];
-
-  console.log(bestList);
 
   let getItemUrl = "https://waycabvav.shop/items/recommend?";
 
@@ -25,18 +39,65 @@ const Recommend = () => {
 
   const { data: recomData } = useSWR<AllData[]>(getItemUrl, fetcher);
 
-  // console.log(recomData);
+  const [isCut, setIsCut] = useState(false);
 
-  let a = [];
+  const onClickCut = useCallback(() => {
+    setIsCut((prev) => !prev);
+  }, []);
 
-  if (recomData)
-    for (let i = 0; i < recomData?.length; i++) {
-      a.push(recomData[i].itemName);
-    }
+  const [isNum, setIsNum] = useState(-1);
 
-  console.log(a);
+  return (
+    <div>
+      <Wrapper>
+        <TitleContainer>
+          <h2>추천 상품</h2>
+        </TitleContainer>
+        <ItemContainer>
+          {recomData &&
+            recomData?.map((v, index) => {
+              const itemId = recomData[index].itemId;
 
-  return <div>1</div>;
+              return (
+                <div key={index} style={{ position: "relative" }}>
+                  <Link to={`/shop/${itemId}`}>
+                    <ItemBox>
+                      <ItemImg>
+                        <img
+                          src={recomData[index].imageUrl}
+                          alt={recomData[index].itemName}
+                        />
+                      </ItemImg>
+                      <ItemInfo>
+                        <ItemName>{recomData[index].itemName}</ItemName>
+                        <ItemPrice>{recomData[index].basicPrice}원</ItemPrice>
+                      </ItemInfo>
+                    </ItemBox>
+                  </Link>
+                  <Btn
+                    onClick={() => {
+                      onClickCut();
+                      setIsNum(itemId);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                  </Btn>
+                  {itemId === isNum && (
+                    <Menu
+                      show={isCut}
+                      onCloseModal={onClickCut}
+                      // style={{ position: "absolute" }}
+                    >
+                      {<CutItem />}
+                    </Menu>
+                  )}
+                </div>
+              );
+            })}
+        </ItemContainer>
+      </Wrapper>
+    </div>
+  );
 };
 
 export default Recommend;
