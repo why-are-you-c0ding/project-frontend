@@ -54,9 +54,10 @@ export const ItemImg = styled.div`
 `;
 
 export const ItemInfo = styled.div`
-  align-self: flex-start;
   margin: 1rem 0;
-  padding: 0 1rem;
+  padding: 1rem 1rem;
+
+  min-height: 8rem;
 `;
 
 export const ItemName = styled.div`
@@ -64,6 +65,13 @@ export const ItemName = styled.div`
 
   font-size: 0.9rem;
   color: rgba(0, 0, 0, 0.6);
+
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 export const ItemPrice = styled.div`
