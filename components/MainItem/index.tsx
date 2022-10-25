@@ -13,6 +13,7 @@ import {
 import useSWR from "swr";
 import { Link } from "react-router-dom";
 import fetcher_noneHeaders from "@utils/fetcher_noneHeaders";
+import { AllData } from "@typings/db";
 // import { AllData } from "@typings/db";
 
 const MainItem = () => {
@@ -28,7 +29,7 @@ const MainItem = () => {
       </TitleContainer>
       <ItemContainer>
         {allData?.items &&
-          allData?.items.map((v: any, index: any) => {
+          allData?.items.map((v: AllData, index: number) => {
             const itemId = allData?.items[index].itemId;
 
             return (
