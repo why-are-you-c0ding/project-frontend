@@ -97,7 +97,7 @@ const Option: FC<Props> = ({ itemName, imageUrl, information }) => {
 
   // 옵션값들 각각 추가 가격
 
-  const [optPrice, setOptPrice] = useState<any>({});
+  const [optPrice, setOptPrice] = useState<Object>({});
 
   let price: string[] = Object.values(optPrice);
 
