@@ -83,11 +83,7 @@ const Recommend = () => {
                     <FontAwesomeIcon icon={faEllipsisVertical} />
                   </Btn>
                   {itemId === isNum && (
-                    <Menu
-                      show={isCut}
-                      onCloseModal={onClickCut}
-                      // style={{ position: "absolute" }}
-                    >
+                    <Menu show={isCut} onCloseModal={onClickCut}>
                       {<CutItem />}
                     </Menu>
                   )}
