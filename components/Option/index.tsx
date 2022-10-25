@@ -295,7 +295,7 @@ const Option: FC<Props> = ({ itemName, imageUrl, information }) => {
                     <span>{v}</span>
                     <Input
                       type="text"
-                      onChange={(e: any) => {
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setOptPrice({
                           ...optPrice,
                           [`${num}`]: e.target.value,

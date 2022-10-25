@@ -155,6 +155,8 @@ const Buy = () => {
     [Data]
   );
 
+  console.log(Data);
+
   return (
     <div>
       <StatusBar />
