@@ -4,6 +4,7 @@ import MainItem from "@components/MainItem";
 import axios from "axios";
 import SliderImage from "@components/SliderImage";
 import { Scrollbars } from "react-custom-scrollbars";
+import Recommend from "@components/Recommend";
 
 const Main = () => {
   const onLogout = useCallback(() => {
@@ -27,6 +28,7 @@ const Main = () => {
       <StatusBar />
       <Scrollbars autoHide ref={scrollbarRef} onScrollFrame={onScroll}>
         <SliderImage />
+        <Recommend />
         <MainItem />
       </Scrollbars>
     </div>

@@ -29,7 +29,7 @@ const Sell = () => {
 
     return new Promise<void>((resolve) => {
       reader.onload = () => {
-        setImageSrc(reader.result);
+        if (reader.result) setImageSrc(reader.result);
         setDragOver(false);
 
         resolve();
@@ -40,6 +40,8 @@ const Sell = () => {
   const onLoadFile = (e: any) => {
     const file = e.target.files;
     setFiles(file);
+
+    // console.log("여기 : ", e);
 
     encodeFileToBase64(e.target.files[0]);
   };
@@ -111,7 +113,7 @@ const Sell = () => {
               {imageSrc && <img src={imageSrc} alt="preview-img" />}
             </Preview>
 
-            {dragOver && <span>사진은 정사각형을 권장합니다.</span>}
+            {dragOver && <span>사진은 1:1 비율을 권장합니다.</span>}
 
             <div>
               <label htmlFor="file">
