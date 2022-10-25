@@ -96,6 +96,7 @@ const Option: FC<Props> = ({ itemName, imageUrl, information }) => {
   optFlat = dummyOpt.flat();
 
   // 옵션값들 각각 추가 가격
+
   const [optPrice, setOptPrice] = useState<any>({});
 
   let price: string[] = Object.values(optPrice);
@@ -140,7 +141,7 @@ const Option: FC<Props> = ({ itemName, imageUrl, information }) => {
   }, [itemName, optName1, Data]);
 
   const onSubmitItems = useCallback(
-    (e: any) => {
+    (e: React.MouseEvent) => {
       e.preventDefault();
 
       // if (!checkImg) {
