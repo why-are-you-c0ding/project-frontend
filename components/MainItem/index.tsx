@@ -21,20 +21,6 @@ const MainItem = () => {
     fetcher_noneHeaders
   );
 
-  // let itemList: AllData[] = [];
-  //
-  // if (allData) itemList = Object.values(allData);
-  //
-  // let item: Array<Array<string | number>> = [];
-  //
-  // for (let i = 0; i < itemList.length; i++) {
-  //   item[i] = Object.values(itemList[i]);
-  // }
-  //
-  // if (!allData) {
-  //   return <div>로딩중입니다...</div>;
-  // }
-
   return (
     <Wrapper>
       <TitleContainer>

@@ -32,6 +32,7 @@ import { makeCartItems } from "@utils/makeCartItems";
 import axios from "axios";
 import { IEachData } from "@typings/db";
 import NullData from "@components/NullData";
+import internal from "stream";
 
 const Buy = () => {
   const location = useLocation();
@@ -142,7 +143,7 @@ const Buy = () => {
   const total = DataPrice[1];
 
   const onClickCart = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
+    (e: any) => {
       e.preventDefault();
 
       axios
@@ -152,52 +153,71 @@ const Buy = () => {
           },
         })
         .then((res) => {
-          // alert("장바구니에 담겼습니다");
+          alert("장바구니에 담겼습니다");
         })
         .catch((err) => {});
     },
     [Data]
   );
 
-  const PlusLike = useCallback((e: FormEvent<HTMLFormElement>, id: number) => {
-    e.preventDefault();
+  const item_id2 = Number(eachData?.itemId);
+  const item_id = JSON.stringify(item_id2);
 
-    axios
-      .post("http://localhost:8000/recommend", {
-        data: {
-          item_id: eachData?.itemId,
-          rating: 3.5,
-        },
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      })
-      .then((res) => {
-        alert("증가");
-      })
-      .catch((err) => {});
-  }, []);
+  const LikeRating2 = 3.5;
+  const LikeRating = JSON.stringify(LikeRating2);
 
-  const PlusBuy = useCallback((e: any) => {
-    e.preventDefault();
+  const PlusLike = useCallback(
+    (e: any) => {
+      console.log(item_id);
+      axios
+        .post(
+          "http://localhost:8000/recommend",
+          {
+            item_id: item_id,
+            rating: LikeRating,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+              "Content-type": "application/json",
+            },
+          }
+        )
+        .then((res) => {})
+        .catch((err) => {
+          alert("실패");
+        });
+    },
+    [eachData]
+  );
 
-    axios
-      .post("http://localhost:8000/recommend", {
-        data: {
-          item_id: eachData?.itemId,
-          rating: 4.5,
-        },
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      })
-      .then((res) => {
-        alert("증가");
-      })
-      .catch((err) => {});
-  }, []);
+  const BuyRating2 = 4.5;
+  const BuyRating = JSON.stringify(BuyRating2);
 
-  console.log(Data);
+  const PlusBuy = useCallback(
+    (e: any) => {
+      e.preventDefault();
+      axios
+        .post(
+          "http://localhost:8000/recommend",
+          {
+            item_id: item_id,
+            rating: BuyRating,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+              "Content-type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          alert("성공");
+        })
+        .catch((err) => {});
+    },
+    [eachData]
+  );
 
   return (
     <div>
@@ -247,12 +267,19 @@ const Buy = () => {
                 <span>{count}</span>
                 <button onClick={Plus}>+</button>
               </CountBtn>
-              <form onSubmit={onClickCart}>
-                <SelectBtn type={"submit"}>
-                  <FontAwesomeIcon icon={faBasketShopping} />
-                  장바구니
-                </SelectBtn>
-              </form>
+              <button
+                onClick={() => {
+                  PlusLike(eachData);
+                  onClickCart(Data);
+                }}
+              >
+                <form onSubmit={onClickCart}>
+                  <SelectBtn type={"submit"}>
+                    <FontAwesomeIcon icon={faBasketShopping} />
+                    장바구니
+                  </SelectBtn>
+                </form>
+              </button>
             </div>
             <form onSubmit={PlusBuy}>
               <Link
