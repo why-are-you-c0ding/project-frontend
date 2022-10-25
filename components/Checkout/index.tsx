@@ -41,7 +41,7 @@ const Checkout = () => {
   );
 
   const onClickBuyBtn = useCallback(
-    (e: any) => {
+    (e: React.MouseEvent) => {
       e.preventDefault();
 
       if (address === "") {
