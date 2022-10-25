@@ -121,3 +121,8 @@ export interface sellOrders {
   ["price"]: number;
   ["createdAt"]: string;
 }
+
+//Recommend 컴포넌트에서 사용, 추천 상품 조회
+export interface bestData {
+  ["itemName"]: Array<string>;
+}
