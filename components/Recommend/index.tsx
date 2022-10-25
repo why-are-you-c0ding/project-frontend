@@ -13,10 +13,10 @@ import {
   Wrapper,
 } from "@components/MainItem/styles";
 import { Link } from "react-router-dom";
-import { Btn } from "@components/Recommend/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import Menu from "@components/Menu";
+import { Btn } from "@components/Recommend/styles";
 import CutItem from "@components/CutItem";
 
 const Recommend = () => {
