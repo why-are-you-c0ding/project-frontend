@@ -1,5 +1,4 @@
 import React, {
-  ChangeEvent,
   CSSProperties,
   Dispatch,
   FC,
@@ -8,7 +7,6 @@ import React, {
 } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { Wrapper } from "@components/Post/styles";
-import address from "@components/Address";
 
 interface Props {
   address: string;
@@ -26,10 +24,15 @@ const Post: FC<Props> = ({
   const addre = address;
   const setAddre = setAddress;
 
-  const onCompletePost = (data: any) => {
+  const onCompletePost = (data: {
+    ["address"]: string;
+    ["zonecode"]: string;
+  }) => {
     onClickAddrSearch();
     setZoneCode(data.zonecode);
     setAddress(data.address);
+
+    console.log(data);
   };
 
   const postCodeStyle: CSSProperties = {
