@@ -77,6 +77,11 @@ export const InfoTop = styled.div`
       font-weight: 500;
 
       width: 70%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
 
     & span:last-of-type {
@@ -106,7 +111,7 @@ export const InfoBottom = styled.div`
   display: flex;
   align-items: center;
 
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 
   & > div:first-of-type {
     color: #199530;
