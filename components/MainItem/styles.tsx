@@ -58,14 +58,14 @@ export const ItemInfo = styled.div`
   padding: 1rem 1rem;
 
   min-height: 8rem;
+
+  & > span {
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
 `;
 
 export const ItemName = styled.div`
-  margin-bottom: 0.3rem;
-
-  font-size: 0.9rem;
-  color: rgba(0, 0, 0, 0.6);
-
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;

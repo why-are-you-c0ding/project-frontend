@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import Menu from "@components/Menu";
-import { Btn } from "@components/Recommend/styles";
+import { Btn, More, MoreBtn } from "@components/Recommend/styles";
 import CutItem from "@components/CutItem";
 
 const Recommend = () => {
@@ -70,6 +70,7 @@ const Recommend = () => {
                       </ItemImg>
                       <ItemInfo>
                         <ItemName>{recomData[index].itemName}</ItemName>
+                        <span>{recomData[index].category}</span>
                         <ItemPrice>{recomData[index].basicPrice}원</ItemPrice>
                       </ItemInfo>
                     </ItemBox>
@@ -92,6 +93,11 @@ const Recommend = () => {
             })}
         </ItemContainer>
       </Wrapper>
+      <More>
+        <Link to={"/ProductPage"}>
+          <MoreBtn>전체 상품 보기</MoreBtn>
+        </Link>
+      </More>
     </div>
   );
 };
