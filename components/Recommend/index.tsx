@@ -84,7 +84,7 @@ const Recommend = () => {
                   </Btn>
                   {itemId === isNum && (
                     <Menu show={isCut} onCloseModal={onClickCut}>
-                      {<CutItem />}
+                      {<CutItem itemId={itemId} />}
                     </Menu>
                   )}
                 </div>
