@@ -24,7 +24,7 @@ const MainItem = () => {
     size,
     setSize,
   } = useSWRInfinite<ListData>(
-    (index) => `https://waycabvav.shop/items?page=${index}`,
+    (index) => `https://waycabvav.shop/items?page=${index}&blockCategory=`,
     fetcher
   );
 
@@ -67,7 +67,10 @@ const MainItem = () => {
               <Link to={`/shop/${MainId}`}>
                 <ItemBox key={ind} ref={ref}>
                   <ItemImg>
-                    <img src={MainList[ind].imageUrl} alt="으악" />
+                    <img
+                      src={MainList[ind].imageUrl}
+                      alt={MainList[ind].itemName}
+                    />
                   </ItemImg>
                   <ItemInfo>
                     <ItemName>{MainList[ind].itemName}</ItemName>
