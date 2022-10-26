@@ -19,12 +19,27 @@ import { useInView } from "react-intersection-observer";
 import NullData from "@components/NullData";
 
 const MainItem = () => {
+  const { data: blockData } = useSWR<{ result: string }>(
+    "http://localhost:8000/blocks",
+    fetcher
+  );
+
+  console.log(blockData?.result);
+  console.log(
+    blockData
+      ? `https://waycabvav.shop/items?page=&blockCategory=${blockData?.result}`
+      : `https://waycabvav.shop/items?page=&blockCategory=`
+  );
+
   const {
     data: allData,
     size,
     setSize,
   } = useSWRInfinite<ListData>(
-    (index) => `https://waycabvav.shop/items?page=${index}&blockCategory=`,
+    (index) =>
+      blockData
+        ? `https://waycabvav.shop/items?page=${index}&blockCategory=${blockData?.result}`
+        : `https://waycabvav.shop/items?page=${index}&blockCategory=`,
     fetcher
   );
 
@@ -64,8 +79,8 @@ const MainItem = () => {
           [...Array(MainList?.length)].map((e, ind) => {
             const MainId = MainList[ind].itemId;
             return (
-              <Link to={`/shop/${MainId}`}>
-                <ItemBox key={ind} ref={ref}>
+              <Link to={`/shop/${MainId}`} key={ind}>
+                <ItemBox ref={ref}>
                   <ItemImg>
                     <img
                       src={MainList[ind].imageUrl}
@@ -74,6 +89,7 @@ const MainItem = () => {
                   </ItemImg>
                   <ItemInfo>
                     <ItemName>{MainList[ind].itemName}</ItemName>
+                    <span>{MainList[ind].category}</span>
                     <ItemPrice>{MainList[ind].basicPrice}원</ItemPrice>
                   </ItemInfo>
                 </ItemBox>
