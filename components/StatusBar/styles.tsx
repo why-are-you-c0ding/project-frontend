@@ -73,6 +73,28 @@ export const MainBar = styled.div`
     cursor: pointer;
   }
 
+  & span > label {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+
+    & > input {
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      width: 10rem;
+      height: 2.3rem;
+
+      font-size: 1.1rem;
+    }
+
+    & .icon {
+      margin-left: 0.5rem;
+    }
+  }
+
   & a {
     text-decoration: none;
     color: inherit;

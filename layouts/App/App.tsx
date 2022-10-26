@@ -13,7 +13,7 @@ const CustomerOrder = loadable(() => import(`@pages/CustomerOrder`));
 const Checkout = loadable(() => import("@components/Checkout"));
 const SellShop = loadable(() => import(`@pages/SellShop`));
 const ProductPage = loadable(() => import(`@pages/ProductPage`));
-const Search = loadable(() => import(`@pages/Search`));
+const SearchItem = loadable(() => import(`@pages/SearchItem`));
 
 const App = () => {
   return (
@@ -40,7 +40,7 @@ const App = () => {
       <Route path="/productpage/:itemId" component={ProductPage} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/checkout/:id" component={Checkout} />
-      <Route path="/search" component={Search} />
+      <Route path="/searchitem" component={SearchItem} />
     </Switch>
   );
 };
