@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   color: rgba(0, 0, 0, 0.5);
 
