@@ -65,9 +65,7 @@ const Checkout: FC = () => {
   );
 
   const onClickBuyBtn = useCallback(
-    (e: React.MouseEvent) => {
-      e.preventDefault();
-
+    (e: any) => {
       if (address === "") {
         alert("주소를 입력해주세요");
         return;
@@ -84,7 +82,7 @@ const Checkout: FC = () => {
           },
         })
         .then((res) => {
-          alert("성공");
+          alert("주문 성공");
         })
         .catch((err) => {
           alert("실패");
@@ -99,6 +97,33 @@ const Checkout: FC = () => {
     if (i !== 0) option += ", ";
     option += location.state.optInfo.cartOptionGroups[i].cartOptions[0].name;
   }
+
+  const item_id2 = Number(location.state.eachData.itemId);
+  const item_id = JSON.stringify(item_id2);
+  const BuyRating2 = 4.5;
+  const BuyRating = JSON.stringify(BuyRating2);
+
+  const PlusBuy = useCallback(
+    (e: any) => {
+      axios
+        .post(
+          "http://localhost:8000/recommend",
+          {
+            item_id: item_id,
+            rating: BuyRating,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+              "Content-type": "application/json",
+            },
+          }
+        )
+        .then((res) => {})
+        .catch((err) => {});
+    },
+    [location.state.eachData]
+  );
 
   return (
     <div>
@@ -172,7 +197,14 @@ const Checkout: FC = () => {
         </Info>
 
         <Button>
-          <button onClick={onClickBuyBtn}>결제하기</button>
+          <button
+            onClick={() => {
+              onClickBuyBtn(order);
+              PlusBuy(location.state.eachData);
+            }}
+          >
+            결제하기
+          </button>
         </Button>
       </Wrapper>
 

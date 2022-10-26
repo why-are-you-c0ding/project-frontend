@@ -33,6 +33,7 @@ import axios from "axios";
 import { IEachData } from "@typings/db";
 import NullData from "@components/NullData";
 import internal from "stream";
+import { Redirect } from "react-router";
 
 const Buy = () => {
   const location = useLocation();
@@ -144,8 +145,6 @@ const Buy = () => {
 
   const onClickCart = useCallback(
     (e: any) => {
-      e.preventDefault();
-
       axios
         .post("https://waycabvav.shop/carts/cart-line-items", Data, {
           headers: {
@@ -168,7 +167,6 @@ const Buy = () => {
 
   const PlusLike = useCallback(
     (e: any) => {
-      console.log(item_id);
       axios
         .post(
           "http://localhost:8000/recommend",
@@ -183,38 +181,12 @@ const Buy = () => {
             },
           }
         )
-        .then((res) => {})
+        .then((res) => {
+          alert("증가");
+        })
         .catch((err) => {
           alert("실패");
         });
-    },
-    [eachData]
-  );
-
-  const BuyRating2 = 4.5;
-  const BuyRating = JSON.stringify(BuyRating2);
-
-  const PlusBuy = useCallback(
-    (e: any) => {
-      e.preventDefault();
-      axios
-        .post(
-          "http://localhost:8000/recommend",
-          {
-            item_id: item_id,
-            rating: BuyRating,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-              "Content-type": "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          alert("성공");
-        })
-        .catch((err) => {});
     },
     [eachData]
   );
@@ -267,35 +239,36 @@ const Buy = () => {
                 <span>{count}</span>
                 <button onClick={Plus}>+</button>
               </CountBtn>
-              <button
+              <SelectBtn
                 onClick={() => {
-                  PlusLike(eachData);
                   onClickCart(Data);
+                  PlusLike(eachData);
                 }}
               >
-                <form onSubmit={onClickCart}>
-                  <SelectBtn type={"submit"}>
-                    <FontAwesomeIcon icon={faBasketShopping} />
-                    장바구니
-                  </SelectBtn>
-                </form>
-              </button>
+                <FontAwesomeIcon icon={faBasketShopping} />
+                장바구니
+                {/*<form onSubmit={onClickCart}>*/}
+                {/*  <SelectBtn type={"submit"}>*/}
+                {/*    <FontAwesomeIcon icon={faBasketShopping} />*/}
+                {/*    장바구니*/}
+                {/*  </SelectBtn>*/}
+                {/*</form>*/}
+              </SelectBtn>
             </div>
-            <form onSubmit={PlusBuy}>
-              <Link
-                to={{
-                  pathname: `/checkout/${location.pathname.split("/")[2]}`,
-                  state: {
-                    eachData: eachData,
-                    optInfo: Data,
-                    count: count,
-                    total: total,
-                  },
-                }}
-              >
-                <BuyBtn type="submit">구매</BuyBtn>
-              </Link>
-            </form>
+
+            <Link
+              to={{
+                pathname: `/checkout/${location.pathname.split("/")[2]}`,
+                state: {
+                  eachData: eachData,
+                  optInfo: Data,
+                  count: count,
+                  total: total,
+                },
+              }}
+            >
+              <BuyBtn type="submit">구매</BuyBtn>
+            </Link>
           </Btn>
         </RightSide>
       </Wrapper>
