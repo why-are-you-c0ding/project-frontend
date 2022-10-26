@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { SearchBox, TitleContainer } from "@pages/Search/styles";
+import { SearchBox, TitleContainer } from "@pages/SearchItem/styles";
 
 import StatusBar from "@components/StatusBar";
 import {
@@ -13,17 +13,20 @@ import {
   Wrapper,
 } from "@components/MainItem/styles";
 import NullData from "@components/NullData";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
 import { ListData } from "@typings/db";
 import fetcher from "@utils/fetcher";
 import { useInView } from "react-intersection-observer";
 
-const Address = () => {
-  const [search, setSearch] = useState("");
-  const onChange = (e: any) => {
-    setSearch(e.target.value);
-  };
+interface state {
+  ["word"]: string;
+}
+
+const SearchItem = () => {
+  const location = useLocation<state>();
+
+  console.log(location.state.word);
 
   const {
     data: SearchData,
@@ -31,7 +34,7 @@ const Address = () => {
     setSize,
   } = useSWRInfinite<ListData>(
     (index) =>
-      `https://waycabvav.shop/items/search?keyword=${search}&page=${index}`,
+      `https://waycabvav.shop/items/search?keyword=${location.state.word}&page=${index}`,
     fetcher
   );
 
@@ -59,20 +62,8 @@ const Address = () => {
   return (
     <Wrapper>
       <StatusBar />
-      <TitleContainer>
-        <h2>검색 페이지</h2>
-      </TitleContainer>
-      <SearchBox>
-        <input
-          type="text"
-          value={search}
-          onChange={onChange}
-          placeholder="검색하고 싶은 단어"
-        />
-      </SearchBox>
-      <TitleContainer>
-        <h2>검색 결과</h2>
-      </TitleContainer>
+
+      <h2>검색 결과</h2>
 
       {SearchList.length === 0 && <NullData />}
       <ItemContainer>
@@ -81,8 +72,8 @@ const Address = () => {
           [...Array(SearchList?.length)].map((e, ind) => {
             const MainId = SearchList[ind].itemId;
             return (
-              <Link to={`/shop/${MainId}`}>
-                <ItemBox key={ind} ref={ref}>
+              <Link to={`/shop/${MainId}`} key={ind}>
+                <ItemBox ref={ref}>
                   <ItemImg>
                     <img
                       src={SearchList[ind].imageUrl}
@@ -102,4 +93,4 @@ const Address = () => {
   );
 };
 
-export default Address;
+export default SearchItem;

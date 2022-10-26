@@ -13,6 +13,9 @@ import Menu from "@components/Menu";
 import MenuList from "@components/MenuList";
 import { Link } from "react-router-dom";
 import Search from "@components/Search";
+import { useInView } from "react-intersection-observer";
+import useInput from "@hooks/useInput";
+import { Redirect } from "react-router";
 
 interface Props {
   sideBar?: boolean;
@@ -20,6 +23,8 @@ interface Props {
 
 const StatusBar: FC<Props> = ({ sideBar }) => {
   const [menu, setMenu] = useState(false);
+
+  const [word, onChangeWord, setWord] = useInput("");
 
   const onClickBar = useCallback(() => {
     setMenu((prev) => !prev);
@@ -79,12 +84,22 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
               <Link to="/ProductPage">Shop</Link>
             </span>
             <span>
-              <Link to="/Search">
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-                검색
-              </Link>
-
-              {/*<Search />*/}
+              <label>
+                <input type="text" value={word} onChange={onChangeWord} />
+                <Link
+                  to={{
+                    pathname: "/searchitem",
+                    state: {
+                      word: word,
+                    },
+                  }}
+                >
+                  <FontAwesomeIcon
+                    className={"icon"}
+                    icon={faMagnifyingGlass}
+                  />
+                </Link>
+              </label>
             </span>
             <span className="faBars" onClick={onClickBar}>
               <FontAwesomeIcon icon={faBars} />

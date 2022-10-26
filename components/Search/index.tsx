@@ -6,6 +6,8 @@ import fetcher from "@utils/fetcher";
 import { makeSearch } from "@utils/makeSearch";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 // import { makeSearch } from "@utils/makeSearch";
 const Search = () => {
@@ -56,6 +58,7 @@ const Search = () => {
         autoFocus
         iconBoxSize="3rem"
       />
+      <FontAwesomeIcon icon={faMagnifyingGlass} />
     </div>
   );
 };
