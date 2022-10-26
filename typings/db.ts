@@ -91,6 +91,11 @@ export interface cartLineItems {
 }
 
 // MainItem 컴포넌트에서 사용, 전체 상품 조회
+export interface ListData {
+  ["finalPage"]: boolean;
+  ["items"]: AllData[];
+}
+
 export interface AllData {
   itemId: number;
   itemName: string;
@@ -98,12 +103,6 @@ export interface AllData {
   basicPrice: number;
   imageUrl: string;
   category: string;
-}
-
-// sellList 컴포넌트에서 사용, 판매자가 등록한 상품 조회
-export interface ListData {
-  ["finalPage"]: boolean;
-  ["items"]: AllData[];
 }
 
 // sellOrder 컴포넌트에서 사용, 판매자가 받은 주문 조회
