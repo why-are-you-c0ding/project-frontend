@@ -15,9 +15,10 @@ interface Props {
   itemName: string;
   imageUrl: string;
   information: string;
+  category: string;
 }
 
-const Option: FC<Props> = ({ itemName, imageUrl, information }) => {
+const Option: FC<Props> = ({ itemName, imageUrl, information, category }) => {
   const [toggleTable, setToggleTable] = useState(false);
 
   //optName
@@ -108,7 +109,8 @@ const Option: FC<Props> = ({ itemName, imageUrl, information }) => {
     opt,
     itemName,
     imageUrl,
-    information
+    information,
+    category
   );
 
   const onClickToggleTable = useCallback(() => {
@@ -116,6 +118,11 @@ const Option: FC<Props> = ({ itemName, imageUrl, information }) => {
     //   alert("사진 등록을 해주세요.");
     //   return;
     // }
+
+    if (information === "") {
+      alert("상세 설명을 입력해주세요.");
+      return;
+    }
 
     if (information === "") {
       alert("상세 설명을 입력해주세요.");

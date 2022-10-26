@@ -30,7 +30,8 @@ export const makeOptionGroupRequests = (
   opt: string[][],
   optName: string,
   imageUrl: string,
-  itemExplain: string
+  itemExplain: string,
+  itemCategory: string
 ) => {
   let optLen = [];
 
@@ -58,6 +59,7 @@ export const makeOptionGroupRequests = (
     ["itemName"]: optName,
     ["imageUrl"]: imageUrl,
     ["information"]: itemExplain,
+    ["category"]: itemCategory,
     ["optionGroups"]: eachGroup,
   };
 

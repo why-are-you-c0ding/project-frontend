@@ -7,6 +7,7 @@ export interface IEachData {
   ["optionGroups"]: optionGroups[];
   ["imageUrl"]: string;
   ["information"]: string;
+  ["category"]: string;
 }
 
 export interface optionGroups {
@@ -96,6 +97,7 @@ export interface AllData {
   shopName: string;
   basicPrice: number;
   imageUrl: string;
+  category: string;
 }
 
 // sellList 컴포넌트에서 사용, 판매자가 등록한 상품 조회

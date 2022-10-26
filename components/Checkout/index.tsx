@@ -175,7 +175,11 @@ const Checkout: FC = () => {
             <span>{location.state.eachData.itemName}</span>
           </div>
           <div>
-            <span>선택 옵셥</span>
+            <span>카테고리</span>
+            <span>{location.state.eachData.category}</span>
+          </div>
+          <div>
+            <span>선택 옵션</span>
             <span>{option}</span>
           </div>
           <div>

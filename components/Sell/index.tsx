@@ -17,6 +17,7 @@ import axios from "axios";
 const Sell = () => {
   const [itemName, onChangeItemname, setItemName] = useInput("");
   const [information, onChangeInformation, setItemExplain] = useInput("");
+  const [category, onChangeCategory, setcategory] = useInput("");
 
   const [files, setFiles] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -143,6 +144,16 @@ const Sell = () => {
                 />
               </label>
               <label>
+                <ItemTitle>카테고리</ItemTitle>
+                <Input
+                  type="text"
+                  name="item-category"
+                  value={category}
+                  onChange={onChangeCategory}
+                  placeholder=" 예시) 헬스 용품"
+                />
+              </label>
+              <label>
                 <ItemTitle>상세 설명</ItemTitle>
                 <Input
                   type="text"
@@ -156,6 +167,7 @@ const Sell = () => {
                 itemName={itemName}
                 imageUrl={imageUrl}
                 information={information}
+                category={category}
               />
             </ItemInfo>
           </div>
