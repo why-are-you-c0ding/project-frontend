@@ -28,7 +28,6 @@ const Main = () => {
       <StatusBar />
       <SliderImage />
       <Recommend />
-      <MainItem />
     </div>
   );
 };
