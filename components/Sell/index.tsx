@@ -13,11 +13,37 @@ import {
 import { Input } from "@pages/SignUp/styles";
 import useInput from "@hooks/useInput";
 import axios from "axios";
+import ReponsiveBar from "@components/ReponsiveBar";
 
 const Sell = () => {
+  const categoryList = [
+    "Food",
+    "Health",
+    "Electronics",
+    "Sports & Outdoors",
+    "Baby",
+    "Home",
+    "Household Essentials",
+    "Clothing",
+    "Personal Care",
+    "Toys",
+    "Beauty",
+    "Shop by Brand",
+    "Home Improvement",
+    "Industrial & Scientific",
+    "Patio & Garden",
+    "Pets",
+    "Arts Crafts & Sewing",
+    "Premium Beauty",
+  ];
+
   const [itemName, onChangeItemname, setItemName] = useInput("");
   const [information, onChangeInformation, setItemExplain] = useInput("");
-  const [category, onChangeCategory, setcategory] = useInput("");
+  const [category, setcategory] = useState(categoryList[0]);
+
+  const onChangeCategory = useCallback((e) => {
+    setcategory(e.target.value);
+  }, []);
 
   const [files, setFiles] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -41,8 +67,6 @@ const Sell = () => {
   const onLoadFile = (e: any) => {
     const file = e.target.files;
     setFiles(file);
-
-    // console.log("여기 : ", e);
 
     encodeFileToBase64(e.target.files[0]);
   };
@@ -99,7 +123,8 @@ const Sell = () => {
 
   return (
     <div>
-      <StatusBar />
+      <ReponsiveBar title={"판매 리스트"} />
+
       <Wrapper>
         <Image>
           <h2>등록 상품 이미지</h2>
@@ -114,7 +139,9 @@ const Sell = () => {
               {imageSrc && <img src={imageSrc} alt="preview-img" />}
             </Preview>
 
-            {dragOver && <span>사진은 1:1 비율을 권장합니다.</span>}
+            {dragOver && (
+              <span>사진(jpeg만 가능)은 1:1 비율을 권장합니다.</span>
+            )}
 
             <div>
               <label htmlFor="file">
@@ -145,13 +172,13 @@ const Sell = () => {
               </label>
               <label>
                 <ItemTitle>카테고리</ItemTitle>
-                <Input
-                  type="text"
-                  name="item-category"
-                  value={category}
-                  onChange={onChangeCategory}
-                  placeholder=" 예시) 헬스 용품"
-                />
+                <select onChange={onChangeCategory} value={category}>
+                  {categoryList.map((item) => (
+                    <option value={item} key={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
               </label>
               <label>
                 <ItemTitle>상세 설명</ItemTitle>

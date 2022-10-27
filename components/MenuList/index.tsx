@@ -27,22 +27,28 @@ const MenuList: FC<Props> = ({ onCloseModal }) => {
       <List>
         <CloseBtn onClick={onCloseModal}>X</CloseBtn>
         <div>
-          <span>
+          <div>
             <Link to="/ProductPage">shop</Link>
-          </span>
-          <span>
+          </div>
+          <div>
             <Link to="/mypage/like">장바구니</Link>
-          </span>
-          <span>
-            <Link to="/mypage/my">마이페이지</Link>
-          </span>
-          <span>
+          </div>
+          <div>
+            <Link to="/mypage/buying">주문내역</Link>
+          </div>
+          <div>
+            <Link to="/sellpage/selllist">등록 상품 조회</Link>
+          </div>
+          <div>
+            <Link to="/sellpage/sellorderlist">주문 내역 조회</Link>
+          </div>
+          <div>
             {!isLogin ? (
               <Link to="/login">로그인</Link>
             ) : (
               <div onClick={onLogout}>로그아웃</div>
             )}
-          </span>
+          </div>
         </div>
       </List>
     </div>

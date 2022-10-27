@@ -9,9 +9,7 @@ interface Props {
 const MypageSidebar: FC<Props> = ({ sideBar }) => {
   return (
     <Wrapper sideBar={sideBar}>
-      <Title>
-        <Link to={"/mypage/my"}>마이 페이지</Link>
-      </Title>
+      <Title>마이 페이지</Title>
 
       <Info>
         <header>쇼핑 정보</header>
@@ -27,25 +25,25 @@ const MypageSidebar: FC<Props> = ({ sideBar }) => {
         </span>
       </Info>
 
-      <Info>
-        <header>내 정보</header>
+      {/*<Info>*/}
+      {/*  <header>내 정보</header>*/}
 
-        <span>
-          <NavLink activeClassName="selected" to={`/mypage/profile`}>
-            프로필 정보
-          </NavLink>
-        </span>
-        <span>
-          <NavLink activeClassName="selected" to={`/mypage/address`}>
-            주소록
-          </NavLink>
-        </span>
-        <span>
-          <NavLink activeClassName="selected" to={`/mypage/payment`}>
-            결제 정보
-          </NavLink>
-        </span>
-      </Info>
+      {/*  <span>*/}
+      {/*    <NavLink activeClassName="selected" to={`/mypage/profile`}>*/}
+      {/*      프로필 정보*/}
+      {/*    </NavLink>*/}
+      {/*  </span>*/}
+      {/*  <span>*/}
+      {/*    <NavLink activeClassName="selected" to={`/mypage/address`}>*/}
+      {/*      주소록*/}
+      {/*    </NavLink>*/}
+      {/*  </span>*/}
+      {/*  <span>*/}
+      {/*    <NavLink activeClassName="selected" to={`/mypage/payment`}>*/}
+      {/*      결제 정보*/}
+      {/*    </NavLink>*/}
+      {/*  </span>*/}
+      {/*</Info>*/}
     </Wrapper>
   );
 };

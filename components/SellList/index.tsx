@@ -46,6 +46,7 @@ const SellList = () => {
                       <span>{list[index]?.itemName}</span>
                       <span>{list[index]?.basicPrice}원</span>
                     </div>
+                    <div></div>
                   </InfoTop>
                   <InfoBottom>
                     <div>{list[index]?.shopName}</div>

@@ -8,20 +8,13 @@ import loadable from "@loadable/component";
 
 const Buying = loadable(() => import("@components/Buying"));
 const Like = loadable(() => import("@components/Like"));
-const Profile = loadable(() => import("@components/Profile"));
-const Address = loadable(() => import("@components/Address"));
-const Payment = loadable(() => import("@components/Payment"));
+// const Profile = loadable(() => import("@components/Profile"));
+// const Address = loadable(() => import("@components/Address"));
+// const Payment = loadable(() => import("@components/Payment"));
 const My = loadable(() => import("@components/My"));
 
 const MyPage = () => {
-  const location = useLocation();
-  const [sideBar, setSideBar] = useState(false);
-
-  useEffect(() => {
-    if (location.pathname === "/mypage/my") {
-      setSideBar(true);
-    } else setSideBar(false);
-  }, [location, sideBar]);
+  const [sideBar, setSideBar] = useState(true);
 
   return (
     <div>
@@ -32,12 +25,12 @@ const MyPage = () => {
         </SideBar>
         <RightSide>
           <Switch>
-            <Route path="/mypage/my" component={My} />
+            {/*<Route path="/mypage/my" component={My} />*/}
             <Route path="/mypage/buying" component={Buying} />
             <Route path="/mypage/like" component={Like} />
-            <Route path="/mypage/profile" component={Profile} />
-            <Route path="/mypage/address" component={Address} />
-            <Route path="/mypage/payment" component={Payment} />
+            {/*<Route path="/mypage/profile" component={Profile} />*/}
+            {/*<Route path="/mypage/address" component={Address} />*/}
+            {/*<Route path="/mypage/payment" component={Payment} />*/}
           </Switch>
         </RightSide>
       </Wrapper>

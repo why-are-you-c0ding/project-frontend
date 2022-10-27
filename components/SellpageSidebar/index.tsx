@@ -9,9 +9,7 @@ interface Props {
 const SellpageSidebar: FC<Props> = ({ sideBar }) => {
   return (
     <Wrapper sideBar={sideBar}>
-      <Title>
-        <Link to={"/sellpage/info"}>판매자 페이지</Link>
-      </Title>
+      <Title>판매자 페이지</Title>
 
       <Info>
         <header>상품 등록</header>
@@ -20,20 +18,6 @@ const SellpageSidebar: FC<Props> = ({ sideBar }) => {
             상품 등록
           </NavLink>
         </span>
-        <span>
-          <NavLink activeClassName="selected" to={`/sellpage/sellstock`}>
-            재고 등록
-          </NavLink>
-        </span>
-        <span>
-          <NavLink activeClassName="selected" to={`/sellpage/sellstocklook`}>
-            재고 조회
-          </NavLink>
-        </span>
-      </Info>
-
-      <Info>
-        <header>상품 조회</header>
         <span>
           <NavLink activeClassName="selected" to={"/sellpage/selllist"}>
             등록 상품 조회

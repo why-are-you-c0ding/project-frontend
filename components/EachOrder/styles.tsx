@@ -72,24 +72,23 @@ export const Item = styled.div`
 
 export const ItemName = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
 
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 
   & h2 {
     margin-bottom: 0.5rem;
   }
+`;
 
-  @media (max-width: 940px) {
-  }
-  & span:first-of-type {
-    font-size: 1.5rem;
-  }
-  & span:last-of-type {
-    font-size: 1rem;
-    margin-top: 0.4rem;
-  }
+export const ShopName = styled.div`
+  margin-bottom: 0.5rem;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.9rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
 
 export const OptInfo = styled.span`
@@ -98,7 +97,6 @@ export const OptInfo = styled.span`
 
 export const ItemInfo = styled.div`
   margin-bottom: 0.5rem;
-
   color: rgba(0, 0, 0, 0.4);
 `;
 

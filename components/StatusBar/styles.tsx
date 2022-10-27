@@ -4,15 +4,7 @@ export const BarWrapper = styled.div<{ sideBar: boolean | undefined }>`
   margin-bottom: 9rem;
 
   @media screen and (max-width: 769px) {
-    margin-bottom: 6rem;
-
-    ${({ sideBar }) =>
-      !sideBar &&
-      sideBar !== undefined &&
-      `
-    display: none;
-  `};
-  }
+    margin-bottom: 0;
 `;
 
 export const Bar = styled.div`

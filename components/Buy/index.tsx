@@ -228,7 +228,7 @@ const Buy = () => {
             </div>
           </Option>
 
-          <ItemInfo>판매 처: {eachData?.information}</ItemInfo>
+          <ItemInfo>판매처: {eachData?.information}</ItemInfo>
           <ItemInfo>카테고리: {eachData?.category}</ItemInfo>
 
           <TotalPrice>총 가격: {total}원</TotalPrice>

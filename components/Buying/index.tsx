@@ -57,12 +57,13 @@ const Buying = () => {
                   <img src={v.itemImageUrl} alt={v.itemName} />
                   <ItemInfo>
                     <InfoTop>
-                      <div style={{ paddingBottom: "2.5rem" }}>
+                      <div>
                         <span>{v.itemName}</span>
                         <span>{v.shopName}</span>
                       </div>
+                      <div></div>
                     </InfoTop>
-                    <InfoBottom style={{ marginTop: "0" }}>
+                    <InfoBottom>
                       <div>
                         <span>2~3일 내 도착</span>
                       </div>

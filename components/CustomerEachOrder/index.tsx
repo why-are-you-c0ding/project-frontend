@@ -15,7 +15,6 @@ import {
   OptInfo,
   DeliState,
 } from "@components/EachOrder/styles";
-import axios from "axios";
 import { IEachOrder } from "@typings/db";
 
 const CustomerEachOrder = () => {
@@ -80,7 +79,7 @@ const CustomerEachOrder = () => {
                   ? "주문 진행중"
                   : "주문 완료"}
               </ItemInfo>
-              <Button>주문 취소 버튼</Button>
+              {/*<Button>주문 취소 버튼</Button>*/}
             </DeliState>
 
             <h3>총 가격</h3>

@@ -27,9 +27,15 @@ export const List = styled.div`
     flex-direction: column;
 
     margin-top: 80px;
-    font-size: 25px;
+    font-size: 1.6rem;
 
-    & span {
+    width: 100%;
+
+    & label {
+      width: 100%;
+    }
+
+    & > div {
       padding: 20px 0;
       padding-left: 20px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);

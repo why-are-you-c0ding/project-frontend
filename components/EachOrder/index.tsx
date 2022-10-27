@@ -14,6 +14,7 @@ import {
   Button,
   OptInfo,
   DeliState,
+  ShopName,
 } from "@components/EachOrder/styles";
 import axios from "axios";
 import { IEachOrder } from "@typings/db";
@@ -116,15 +117,8 @@ const EachOrder = () => {
         <MiddleSide></MiddleSide>
         <RightSide>
           <ItemName>
-            <h2>{orderData?.itemName}</h2>
-            <ItemInfo
-              style={{
-                fontSize: "0.9rem",
-                color: "rgba(0,0,0,0.4)",
-              }}
-            >
-              {orderData?.shopName}
-            </ItemInfo>
+            <h3>{orderData?.itemName}</h3>
+            <ShopName>{orderData?.shopName}</ShopName>
           </ItemName>
 
           <div style={{ padding: "0 1rem" }}>

@@ -86,6 +86,7 @@ const SellOrderList = () => {
                           {orderList[index]?.createdAt.slice(0, 16)}
                         </span>
                       </div>
+                      <div></div>
                     </InfoTop>
                     <InfoBottom>
                       <div>

@@ -8,7 +8,11 @@ export const Wrapper = styled.section`
 
 export const Image = styled.section`
   & > div {
-    margin-top: 2rem;
+    margin-top: 8rem;
+
+    @media (max-width: 769px) {
+      margin-top: 16rem;
+    }
 
     & > span {
       display: flex;
@@ -126,6 +130,28 @@ export const ItemInfo = styled.div`
     flex-direction: column;
     align-items: center;
     margin-bottom: 2rem;
+
+    & select {
+      margin: 0.5rem 0;
+      width: 10rem;
+      height: 3rem;
+      border: 1px solid #c4c4c4;
+      border-radius: 10px;
+      box-sizing: border-box;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1rem;
+
+      margin-left: -15rem;
+      margin-top: 0.5rem;
+    }
+
+    & select:focus {
+      border: 1px solid #b7acac;
+      box-sizing: border-box;
+      border-radius: 10px;
+      outline: 3px solid #f8e4ff;
+    }
   }
 
   & input {

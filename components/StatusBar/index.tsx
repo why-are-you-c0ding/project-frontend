@@ -57,13 +57,13 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
         <SubBar>
           <SubMenu>
             <span>
-              <Link to="/sellpage/info">판매 페이지</Link>
+              <Link to="/sellpage/sellregister">판매 페이지</Link>
             </span>
             <span>
               <Link to="/mypage/like">장바구니</Link>
             </span>
             <span>
-              <Link to="/mypage/my">마이 페이지</Link>
+              <Link to="/mypage/buying">마이 페이지</Link>
             </span>
             <span>
               {!isLogin ? (

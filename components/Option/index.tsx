@@ -193,7 +193,22 @@ const Option: FC<Props> = ({ itemName, imageUrl, information, category }) => {
     [Data]
   );
 
-  console.log(optPrice);
+  console.log(JSON.stringify(Data));
+
+  console.log({
+    itemName: "최고급 휴지통",
+    imageUrl:
+      "https://wayc-deploy-bucket.s3.ap-northeast-2.amazonaws.com/images/465d4362-292e-4b76-a4fd-7861ab202c45-%E1%84%92%E1%85%B2%E1%84%8C%E1%85%B5%E1%84%90%E1%85%A9%E1%86%BC.jpeg",
+    information: "이 상품은 최고급 휴지통입니다.",
+    category: "Home",
+    optionGroups: [
+      {
+        options: [{ optionName: "black", price: 2000000 }],
+        optionGroupName: "color",
+        basic: "true",
+      },
+    ],
+  });
 
   return (
     <Wrapper>
