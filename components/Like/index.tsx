@@ -192,9 +192,9 @@ const Like = () => {
                     </div>
 
                     <div>
-                      <span>
-                        {getTotalPrice(item, index) * eachLen[index]}원
-                      </span>
+                      {/*<span>*/}
+                      {/*  {getTotalPrice(item, index) * eachLen[index]}원*/}
+                      {/*</span>*/}
                       <span>
                         <button
                           onClick={(event) => {

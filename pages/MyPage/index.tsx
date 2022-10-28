@@ -28,9 +28,6 @@ const MyPage = () => {
             {/*<Route path="/mypage/my" component={My} />*/}
             <Route path="/mypage/buying" component={Buying} />
             <Route path="/mypage/like" component={Like} />
-            {/*<Route path="/mypage/profile" component={Profile} />*/}
-            {/*<Route path="/mypage/address" component={Address} />*/}
-            {/*<Route path="/mypage/payment" component={Payment} />*/}
           </Switch>
         </RightSide>
       </Wrapper>

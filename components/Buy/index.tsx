@@ -31,9 +31,6 @@ import { Link, useLocation } from "react-router-dom";
 import { makeCartItems } from "@utils/makeCartItems";
 import axios from "axios";
 import { IEachData } from "@typings/db";
-import NullData from "@components/NullData";
-import internal from "stream";
-import { Redirect } from "react-router";
 
 const Buy = () => {
   const location = useLocation();
@@ -181,9 +178,7 @@ const Buy = () => {
             },
           }
         )
-        .then((res) => {
-          alert("증가");
-        })
+        .then((res) => {})
         .catch((err) => {
           alert("실패");
         });

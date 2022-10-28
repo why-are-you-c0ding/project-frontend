@@ -21,13 +21,13 @@ import { IEachOrder } from "@typings/db";
 
 const EachOrder = () => {
   const location = useLocation();
+
   const {
     data: orderData,
     mutate: mutateOrder,
     error,
   } = useSWR<IEachOrder | undefined>(
     `https://waycabvav.shop/orders/${location.pathname.split("/")[2]}`,
-
     fetcher
   );
 

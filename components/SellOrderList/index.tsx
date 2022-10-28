@@ -45,6 +45,10 @@ const SellOrderList = () => {
     }
   }, [inView]);
 
+  console.log(orderData);
+  console.log(orderData);
+  console.log(orderData);
+
   return (
     <div>
       <ReponsiveBar title={"받은 주문 리스트"} />

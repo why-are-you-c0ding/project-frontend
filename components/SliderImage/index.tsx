@@ -9,7 +9,7 @@ const SliderImage = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 2000000,
+    speed: 1000,
     autoplay: true,
     autoplaySpeed: 4000,
     slidesToShow: 1,
