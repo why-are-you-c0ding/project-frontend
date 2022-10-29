@@ -145,7 +145,7 @@ const Checkout: FC = () => {
           <div>
             <span>배송주소</span>
             <span>
-              {address}{" "}
+              {address}
               <SearchBtn onClick={onClickAddrSearch}>주소 검색</SearchBtn>
             </span>
           </div>

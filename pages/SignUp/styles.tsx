@@ -144,6 +144,8 @@ export const SearchBox = styled.div`
   text-align: center;
   & span {
     padding: 20px;
+    font-size: 1.2rem;
+    font-weight: bolder;
 
     & a {
       text-decoration: none;

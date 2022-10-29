@@ -98,8 +98,6 @@ const LogIn = () => {
           <span>
             <Link to="/signup">회원 가입</Link>
           </span>
-          <span>아이디 찾기</span>
-          <span>비밀번호 찾기</span>
         </SearchBox>
       </Form>
     </Wrapper>

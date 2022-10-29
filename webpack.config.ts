@@ -82,7 +82,6 @@ const config: Configuration = {
     devMiddleware: { publicPath: "/dist/" },
     static: { directory: path.resolve(__dirname) },
 
-
     // proxy: {
     //   "/api/": {
     //     target: "https://waycabvav.shop",
