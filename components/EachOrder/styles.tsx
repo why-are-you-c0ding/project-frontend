@@ -17,6 +17,14 @@ export const Wrapper = styled.section`
     flex-direction: column;
     align-items: center;
   }
+
+  @media (max-width: 769px) {
+    margin-top: 6rem;
+
+    img {
+      margin-bottom: 2rem;
+    }
+  }
 `;
 
 export const LeftSide = styled.section``;

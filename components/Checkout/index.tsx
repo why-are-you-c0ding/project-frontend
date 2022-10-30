@@ -16,6 +16,7 @@ import Menu from "@components/Menu";
 import useInput from "@hooks/useInput";
 import AddressSearchModal from "@components/AddressSearchModal";
 import { IEachData } from "@typings/db";
+import { useHistory } from "react-router-dom";
 
 interface state {
   ["count"]: number;
@@ -46,6 +47,7 @@ const Checkout: FC = () => {
   const [address, setAddress] = useState("");
   const [zoneCode, setZoneCode] = useState("");
   const [detailAddr, onChangeDetailAddr, setDetailAddr] = useInput("");
+  const history = useHistory();
 
   const onClickAddrSearch = useCallback(() => {
     setAddrSearch((prev) => !prev);
@@ -75,18 +77,24 @@ const Checkout: FC = () => {
         return;
       }
 
-      axios
-        .post("https://waycabvav.shop/orders", order, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          },
-        })
-        .then((res) => {
-          alert("주문 성공");
-        })
-        .catch((err) => {
-          alert("실패");
-        });
+      if (window.confirm("주문하시겠습니까?")) {
+        axios
+          .post("https://waycabvav.shop/orders", order, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+          })
+          .then((res) => {
+            alert("주문 성공");
+
+            history.push("/");
+          })
+          .catch((err) => {
+            alert("실패");
+          });
+      } else {
+        alert("취소합니다.");
+      }
     },
     [order]
   );
@@ -138,10 +146,6 @@ const Checkout: FC = () => {
           <Title>
             <h3>구매자 정보</h3>
           </Title>
-          <div>
-            <span>이름</span>
-            <span>김덕배</span>
-          </div>
           <div>
             <span>배송주소</span>
             <span>

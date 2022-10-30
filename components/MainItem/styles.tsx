@@ -2,6 +2,10 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.section`
   margin: 2rem 4rem;
+
+  @media (max-width: 769px) {
+    margin-top: 6rem;
+  }
 `;
 
 export const TitleContainer = styled.section`

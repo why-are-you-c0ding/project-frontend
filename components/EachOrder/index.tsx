@@ -115,7 +115,7 @@ const EachOrder = () => {
           </Item>
         </LeftSide>
         <MiddleSide></MiddleSide>
-        <RightSide>
+        <RightSide style={{ margin: "-2rem" }}>
           <ItemName>
             <h3>{orderData?.itemName}</h3>
             <ShopName>{orderData?.shopName}</ShopName>
