@@ -46,10 +46,13 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
 
   const [isLogin, setIsLogin] = useState(localStorage.getItem("jwt") !== null);
 
-  const onLogout = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    localStorage.removeItem("jwt");
-    setIsLogin(false);
-  }, []);
+  const onLogout = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      localStorage.removeItem("jwt");
+      setIsLogin(false);
+    },
+    [isLogin]
+  );
 
   return (
     <BarWrapper sideBar={sideBar}>

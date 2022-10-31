@@ -1,13 +1,10 @@
 import axios from "axios";
 
-const fetcher = (url: string) =>
+const fetcher_noneHeaders = (url: string) =>
   axios
     .get(url, {
       withCredentials: true,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
     })
     .then((response) => response.data);
 
-export default fetcher;
+export default fetcher_noneHeaders;

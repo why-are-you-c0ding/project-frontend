@@ -1,4 +1,4 @@
-// Buy 컴포넌트에서 사용, 장바구니
+// Buy 컴포넌트에서 사용, 개별 상품 조회
 export interface IEachData {
   ["itemId"]: number;
   ["itemName"]: string;

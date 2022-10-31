@@ -42,7 +42,6 @@ const LogIn = () => {
           { withCredentials: true, headers }
         )
         .then((response) => {
-          alert("성공");
           localStorage.setItem("jwt", response.data.jwt);
           setIsLogin(true);
         })

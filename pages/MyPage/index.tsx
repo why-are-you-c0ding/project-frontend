@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import { Wrapper, SideBar, RightSide } from "@pages/MyPage/styles";
 import MypageSidebar from "@components/MypageSidebar";
-import { Route, Switch } from "react-router";
+import { Route, Switch, useHistory } from "react-router";
 import { useLocation } from "react-router-dom";
 import loadable from "@loadable/component";
 
@@ -15,6 +15,11 @@ const My = loadable(() => import("@components/My"));
 
 const MyPage = () => {
   const [sideBar, setSideBar] = useState(true);
+  const history = useHistory();
+
+  if (!localStorage.getItem("jwt")) {
+    history.push("/login");
+  }
 
   return (
     <div>

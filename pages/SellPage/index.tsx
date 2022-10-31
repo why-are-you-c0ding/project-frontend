@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import { Wrapper, SideBar, RightSide } from "@pages/MyPage/styles";
-import { Route, Switch } from "react-router";
+import { Route, Switch, useHistory } from "react-router";
 import { useLocation } from "react-router-dom";
 import loadable from "@loadable/component";
 import SellpageSidebar from "@components/SellpageSidebar";
@@ -15,6 +15,7 @@ const SellOrderList = loadable(() => import("@components/SellOrderList"));
 
 const SellPage = () => {
   const location = useLocation();
+  const history = useHistory();
   const [sideBar, setSideBar] = useState(false);
 
   useEffect(() => {
@@ -22,6 +23,10 @@ const SellPage = () => {
       setSideBar(true);
     } else setSideBar(false);
   }, [location, sideBar]);
+
+  if (!localStorage.getItem("jwt")) {
+    history.push("/login");
+  }
 
   return (
     <div>

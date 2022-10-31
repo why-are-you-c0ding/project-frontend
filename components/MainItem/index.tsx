@@ -17,18 +17,12 @@ import useSWRInfinite from "swr/infinite";
 import fetcher from "@utils/fetcher";
 import { useInView } from "react-intersection-observer";
 import NullData from "@components/NullData";
+import fetcher_noneHeaders from "@utils/fetcher_noneHeaders";
 
 const MainItem = () => {
   const { data: blockData } = useSWR<{ result: string }>(
     "http://localhost:8000/blocks",
     fetcher
-  );
-
-  console.log(blockData?.result);
-  console.log(
-    blockData
-      ? `https://waycabvav.shop/items?page=&blockCategory=${blockData?.result}`
-      : `https://waycabvav.shop/items?page=&blockCategory=`
   );
 
   const {
@@ -40,7 +34,7 @@ const MainItem = () => {
       blockData
         ? `https://waycabvav.shop/items?page=${index}&blockCategory=${blockData?.result}`
         : `https://waycabvav.shop/items?page=${index}&blockCategory=`,
-    fetcher
+    fetcher_noneHeaders
   );
 
   let MainList: any = [];
