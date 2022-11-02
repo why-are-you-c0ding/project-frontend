@@ -63,6 +63,8 @@ export const ItemInfo = styled.div`
 
   min-height: 8rem;
 
+  width: 95%;
+
   & > span {
     font-size: 0.9rem;
     color: rgba(0, 0, 0, 0.6);

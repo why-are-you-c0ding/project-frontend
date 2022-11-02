@@ -60,7 +60,7 @@ const LogIn = () => {
   return (
     <Wrapper>
       <StatusBar />
-      <Header>WAYC</Header>
+      <Header style={{ marginTop: "-4rem" }}>WAYC</Header>
       <SubHeader>Why Are You Coding?</SubHeader>
       <Form onSubmit={onSubmit}>
         <Label>
