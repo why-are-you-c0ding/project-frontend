@@ -32,7 +32,7 @@ const SellList = () => {
         {ListData && list && list.length === 0 && <NullData />}
 
         {ListData && list && list.length !== 0 && (
-          <SubHeader>{list[0]?.shopName}님이 등록한 상품</SubHeader>
+          <SubHeader>{list[0]?.shopName} </SubHeader>
         )}
         {ListData &&
           list &&
