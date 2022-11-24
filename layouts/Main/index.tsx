@@ -14,8 +14,7 @@ const Main = () => {
       <div style={{ marginTop: "7rem" }}></div>
       <SliderImage />
 
-      {isLogin && <Recommend />}
-      {!isLogin && <MainItem />}
+      <MainItem />
     </div>
   );
 };
