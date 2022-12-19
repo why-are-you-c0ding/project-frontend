@@ -11,7 +11,6 @@ const Shop = loadable(() => import(`@pages/Shop`));
 const Order = loadable(() => import(`@pages/Order`));
 const CustomerOrder = loadable(() => import(`@pages/CustomerOrder`));
 const Checkout = loadable(() => import("@components/Checkout"));
-const ProductPage = loadable(() => import(`@pages/ProductPage`));
 const SearchItem = loadable(() => import(`@pages/SearchItem`));
 
 const App = () => {
@@ -34,8 +33,6 @@ const App = () => {
       <Route path="/orders/:orderId" component={Order} />
       <Route path="/customerorders" component={CustomerOrder} />
       <Route path="/customerorders/:orderId" component={CustomerOrder} />
-      <Route path="/productpage" component={ProductPage} />
-      <Route path="/productpage/:itemId" component={ProductPage} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/checkout/:id" component={Checkout} />
       <Route path="/searchitem" component={SearchItem} />
