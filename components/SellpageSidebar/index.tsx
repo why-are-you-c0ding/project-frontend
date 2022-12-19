@@ -14,7 +14,7 @@ const SellpageSidebar: FC<Props> = ({ sideBar }) => {
       <Info>
         <header>상품 등록</header>
         <span>
-          <NavLink activeClassName="selected" to={"/sellpage/sellregister"}>
+          <NavLink activeClassName="selected" to={"/sellpage/signupitem"}>
             상품 등록
           </NavLink>
         </span>

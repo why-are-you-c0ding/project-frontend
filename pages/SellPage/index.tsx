@@ -5,9 +5,10 @@ import { Route, Switch, useHistory } from "react-router";
 import { useLocation } from "react-router-dom";
 import loadable from "@loadable/component";
 import SellpageSidebar from "@components/SellpageSidebar";
+import SignUpItem from "@components/SignUpItem";
 
 const SellInfo = loadable(() => import("@components/SellInfo"));
-const SellRegister = loadable(() => import("@components/SellRegister"));
+const SellRegister = loadable(() => import("@components/SignUpItem"));
 const SellStock = loadable(() => import("@components/SellStock"));
 const SellStockLook = loadable(() => import("@components/SellStockLook"));
 const SellList = loadable(() => import("@components/SellList"));
@@ -38,7 +39,7 @@ const SellPage = () => {
         <RightSide>
           <Switch>
             <Route path="/sellpage/info" component={SellInfo} />
-            <Route path="/sellpage/sellregister" component={SellRegister} />
+            <Route path="/sellpage/signupitem" component={SignUpItem} />
             <Route path="/sellpage/sellstock" component={SellStock} />
             <Route path="/sellpage/sellstocklook" component={SellStockLook} />
             <Route path="/sellpage/selllist" component={SellList} />
