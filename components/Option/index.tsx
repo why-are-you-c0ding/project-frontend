@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useCallback, useState } from "react";
-import { BuyBtn, Explain } from "@components/Sell/styles";
+import { BuyBtn, Explain } from "@components/SignUpItem/styles";
 import {
   Input,
   MakeTableBtn,
@@ -14,11 +14,11 @@ import { Redirect } from "react-router";
 interface Props {
   itemName: string;
   imageUrl: string;
-  information: string;
+  explain: string;
   category: string;
 }
 
-const Option: FC<Props> = ({ itemName, imageUrl, information, category }) => {
+const Option: FC<Props> = ({ itemName, imageUrl, explain, category }) => {
   const [toggleTable, setToggleTable] = useState(false);
 
   //optName
@@ -109,7 +109,7 @@ const Option: FC<Props> = ({ itemName, imageUrl, information, category }) => {
     opt,
     itemName,
     imageUrl,
-    information,
+    explain,
     category
   );
 
@@ -119,12 +119,12 @@ const Option: FC<Props> = ({ itemName, imageUrl, information, category }) => {
     //   return;
     // }
 
-    if (information === "") {
+    if (explain === "") {
       alert("상세 설명을 입력해주세요.");
       return;
     }
 
-    if (information === "") {
+    if (explain === "") {
       alert("상세 설명을 입력해주세요.");
       return;
     }
@@ -156,7 +156,7 @@ const Option: FC<Props> = ({ itemName, imageUrl, information, category }) => {
       //   return;
       // }
 
-      if (information === "") {
+      if (explain === "") {
         alert("상세 설명을 입력해주세요.");
         return;
       }
@@ -199,7 +199,7 @@ const Option: FC<Props> = ({ itemName, imageUrl, information, category }) => {
     itemName: "최고급 휴지통",
     imageUrl:
       "https://wayc-deploy-bucket.s3.ap-northeast-2.amazonaws.com/images/465d4362-292e-4b76-a4fd-7861ab202c45-%E1%84%92%E1%85%B2%E1%84%8C%E1%85%B5%E1%84%90%E1%85%A9%E1%86%BC.jpeg",
-    information: "이 상품은 최고급 휴지통입니다.",
+    explain: "이 상품은 최고급 휴지통입니다.",
     category: "Home",
     optionGroups: [
       {
