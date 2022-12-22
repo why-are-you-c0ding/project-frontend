@@ -17,9 +17,8 @@ import {
 } from "@components/SellStock/styles";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
-import option from "@components/Option";
-import { Input } from "@components/Option/styles";
-import { getCookie } from "@utils/cookie";
+import option from "@components/SellOption";
+import { Input } from "@components/SellOption/styles";
 
 const SellStock = () => {
   const [number, setNumber] = useState<any>({});
