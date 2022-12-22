@@ -19,7 +19,7 @@ import {
   Wrapper,
 } from "@components/SignUpItem/styles";
 import { Input } from "@pages/SignUp/styles";
-import Option from "@components/Option";
+import SellOption from "@components/SellOption";
 import useInput from "@hooks/useInput";
 import axios from "axios";
 import autosize from "autosize";
@@ -224,12 +224,9 @@ const SignUpItem = () => {
           </OptionInfo>
         </EachWrapper>
 
-        <Option
-          itemName={itemName}
-          imageUrl={imageUrl}
-          explain={explain}
-          category={category}
-        />
+        <EachWrapper>
+          <SellOption />
+        </EachWrapper>
       </Wrapper>
     </div>
   );

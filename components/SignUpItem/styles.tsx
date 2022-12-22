@@ -80,37 +80,6 @@ export const DragOver = styled.div`
   border: 2px dashed rgba(0, 0, 0, 0.4);
 `;
 
-export const Explain = styled.div`
-  font-size: 0.8rem;
-  color: rgba(0, 0, 0, 0.5);
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-`;
-
-export const BuyBtn = styled.button`
-  width: 25rem;
-  height: 4rem;
-
-  background-color: cornflowerblue;
-  color: white;
-
-  border: transparent;
-  border-radius: 20px;
-  text-align: center;
-  outline: none;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-
-  font-size: 1.5rem;
-  font-weight: bold;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #d63535;
-    border: none;
-  }
-`;
-
 export const OptionInfo = styled.section`
   display: flex;
   flex-direction: column;
@@ -121,7 +90,7 @@ export const OptionInfo = styled.section`
 `;
 
 export const ItemInfo = styled.div`
-  width: 60%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
