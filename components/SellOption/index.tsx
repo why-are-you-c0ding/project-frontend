@@ -69,7 +69,7 @@ const SellOption: FC<Props> = ({}) => {
       <ItemInfoWrapper>
         <ItemInfo>
           <InputOptions>
-            <ItemTitle>상품 옵션 입력</ItemTitle>
+            <ItemTitle>상품 옵션</ItemTitle>
             <button onClick={addInput}>+</button>
 
             {itemInfos.map((item) => {
