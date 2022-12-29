@@ -9,18 +9,8 @@ import {
   SellOptionContainer,
   Option,
   OptDeleteBtn,
-} from "@components/SellOption/styles";
+} from "@components/SignUpItemBodys/SellOption/styles";
 import { ItemTitle } from "@components/SignUpItem/styles";
-import { Button, Modal } from "antd";
-
-import styled from "@emotion/styled";
-
-const A = styled(Button)`
-  color: #3f96fe;
-  background-color: inherit;
-  box-shadow: none;
-  padding: 0;
-`;
 
 interface Props {}
 
@@ -31,23 +21,10 @@ interface ItemInfo {
 }
 
 const SellOption: FC<Props> = ({}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-  const ItemId = useRef(1);
+  const ItemId = useRef(2);
   const [itemInfos, setItemInfos] = useState<ItemInfo[]>([
     { id: 0, name: "", values: "" },
+    { id: 1, name: "", values: "" },
   ]);
 
   const addInput = useCallback(() => {
@@ -99,27 +76,35 @@ const SellOption: FC<Props> = ({}) => {
       <h3>옵션</h3>
       <ItemInfoWrapper>
         <ItemInfo>
-          <ItemTitle>상품 옵션</ItemTitle>
+          <ItemTitle>기본 옵션</ItemTitle>
           <Explain>
-            첫 옵션은 기본 가격을 입력해주세요.
-            <br />두 번째 옵션의 기본 가격은 1,000원 이상 입력해주세요.{" "}
-            <A type="primary" onClick={showModal}>
-              예시 보기
-            </A>
+            기본 옵션은 필수로 입력해주세요. <br />
+            옵션은 ","을 기준으로 나눠주세요.
           </Explain>
-
-          <Modal
-            title="Basic Modal"
-            open={isModalOpen}
-            onOk={handleOk}
-            onCancel={handleCancel}
-          >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-          </Modal>
-
+          <Option key={itemInfos[0].id}>
+            <OptionName
+              type="text"
+              value={itemInfos[0].name}
+              onChange={(e) => {
+                onChangeItemName(e, 0);
+              }}
+              placeholder={"예시) 색상"}
+            />
+            <OptionValue
+              type="text"
+              value={itemInfos[0].values}
+              onChange={(e) => {
+                onChangeItemValues(e, 0);
+              }}
+              placeholder={"예시) 화이트, 블랙"}
+            />
+          </Option>
+          <div className="gap" />
+          <ItemTitle>추가 옵션</ItemTitle>
+          <Explain>추가 옵션은 선택입니다.(최대 4개 입력 가능)</Explain>
           {itemInfos.map((item, idx) => {
+            if (item.id === 0) return;
+
             return (
               <Option key={item.id}>
                 <OptionName
@@ -138,7 +123,7 @@ const SellOption: FC<Props> = ({}) => {
                   }}
                   placeholder={"예시) 화이트, 블랙"}
                 />
-                {item.id !== 0 && (
+                {item.id !== 1 && (
                   <OptDeleteBtn onClick={() => deleteInput(item.id)}>
                     -
                   </OptDeleteBtn>

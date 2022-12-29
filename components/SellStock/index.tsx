@@ -17,8 +17,8 @@ import {
 } from "@components/SellStock/styles";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
-import option from "@components/SellOption";
-import { Input } from "@components/SellOption/styles";
+import option from "@components/SignUpItemBodys/SellOption";
+import { Input } from "@components/SignUpItemBodys/SellOption/styles";
 
 const SellStock = () => {
   const [number, setNumber] = useState<any>({});

@@ -19,7 +19,7 @@ import {
   Wrapper,
 } from "@components/SignUpItem/styles";
 import { Input } from "@pages/SignUp/styles";
-import SellOption from "@components/SellOption";
+import SellOption from "@components/SignUpItemBodys/SellOption";
 import useInput from "@hooks/useInput";
 import axios from "axios";
 import autosize from "autosize";
