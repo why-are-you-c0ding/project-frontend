@@ -48,6 +48,7 @@ export const Explain = styled.span`
 
 export const Option = styled.div`
   margin-top: 0.5rem;
+  margin-bottom: 1rem;
 
   display: flex;
   align-items: center;
@@ -76,4 +77,25 @@ export const OptDeleteBtn = styled(OptPlusBtn)`
   width: 1rem;
   font-size: 1.8rem;
   margin-left: 0;
+`;
+
+export const MakeTableBtn = styled.button`
+  padding: 0.4rem 1rem;
+  background-color: cornflowerblue;
+  color: white;
+  border: 1px solid rgb(77, 77, 77);
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 8rem;
+  margin-bottom: 1rem;
+
+  &:hover {
+    background-color: #d63535;
+    border: none;
+  }
 `;

@@ -9,22 +9,29 @@ import {
   SellOptionContainer,
   Option,
   OptDeleteBtn,
+  MakeTableBtn,
 } from "@components/SignUpItemBodys/SellOption/styles";
 import { ItemTitle } from "@components/SignUpItem/styles";
+import SellOptionTable from "@components/SignUpItemBodys/SellOptionTable";
+import { makeOptionTableList } from "@utils/makeOptionTableList";
+import { useDispatch } from "react-redux";
+import { getOptionTableList } from "../../../redux/reducers/sellOptionSlice";
 
 interface Props {}
 
-interface ItemInfo {
+export interface ItemInfo {
   id: number;
   name: string;
   values: string;
 }
 
 const SellOption: FC<Props> = ({}) => {
+  const dispatch = useDispatch();
+
   const ItemId = useRef(2);
   const [itemInfos, setItemInfos] = useState<ItemInfo[]>([
-    { id: 0, name: "", values: "" },
-    { id: 1, name: "", values: "" },
+    { id: 0, name: "색상", values: "화이트, 블 랙,그린,  빨강," },
+    { id: 1, name: "사이즈 ", values: "s, m,l" },
   ]);
 
   const addInput = useCallback(() => {
@@ -70,6 +77,10 @@ const SellOption: FC<Props> = ({}) => {
     },
     [itemInfos]
   );
+
+  const onClickOptionApply = useCallback(() => {
+    dispatch(getOptionTableList(makeOptionTableList(itemInfos)));
+  }, [itemInfos]);
 
   return (
     <SellOptionContainer>
@@ -134,6 +145,10 @@ const SellOption: FC<Props> = ({}) => {
               </Option>
             );
           })}
+          <MakeTableBtn onClick={onClickOptionApply}>옵션 적용</MakeTableBtn>
+
+          <ItemTitle>옵션 목록</ItemTitle>
+          <SellOptionTable />
         </ItemInfo>
       </ItemInfoWrapper>
     </SellOptionContainer>
