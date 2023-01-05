@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { Option } from "@utils/makeOptionTableList";
 
@@ -10,6 +10,12 @@ const initialState: SellOption = {
   optionTableList: [],
 };
 
+interface ChangeInfo {
+  num1: number;
+  num2: number;
+  price: string;
+}
+
 export const sellOptionSlice = createSlice({
   name: "sellOption",
   initialState,
@@ -17,8 +23,10 @@ export const sellOptionSlice = createSlice({
     getOptionTableList: (state, action) => {
       state.optionTableList = action.payload;
     },
-    changePrice: (state, action: any) => {
-      console.log(action.num1);
+    changePrice: (state, action: PayloadAction<ChangeInfo>) => {
+      state.optionTableList[action.payload.num1].options[
+        action.payload.num2
+      ].price = action.payload.price;
     },
   },
   extraReducers: (builder) => {},

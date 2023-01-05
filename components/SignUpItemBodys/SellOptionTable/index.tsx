@@ -15,9 +15,8 @@ const SellOptionTable = () => {
   const { optionTableList } = useAppSelector((state) => state.sellOption);
 
   const onChangePrice = useCallback(
-    (num1: number, num2: number, e: ChangeEvent<HTMLInputElement>) => {
-      // optionTableList[num1].options[num2].price = e.target.value;
-      // dispatch(changePrice(num1));
+    (num1: any, num2: number, e: ChangeEvent<HTMLInputElement>) => {
+      dispatch(changePrice({ num1: num1, num2: num2, price: e.target.value }));
     },
     [optionTableList]
   );
