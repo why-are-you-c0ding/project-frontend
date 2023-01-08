@@ -17,15 +17,13 @@ import { makeOptionTableList } from "@utils/makeOptionTableList";
 import { useDispatch } from "react-redux";
 import { getOptionTableList } from "../../../redux/reducers/sellOptionSlice";
 
-interface Props {}
-
 export interface ItemInfo {
   id: number;
   name: string;
   values: string;
 }
 
-const SellOption: FC<Props> = ({}) => {
+const SellOption = () => {
   const dispatch = useDispatch();
 
   const ItemId = useRef(2);
