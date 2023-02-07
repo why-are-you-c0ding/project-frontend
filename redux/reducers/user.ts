@@ -5,42 +5,61 @@ import { setUserAsync } from "../actions/UserAPI";
 
 export interface User {
   isLoggingIn: boolean;
-  data: any;
-  id: string;
+  seller: boolean;
+  nickName: string;
+  email: string;
+  loginId: string;
   password: string;
+  checkPassword: string;
+  age: number;
+  authKey: string;
+  jwt: string;
   error: any;
 }
 
 const initialState: User = {
   isLoggingIn: false,
-  data: [],
-  id: "",
+  seller: false,
+  nickName: "",
+  email: "",
+  loginId: "",
   password: "",
+  checkPassword: "",
+  age: 0,
+  authKey: "",
+  jwt: "",
   error: "",
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    logOut(state, action) {
-      state.data = null;
-    },
-    setLoginForm(state, action) {
-      state.data = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) =>
     builder
-      .addCase(setUserAsync.pending, (state, action) => {
-        state.data = null;
-        state.isLoggingIn = true;
+      //회원가입
+      .addCase(addUserAsync.pending, (state, action) => {
+        console.log("pending");
       })
-      .addCase(setUserAsync.fulfilled, (state, action) => {
-        state.data = action.payload;
+      .addCase(addUserAsync.fulfilled, (state, action) => {
+        console.log(action.payload);
+      })
+      .addCase(addUserAsync.rejected, (state, action) => {
+        console.log(action.payload);
+        state.error = action.payload;
+      })
+      //로그인
+      .addCase(setUserAsync.pending, (state, action) => {
+        console.log("로그인 중");
         state.isLoggingIn = false;
       })
+      .addCase(setUserAsync.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.isLoggingIn = true;
+        state.jwt = action.payload?.jwt;
+      })
       .addCase(setUserAsync.rejected, (state, action) => {
+        console.log("error");
         state.error = action.payload;
       }),
 });
