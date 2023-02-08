@@ -1,8 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { sellOptionSlice } from "./sellOptionSlice";
+import { signUpItemSlice } from "./signUpItemSlice";
 
 const reducer = combineReducers({
-  sellOption: sellOptionSlice.reducer,
+  sellOption: signUpItemSlice.reducer,
 });
 
 export default reducer;

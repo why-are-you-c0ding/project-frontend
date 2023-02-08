@@ -4,10 +4,12 @@ import { Option } from "@utils/makeOptionTableList";
 
 export interface SellOption {
   optionTableList: Option[];
+  isTable: boolean;
 }
 
 const initialState: SellOption = {
   optionTableList: [],
+  isTable: false,
 };
 
 interface ChangeInfo {
@@ -16,12 +18,14 @@ interface ChangeInfo {
   price: string;
 }
 
-export const sellOptionSlice = createSlice({
+export const signUpItemSlice = createSlice({
   name: "sellOption",
   initialState,
   reducers: {
     getOptionTableList: (state, action) => {
       state.optionTableList = action.payload;
+      state.isTable = action.payload.length > 0;
+      console.log(action.payload);
     },
     changePrice: (state, action: PayloadAction<ChangeInfo>) => {
       state.optionTableList[action.payload.num1].options[
@@ -32,7 +36,7 @@ export const sellOptionSlice = createSlice({
   extraReducers: (builder) => {},
 });
 
-export const { getOptionTableList, changePrice } = sellOptionSlice.actions;
+export const { getOptionTableList, changePrice } = signUpItemSlice.actions;
 export const sellOption = (state: RootState) => state.sellOption;
 
-export default sellOptionSlice.reducer;
+export default signUpItemSlice.reducer;
