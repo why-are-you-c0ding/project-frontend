@@ -9,12 +9,13 @@ export const Wrapper = styled.div`
   border-radius: 10px;
 `;
 
-export const Table = styled.div`
+export const Table = styled.div<{ isTable?: boolean }>`
   display: flex;
-  border-bottom: 1px solid;
+
+  border-bottom: ${(props) => (!props.isTable ? "1px solid" : "")};
 
   & > div {
-    width: 33%;
+    width: 50%;
 
     display: flex;
     justify-content: center;
@@ -27,10 +28,14 @@ export const Table = styled.div`
   }
 `;
 
-export const OptionName = styled.div`
-  border-bottom: 1px solid;
+export const Options = styled(Table)`
+  border-top: 1px solid;
+  border-bottom: none;
+`;
 
+export const OptionName = styled.div`
   text-align: center;
+  border-top: 1px solid;
 `;
 
 export const ZeroData = styled.div`

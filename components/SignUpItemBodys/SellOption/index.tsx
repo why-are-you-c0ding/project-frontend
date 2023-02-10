@@ -15,7 +15,7 @@ import { ItemTitle } from "@components/SignUpItem/styles";
 import SellOptionTable from "@components/SignUpItemBodys/SellOptionTable";
 import { makeOptionTableList } from "@utils/makeOptionTableList";
 import { useDispatch } from "react-redux";
-import { getOptionTableList } from "../../../redux/reducers/sellOptionSlice";
+import { getOptionTableList } from "../../../redux/reducers/signUpItemSlice";
 
 export interface ItemInfo {
   id: number;
@@ -77,7 +77,17 @@ const SellOption = () => {
   );
 
   const onClickOptionApply = useCallback(() => {
-    dispatch(getOptionTableList(makeOptionTableList(itemInfos)));
+    let flag = 1;
+
+    for (let item of itemInfos) {
+      if (item.name === "" || item.values === "") {
+        alert("모든 옵션을 입력해주세요");
+        flag = 0;
+        break;
+      }
+    }
+
+    if (flag) dispatch(getOptionTableList(makeOptionTableList(itemInfos)));
   }, [itemInfos]);
 
   return (
