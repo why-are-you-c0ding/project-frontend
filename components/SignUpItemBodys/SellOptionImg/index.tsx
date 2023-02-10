@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { SellOptionImgWrapper } from "@components/SignUpItemBodys/SellOptionImg/styles";
+import { useDispatch } from "react-redux";
+import { changeItemImg } from "../../../redux/reducers/signUpItemSlice";
 
 const SellOptionImg = () => {
+  const dispatch = useDispatch();
+
   const [images, setImages] = useState([]);
   const maxNumber = 1;
 
-  const onChange = (
-    imageList: ImageListType,
-    addUpdateIndex: number[] | undefined
-  ) => {
-    // data for submit
-    setImages(imageList as never[]);
-  };
-
-  console.log(images);
+  const onChange = useCallback(
+    (imageList: ImageListType, addUpdateIndex: number[] | undefined) => {
+      dispatch(changeItemImg(imageList));
+    },
+    [images]
+  );
 
   return (
     <SellOptionImgWrapper>
