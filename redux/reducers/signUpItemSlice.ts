@@ -1,7 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { Option } from "@utils/makeOptionTableList";
 import { ImageListType } from "react-images-uploading";
+import { signUpItem } from "../actions/signUpItemAPI";
+
+interface Options {
+  optionName: string;
+  price: number;
+}
+
+interface Option {
+  options: Options[];
+  optionGroupName: string;
+  basic: boolean;
+}
 
 export interface SellOption {
   optionTableList: Option[];
@@ -28,18 +39,29 @@ export const signUpItemSlice = createSlice({
     getOptionTableList: (state, action) => {
       state.optionTableList = action.payload;
       state.isTable = action.payload.length > 0;
-      console.log(action.payload);
     },
     changePrice: (state, action: PayloadAction<ChangeInfo>) => {
       state.optionTableList[action.payload.num1].options[
         action.payload.num2
-      ].price = action.payload.price;
+      ].price = parseInt(action.payload.price);
     },
     changeItemImg: (state, action) => {
       state.itemImg = action.payload;
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      //signUpItem
+      .addCase(signUpItem.pending, (state, action) => {
+        true;
+      })
+      .addCase(signUpItem.fulfilled, (state, action) => {
+        true;
+      })
+      .addCase(signUpItem.rejected, (state, action) => {
+        true;
+      });
+  },
 });
 
 export const { getOptionTableList, changePrice, changeItemImg } =
