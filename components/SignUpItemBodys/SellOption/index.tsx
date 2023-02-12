@@ -28,8 +28,8 @@ const SellOption = () => {
 
   const ItemId = useRef(2);
   const [itemInfos, setItemInfos] = useState<ItemInfo[]>([
-    { id: 0, name: "색상", values: "화이트, 블 랙,그린,  빨강," },
-    { id: 1, name: "사이즈 ", values: "s, m,l" },
+    { id: 0, name: "", values: "" },
+    { id: 1, name: "", values: "" },
   ]);
 
   const addInput = useCallback(() => {
@@ -81,7 +81,7 @@ const SellOption = () => {
 
     for (let item of itemInfos) {
       if (item.name === "" || item.values === "") {
-        alert("모든 옵션을 입력해주세요");
+        alert("모든 옵션을 입력해주세요.");
         flag = 0;
         break;
       }

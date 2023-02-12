@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   width: 100%;
-  min-height: 12rem;
 
   margin-top: 0.5rem;
   border: 1px solid;
@@ -45,4 +44,6 @@ export const ZeroData = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  margin-bottom: 8rem;
 `;

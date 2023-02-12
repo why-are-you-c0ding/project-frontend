@@ -13,6 +13,7 @@ import {
   ItemInfo,
   ItemTitle,
   OptionInfo,
+  SignBtn,
   Textarea,
   Wrapper,
 } from "@components/SignUpItem/styles";
@@ -21,8 +22,16 @@ import SellOption from "@components/SignUpItemBodys/SellOption";
 import useInput from "@hooks/useInput";
 import autosize from "autosize";
 import SellOptionImg from "@components/SignUpItemBodys/SellOptionImg";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { signUpItem } from "../../redux/actions/signUpItemAPI";
 
 const SignUpItem = () => {
+  const dispatch = useAppDispatch();
+  const { optionTableList, itemImg, isTable } = useAppSelector(
+    (state) => state.sellOption
+  );
+  const { jwt } = useAppSelector((state) => state.userInfo);
+
   const categoryList = [
     "Food",
     "Health",
@@ -45,7 +54,7 @@ const SignUpItem = () => {
   ];
 
   const [itemName, onChangeItemName, setItemName] = useInput("");
-  const [explain, , setItemExplain] = useInput("");
+  const [information, , setInformation] = useInput("");
   const [category, setCategory] = useState(categoryList[0]);
 
   const onChangeCategory = useCallback((e) => {
@@ -54,10 +63,44 @@ const SignUpItem = () => {
 
   const onChangeInformation = useCallback(
     (e: ChangeEvent<HTMLTextAreaElement>) => {
-      setItemExplain(e.target.value);
+      setInformation(e.target.value);
     },
     []
   );
+
+  const onClickSignItem = useCallback(() => {
+    if (itemImg.length === 0) {
+      alert("이미지를 입력하세요.");
+      return;
+    }
+    if (!itemName) {
+      alert("아이템 이름을 입력하세요.");
+      return;
+    }
+    if (!information) {
+      alert("상세 설명을 입력하세요.");
+      return;
+    }
+    if (!isTable) {
+      alert("옵션을 입력하세요.");
+      return;
+    }
+    // for (let options of optionTableList) {
+    //   console.log(options.options);
+    // }
+
+    dispatch(
+      signUpItem({
+        jwt,
+        itemImg,
+        itemName,
+        information,
+        category,
+        optionGroups: optionTableList,
+        isTable,
+      })
+    );
+  }, [jwt, itemImg, itemName, information, category, optionTableList]);
 
   const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -110,7 +153,7 @@ const SignUpItem = () => {
                   <ItemTitle>상세 설명</ItemTitle>
                   <Textarea
                     ref={ref}
-                    value={explain}
+                    value={information}
                     onChange={onChangeInformation}
                     placeholder={"상품 설명을 입력해주세요."}
                   />
@@ -123,6 +166,10 @@ const SignUpItem = () => {
         <EachWrapper>
           <SellOption />
         </EachWrapper>
+
+        <SignBtn>
+          <button onClick={onClickSignItem}>상품 등록</button>
+        </SignBtn>
       </Wrapper>
     </div>
   );

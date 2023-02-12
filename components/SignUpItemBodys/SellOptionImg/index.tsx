@@ -1,17 +1,18 @@
 import React, { useCallback, useState } from "react";
 import ImageUploading, { ImageListType } from "react-images-uploading";
 import { SellOptionImgWrapper } from "@components/SignUpItemBodys/SellOptionImg/styles";
-import { useDispatch } from "react-redux";
 import { changeItemImg } from "../../../redux/reducers/signUpItemSlice";
+import { useAppDispatch } from "../../../redux/hooks";
 
 const SellOptionImg = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [images, setImages] = useState([]);
   const maxNumber = 1;
 
   const onChange = useCallback(
     (imageList: ImageListType, addUpdateIndex: number[] | undefined) => {
+      setImages(imageList as never[]);
       dispatch(changeItemImg(imageList));
     },
     [images]
@@ -37,7 +38,7 @@ const SellOptionImg = () => {
           <div className="upload__image-wrapper">
             {images.length === 0 && (
               <button
-                style={isDragging ? { color: "red" } : undefined}
+                style={isDragging ? { color: "blue" } : undefined}
                 onClick={onImageUpload}
                 {...dragProps}
                 className={"inputBtn"}

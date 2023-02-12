@@ -1,11 +1,11 @@
 import { ItemInfo } from "@components/SignUpItemBodys/SellOption";
 
-export interface Options {
+interface Options {
   optionName: string;
   price: string;
 }
 
-export interface Option {
+interface Option {
   options: Options[];
   optionGroupName: string;
   basic: boolean;
