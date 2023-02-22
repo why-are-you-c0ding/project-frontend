@@ -1,4 +1,10 @@
-import React, { ChangeEvent, useCallback, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   Explain,
   ItemInfo,
@@ -16,6 +22,7 @@ import SellOptionTable from "@components/SignUpItemBodys/SellOptionTable";
 import { makeOptionTableList } from "@utils/makeOptionTableList";
 import { useDispatch } from "react-redux";
 import { getOptionTableList } from "../../../redux/reducers/signUpItemSlice";
+import { useAppSelector } from "../../../redux/hooks";
 
 export interface ItemInfo {
   id: number;
@@ -25,6 +32,7 @@ export interface ItemInfo {
 
 const SellOption = () => {
   const dispatch = useDispatch();
+  const { optionTableList } = useAppSelector((state) => state.sellOption);
 
   const ItemId = useRef(2);
   const [itemInfos, setItemInfos] = useState<ItemInfo[]>([
@@ -89,6 +97,18 @@ const SellOption = () => {
 
     if (flag) dispatch(getOptionTableList(makeOptionTableList(itemInfos)));
   }, [itemInfos]);
+
+  useEffect(() => {
+    let optionMul = 1;
+    optionTableList.map((option) => {
+      optionMul *= option.options.length;
+    });
+
+    if (optionMul > 150) {
+      dispatch(getOptionTableList([]));
+      alert("상품 옵션의 개수가 150개 초과될 수 없습니다.");
+    }
+  }, [optionTableList]);
 
   return (
     <SellOptionContainer>
