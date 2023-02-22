@@ -34,10 +34,10 @@ const SellOption = () => {
   const dispatch = useDispatch();
   const { optionTableList } = useAppSelector((state) => state.sellOption);
 
-  const ItemId = useRef(2);
+  const ItemId = useRef(1);
   const [itemInfos, setItemInfos] = useState<ItemInfo[]>([
     { id: 0, name: "", values: "" },
-    { id: 1, name: "", values: "" },
+    // { id: 1, name: "", values: "" },
   ]);
 
   const addInput = useCallback(() => {
@@ -60,24 +60,28 @@ const SellOption = () => {
     [itemInfos]
   );
 
-  const onChangeItemValues = useCallback(
+  const onChangeItemName = useCallback(
     (e: ChangeEvent<HTMLInputElement>, index: number) => {
-      if (index >= itemInfos.length) return;
-
       let temp = [...itemInfos];
-      temp[index].values = e.target.value;
+      temp.find((v, idx) => {
+        if (v.id === index) {
+          temp[idx].name = e.target.value;
+        }
+      });
 
       setItemInfos(temp);
     },
     [itemInfos]
   );
 
-  const onChangeItemName = useCallback(
+  const onChangeItemValues = useCallback(
     (e: ChangeEvent<HTMLInputElement>, index: number) => {
-      if (index >= itemInfos.length) return;
-
       let temp = [...itemInfos];
-      temp[index].name = e.target.value;
+      temp.find((v, idx) => {
+        if (v.id === index) {
+          temp[idx].values = e.target.value;
+        }
+      });
 
       setItemInfos(temp);
     },
@@ -141,6 +145,9 @@ const SellOption = () => {
           <div className="gap" />
           <ItemTitle>추가 옵션</ItemTitle>
           <Explain>추가 옵션은 선택입니다.(최대 4개 입력 가능)</Explain>
+          {itemInfos.length < 2 && (
+            <button onClick={addInput}>옵션 추가</button>
+          )}
           {itemInfos.map((item, idx) => {
             if (item.id === 0) return;
 
@@ -162,11 +169,9 @@ const SellOption = () => {
                   }}
                   placeholder={"예시) 화이트, 블랙"}
                 />
-                {item.id !== 1 && (
-                  <OptDeleteBtn onClick={() => deleteInput(item.id)}>
-                    -
-                  </OptDeleteBtn>
-                )}
+                <OptDeleteBtn onClick={() => deleteInput(item.id)}>
+                  -
+                </OptDeleteBtn>
                 {idx === itemInfos.length - 1 && itemInfos.length < 5 && (
                   <OptPlusBtn icon={"+"} onClick={addInput} />
                 )}
