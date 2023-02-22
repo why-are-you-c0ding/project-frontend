@@ -46,3 +46,18 @@ export const SellOptionImgWrapper = styled.div`
     }
   }
 `;
+
+export const EditBtn = styled.button`
+  width: 5rem;
+  height: 2rem;
+
+  background-color: #ececec;
+  border-radius: 5px;
+  cursor: pointer;
+
+  :hover {
+    background-color: black;
+    color: white;
+    border: transparent;
+  }
+`;
