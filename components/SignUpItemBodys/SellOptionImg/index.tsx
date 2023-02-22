@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from "react";
 import ImageUploading, { ImageListType } from "react-images-uploading";
-import { SellOptionImgWrapper } from "@components/SignUpItemBodys/SellOptionImg/styles";
+import {
+  EditBtn,
+  SellOptionImgWrapper,
+} from "@components/SignUpItemBodys/SellOptionImg/styles";
 import { changeItemImg } from "../../../redux/reducers/signUpItemSlice";
 import { useAppDispatch } from "../../../redux/hooks";
 
@@ -25,6 +28,8 @@ const SellOptionImg = () => {
         value={images}
         onChange={onChange}
         maxNumber={maxNumber}
+        acceptType={["jpg", "jpeg"]}
+        maxFileSize={1024 * 1024 * 2}
       >
         {({
           imageList,
@@ -51,8 +56,12 @@ const SellOptionImg = () => {
               <div key={index} className="image-item">
                 <img src={image.dataURL} alt={image.name} width="90%" />
                 <div className="image-item__btn-wrapper">
-                  <button onClick={() => onImageUpdate(index)}>수정하기</button>
-                  <button onClick={() => onImageRemove(index)}>삭제하기</button>
+                  <EditBtn onClick={() => onImageUpdate(index)}>
+                    수정하기
+                  </EditBtn>
+                  <EditBtn onClick={() => onImageRemove(index)}>
+                    삭제하기
+                  </EditBtn>
                 </div>
               </div>
             ))}
