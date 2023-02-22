@@ -85,9 +85,19 @@ const SignUpItem = () => {
       alert("옵션을 입력하세요.");
       return;
     }
-    // for (let options of optionTableList) {
-    //   console.log(options.options);
-    // }
+
+    for (let options of optionTableList) {
+      for (let option of options.options) {
+        if (!option.price) {
+          alert("추가 가격을 입력해주세요.");
+          return;
+        }
+        if (option.price < 1000) {
+          alert("추가 가격은 1,000원 이상 입력해주세요.");
+          return;
+        }
+      }
+    }
 
     dispatch(
       signUpItem({
