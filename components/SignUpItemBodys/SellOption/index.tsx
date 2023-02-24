@@ -36,9 +36,12 @@ const SellOption = () => {
 
   const ItemId = useRef(1);
   const [itemInfos, setItemInfos] = useState<ItemInfo[]>([
-    { id: 0, name: "", values: "" },
-    // { id: 1, name: "", values: "" },
+    { id: 0, name: "color", values: "black, white" },
+    { id: 1, name: "sizee", values: "small,middle,   large" },
   ]);
+  // const [itemInfos, setItemInfos] = useState<ItemInfo[]>([
+  //   { id: 0, name: "", values: "" },
+  // ]);
 
   const addInput = useCallback(() => {
     if (itemInfos.length < 5) {
@@ -141,43 +144,49 @@ const SellOption = () => {
               }}
               placeholder={"예시) 화이트, 블랙"}
             />
+            {itemInfos.length === 1 && (
+              <OptPlusBtn icon={"+"} onClick={addInput} />
+            )}
           </Option>
-          <div className="gap" />
-          <ItemTitle>추가 옵션</ItemTitle>
-          <Explain>추가 옵션은 선택입니다.(최대 4개 입력 가능)</Explain>
-          {itemInfos.length < 2 && (
-            <button onClick={addInput}>옵션 추가</button>
-          )}
-          {itemInfos.map((item, idx) => {
-            if (item.id === 0) return;
 
-            return (
-              <Option key={item.id}>
-                <OptionName
-                  type="text"
-                  value={item.name}
-                  onChange={(e) => {
-                    onChangeItemName(e, item.id);
-                  }}
-                  placeholder={"예시) 색상"}
-                />
-                <OptionValue
-                  type="text"
-                  value={item.values}
-                  onChange={(e) => {
-                    onChangeItemValues(e, item.id);
-                  }}
-                  placeholder={"예시) 화이트, 블랙"}
-                />
-                <OptDeleteBtn onClick={() => deleteInput(item.id)}>
-                  -
-                </OptDeleteBtn>
-                {idx === itemInfos.length - 1 && itemInfos.length < 5 && (
-                  <OptPlusBtn icon={"+"} onClick={addInput} />
-                )}
-              </Option>
-            );
-          })}
+          {itemInfos.length > 1 && (
+            <div>
+              <ItemTitle>추가 옵션</ItemTitle>
+              <Explain>추가 옵션은 선택입니다.(최대 4개 입력 가능)</Explain>
+
+              {itemInfos.map((item, idx) => {
+                if (item.id === 0) return;
+
+                return (
+                  <Option key={item.id}>
+                    <OptionName
+                      type="text"
+                      value={item.name}
+                      onChange={(e) => {
+                        onChangeItemName(e, item.id);
+                      }}
+                      placeholder={"예시) 색상"}
+                    />
+                    <OptionValue
+                      type="text"
+                      value={item.values}
+                      onChange={(e) => {
+                        onChangeItemValues(e, item.id);
+                      }}
+                      placeholder={"예시) 화이트, 블랙"}
+                    />
+                    <OptDeleteBtn onClick={() => deleteInput(item.id)}>
+                      -
+                    </OptDeleteBtn>
+                    {idx === itemInfos.length - 1 && itemInfos.length < 5 && (
+                      <OptPlusBtn icon={"+"} onClick={addInput} />
+                    )}
+                  </Option>
+                );
+              })}
+            </div>
+          )}
+
           <MakeTableBtn onClick={onClickOptionApply}>옵션 적용</MakeTableBtn>
 
           <ItemTitle>옵션 목록</ItemTitle>

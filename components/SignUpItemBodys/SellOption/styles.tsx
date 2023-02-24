@@ -30,10 +30,6 @@ export const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  .gap {
-    margin-bottom: 1rem;
-  }
 `;
 
 export const Explain = styled.span`
