@@ -29,7 +29,7 @@ const initialState: SellOption = {
 interface ChangeInfo {
   num1: number;
   num2: number;
-  price: string;
+  price: number;
 }
 
 export const signUpItemSlice = createSlice({
@@ -43,7 +43,7 @@ export const signUpItemSlice = createSlice({
     changePrice: (state, action: PayloadAction<ChangeInfo>) => {
       state.optionTableList[action.payload.num1].options[
         action.payload.num2
-      ].price = parseInt(action.payload.price);
+      ].price = action.payload.price;
     },
     changeItemImg: (state, action) => {
       state.itemImg = action.payload;
