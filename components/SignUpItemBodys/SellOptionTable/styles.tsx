@@ -30,6 +30,16 @@ export const Table = styled.div<{ isTable?: boolean }>`
 export const Options = styled(Table)`
   border-top: 1px solid;
   border-bottom: none;
+
+  & > div:last-of-type {
+    & > input {
+      width: 100%;
+
+      border: none;
+      outline: none;
+      text-align: center;
+    }
+  }
 `;
 
 export const OptionName = styled.div`
