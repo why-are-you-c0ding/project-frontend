@@ -3,12 +3,12 @@ import { RootState } from "../store";
 import { ImageListType } from "react-images-uploading";
 import { signUpItem } from "../actions/signUpItemAPI";
 
-interface Options {
+export interface Options {
   optionName: string;
   price: number;
 }
 
-interface Option {
+export interface Option {
   options: Options[];
   optionGroupName: string;
   basic: boolean;

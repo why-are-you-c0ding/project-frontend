@@ -1,15 +1,5 @@
 import { ItemInfo } from "@components/SignUpItemBodys/SellOption";
-
-interface Options {
-  optionName: string;
-  price: string;
-}
-
-interface Option {
-  options: Options[];
-  optionGroupName: string;
-  basic: boolean;
-}
+import { Option } from "../redux/reducers/signUpItemSlice";
 
 export const makeOptionTableList = (itemInfos: ItemInfo[]) => {
   let list: Option[] = [];
@@ -26,7 +16,7 @@ export const makeOptionTableList = (itemInfos: ItemInfo[]) => {
     for (let i = 0; i < temp.length; i++) {
       item.options.push({
         optionName: temp[i].trim(),
-        price: "",
+        price: 0,
       });
     }
     list.push(item);

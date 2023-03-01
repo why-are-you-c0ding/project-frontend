@@ -18,15 +18,13 @@ const SellOptionTable = () => {
 
   const onChangePrice = useCallback(
     (num1: number, num2: number, e: ChangeEvent<HTMLInputElement>) => {
-      if (
-        !isNaN(parseInt(e.target.value)) &&
-        parseInt(e.target.value) < 10 ** 9
-      ) {
+      const p = e.target.value.trim();
+      if (parseInt(p) < 10 ** 9 || p === "") {
         dispatch(
           changePrice({
             num1: num1,
             num2: num2,
-            price: parseInt(e.target.value),
+            price: p === "" ? 0 : parseInt(p),
           })
         );
       }
@@ -59,7 +57,7 @@ const SellOptionTable = () => {
                   <div>{option.optionName}</div>
                   <div>
                     <input
-                      value={option.price ? option.price : 0}
+                      value={option.price === 0 ? "" : option.price.toString()}
                       onChange={(event) => {
                         onChangePrice(idx1, idx2, event);
                       }}
