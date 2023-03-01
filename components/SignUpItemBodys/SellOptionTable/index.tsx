@@ -44,7 +44,7 @@ const SellOptionTable = () => {
         <ZeroData>데이터가 존재하지 않습니다.</ZeroData>
       )}
       {optionTableList.map((item, idx1) => (
-        <div key={shortId.generate()}>
+        <div key={idx1}>
           <OptionName>
             {item.optionGroupName.trim()}
             {idx1 === 0 ? "의 기본 가격" : "의 추가 가격"}
@@ -52,7 +52,7 @@ const SellOptionTable = () => {
           <div>
             {item.options.map((option, idx2) => {
               return (
-                <Options key={shortId.generate()}>
+                <Options key={idx2}>
                   <div>{option.optionName}</div>
                   <div>
                     <input
