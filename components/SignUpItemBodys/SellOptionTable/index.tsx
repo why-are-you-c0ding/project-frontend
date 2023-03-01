@@ -9,6 +9,7 @@ import {
 } from "@components/SignUpItemBodys/SellOptionTable/styles";
 import { useDispatch } from "react-redux";
 import { changePrice } from "../../../redux/reducers/signUpItemSlice";
+import shortId from "shortid";
 
 const SellOptionTable = () => {
   const dispatch = useDispatch();
@@ -32,8 +33,6 @@ const SellOptionTable = () => {
     [optionTableList]
   );
 
-  console.log(optionTableList);
-
   return (
     <Wrapper>
       <Table isTable={isTable}>
@@ -45,7 +44,7 @@ const SellOptionTable = () => {
         <ZeroData>데이터가 존재하지 않습니다.</ZeroData>
       )}
       {optionTableList.map((item, idx1) => (
-        <div key={idx1}>
+        <div key={shortId.generate()}>
           <OptionName>
             {item.optionGroupName.trim()}
             {idx1 === 0 ? "의 기본 가격" : "의 추가 가격"}
@@ -53,7 +52,7 @@ const SellOptionTable = () => {
           <div>
             {item.options.map((option, idx2) => {
               return (
-                <Options key={idx2}>
+                <Options key={shortId.generate()}>
                   <div>{option.optionName}</div>
                   <div>
                     <input
