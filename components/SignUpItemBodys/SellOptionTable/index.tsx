@@ -9,7 +9,7 @@ import {
 } from "@components/SignUpItemBodys/SellOptionTable/styles";
 import { useDispatch } from "react-redux";
 import { changePrice } from "../../../redux/reducers/signUpItemSlice";
-import shortId from "shortid";
+// import shortId from "shortid";
 
 const SellOptionTable = () => {
   const dispatch = useDispatch();
