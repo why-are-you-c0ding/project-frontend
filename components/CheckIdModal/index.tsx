@@ -44,7 +44,7 @@ const CheckIdModal: FC<Props> = ({
 
       axios
         .post(
-          "https://wayc.store/verification/login-id",
+          "https://waycabvav.shop/verification/login-id",
           {
             loginId: id,
           },
