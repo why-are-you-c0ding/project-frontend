@@ -36,6 +36,8 @@ const CheckIdModal: FC<Props> = ({
   const [failUseID, setFailUseId] = useState(false);
   const [clickCheck, setClickCheck] = useState(false);
 
+  console.log(process.env.REACT_APP_BASE_URL);
+
   const onSubmitId = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -44,7 +46,7 @@ const CheckIdModal: FC<Props> = ({
 
       axios
         .post(
-          "https://waycabvav.shop/verification/login-id",
+          `${1}/verification/login-id`,
           {
             loginId: id,
           },
