@@ -2,6 +2,9 @@ import path from "path";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import webpack, { Configuration as WebpackConfiguration } from "webpack";
 import { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
@@ -69,6 +72,9 @@ const config: Configuration = {
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: isDevelopment ? "development" : "production",
+    }),
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(process.env),
     }),
   ],
   output: {
