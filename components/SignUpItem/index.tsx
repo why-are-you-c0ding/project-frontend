@@ -28,7 +28,7 @@ import { signUpItem } from "../../redux/actions/signUpItemAPI";
 const SignUpItem = () => {
   const dispatch = useAppDispatch();
   const { optionTableList, itemImg, isTable } = useAppSelector(
-    (state) => state.sellOption
+    (state) => state.sellOption,
   );
   const { jwt } = useAppSelector((state) => state.userInfo);
 
@@ -57,7 +57,7 @@ const SignUpItem = () => {
   const [information, , setInformation] = useInput("");
   const [category, setCategory] = useState(categoryList[0]);
 
-  const onChangeCategory = useCallback((e) => {
+  const onChangeCategory = useCallback((e: any) => {
     setCategory(e.target.value);
   }, []);
 
@@ -65,7 +65,7 @@ const SignUpItem = () => {
     (e: ChangeEvent<HTMLTextAreaElement>) => {
       setInformation(e.target.value);
     },
-    []
+    [],
   );
 
   const onClickSignItem = useCallback(() => {
@@ -108,7 +108,7 @@ const SignUpItem = () => {
         category,
         optionGroups: optionTableList,
         isTable,
-      })
+      }),
     );
   }, [jwt, itemImg, itemName, information, category, optionTableList]);
 

@@ -14,12 +14,13 @@ import StatusBar from "@components/StatusBar";
 import useInput from "@hooks/useInput";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Redirect } from "react-router";
+import { useNavigate } from "react-router";
 
 const LogIn = () => {
   const [id, onChangeId, setId] = useInput("");
   const [password, onChangePassword, setPassword] = useInput("");
   const [logInError, setLogInError] = useState(false);
+  const navigate = useNavigate();
 
   const headers = {
     "X-Requested-With": "XMLHttpRequest",
@@ -39,7 +40,7 @@ const LogIn = () => {
             loginId: id,
             password: password,
           },
-          { withCredentials: true, headers }
+          { withCredentials: true, headers },
         )
         .then((response) => {
           localStorage.setItem("jwt", response.data.jwt);
@@ -50,11 +51,11 @@ const LogIn = () => {
           setLogInError(error.response?.data?.statuseCode === 401);
         });
     },
-    [id, password]
+    [id, password],
   );
 
   if (isLogin) {
-    return <Redirect to={"/main"} />;
+    navigate("/main", { replace: true });
   }
 
   return (

@@ -1,6 +1,7 @@
 import React from "react";
-import { Redirect, Route, Switch } from "react-router";
+import { Route, Routes } from "react-router";
 import loadable from "@loadable/component";
+import { BrowserRouter } from "react-router-dom";
 
 const SignUp = loadable(() => import("@pages/SignUp"));
 const LogIn = loadable(() => import("@pages/LogIn"));
@@ -15,28 +16,29 @@ const SearchItem = loadable(() => import(`@pages/SearchItem`));
 
 const App = () => {
   return (
-    <Switch>
-      <Route exact path="/">
-        <Redirect to="main" />
-      </Route>
-      <Route path="/main" component={Main} />
-      <Route path="/main/:main" component={Main} />
-      <Route path="/signup" component={SignUp} />
-      <Route path="/login" component={LogIn} />
-      <Route path="/mypage" component={MyPage} />
-      <Route path="/mypage/:id" component={MyPage} />
-      <Route path="/sellpage" component={SellPage} />
-      <Route path="/sellpage/:id" component={SellPage} />
-      <Route path="/shop" component={Shop} />
-      <Route path="/shop/:itemId" component={Shop} />
-      <Route path="/orders" component={Order} />
-      <Route path="/orders/:orderId" component={Order} />
-      <Route path="/customerorders" component={CustomerOrder} />
-      <Route path="/customerorders/:orderId" component={CustomerOrder} />
-      <Route path="/checkout" component={Checkout} />
-      <Route path="/checkout/:id" component={Checkout} />
-      <Route path="/searchitem" component={SearchItem} />
-    </Switch>
+    <Routes>
+      {/*<Route exact path="/">*/}
+      {/*  <Redirect to="main" />*/}
+      {/*</Route>*/}
+      <Route path="/" element={<Main />} />
+      <Route path="/main" element={<Main />} />
+      <Route path="/main/:main" element={<Main />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<LogIn />} />
+      <Route path="/mypage" element={<MyPage />} />
+      <Route path="/mypage/:id" element={<MyPage />} />
+      <Route path="/sellpage" element={<SellPage />} />
+      <Route path="/sellpage/:id" element={<SellPage />} />
+      <Route path="/shop" element={<Shop />} />
+      <Route path="/shop/:itemId" element={<Shop />} />
+      <Route path="/orders" element={<Order />} />
+      <Route path="/orders/:orderId" element={<Order />} />
+      <Route path="/customerorders" element={<CustomerOrder />} />
+      <Route path="/customerorders/:orderId" element={<CustomerOrder />} />
+      <Route path="/checkout" element={<Checkout />} />
+      <Route path="/checkout/:id" element={<Checkout />} />
+      <Route path="/searchitem" element={<SearchItem />} />
+    </Routes>
   );
 };
 

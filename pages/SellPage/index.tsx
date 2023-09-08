@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import StatusBar from "@components/StatusBar";
 import { Wrapper, SideBar, RightSide } from "@pages/MyPage/styles";
-import { Route, Switch, useHistory } from "react-router";
-import { useLocation } from "react-router-dom";
+import { Outlet, useNavigate, Route, Routes } from "react-router-dom"; // Updated imports
 import loadable from "@loadable/component";
 import SellpageSidebar from "@components/SellpageSidebar";
 
@@ -14,19 +13,22 @@ const SellList = loadable(() => import("@components/SellList"));
 const SellOrderList = loadable(() => import("@components/SellOrderList"));
 
 const SellPage = () => {
-  const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [sideBar, setSideBar] = useState(false);
 
   useEffect(() => {
-    if (location.pathname === "/sellpage/info") {
+    if (window.location.pathname === "/sellpage/info") {
       setSideBar(true);
-    } else setSideBar(false);
-  }, [location, sideBar]);
+    } else {
+      setSideBar(false);
+    }
+  }, []);
 
-  if (!localStorage.getItem("jwt")) {
-    history.push("/login");
-  }
+  useEffect(() => {
+    if (!localStorage.getItem("jwt")) {
+      navigate("/login", { replace: true });
+    }
+  }, [navigate]);
 
   return (
     <div>
@@ -36,17 +38,21 @@ const SellPage = () => {
           <SellpageSidebar sideBar={sideBar} />
         </SideBar>
         <RightSide>
-          <Switch>
-            <Route path="/sellpage/info" component={SellInfo} />
-            <Route path="/sellpage/signupitem" component={SignUpItem} />
-            <Route path="/sellpage/sellstock" component={SellStock} />
-            <Route path="/sellpage/sellstocklook" component={SellStockLook} />
-            <Route path="/sellpage/selllist" component={SellList} />
-            <Route path="/sellpage/sellorderlist" component={SellOrderList} />
-          </Switch>
+          <Routes>
+            {" "}
+            {/* Use Routes component */}
+            <Route path="/info" element={<SellInfo />} />
+            <Route path="/signupitem" element={<SignUpItem />} />
+            <Route path="/sellstock" element={<SellStock />} />
+            <Route path="/sellstocklook" element={<SellStockLook />} />
+            <Route path="/selllist" element={<SellList />} />
+            <Route path="/sellorderlist" element={<SellOrderList />} />
+          </Routes>
         </RightSide>
       </Wrapper>
+      <Outlet /> {/* Render nested routes */}
     </div>
   );
 };
+
 export default SellPage;

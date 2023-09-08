@@ -15,7 +15,6 @@ import { Link } from "react-router-dom";
 import Search from "@components/Search";
 import { useInView } from "react-intersection-observer";
 import useInput from "@hooks/useInput";
-import { Redirect } from "react-router";
 
 interface Props {
   sideBar?: boolean;
@@ -51,7 +50,7 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
       localStorage.removeItem("jwt");
       setIsLogin(false);
     },
-    [isLogin]
+    [isLogin],
   );
 
   return (
@@ -90,11 +89,9 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
               <label>
                 <input type="text" value={word} onChange={onChangeWord} />
                 <Link
-                  to={{
-                    pathname: "/searchitem",
-                    state: {
-                      word: word,
-                    },
+                  to={"/searchitem"}
+                  state={{
+                    word: word,
                   }}
                 >
                   <FontAwesomeIcon

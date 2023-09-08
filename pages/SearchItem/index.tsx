@@ -24,7 +24,7 @@ interface state {
 }
 
 const SearchItem = () => {
-  const location = useLocation<state>();
+  const location = useLocation();
 
   console.log(location.state.word);
 
@@ -35,7 +35,7 @@ const SearchItem = () => {
   } = useSWRInfinite<ListData>(
     (index) =>
       `https://waycabvav.shop/items/search?keyword=${location.state.word}&page=${index}`,
-    fetcher
+    fetcher,
   );
 
   let SearchList: any = [];

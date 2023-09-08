@@ -2,17 +2,17 @@ import React, { CSSProperties, FC, useEffect } from "react";
 import { Back, Title, Wrapper } from "@components/ReponsiveBar/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 interface Props {
   title: string;
 }
 
 const ReponsiveBar: FC<Props> = ({ title }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleHistory = () => {
-    history.goBack();
+    navigate(-1);
   };
 
   return (
