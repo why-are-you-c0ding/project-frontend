@@ -1,11 +1,11 @@
- import React, { FC, useCallback } from "react";
+import React, { FC, useCallback } from "react";
 import { CreateModal } from "@components/Menu/styles";
 
 interface Props {
   show: boolean;
   onCloseModal: (e: React.SyntheticEvent<EventTarget>) => void;
   closeButton?: boolean;
-  children: React.PropsWithChildren<{}>;
+  children: React.ReactNode;
 }
 
 const Menu: FC<Props> = ({ children, show, onCloseModal, closeButton }) => {

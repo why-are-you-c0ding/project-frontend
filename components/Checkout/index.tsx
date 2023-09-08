@@ -16,7 +16,7 @@ import Menu from "@components/Menu";
 import useInput from "@hooks/useInput";
 import AddressSearchModal from "@components/AddressSearchModal";
 import { IEachData } from "@typings/db";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 interface state {
   ["count"]: number;
@@ -47,14 +47,14 @@ const Checkout: FC = () => {
   const [address, setAddress] = useState("");
   const [zoneCode, setZoneCode] = useState("");
   const [detailAddr, onChangeDetailAddr, setDetailAddr] = useInput("");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onClickAddrSearch = useCallback(() => {
     setAddrSearch((prev) => !prev);
     setPopup((prev) => !prev);
   }, []);
 
-  const location = useLocation<state>();
+  const location = useLocation();
 
   const order = makeOrder(
     location.state.eachData,
@@ -63,7 +63,7 @@ const Checkout: FC = () => {
     address,
     zoneCode,
     detailAddr,
-    location.state.total
+    location.state.total,
   );
 
   const onClickBuyBtn = useCallback(
@@ -87,7 +87,7 @@ const Checkout: FC = () => {
           .then((res) => {
             alert("주문 성공");
 
-            history.push("/");
+            navigate("/");
           })
           .catch((err) => {
             alert("실패");
@@ -96,7 +96,7 @@ const Checkout: FC = () => {
         alert("취소합니다.");
       }
     },
-    [order]
+    [order],
   );
 
   let option: string = "";
@@ -125,12 +125,12 @@ const Checkout: FC = () => {
               Authorization: `Bearer ${localStorage.getItem("jwt")}`,
               "Content-type": "application/json",
             },
-          }
+          },
         )
         .then((res) => {})
         .catch((err) => {});
     },
-    [location.state.eachData]
+    [location.state.eachData],
   );
 
   return (
