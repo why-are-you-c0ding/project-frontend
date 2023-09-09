@@ -78,7 +78,7 @@ const LogIn = () => {
           </div>
         </Label>
         <Label>
-          <span>비밀 번호*</span>
+          <span>비밀 번호</span>
           <div>
             <Input
               type="password"
