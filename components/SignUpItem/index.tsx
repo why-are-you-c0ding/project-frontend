@@ -28,9 +28,9 @@ import { signUpItem } from "../../redux/actions/signUpItemAPI";
 const SignUpItem = () => {
   const dispatch = useAppDispatch();
   const { optionTableList, itemImg, isTable } = useAppSelector(
-    (state) => state.sellOption,
+    (state: any) => state.sellOption,
   );
-  const { jwt } = useAppSelector((state) => state.userInfo);
+  const { jwt } = useAppSelector((state: any) => state.userInfo);
 
   const categoryList = [
     "Food",

@@ -19,6 +19,6 @@ export const userInfoSlice = createSlice({
 });
 
 export const {} = userInfoSlice.actions;
-export const userInfo = (state: RootState) => state.userInfo;
+// export const userInfo = (state: RootState) => state.userInfo;
 
 export default userInfoSlice.reducer;
