@@ -32,7 +32,7 @@ export interface ItemInfo {
 
 const SellOption = () => {
   const dispatch = useDispatch();
-  const { optionTableList } = useAppSelector((state) => state.sellOption);
+  const { optionTableList } = useAppSelector((state: any) => state.sellOption);
 
   const ItemId = useRef(1);
   const [itemInfos, setItemInfos] = useState<ItemInfo[]>([
@@ -60,7 +60,7 @@ const SellOption = () => {
     (index: number) => {
       setItemInfos(itemInfos.filter((item) => item.id !== index));
     },
-    [itemInfos]
+    [itemInfos],
   );
 
   const onChangeItemName = useCallback(
@@ -74,7 +74,7 @@ const SellOption = () => {
 
       setItemInfos(temp);
     },
-    [itemInfos]
+    [itemInfos],
   );
 
   const onChangeItemValues = useCallback(
@@ -88,7 +88,7 @@ const SellOption = () => {
 
       setItemInfos(temp);
     },
-    [itemInfos]
+    [itemInfos],
   );
 
   const onClickOptionApply = useCallback(() => {
@@ -107,7 +107,7 @@ const SellOption = () => {
 
   useEffect(() => {
     let optionMul = 1;
-    optionTableList.map((option) => {
+    optionTableList.map((option: any) => {
       optionMul *= option.options.length;
     });
 

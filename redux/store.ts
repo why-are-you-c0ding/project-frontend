@@ -1,12 +1,14 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import reducer from "./reducers";
+import { memberApi } from "../api/memberApi";
 
 export const store = configureStore({
-  reducer,
+  reducer: {
+    [memberApi.reducerPath]: memberApi.reducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }).concat(memberApi.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

@@ -66,6 +66,6 @@ export const signUpItemSlice = createSlice({
 
 export const { getOptionTableList, changePrice, changeItemImg } =
   signUpItemSlice.actions;
-export const sellOption = (state: RootState) => state.sellOption;
+// export const sellOption = (state: RootState) => state.sellOption;
 
 export default signUpItemSlice.reducer;

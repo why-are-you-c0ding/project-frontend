@@ -14,7 +14,7 @@ import { changePrice } from "../../../redux/reducers/signUpItemSlice";
 const SellOptionTable = () => {
   const dispatch = useDispatch();
   const { optionTableList, isTable } = useAppSelector(
-    (state) => state.sellOption
+    (state: any) => state.sellOption,
   );
 
   const onChangePrice = useCallback(
@@ -26,11 +26,11 @@ const SellOptionTable = () => {
             num1: num1,
             num2: num2,
             price: p === "" ? 0 : parseInt(p),
-          })
+          }),
         );
       }
     },
-    [optionTableList]
+    [optionTableList],
   );
 
   return (
@@ -43,14 +43,14 @@ const SellOptionTable = () => {
       {optionTableList.length === 0 && (
         <ZeroData>데이터가 존재하지 않습니다.</ZeroData>
       )}
-      {optionTableList.map((item, idx1) => (
+      {optionTableList.map((item: any, idx1: number) => (
         <div key={idx1}>
           <OptionName>
             {item.optionGroupName.trim()}
             {idx1 === 0 ? "의 기본 가격" : "의 추가 가격"}
           </OptionName>
           <div>
-            {item.options.map((option, idx2) => {
+            {item.options.map((option: any, idx2: number) => {
               return (
                 <Options key={idx2}>
                   <div>{option.optionName}</div>

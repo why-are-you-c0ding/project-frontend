@@ -75,7 +75,7 @@ const SignUp = () => {
       setPassword(e.target.value);
       setMismatchError(e.target.value === passwordCheck);
     },
-    [passwordCheck, setPassword]
+    [passwordCheck, setPassword],
   );
 
   const onChangePasswordCheck = useCallback(
@@ -83,7 +83,7 @@ const SignUp = () => {
       setPasswordCheck(e.target.value);
       setMismatchError(e.target.value === password);
     },
-    [password, setPasswordCheck]
+    [password, setPasswordCheck],
   );
 
   const onCloseCheckIdModal = useCallback(() => {
@@ -124,8 +124,8 @@ const SignUp = () => {
       axios
         .post(
           seller
-            ? "https://waycabvav.shop/members/sellers"
-            : "https://waycabvav.shop/members/consumers",
+            ? "https://wayc.store/members/sellers"
+            : "https://wayc.store/members/consumers",
           {
             nickName: nickname,
             email: email,
@@ -135,7 +135,7 @@ const SignUp = () => {
             age: age,
             authKey: authKey,
           },
-          { withCredentials: true, headers }
+          { withCredentials: true, headers },
         )
         .then((response) => {
           alert("회원가입에 성공하셨습니다. 로그인을 해주세요");
@@ -168,7 +168,7 @@ const SignUp = () => {
       mismatchCondition,
       seller,
       authKey,
-    ]
+    ],
   );
 
   return (
