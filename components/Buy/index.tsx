@@ -37,7 +37,7 @@ const Buy = () => {
 
   const { data: eachData, error } = useSWR<IEachData | undefined>(
     `https://waycabvav.shop/items/${location.pathname.split("/")[2]}`,
-    fetcher
+    fetcher,
   );
 
   const [count, setCount] = useState(1);
@@ -74,7 +74,7 @@ const Buy = () => {
     if (temp && eachData) {
       for (let j = 0; j < temp; j++) {
         optGroupValue[i].push(
-          eachData?.optionGroups[i]?.options[j]?.optionName
+          eachData?.optionGroups[i]?.options[j]?.optionName,
         );
       }
     }
@@ -134,11 +134,11 @@ const Buy = () => {
     eachData?.itemId,
     count,
     eachData?.itemName,
-    eachData?.imageUrl
+    eachData?.imageUrl,
   );
 
   const Data = DataPrice[0];
-  const total = DataPrice[1];
+  const total = DataPrice[1] as number;
 
   const onClickCart = useCallback(
     (e: any) => {
@@ -153,7 +153,7 @@ const Buy = () => {
         })
         .catch((err) => {});
     },
-    [Data]
+    [Data],
   );
 
   const item_id2 = Number(eachData?.itemId);
@@ -176,14 +176,14 @@ const Buy = () => {
               Authorization: `Bearer ${localStorage.getItem("jwt")}`,
               "Content-type": "application/json",
             },
-          }
+          },
         )
         .then((res) => {})
         .catch((err) => {
           alert("실패");
         });
     },
-    [eachData]
+    [eachData],
   );
 
   return (
@@ -253,14 +253,12 @@ const Buy = () => {
             </div>
 
             <Link
-              to={{
-                pathname: `/checkout/${location.pathname.split("/")[2]}`,
-                state: {
-                  eachData: eachData,
-                  optInfo: Data,
-                  count: count,
-                  total: total,
-                },
+              to={`/checkout/${location.pathname.split("/")[2]}`}
+              state={{
+                eachData: eachData,
+                optInfo: Data,
+                count: count,
+                total: total,
               }}
             >
               <BuyBtn type="submit">구매</BuyBtn>

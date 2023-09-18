@@ -14,12 +14,18 @@ const MypageSidebar: FC<Props> = ({ sideBar }) => {
       <Info>
         <header>쇼핑 정보</header>
         <span>
-          <NavLink activeClassName="selected" to={"/mypage/buying"}>
+          <NavLink
+            className={(isActive) => (isActive ? "selected" : "")}
+            to={"/mypage/buying"}
+          >
             주문 내역
           </NavLink>
         </span>
         <span>
-          <NavLink activeClassName="selected" to={`/mypage/like`}>
+          <NavLink
+            className={(isActive) => (isActive ? "selected" : "")}
+            to={`/mypage/like`}
+          >
             장바구니
           </NavLink>
         </span>

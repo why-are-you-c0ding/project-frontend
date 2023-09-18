@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import StatusBar from "@components/StatusBar";
 import { Wrapper, SideBar, RightSide } from "@pages/MyPage/styles";
 import MypageSidebar from "@components/MypageSidebar";
-import { Route, Switch, useHistory } from "react-router";
-import { useLocation } from "react-router-dom";
+import { Outlet, useNavigate, Route, Routes } from "react-router-dom"; // Updated imports
 import loadable from "@loadable/component";
 
 const Buying = loadable(() => import("@components/Buying"));
@@ -14,29 +13,34 @@ const Like = loadable(() => import("@components/Like"));
 const My = loadable(() => import("@components/My"));
 
 const MyPage = () => {
-  const [sideBar, setSideBar] = useState(true);
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  if (!localStorage.getItem("jwt")) {
-    history.push("/login");
-  }
+  useEffect(() => {
+    if (!localStorage.getItem("jwt")) {
+      navigate("/login", { replace: true });
+    }
+  }, [navigate]);
 
   return (
     <div>
-      <StatusBar sideBar={sideBar} />
+      <StatusBar sideBar={true} />
       <Wrapper>
         <SideBar>
-          <MypageSidebar sideBar={sideBar} />
+          <MypageSidebar sideBar={true} />
         </SideBar>
         <RightSide>
-          <Switch>
-            {/*<Route path="/mypage/my" component={My} />*/}
-            <Route path="/mypage/buying" component={Buying} />
-            <Route path="/mypage/like" component={Like} />
-          </Switch>
+          <Routes>
+            {" "}
+            {/* Use Routes component */}
+            {/*<Route path="/my" element={<Profile />} />*/}
+            <Route path="/buying" element={<Buying />} />
+            <Route path="/like" element={<Like />} />
+          </Routes>
         </RightSide>
       </Wrapper>
+      <Outlet /> {/* Render nested routes */}
     </div>
   );
 };
+
 export default MyPage;

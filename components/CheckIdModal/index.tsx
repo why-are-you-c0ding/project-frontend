@@ -17,6 +17,7 @@ import {
 } from "@components/CheckIdModal/styles";
 import { Correct, Error } from "@pages/SignUp/styles";
 import axios from "axios";
+import { memberApi } from "../../api/memberApi";
 
 interface Props {
   id: string;
@@ -35,6 +36,7 @@ const CheckIdModal: FC<Props> = ({
 }) => {
   const [failUseID, setFailUseId] = useState(false);
   const [clickCheck, setClickCheck] = useState(false);
+  const mutation = memberApi.useValidateIdMutation();
 
   const onSubmitId = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
@@ -42,42 +44,44 @@ const CheckIdModal: FC<Props> = ({
 
       if (!id && !id.trim()) return;
 
-      axios
-        .post(
-          "https://waycabvav.shop/verification/login-id",
-          {
-            loginId: id,
-          },
-          { withCredentials: true }
-        )
-        .then((response) => {
-          setFailUseId(true);
-          setId(id);
-          setCheckId(true);
+      mutation[0]({ loginId: id });
 
-          if (id.length < 6) {
-            setFailUseId(false);
-            setCheckId(false);
-          }
-        })
-        .catch((error) => {
-          setFailUseId(false);
-          setCheckId(false);
-
-          console.log(error.response);
-        })
-        .finally(() => {
-          setClickCheck(true);
-        });
+      // axios
+      //   .post(
+      //     `/verification/login-id`,
+      //     {
+      //       loginId: id,
+      //     },
+      //     { withCredentials: true },
+      //   )
+      //   .then((response) => {
+      //     setFailUseId(true);
+      //     setId(id);
+      //     setCheckId(true);
+      //
+      //     if (id.length < 6) {
+      //       setFailUseId(false);
+      //       setCheckId(false);
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     setFailUseId(false);
+      //     setCheckId(false);
+      //
+      //     console.log(error.response);
+      //   })
+      //   .finally(() => {
+      //     setClickCheck(true);
+      //   });
     },
-    [id, setId]
+    [id, setId],
   );
 
   const stopPropagation = useCallback(
     (e: React.SyntheticEvent<EventTarget>) => {
       e.stopPropagation();
     },
-    []
+    [],
   );
 
   return (

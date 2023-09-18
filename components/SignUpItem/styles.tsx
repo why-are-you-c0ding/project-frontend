@@ -171,3 +171,30 @@ export const EachWrapper = styled.div`
   min-width: 800px;
   margin-bottom: 2rem;
 `;
+
+export const SignBtn = styled.div`
+  display: flex;
+  justify-content: center;
+
+  & > button {
+    padding: 0.4rem 1rem;
+    background-color: cornflowerblue;
+    color: white;
+    border: 1px solid rgb(77, 77, 77);
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 10rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+
+    &:hover {
+      background-color: #d63535;
+      border: none;
+    }
+  }
+`;

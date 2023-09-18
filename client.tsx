@@ -7,16 +7,16 @@ import axios from "axios";
 
 import App from "@layouts/App/App";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import { store } from "./redux/store";
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "https://waycabvav.shop";
 
 render(
-  <BrowserRouter>
-    <Provider store={store}>
+  <Provider store={store}>
+    <BrowserRouter>
       <App />
-    </Provider>
-  </BrowserRouter>,
+    </BrowserRouter>
+  </Provider>,
   document.querySelector("#app")
 );

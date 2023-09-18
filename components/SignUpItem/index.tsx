@@ -8,23 +8,30 @@ import React, {
 import { TopHeader } from "@pages/MyPage/styles";
 import ReponsiveBar from "@components/ReponsiveBar";
 import {
-  DragOver,
   EachWrapper,
   Image,
   ItemInfo,
   ItemTitle,
   OptionInfo,
-  Preview,
+  SignBtn,
   Textarea,
   Wrapper,
 } from "@components/SignUpItem/styles";
 import { Input } from "@pages/SignUp/styles";
 import SellOption from "@components/SignUpItemBodys/SellOption";
 import useInput from "@hooks/useInput";
-import axios from "axios";
 import autosize from "autosize";
+import SellOptionImg from "@components/SignUpItemBodys/SellOptionImg";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { signUpItem } from "../../redux/actions/signUpItemAPI";
 
 const SignUpItem = () => {
+  const dispatch = useAppDispatch();
+  const { optionTableList, itemImg, isTable } = useAppSelector(
+    (state: any) => state.sellOption,
+  );
+  const { jwt } = useAppSelector((state: any) => state.userInfo);
+
   const categoryList = [
     "Food",
     "Health",
@@ -46,96 +53,64 @@ const SignUpItem = () => {
     "Premium Beauty",
   ];
 
-  const [itemName, onChangeItemname, setItemName] = useInput("");
-  const [explain, , setItemExplain] = useInput("");
+  const [itemName, onChangeItemName, setItemName] = useInput("");
+  const [information, , setInformation] = useInput("");
   const [category, setCategory] = useState(categoryList[0]);
 
-  const onChangeCategory = useCallback((e) => {
+  const onChangeCategory = useCallback((e: any) => {
     setCategory(e.target.value);
   }, []);
 
   const onChangeInformation = useCallback(
     (e: ChangeEvent<HTMLTextAreaElement>) => {
-      setItemExplain(e.target.value);
+      setInformation(e.target.value);
     },
-    []
+    [],
   );
 
-  const [files, setFiles] = useState("");
-  const [imageSrc, setImageSrc] = useState("");
-  const [dragOver, setDragOver] = useState(true);
-
-  const encodeFileToBase64 = (fileBlob: Blob) => {
-    const reader: any = new FileReader();
-
-    reader.readAsDataURL(fileBlob);
-
-    return new Promise<void>((resolve) => {
-      reader.onload = () => {
-        if (reader.result) setImageSrc(reader.result);
-        setDragOver(false);
-
-        resolve();
-      };
-    });
-  };
-
-  const onLoadFile = (e: any) => {
-    const file = e.target.files;
-    setFiles(file);
-
-    encodeFileToBase64(e.target.files[0]);
-  };
-
-  const [imageUrl, setImageUrl] = useState("");
-
-  useEffect(() => {
-    if (files && imageSrc) {
-      const formdata = new FormData();
-      formdata.append("images", files[0]);
-
-      axios
-        .post("https://waycabvav.shop/images", formdata, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((response) => {
-          setImageUrl(response.data.imageUrl);
-          console.log(response);
-        })
-        .catch((error) => {});
+  const onClickSignItem = useCallback(() => {
+    if (itemImg.length === 0) {
+      alert("이미지를 입력하세요.");
+      return;
     }
-  }, [files, imageSrc]);
+    if (!itemName) {
+      alert("아이템 이름을 입력하세요.");
+      return;
+    }
+    if (!information) {
+      alert("상세 설명을 입력하세요.");
+      return;
+    }
+    if (!isTable) {
+      alert("옵션을 입력하세요.");
+      return;
+    }
 
-  const formData = new FormData();
-
-  const onDrop = useCallback((e: any) => {
-    e.preventDefault();
-    if (e.dataTransfer.item) {
-      for (let i = 0; i < e.dataTransfer.items.length; i++) {
-        // If dropped items aren't files, reject them
-        if (e.dataTransfer.items[i].kind === "file") {
-          const file = e.dataTransfer.items[i].getAsFile();
-          formData.append("images", file);
+    for (let options of optionTableList) {
+      for (let option of options.options) {
+        if (!option.price) {
+          alert("추가 가격을 입력해주세요.");
+          return;
+        }
+        if (option.price < 1000) {
+          alert("추가 가격은 1,000원 이상 입력해주세요.");
+          return;
         }
       }
-    } else {
-      for (let i = 0; i < e.dataTransfer.files.length; i++) {
-        formData.append("images", e.dataTransfer.files[i]);
-      }
     }
 
-    setFiles(e.dataTransfer.files);
-
-    encodeFileToBase64(e.dataTransfer.files[0]);
-  }, []);
-
-  const onDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setDragOver(true);
-  }, []);
+    dispatch(
+      signUpItem({
+        jwt,
+        itemImg,
+        itemName,
+        information,
+        category,
+        optionGroups: optionTableList,
+        isTable,
+      }),
+    );
+  }, [jwt, itemImg, itemName, information, category, optionTableList]);
 
   const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -155,33 +130,7 @@ const SignUpItem = () => {
         <EachWrapper>
           <Image>
             <h3>등록 상품 이미지</h3>
-
-            <div>
-              <Preview onDrop={onDrop} onDragOver={onDragOver}>
-                {dragOver && (
-                  <DragOver>
-                    <div>상품 사진</div>
-                  </DragOver>
-                )}
-                {imageSrc && <img src={imageSrc} alt="preview-img" />}
-              </Preview>
-
-              {dragOver && (
-                <span>사진(jpeg만 가능)은 1:1 비율을 권장합니다.</span>
-              )}
-
-              <div>
-                <label htmlFor="file">
-                  <div>파일 업로드</div>
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  accept="image/jpeg"
-                  onChange={onLoadFile}
-                />
-              </div>
-            </div>
+            <SellOptionImg />
           </Image>
         </EachWrapper>
 
@@ -196,7 +145,7 @@ const SignUpItem = () => {
                     type="text"
                     name="item-name"
                     value={itemName}
-                    onChange={onChangeItemname}
+                    onChange={onChangeItemName}
                     placeholder="상품 이름을 입력해주세요."
                   />
                 </label>
@@ -214,7 +163,7 @@ const SignUpItem = () => {
                   <ItemTitle>상세 설명</ItemTitle>
                   <Textarea
                     ref={ref}
-                    value={explain}
+                    value={information}
                     onChange={onChangeInformation}
                     placeholder={"상품 설명을 입력해주세요."}
                   />
@@ -227,6 +176,10 @@ const SignUpItem = () => {
         <EachWrapper>
           <SellOption />
         </EachWrapper>
+
+        <SignBtn>
+          <button onClick={onClickSignItem}>상품 등록</button>
+        </SignBtn>
       </Wrapper>
     </div>
   );

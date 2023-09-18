@@ -1,4 +1,10 @@
-import React, { ChangeEvent, FC, useCallback, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   Explain,
   ItemInfo,
@@ -9,23 +15,33 @@ import {
   SellOptionContainer,
   Option,
   OptDeleteBtn,
+  MakeTableBtn,
 } from "@components/SignUpItemBodys/SellOption/styles";
 import { ItemTitle } from "@components/SignUpItem/styles";
+import SellOptionTable from "@components/SignUpItemBodys/SellOptionTable";
+import { makeOptionTableList } from "@utils/makeOptionTableList";
+import { useDispatch } from "react-redux";
+import { getOptionTableList } from "../../../redux/reducers/signUpItemSlice";
+import { useAppSelector } from "../../../redux/hooks";
 
-interface Props {}
-
-interface ItemInfo {
+export interface ItemInfo {
   id: number;
   name: string;
   values: string;
 }
 
-const SellOption: FC<Props> = ({}) => {
-  const ItemId = useRef(2);
+const SellOption = () => {
+  const dispatch = useDispatch();
+  const { optionTableList } = useAppSelector((state: any) => state.sellOption);
+
+  const ItemId = useRef(1);
   const [itemInfos, setItemInfos] = useState<ItemInfo[]>([
-    { id: 0, name: "", values: "" },
-    { id: 1, name: "", values: "" },
+    { id: 0, name: "color", values: "black, white" },
+    { id: 1, name: "sizee", values: "small,middle,   large" },
   ]);
+  // const [itemInfos, setItemInfos] = useState<ItemInfo[]>([
+  //   { id: 0, name: "", values: "" },
+  // ]);
 
   const addInput = useCallback(() => {
     if (itemInfos.length < 5) {
@@ -44,32 +60,62 @@ const SellOption: FC<Props> = ({}) => {
     (index: number) => {
       setItemInfos(itemInfos.filter((item) => item.id !== index));
     },
-    [itemInfos]
-  );
-
-  const onChangeItemValues = useCallback(
-    (e: ChangeEvent<HTMLInputElement>, index: number) => {
-      if (index >= itemInfos.length) return;
-
-      let temp = [...itemInfos];
-      temp[index].values = e.target.value;
-
-      setItemInfos(temp);
-    },
-    [itemInfos]
+    [itemInfos],
   );
 
   const onChangeItemName = useCallback(
     (e: ChangeEvent<HTMLInputElement>, index: number) => {
-      if (index >= itemInfos.length) return;
-
       let temp = [...itemInfos];
-      temp[index].name = e.target.value;
+      temp.find((v, idx) => {
+        if (v.id === index) {
+          temp[idx].name = e.target.value;
+        }
+      });
 
       setItemInfos(temp);
     },
-    [itemInfos]
+    [itemInfos],
   );
+
+  const onChangeItemValues = useCallback(
+    (e: ChangeEvent<HTMLInputElement>, index: number) => {
+      let temp = [...itemInfos];
+      temp.find((v, idx) => {
+        if (v.id === index) {
+          temp[idx].values = e.target.value;
+        }
+      });
+
+      setItemInfos(temp);
+    },
+    [itemInfos],
+  );
+
+  const onClickOptionApply = useCallback(() => {
+    let flag = 1;
+
+    for (let item of itemInfos) {
+      if (item.name === "" || item.values === "") {
+        alert("모든 옵션을 입력해주세요.");
+        flag = 0;
+        break;
+      }
+    }
+
+    if (flag) dispatch(getOptionTableList(makeOptionTableList(itemInfos)));
+  }, [itemInfos]);
+
+  useEffect(() => {
+    let optionMul = 1;
+    optionTableList.map((option: any) => {
+      optionMul *= option.options.length;
+    });
+
+    if (optionMul > 150) {
+      dispatch(getOptionTableList([]));
+      alert("상품 옵션의 개수가 150개 초과될 수 없습니다.");
+    }
+  }, [optionTableList]);
 
   return (
     <SellOptionContainer>
@@ -98,42 +144,53 @@ const SellOption: FC<Props> = ({}) => {
               }}
               placeholder={"예시) 화이트, 블랙"}
             />
+            {itemInfos.length === 1 && (
+              <OptPlusBtn icon={"+"} onClick={addInput} />
+            )}
           </Option>
-          <div className="gap" />
-          <ItemTitle>추가 옵션</ItemTitle>
-          <Explain>추가 옵션은 선택입니다.(최대 4개 입력 가능)</Explain>
-          {itemInfos.map((item, idx) => {
-            if (item.id === 0) return;
 
-            return (
-              <Option key={item.id}>
-                <OptionName
-                  type="text"
-                  value={item.name}
-                  onChange={(e) => {
-                    onChangeItemName(e, item.id);
-                  }}
-                  placeholder={"예시) 색상"}
-                />
-                <OptionValue
-                  type="text"
-                  value={item.values}
-                  onChange={(e) => {
-                    onChangeItemValues(e, item.id);
-                  }}
-                  placeholder={"예시) 화이트, 블랙"}
-                />
-                {item.id !== 1 && (
-                  <OptDeleteBtn onClick={() => deleteInput(item.id)}>
-                    -
-                  </OptDeleteBtn>
-                )}
-                {idx === itemInfos.length - 1 && itemInfos.length < 5 && (
-                  <OptPlusBtn icon={"+"} onClick={addInput} />
-                )}
-              </Option>
-            );
-          })}
+          {itemInfos.length > 1 && (
+            <div>
+              <ItemTitle>추가 옵션</ItemTitle>
+              <Explain>추가 옵션은 선택입니다.(최대 4개 입력 가능)</Explain>
+
+              {itemInfos.map((item, idx) => {
+                if (item.id === 0) return;
+
+                return (
+                  <Option key={item.id}>
+                    <OptionName
+                      type="text"
+                      value={item.name}
+                      onChange={(e) => {
+                        onChangeItemName(e, item.id);
+                      }}
+                      placeholder={"예시) 색상"}
+                    />
+                    <OptionValue
+                      type="text"
+                      value={item.values}
+                      onChange={(e) => {
+                        onChangeItemValues(e, item.id);
+                      }}
+                      placeholder={"예시) 화이트, 블랙"}
+                    />
+                    <OptDeleteBtn onClick={() => deleteInput(item.id)}>
+                      -
+                    </OptDeleteBtn>
+                    {idx === itemInfos.length - 1 && itemInfos.length < 5 && (
+                      <OptPlusBtn icon={"+"} onClick={addInput} />
+                    )}
+                  </Option>
+                );
+              })}
+            </div>
+          )}
+
+          <MakeTableBtn onClick={onClickOptionApply}>옵션 적용</MakeTableBtn>
+
+          <ItemTitle>옵션 목록</ItemTitle>
+          <SellOptionTable />
         </ItemInfo>
       </ItemInfoWrapper>
     </SellOptionContainer>

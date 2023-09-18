@@ -1,8 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import userSlice from "./user";
+import { signUpItemSlice } from "./signUpItemSlice";
+import { userInfoSlice } from "./userInfoSlice";
 
 const reducer = combineReducers({
-  user: userSlice.reducer,
+  sellOption: signUpItemSlice.reducer,
+  userInfo: userInfoSlice.reducer,
 });
 
 export default reducer;
