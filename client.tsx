@@ -6,8 +6,13 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "@layouts/App/App";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
 import { ChakraProvider, extendBaseTheme } from "@chakra-ui/react";
+import store from "@redux/store";
+
+import { worker } from "@mock/browser";
+if (process.env.NODE_ENV === "development") {
+  worker.start();
+}
 
 const root = ReactDOM.createRoot(document.querySelector("#app") as HTMLElement);
 
