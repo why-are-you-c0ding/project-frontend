@@ -1,22 +1,27 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 import React from "react";
-import { render } from "react-dom";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import axios from "axios";
 
 import App from "@layouts/App/App";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { ChakraProvider, extendBaseTheme } from "@chakra-ui/react";
+import store from "@redux/store";
 
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "https://waycabvav.shop";
+import { worker } from "@mock/browser";
+if (process.env.NODE_ENV === "development") {
+  worker.start();
+}
 
-render(
+const root = ReactDOM.createRoot(document.querySelector("#app") as HTMLElement);
+
+root.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ChakraProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ChakraProvider>
   </Provider>,
-  document.querySelector("#app")
 );

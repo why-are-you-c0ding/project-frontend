@@ -29,6 +29,8 @@ const config: Configuration = {
       "@typings": path.resolve(__dirname, "typings"),
       "@api": path.resolve(__dirname, "api"),
       "@redux": path.resolve(__dirname, "redux"),
+      "@mock": path.resolve(__dirname, "mock"),
+      "@public": path.resolve(__dirname, "public"),
     },
   },
   entry: {

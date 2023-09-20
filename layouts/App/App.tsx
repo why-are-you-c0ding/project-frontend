@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import loadable from "@loadable/component";
-import { BrowserRouter } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = loadable(() => import("@pages/SignUp"));
 const LogIn = loadable(() => import("@pages/LogIn"));

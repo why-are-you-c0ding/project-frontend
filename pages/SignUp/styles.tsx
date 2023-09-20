@@ -16,25 +16,23 @@ export const Header = styled.header`
   margin-bottom: 2rem;
 `;
 
-export const Div = styled.div`
-  position: relative;
+export const IsCheckWrapper = styled.div`
+  & > span {
+    margin-right: 0.8rem;
+  }
 `;
 
 export const Button = styled.button`
   width: 4rem;
-  height: 1.5rem;
+  height: 1.3rem;
   border-radius: 5px;
   background-color: #e8e1e1;
   color: inherit;
   border: transparent;
   text-align: center;
-  margin-left: 1rem;
   font-weight: bold;
   cursor: pointer;
-
-  position: absolute;
-  top: 0;
-  left: 4.5rem;
+  font-size: 0.8rem;
 `;
 
 export const SubHeader = styled.div`
