@@ -7,8 +7,6 @@ import React, {
 } from "react";
 import useInput from "@hooks/useInput";
 import { Link } from "react-router-dom";
-import axios from "axios";
-
 import {
   Form,
   Error,
@@ -22,14 +20,12 @@ import {
   Wrapper,
   LinkContainer,
   Button,
-  Div,
   CheckSeller,
+  IsCheckWrapper,
 } from "./styles";
 import StatusBar from "@components/StatusBar";
-import Menu from "@components/Menu";
-import CheckIdModal from "@components/CheckIdModal";
-import CheckNicknameModal from "@components/CheckNicknameModal";
-import SendProveEmail from "@components/SendProveEmail";
+import { toast, ToastContainer } from "react-toastify";
+import { setupWorker, rest } from "msw";
 
 const SignUp = () => {
   const [id, onChangeId, setId] = useInput("");
@@ -48,13 +44,41 @@ const SignUp = () => {
   const [mismatchError, setMismatchError] = useState(false);
   const [mismatchCondition, setMismatchCondition] = useState(false);
 
-  const [checkId, setCheckId] = useState(false);
-  const [checkNickname, setCheckNickname] = useState(false);
-  const [checkEmail, setCheckEmail] = useState(false);
+  console.log(
+    fetch("/todos")
+      .then((response) => response.json())
+      .then((data) => console.log(data)),
+  );
 
-  const [checkIdModal, setCheckIdModal] = useState(false);
-  const [checkNicknameModal, setCheckNicknameModal] = useState(false);
-  const [checkEmailModal, setCheckEmailModal] = useState(false);
+  const onCheckId = useCallback(() => {
+    if (!id) {
+      toast.warn("사용할 아이디를 입력해주세요!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+
+    if (id.length < 6) {
+      toast.warn("아이디를 6자 이상 입력해주세요!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+
+    // toast("Default Notification !");
+    //
+    // toast.success("Success Notification !", {
+    //   position: toast.POSITION.TOP_CENTER,
+    // });
+    //
+    // toast.error("Error Notification !", {
+    //   position: toast.POSITION.TOP_LEFT,
+    // });
+    //
+    // toast.info("Info Notification !", {
+    //   position: toast.POSITION.BOTTOM_CENTER,
+    // });
+  }, [id]);
 
   // 여기 변수로 나이 계산
   useEffect(() => {
@@ -86,18 +110,6 @@ const SignUp = () => {
     [password, setPasswordCheck],
   );
 
-  const onCloseCheckIdModal = useCallback(() => {
-    setCheckIdModal((prev) => !prev);
-  }, []);
-
-  const onCloseCheckNicknameModal = useCallback(() => {
-    setCheckNicknameModal((prev) => !prev);
-  }, []);
-
-  const onCloseCheckEmailModal = useCallback(() => {
-    setCheckEmailModal((prev) => !prev);
-  }, []);
-
   const onChangeSeller = useCallback(() => {
     setSeller((prev) => !prev);
   }, [seller]);
@@ -105,94 +117,51 @@ const SignUp = () => {
   const headers = {
     "X-Requested-With": "XMLHttpRequest",
   };
-  const onSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-
-      if (
-        !checkId ||
-        !mismatchError ||
-        !mismatchCondition ||
-        (!birthDay && !birthDay.trim()) ||
-        !checkEmail ||
-        !checkNickname
-      ) {
-        alert("전부 조건에 맞게 입력해주세요!");
-        return;
-      }
-
-      axios
-        .post(
-          seller
-            ? "https://wayc.store/members/sellers"
-            : "https://wayc.store/members/consumers",
-          {
-            nickName: nickname,
-            email: email,
-            loginId: id,
-            password: password,
-            checkPassword: passwordCheck,
-            age: age,
-            authKey: authKey,
-          },
-          { withCredentials: true, headers },
-        )
-        .then((response) => {
-          alert("회원가입에 성공하셨습니다. 로그인을 해주세요");
-          setSignUpSuccess(true);
-          setId("");
-          setPassword("");
-          setPasswordCheck("");
-          setEmail("");
-          setNickname("");
-          setBirthDay("");
-          setAge(0);
-          setAuthKey("");
-        })
-        .catch((error) => {
-          alert("아이디, 패스워드를 확인해주세요.");
-          console.log(error.response);
-        });
-    },
-    [
-      id,
-      password,
-      passwordCheck,
-      birthDay,
-      age,
-      email,
-      nickname,
-      checkId,
-      checkNickname,
-      mismatchError,
-      mismatchCondition,
-      seller,
-      authKey,
-    ],
-  );
+  const onSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  }, []);
 
   return (
     <div>
       <StatusBar />
+      <ToastContainer />
       <Wrapper>
         <Header>회원가입</Header>
         <Form onSubmit={onSubmit}>
-          <Div>
-            <Label>
+          <Label>
+            <IsCheckWrapper>
               <span>아이디*</span>
-              <Input
-                type="text"
-                id="id"
-                name="id"
-                value={id}
-                onChange={onChangeId}
-                placeholder="예) Wayc123, 6자 이상"
-              />
-            </Label>
-            <Button type="button" onClick={onCloseCheckIdModal}>
-              중복 체크
-            </Button>
-          </Div>
+              <Button type="button" onClick={onCheckId}>
+                중복 체크
+              </Button>
+            </IsCheckWrapper>
+            <Input
+              type="text"
+              id="id"
+              name="id"
+              value={id}
+              onChange={onChangeId}
+              placeholder="예) Wayc123, 6자 이상"
+            />
+          </Label>
+
+          <Label>
+            <IsCheckWrapper>
+              <span>이메일 주소*</span>
+              <Button type="button" onClick={() => {}}>
+                인증 번호
+              </Button>
+            </IsCheckWrapper>
+            <Input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={onChangeEmail}
+              placeholder="예) wayc@google.com"
+            />
+          </Label>
+
           <Label>
             <span>비밀 번호*</span>
             <div>
@@ -258,6 +227,25 @@ const SignUp = () => {
               </Correct>
             )}
           </Label>
+
+          <Label>
+            <IsCheckWrapper>
+              <span>닉네임*</span>
+              <Button type="button" onClick={() => {}}>
+                중복 체크
+              </Button>
+            </IsCheckWrapper>
+            <Input
+              type="text"
+              id="nickname"
+              name="nickname"
+              value={nickname}
+              onChange={onChangeNickname}
+              placeholder="예) 나비, 2자 이상"
+              minLength={2}
+            />
+          </Label>
+
           <Label>
             <span>생년 월일*</span>
             <Input
@@ -266,40 +254,6 @@ const SignUp = () => {
               onChange={onChangeBirthDay}
             ></Input>
           </Label>
-          <Div>
-            <Label>
-              <span>이메일 주소*</span>
-              <Input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={onChangeEmail}
-                placeholder="예) wayc@google.com"
-              />
-            </Label>
-            <Button type="button" onClick={onCloseCheckEmailModal}>
-              인증 번호
-            </Button>
-          </Div>
-
-          <Div>
-            <Label>
-              <span>닉네임*</span>
-              <Input
-                type="text"
-                id="nickname"
-                name="nickname"
-                value={nickname}
-                onChange={onChangeNickname}
-                placeholder="예) 나비, 2자 이상"
-                minLength={2}
-              />
-            </Label>
-            <Button type="button" onClick={onCloseCheckNicknameModal}>
-              중복 체크
-            </Button>
-          </Div>
 
           <CheckSeller>
             <span>*판매자로 가입하시려면 체크해주세요</span>
@@ -316,49 +270,6 @@ const SignUp = () => {
           이미 회원이신가요? &nbsp;
           <Link to="/login">로그인 하러가기</Link>
         </LinkContainer>
-        {
-          <Menu show={checkIdModal} onCloseModal={onCloseCheckIdModal}>
-            {
-              <CheckIdModal
-                id={id}
-                onChangeId={onChangeId}
-                onCloseCheckIdModal={onCloseCheckIdModal}
-                setId={setId}
-                setCheckId={setCheckId}
-              />
-            }
-          </Menu>
-        }
-        {
-          <Menu
-            show={checkNicknameModal}
-            onCloseModal={onCloseCheckNicknameModal}
-          >
-            {
-              <CheckNicknameModal
-                nickname={nickname}
-                onChangeNickname={onChangeNickname}
-                onCloseCheckIdModal={onCloseCheckNicknameModal}
-                setNickname={setNickname}
-                setCheckNickname={setCheckNickname}
-              />
-            }
-          </Menu>
-        }
-        {
-          <Menu show={checkEmailModal} onCloseModal={onCloseCheckEmailModal}>
-            {
-              <SendProveEmail
-                email={email}
-                onChangeEmail={onChangeEmail}
-                onCloseCheckEmailModal={onCloseCheckEmailModal}
-                setCheckEmail={setCheckEmail}
-                authKey={authKey}
-                onChangeAuthKey={onChangeAuthKey}
-              />
-            }
-          </Menu>
-        }
       </Wrapper>
     </div>
   );

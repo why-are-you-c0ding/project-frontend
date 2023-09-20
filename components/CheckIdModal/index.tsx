@@ -16,8 +16,7 @@ import {
   Wrapper,
 } from "@components/CheckIdModal/styles";
 import { Correct, Error } from "@pages/SignUp/styles";
-import axios from "axios";
-import { memberApi } from "../../api/memberApi";
+import { memberApi } from "@api/memberApi";
 
 interface Props {
   id: string;
