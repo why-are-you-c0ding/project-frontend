@@ -86,5 +86,3 @@ export const memberApi = createApi({
     }),
   }),
 });
-
-// export const { useValidateIdQuery } = memberApi;
