@@ -12,5 +12,40 @@ export const myPageApi = createApi({
         return [{ type: "cart", id: arg.name }];
       },
     }),
+    getCart: builder.query({
+      query: () => "/carts/current",
+      providesTags: (result, error, arg) => {
+        return [{ type: "cart", id: "current" }];
+      },
+    }),
+    deleteCartItem: builder.mutation({
+      query: ({ cartLineItemId }) => ({
+        url: `/carts/cart-line-items/${cartLineItemId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result, error, arg) => {
+        return [{ type: "cart", id: "current" }];
+      },
+    }),
+    downCartItem: builder.mutation({
+      query: ({ cartLineItemId, count }) => ({
+        url: `/carts/cart-line-items/${cartLineItemId}`,
+        method: "PATCH",
+        body: { count },
+      }),
+      invalidatesTags: (result, error, arg) => {
+        return [{ type: "cart", id: "current" }];
+      },
+    }),
+    upCartItem: builder.mutation({
+      query: ({ cartLineItemId, count }) => ({
+        url: `/carts/cart-line-items/${cartLineItemId}`,
+        method: "PATCH",
+        body: { count },
+      }),
+      invalidatesTags: (result, error, arg) => {
+        return [{ type: "cart", id: "current" }];
+      },
+    }),
   }),
 });
