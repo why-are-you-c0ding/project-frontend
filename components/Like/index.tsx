@@ -53,7 +53,7 @@ const Like = () => {
     (
       e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
       id: number,
-      idx: number
+      idx: number,
     ) => {
       e.preventDefault();
 
@@ -70,21 +70,21 @@ const Like = () => {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("jwt")}`,
             },
-          }
+          },
         )
         .then((res) => {
           mutateCart();
         })
         .catch((err) => {});
     },
-    []
+    [],
   );
 
   const onClickLenDown = useCallback(
     (
       e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
       id: number,
-      idx: number
+      idx: number,
     ) => {
       e.preventDefault();
 
@@ -103,7 +103,7 @@ const Like = () => {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("jwt")}`,
             },
-          }
+          },
         )
         .then((res) => {
           mutateCart();
@@ -112,7 +112,7 @@ const Like = () => {
           alert("수량을 변경하지 못했습니다.");
         });
     },
-    []
+    [],
   );
 
   const onDeleteItem = useCallback(
@@ -135,7 +135,7 @@ const Like = () => {
           alert("상품을 삭제하지 못했습니다.");
         });
     },
-    []
+    [],
   );
 
   return (

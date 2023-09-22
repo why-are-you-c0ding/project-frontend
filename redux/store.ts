@@ -1,6 +1,8 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import { myPageApi } from "@api/myPageApi";
+
 import { memberApi } from "@api/memberApi";
+import { myPageApi } from "@api/myPageApi";
+
 
 export const store = configureStore({
   reducer: {
