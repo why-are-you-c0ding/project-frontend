@@ -192,7 +192,6 @@ const Like = () => {
                     </div>
 
                     <div>
-                      {/*어떤 코드인지 확인해야함*/}
                       {/*<span>*/}
                       {/*  {getTotalPrice(item, index) * eachLen[index]}원*/}
                       {/*</span>*/}
