@@ -4,7 +4,7 @@ const URL = process.env.REACT_APP_BASE_URL;
 
 export const memberApi = createApi({
   reducerPath: "memberApi",
-  baseQuery: fetchBaseQuery({ baseUrl: URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: "/" }),
   tagTypes: ["signUp"],
   endpoints: (builder) => ({
     validateId: builder.mutation({
