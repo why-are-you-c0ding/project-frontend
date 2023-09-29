@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { verificationNickname } from "@mock/api/data/member/signUp";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ export const Wrapper = styled.div`
 
 export const Header = styled.header`
   font-weight: bolder;
-  font-size: 3em;
+  font-size: 2.2rem;
   letter-spacing: -0.75px;
   margin-bottom: 2rem;
 `;
@@ -22,11 +23,13 @@ export const IsCheckWrapper = styled.div`
   }
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{ isCheckId?: boolean }>`
   width: 4rem;
   height: 1.3rem;
   border-radius: 5px;
+  // background-color: ${(props) => (props.isCheckId ? "#11DD33" : "#e8e1e1")};
   background-color: #e8e1e1;
+  // color: ${(props) => (props.isCheckId ? "white" : "inherit")};
   color: inherit;
   border: transparent;
   text-align: center;
@@ -49,6 +52,7 @@ export const Form = styled.form`
 `;
 
 export const Label = styled.label`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,6 +88,12 @@ export const Input = styled.input`
   ::placeholder {
     font-size: 0.9rem;
   }
+`;
+
+export const SuccessVerification = styled.span`
+  position: absolute;
+  top: 2.4rem;
+  right: -5.5rem;
 `;
 
 export const SignUpBtn = styled.button`

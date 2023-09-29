@@ -22,10 +22,12 @@ import {
   Button,
   CheckSeller,
   IsCheckWrapper,
+  SuccessVerification,
 } from "./styles";
 import StatusBar from "@components/StatusBar";
 import { toast, ToastContainer } from "react-toastify";
-import { setupWorker, rest } from "msw";
+import { memberApi } from "@api/memberApi";
+import { VerificationFail, VerificationSuccess } from "@typings/member";
 
 const SignUp = () => {
   const [id, onChangeId, setId] = useInput("");
@@ -44,13 +46,11 @@ const SignUp = () => {
   const [mismatchError, setMismatchError] = useState(false);
   const [mismatchCondition, setMismatchCondition] = useState(false);
 
-  console.log(
-    fetch("/todos")
-      .then((response) => response.json())
-      .then((data) => console.log(data)),
-  );
+  const [isCheckId, setIsCheckId] = useState(false);
 
-  const onCheckId = useCallback(() => {
+  const [checkIdMutation, result] = memberApi.useValidateIdMutation();
+
+  const onCheckId = useCallback(async () => {
     if (!id) {
       toast.warn("사용할 아이디를 입력해주세요!", {
         position: toast.POSITION.TOP_CENTER,
@@ -63,6 +63,27 @@ const SignUp = () => {
         position: toast.POSITION.TOP_CENTER,
       });
       return;
+    }
+
+    const res: VerificationSuccess | VerificationFail = await checkIdMutation({
+      loginId: id,
+    });
+
+    if ("data" in res) {
+      if (res.data.message === "검증에 성공했습니다.") {
+        setIsCheckId(true);
+        toast.success("아이디 사용이 가능합니다!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      } else {
+        toast.warning(res.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    } else if ("error" in res) {
+      toast.error("다시 시도해주세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
 
     // toast("Default Notification !");
@@ -131,7 +152,7 @@ const SignUp = () => {
           <Label>
             <IsCheckWrapper>
               <span>아이디*</span>
-              <Button type="button" onClick={onCheckId}>
+              <Button type="button" onClick={onCheckId} isCheckId={isCheckId}>
                 중복 체크
               </Button>
             </IsCheckWrapper>
@@ -141,8 +162,10 @@ const SignUp = () => {
               name="id"
               value={id}
               onChange={onChangeId}
-              placeholder="예) Wayc123, 6자 이상"
+              placeholder="예) wayc123, 6~15자 "
+              maxLength={15}
             />
+            {isCheckId && <SuccessVerification>✅</SuccessVerification>}
           </Label>
 
           <Label>
