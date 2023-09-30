@@ -14,6 +14,7 @@ import fetcher from "@utils/fetcher";
 import axios from "axios";
 import NullData from "@components/NullData";
 import { cartLineItems, ICartData } from "@typings/db";
+import { myPageApi } from "@api/myPageApi";
 
 const Like = () => {
   const {
@@ -138,6 +139,7 @@ const Like = () => {
     [],
   );
 
+  const { data: cartData, isLoading, error } = myPageApi.useGetCartQuery();
   return (
     <div>
       <ReponsiveBar title={"장바구니"} />
