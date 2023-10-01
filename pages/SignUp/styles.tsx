@@ -116,38 +116,28 @@ export const SignUpBtn = styled.button`
   }
 `;
 
-export const ErrorCircle = styled.div`
-  background-color: red;
-  float: left;
+export const ResultPasswordCircle = styled.div<{ status: boolean }>`
   width: 15px;
   height: 15px;
   border-radius: 50%;
   font-weight: bold;
-  margin-right: 10px;
-  padding: 5px;
+  margin-right: 0.5rem;
+  background-color: ${(props) => (props.status ? "green" : "red")};
 `;
 
-export const Error = styled.div`
-  color: red;
-  margin: 8px 0 16px;
+export const StatusPassword = styled.div<{ status: boolean }>`
+  display: flex;
+  align-items: center;
+  color: ${(props) => (props.status ? "green" : "red")};
   font-weight: bold;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
 `;
 
 export const Correct = styled.div`
   color: green;
   margin: 10px 0 10px;
   font-weight: bold;
-`;
-
-export const CorrectCircle = styled.div`
-  background-color: green;
-  float: left;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  font-weight: bold;
-  margin-right: 10px;
-  padding: 5px;
 `;
 
 export const SearchBox = styled.div`
