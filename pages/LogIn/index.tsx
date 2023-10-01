@@ -8,7 +8,7 @@ import {
   SignUpBtn,
   SubHeader,
   Wrapper,
-  Error,
+  StatusPassword,
 } from "@pages/SignUp/styles";
 import StatusBar from "@components/StatusBar";
 import useInput from "@hooks/useInput";
@@ -89,9 +89,11 @@ const LogIn = () => {
               placeholder="예) 영문, 숫자, 특수문자 조합 8-16자"
             />
           </div>
-          {logInError && (
-            <Error>이메일과 비밀번호 조합이 일치하지 않습니다.</Error>
-          )}
+          {/*{logInError && (*/}
+          {/*  <StatusPassword>*/}
+          {/*    이메일과 비밀번호 조합이 일치하지 않습니다.*/}
+          {/*  </StatusPassword>*/}
+          {/*)}*/}
         </Label>
         <SignUpBtn type="submit">Log In</SignUpBtn>{" "}
         <SearchBox>
