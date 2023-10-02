@@ -22,3 +22,13 @@ export const signupMember = {
   //   로그인 아이디 중복
   // message: "해당 로그인 아이디는 이미 존재하는 로그인 아이디입니다.",
 };
+
+export const login = {
+  message: "Login succeeded.",
+  // message: "Login fail.",
+  // jwt: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0b2tlbiIsImlkIjoxLCJhdXRob3JpdGllcyI6IlJPTEVfQ09OU1VNRVIiLCJpYXQiOjE2OTQxODI0NTcsImV4cCI6MTY5NDE4MjU0NH0.UsUqVLhkMChJmyJak8uaYaqbDiiza2fZJUWdayT2I4Q",
+};
+
+export const logout = {
+  message: "Logout Success.",
+};

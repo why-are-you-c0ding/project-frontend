@@ -1,12 +1,14 @@
 import { rest } from "msw";
 import {
+  login,
+  logout,
   receiveEmail,
   signupMember,
   validateId,
   verificationNickname,
-} from "@mock/api/data/member/signUp";
+} from "@mock/api/data/member/auth";
 
-export const signUp = [
+export const auth = [
   rest.post("/verification/login-id", (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(validateId));
   }),
@@ -21,6 +23,29 @@ export const signUp = [
   }),
   rest.post("/members/consumers", (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(signupMember));
+  }),
+  rest.post("/login", (req, res, ctx) => {
+    const oneHourLater = new Date();
+    oneHourLater.setTime(oneHourLater.getTime() + 60 * 60 * 100000000000);
+
+    return res(
+      ctx.status(200),
+      ctx.json(login),
+      ctx.cookie("JSESSIONID", "cookievalue", {
+        expires: oneHourLater,
+      }),
+    );
+  }),
+  rest.post("/logout", (req, res, ctx) => {
+    const now = new Date();
+
+    return res(
+      ctx.status(200),
+      ctx.json(logout),
+      ctx.cookie("JSESSIONID", "", {
+        expires: now,
+      }),
+    );
   }),
 
   // // 할일 추가
