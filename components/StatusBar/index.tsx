@@ -12,9 +12,12 @@ import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
 import Menu from "@components/Menu";
 import MenuList from "@components/MenuList";
 import { Link } from "react-router-dom";
-import Search from "@components/Search";
-import { useInView } from "react-intersection-observer";
 import useInput from "@hooks/useInput";
+import { ToastContainer } from "react-toastify";
+import { Cookies } from "react-cookie";
+import { memberApi } from "@api/memberApi";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
+import { logout } from "@redux/reducers/userInfoSlice";
 
 interface Props {
   sideBar?: boolean;
@@ -22,12 +25,24 @@ interface Props {
 
 const StatusBar: FC<Props> = ({ sideBar }) => {
   const [menu, setMenu] = useState(false);
-
   const [word, onChangeWord, setWord] = useInput("");
+  const cookie = new Cookies();
+  const isLogin = useAppSelector((state) => state.userInfo.isLogin);
+  const dispatch = useAppDispatch();
+
+  const [logoutMutation] = memberApi.useLogoutMutation();
 
   const onClickBar = useCallback(() => {
     setMenu((prev) => !prev);
   }, []);
+
+  const onLogout = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      logoutMutation({});
+      dispatch(logout());
+    },
+    [isLogin],
+  );
 
   useEffect(() => {
     const windowResize = () => {
@@ -43,18 +58,10 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
     };
   }, []);
 
-  const [isLogin, setIsLogin] = useState(localStorage.getItem("jwt") !== null);
-
-  const onLogout = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      localStorage.removeItem("jwt");
-      setIsLogin(false);
-    },
-    [isLogin],
-  );
-
   return (
     <BarWrapper sideBar={sideBar}>
+      <ToastContainer />
+
       <Bar>
         <SubBar>
           <SubMenu>
