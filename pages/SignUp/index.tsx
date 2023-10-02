@@ -9,10 +9,8 @@ import useInput from "@hooks/useInput";
 import { Link } from "react-router-dom";
 import {
   Form,
-  Error,
-  Correct,
-  ErrorCircle,
-  CorrectCircle,
+  StatusPassword,
+  ResultPasswordCircle,
   Header,
   Input,
   Label,
@@ -27,38 +25,124 @@ import {
 import StatusBar from "@components/StatusBar";
 import { toast, ToastContainer } from "react-toastify";
 import { memberApi } from "@api/memberApi";
-import { VerificationFail, VerificationSuccess } from "@typings/member";
+import {
+  SignUpInfo,
+  VerificationFail,
+  VerificationSuccess,
+} from "@typings/member";
+import { useNavigate } from "react-router";
 
 const SignUp = () => {
-  const [id, onChangeId, setId] = useInput("");
-  const [password, , setPassword] = useInput("");
-  const [passwordCheck, , setPasswordCheck] = useInput("");
-  const [email, onChangeEmail, setEmail] = useInput("");
-  const [nickname, onChangeNickname, setNickname] = useInput("");
-  const [birthDay, onChangeBirthDay, setBirthDay] = useInput("");
-  const [age, setAge] = useState(0);
-  const [authKey, onChangeAuthKey, setAuthKey] = useInput("");
-  const [seller, setSeller] = useState(false);
+  const navigate = useNavigate();
 
-  const [signUpError, setSignUpError] = useState(false);
-  const [signUpSuccess, setSignUpSuccess] = useState(false);
+  const [loginId, onChangeLoginId, setId] = useInput("");
+  const [password, , setPassword] = useInput("");
+  const [checkPassword, , setCheckPassword] = useInput("");
+  const [email, onChangeEmail, setEmail] = useInput("");
+  const [nickName, onChangeNickName, setNickname] = useInput("");
+  const [birthDay, onChangeBirthDay, setBirthDay] = useInput("");
+  const [authKey, onChangeAuthKey, setAuthKey] = useInput("");
+
   /** password mismatch */
   const [mismatchError, setMismatchError] = useState(false);
   const [mismatchCondition, setMismatchCondition] = useState(false);
 
   const [isCheckId, setIsCheckId] = useState(false);
+  const [isCheckNickName, setIsCheckNickName] = useState(false);
+  const [isSendEmail, setIsSendEmail] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
 
-  const [checkIdMutation, result] = memberApi.useValidateIdMutation();
+  const [checkIdMutation] = memberApi.useValidateIdMutation();
+  const [receiveEmailMutation] = memberApi.useReceiveEmailMutation();
+  const [checkNicknameMutation] = memberApi.useVerificationNickNameMutation();
+  const [signupConsumersMutation] = memberApi.useSignUpConsumersMutation();
+  const [signupSellersMutation] = memberApi.useSignUSellersMutation();
+
+  // TODO: 백엔드 다 작동 시 필요할 수도 있어서 남겨둠
+  const headers = {
+    "X-Requested-With": "XMLHttpRequest",
+  };
+
+  const onSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      if (
+        !isCheckId ||
+        !isCheckNickName ||
+        !isSendEmail ||
+        !mismatchCondition ||
+        !mismatchError ||
+        !birthDay ||
+        !authKey
+      ) {
+        toast.warning("모든 정보를 입력하거나 체크를 완료해주세요.", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        return;
+      }
+
+      const thisYear = new Date().getFullYear().toString().slice(0, 4);
+      const age = +thisYear - +birthDay.slice(0, 4) + 1;
+
+      const data: SignUpInfo = {
+        loginId,
+        nickName,
+        email,
+        password,
+        checkPassword,
+        age,
+        authKey,
+      };
+
+      const res = isSeller
+        ? await signupSellersMutation(data)
+        : await signupConsumersMutation(data);
+
+      if ("data" in res) {
+        if (res.data.message === "멤버 생성에 성공했습니다.") {
+          toast.success("회원가입에 성공했습니다!", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+
+          setTimeout(() => navigate("/login"), 3000);
+        } else {
+          toast.warning(res.data.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      } else if ("error" in res) {
+        toast.error("다시 시도해주세요!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    },
+    [
+      nickName,
+      email,
+      loginId,
+      password,
+      checkPassword,
+      authKey,
+      isCheckId,
+      isCheckNickName,
+      isSendEmail,
+      mismatchCondition,
+      mismatchError,
+      birthDay,
+      isSeller,
+    ],
+  );
 
   const onCheckId = useCallback(async () => {
-    if (!id) {
+    if (!loginId) {
       toast.warn("사용할 아이디를 입력해주세요!", {
         position: toast.POSITION.TOP_CENTER,
       });
       return;
     }
 
-    if (id.length < 6) {
+    if (loginId.length < 6) {
       toast.warn("아이디를 6자 이상 입력해주세요!", {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -66,7 +150,7 @@ const SignUp = () => {
     }
 
     const res: VerificationSuccess | VerificationFail = await checkIdMutation({
-      loginId: id,
+      loginId,
     });
 
     if ("data" in res) {
@@ -85,62 +169,96 @@ const SignUp = () => {
         position: toast.POSITION.TOP_CENTER,
       });
     }
+  }, [loginId]);
 
-    // toast("Default Notification !");
-    //
-    // toast.success("Success Notification !", {
-    //   position: toast.POSITION.TOP_CENTER,
-    // });
-    //
-    // toast.error("Error Notification !", {
-    //   position: toast.POSITION.TOP_LEFT,
-    // });
-    //
-    // toast.info("Info Notification !", {
-    //   position: toast.POSITION.BOTTOM_CENTER,
-    // });
-  }, [id]);
+  const receiveAuthKey = useCallback(async () => {
+    if (!email) {
+      toast.warn("이메일을 입력해주세요!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
 
-  // 여기 변수로 나이 계산
-  useEffect(() => {
-    const thisYear = new Date().getFullYear().toString().slice(0, 4);
-    setAge(parseInt(thisYear) - parseInt(birthDay.slice(0, 4)) + 1);
-  }, [birthDay, onChangeBirthDay, setBirthDay]);
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      toast.warn("이메일이 유효하지 않습니다!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
 
-  // password 조건 검색
+    const res: VerificationSuccess | VerificationFail =
+      await receiveEmailMutation({ receiveEmail: email });
+
+    if ("data" in res) {
+      toast.success("인증 번호를 전송했습니다!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setIsSendEmail(true);
+    } else if ("error" in res) {
+      toast.error("다시 시도해주세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  }, [email]);
+
+  const onCheckNickname = useCallback(async () => {
+    if (!nickName) {
+      toast.warn("닉네임을 입력해주세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+
+    if (nickName.length < 2) {
+      toast.warn("닉네임을 2자 이상 입력해주세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+
+    const res: VerificationSuccess | VerificationFail =
+      await checkNicknameMutation({ nickName });
+
+    if ("data" in res) {
+      toast.success("닉네임 사용이 가능합니다!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setIsCheckNickName(true);
+    } else if ("error" in res) {
+      toast.error("다시 시도해주세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  }, [nickName]);
+
+  const onChangePassword = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setPassword(e.target.value);
+      setMismatchError(e.target.value === checkPassword);
+    },
+    [checkPassword, setPassword],
+  );
+
+  const onChangePasswordCheck = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setCheckPassword(e.target.value);
+      setMismatchError(e.target.value === password);
+    },
+    [password, setCheckPassword],
+  );
+
+  const onChangeSeller = useCallback(() => {
+    setIsSeller((prev) => !prev);
+  }, [isSeller]);
+
+  // password 조건 체크
   useEffect(() => {
     const regexp =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,15}$/;
     if (password.match(regexp)) setMismatchCondition(true);
     else setMismatchCondition(false);
   }, [password, setPassword]);
-
-  const onChangePassword = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setPassword(e.target.value);
-      setMismatchError(e.target.value === passwordCheck);
-    },
-    [passwordCheck, setPassword],
-  );
-
-  const onChangePasswordCheck = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setPasswordCheck(e.target.value);
-      setMismatchError(e.target.value === password);
-    },
-    [password, setPasswordCheck],
-  );
-
-  const onChangeSeller = useCallback(() => {
-    setSeller((prev) => !prev);
-  }, [seller]);
-
-  const headers = {
-    "X-Requested-With": "XMLHttpRequest",
-  };
-  const onSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  }, []);
 
   return (
     <div>
@@ -160,31 +278,48 @@ const SignUp = () => {
               type="text"
               id="id"
               name="id"
-              value={id}
-              onChange={onChangeId}
+              value={loginId}
+              onChange={(event) => {
+                onChangeLoginId(event);
+                setIsCheckId(false);
+              }}
               placeholder="예) wayc123, 6~15자 "
               maxLength={15}
             />
             {isCheckId && <SuccessVerification>✅</SuccessVerification>}
           </Label>
-
           <Label>
             <IsCheckWrapper>
               <span>이메일 주소*</span>
-              <Button type="button" onClick={() => {}}>
+              <Button type="button" onClick={receiveAuthKey}>
                 인증 번호
               </Button>
             </IsCheckWrapper>
             <Input
-              type="email"
+              type="text"
               id="email"
               name="email"
               value={email}
-              onChange={onChangeEmail}
+              onChange={(event) => {
+                onChangeEmail(event);
+                setIsSendEmail(false);
+              }}
               placeholder="예) wayc@google.com"
+              maxLength={30}
             />
           </Label>
-
+          <Label>
+            <span>인증 번호</span>
+            <Input
+              type="text"
+              id="authKey"
+              name="authKey"
+              value={authKey}
+              onChange={onChangeAuthKey}
+              placeholder="이메일에 전송된 인증 번호를 입력해주세요."
+              maxLength={10}
+            />
+          </Label>
           <Label>
             <span>비밀 번호*</span>
             <div>
@@ -203,22 +338,26 @@ const SignUp = () => {
                 name="password"
                 value={password}
                 onChange={onChangePassword}
-                placeholder="예) 영문, 숫자, 특수문자 조합 8-15자"
+                placeholder="영문, 숫자, 특수문자 조합 8-15자"
                 minLength={8}
                 maxLength={15}
               />
             </div>
-            {!mismatchCondition && password.length > 0 && (
-              <Error>
-                비밀번호 조건에 일치하지 않습니다!
-                <ErrorCircle></ErrorCircle>
-              </Error>
-            )}
-            {mismatchCondition && (
-              <Correct>
-                비밀번호 조건에 일치합니다!
-                <CorrectCircle></CorrectCircle>
-              </Correct>
+            {password.length > 0 && (
+              <StatusPassword status={mismatchCondition}>
+                {!mismatchCondition && (
+                  <>
+                    <ResultPasswordCircle status={mismatchCondition} />
+                    비밀번호 조건에 맞지 않습니다.
+                  </>
+                )}
+                {mismatchCondition && (
+                  <>
+                    <ResultPasswordCircle status={mismatchCondition} />
+                    비밀번호 사용이 가능합니다!
+                  </>
+                )}
+              </StatusPassword>
             )}
           </Label>
           <Label>
@@ -228,33 +367,34 @@ const SignUp = () => {
                 type="password"
                 id="password-check"
                 name="password-check"
-                value={passwordCheck}
+                value={checkPassword}
                 onChange={onChangePasswordCheck}
-                placeholder="예) 영문, 숫자, 특수문자 조합 8-15자"
+                placeholder="영문, 숫자, 특수문자 조합 8-15자"
                 minLength={8}
                 maxLength={15}
               />
             </div>
-            {!mismatchError && passwordCheck.length > 0 && (
-              <Error>
-                {" "}
-                비밀번호가 일치하지 않습니다!
-                <ErrorCircle></ErrorCircle>
-              </Error>
-            )}
-            {mismatchError && passwordCheck.length > 7 && (
-              <Correct>
-                {" "}
-                비밀번호가 일치합니다!
-                <CorrectCircle></CorrectCircle>
-              </Correct>
+            {checkPassword.length > 0 && (
+              <StatusPassword status={mismatchError}>
+                {!mismatchError && (
+                  <>
+                    <ResultPasswordCircle status={mismatchError} />
+                    비밀번호가 일치하지 않습니다!
+                  </>
+                )}
+                {mismatchError && checkPassword.length > 7 && (
+                  <>
+                    <ResultPasswordCircle status={mismatchError} />
+                    비밀번호가 일치합니다!
+                  </>
+                )}
+              </StatusPassword>
             )}
           </Label>
-
           <Label>
             <IsCheckWrapper>
               <span>닉네임*</span>
-              <Button type="button" onClick={() => {}}>
+              <Button type="button" onClick={onCheckNickname}>
                 중복 체크
               </Button>
             </IsCheckWrapper>
@@ -262,13 +402,17 @@ const SignUp = () => {
               type="text"
               id="nickname"
               name="nickname"
-              value={nickname}
-              onChange={onChangeNickname}
+              value={nickName}
+              onChange={(event) => {
+                onChangeNickName(event);
+                setIsCheckNickName(false);
+              }}
               placeholder="예) 나비, 2자 이상"
               minLength={2}
+              maxLength={10}
             />
+            {isCheckNickName && <SuccessVerification>✅</SuccessVerification>}
           </Label>
-
           <Label>
             <span>생년 월일*</span>
             <Input
@@ -277,16 +421,10 @@ const SignUp = () => {
               onChange={onChangeBirthDay}
             ></Input>
           </Label>
-
           <CheckSeller>
             <span>*판매자로 가입하시려면 체크해주세요</span>
             <input type="checkbox" onChange={onChangeSeller} />
           </CheckSeller>
-
-          {signUpError && <Error>{signUpError}</Error>}
-          {signUpSuccess && (
-            <Correct>회원가입되었습니다! 로그인해주세요.</Correct>
-          )}
           <SignUpBtn type="submit">가입하기</SignUpBtn>
         </Form>
         <LinkContainer>
