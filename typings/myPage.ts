@@ -18,5 +18,10 @@ export interface CartLineItem {
   imageUrl: string;
 }
 export interface GetCartDataSuccess {
-  cartData: CartLineItem[];
+  cartLineItems: CartLineItem[];
+}
+
+export interface CartItemInfo {
+  count: number;
+  cartLineItemId: number;
 }
