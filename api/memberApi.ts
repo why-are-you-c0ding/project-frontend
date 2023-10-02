@@ -6,7 +6,7 @@ const isDevelopment = process.env.NODE_ENV !== "development";
 export const memberApi = createApi({
   reducerPath: "memberApi",
   baseQuery: fetchBaseQuery({ baseUrl: isDevelopment ? URL : "/" }),
-  tagTypes: ["signUp"],
+  tagTypes: ["member"],
   endpoints: (builder) => ({
     validateId: builder.mutation({
       query: ({ loginId }: { loginId: string }) => {
