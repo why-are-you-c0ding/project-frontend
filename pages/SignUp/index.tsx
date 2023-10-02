@@ -56,7 +56,7 @@ const SignUp = () => {
   const [receiveEmailMutation] = memberApi.useReceiveEmailMutation();
   const [checkNicknameMutation] = memberApi.useVerificationNickNameMutation();
   const [signupConsumersMutation] = memberApi.useSignUpConsumersMutation();
-  const [signupSellersMutation] = memberApi.useSignUSellersMutation();
+  const [signupSellersMutation] = memberApi.useSignUpSellersMutation();
 
   // TODO: 백엔드 다 작동 시 필요할 수도 있어서 남겨둠
   const headers = {
@@ -262,7 +262,6 @@ const SignUp = () => {
 
   return (
     <div>
-      <ToastContainer />
       <Wrapper>
         <Header>회원가입</Header>
         <Form onSubmit={onSubmit}>
