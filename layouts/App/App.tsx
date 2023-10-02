@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router";
 import loadable from "@loadable/component";
 import "react-toastify/dist/ReactToastify.css";
+import { BrowserRouter } from "react-router-dom";
 
 const SignUp = loadable(() => import("@pages/SignUp"));
 const LogIn = loadable(() => import("@pages/LogIn"));
@@ -17,16 +18,12 @@ const SearchItem = loadable(() => import(`@pages/SearchItem`));
 const App = () => {
   return (
     <Routes>
-      {/*<Route exact path="/">*/}
-      {/*  <Redirect to="main" />*/}
-      {/*</Route>*/}
       <Route path="/" element={<Main />} />
       <Route path="/main" element={<Main />} />
       <Route path="/main/:main" element={<Main />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<LogIn />} />
-      <Route path="/mypage" element={<MyPage />} />
-      <Route path="/mypage/:id" element={<MyPage />} />
+      <Route path="/mypage/*" element={<MyPage />} />
       <Route path="/sellpage" element={<SellPage />} />
       <Route path="/sellpage/:id" element={<SellPage />} />
       <Route path="/shop" element={<Shop />} />

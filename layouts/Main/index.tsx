@@ -10,7 +10,6 @@ const Main = () => {
       <StatusBar />
       <div style={{ marginTop: "7rem" }}></div>
       <SliderImage />
-
       <MainItem />
     </div>
   );
