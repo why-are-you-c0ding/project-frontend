@@ -262,7 +262,6 @@ const SignUp = () => {
 
   return (
     <div>
-      <StatusBar />
       <ToastContainer />
       <Wrapper>
         <Header>회원가입</Header>

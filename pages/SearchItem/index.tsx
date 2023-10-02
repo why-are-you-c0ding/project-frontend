@@ -61,7 +61,7 @@ const SearchItem = () => {
 
   return (
     <Wrapper>
-      <StatusBar />
+      {/*<StatusBar />*/}
 
       <h2>검색 결과</h2>
 

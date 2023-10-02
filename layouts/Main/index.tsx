@@ -7,7 +7,7 @@ import MainItem from "@components/MainItem";
 const Main = () => {
   return (
     <div>
-      <StatusBar />
+      {/*<StatusBar />*/}
       <div style={{ marginTop: "7rem" }}></div>
       <SliderImage />
 

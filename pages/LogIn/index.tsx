@@ -6,11 +6,8 @@ import {
   Label,
   SearchBox,
   SignUpBtn,
-  SubHeader,
   Wrapper,
-  StatusPassword,
 } from "@pages/SignUp/styles";
-import StatusBar from "@components/StatusBar";
 import useInput from "@hooks/useInput";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -59,10 +56,8 @@ const LogIn = () => {
   }
 
   return (
-    <Wrapper>
-      <StatusBar />
-      <Header style={{ marginTop: "-4rem" }}>WAYC</Header>
-      <SubHeader>Why Are You Coding?</SubHeader>
+    <Wrapper isLogin={true}>
+      <Header>WAYC</Header>
       <Form onSubmit={onSubmit}>
         <Label>
           <span>아이디</span>
@@ -73,7 +68,7 @@ const LogIn = () => {
               name="id"
               value={id}
               onChange={onChangeId}
-              placeholder="예) Wayc"
+              placeholder="아이디를 입력해주세요."
             />
           </div>
         </Label>
@@ -86,14 +81,9 @@ const LogIn = () => {
               name="password"
               value={password}
               onChange={onChangePassword}
-              placeholder="예) 영문, 숫자, 특수문자 조합 8-16자"
+              placeholder="비밀번호를 입력해주세요."
             />
           </div>
-          {/*{logInError && (*/}
-          {/*  <StatusPassword>*/}
-          {/*    이메일과 비밀번호 조합이 일치하지 않습니다.*/}
-          {/*  </StatusPassword>*/}
-          {/*)}*/}
         </Label>
         <SignUpBtn type="submit">Log In</SignUpBtn>{" "}
         <SearchBox>
