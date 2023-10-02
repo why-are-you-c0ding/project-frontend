@@ -11,12 +11,6 @@ export const myPageApi = createApi({
     getCart: builder.query({
       query: () => "/carts",
     }),
-    getCount: builder.query({
-      query: () => "/carts/current",
-      providesTags: (result, error, arg) => {
-        return [{ type: "cart", id: "current" }];
-      },
-    }),
     deleteCartItem: builder.mutation({
       query: ({ cartLineItemId }: { cartLineItemId: number }) => {
         return {
@@ -31,6 +25,9 @@ export const myPageApi = createApi({
         url: `/carts/cart-line-items`,
         method: "PATCH",
         body: { cartLineItemId, count },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
       }),
     }),
     upCartItem: builder.mutation({
@@ -38,6 +35,9 @@ export const myPageApi = createApi({
         url: `/carts/cart-line-items`,
         method: "PATCH",
         body: { cartLineItemId, count },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
       }),
     }),
   }),

@@ -24,7 +24,7 @@ const MyPage = () => {
 
   return (
     <div>
-      <StatusBar sideBar={true} />
+      {/*<StatusBar sideBar={true} />*/}
       <Wrapper>
         <SideBar>
           <MypageSidebar sideBar={true} />
