@@ -14,6 +14,8 @@ import fetcher from "@utils/fetcher";
 import axios from "axios";
 import NullData from "@components/NullData";
 import { cartLineItems, ICartData } from "@typings/db";
+import { myPageApi } from "@api/myPageApi";
+import { GetCartDataSuccess } from "@typings/myPage";
 
 const Like = () => {
   const {
@@ -22,9 +24,18 @@ const Like = () => {
     error,
   } = useSWR<ICartData>("https://waycabvav.shop/carts", fetcher);
 
+  const { data: Mockdata, isLoading } =
+    myPageApi.useGetCartQuery<any>("bulbasaur");
+
+  if (Mockdata) {
+    console.log(Mockdata?.cartLineItems);
+    console.log(Mockdata?.cartLineItems.length);
+    console.log(Mockdata?.cartLineItems.length);
+  }
   let item: cartLineItems[] = [];
 
-  if (cartData) item = Object.values(cartData)[0];
+  // if (cartData) item = Object.values(cartData)[0];
+  if (cartData) item = Mockdata?.cartLineItems;
 
   const getItemLen = (item: cartLineItems[]) => {
     let ary: number[] = [];
@@ -144,16 +155,19 @@ const Like = () => {
       <Wrapper>
         <TopHeader>장바구니</TopHeader>
 
-        {item.length === 0 && <NullData />}
+        {Mockdata?.cartLineItems.length === 0 && <NullData />}
 
-        {[...Array(item?.length)].map((v, index) => {
+        {[...Array(Mockdata?.cartLineItems.length)].map((v, index) => {
           return (
             <CartItem key={index}>
-              <img src={item[index]?.imageUrl} alt={item[index]?.name} />
+              <img
+                src={Mockdata?.cartLineItems[index]?.imageUrl}
+                alt={Mockdata?.cartLineItems[index]?.name}
+              />
               <ItemInfo>
                 <InfoTop>
                   <div>
-                    <span>{item[index]?.name}</span>
+                    <span>{Mockdata?.cartLineItems[index]?.name}</span>
                     <span>{getTotalPrice(item, index)}원</span>
                   </div>
                   <div style={{ color: "rgba(0,0,0,0.4)" }}>
@@ -198,7 +212,10 @@ const Like = () => {
                       <span>
                         <button
                           onClick={(event) => {
-                            onDeleteItem(event, item[index]?.id);
+                            onDeleteItem(
+                              event,
+                              Mockdata?.cartLineItems[index]?.id,
+                            );
                           }}
                         >
                           X
