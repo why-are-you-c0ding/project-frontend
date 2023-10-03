@@ -1,11 +1,13 @@
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { SerializedError } from "@reduxjs/toolkit";
 
-export interface SignUpInfo {
-  nickName: string;
-  email: string;
+export interface LoginInfo {
   loginId: string;
   password: string;
+}
+export interface SignUpInfo extends LoginInfo {
+  nickName: string;
+  email: string;
   checkPassword: string;
   age: number;
   authKey: string;
@@ -20,10 +22,3 @@ export interface VerificationSuccess {
 export interface VerificationFail {
   error: FetchBaseQueryError | SerializedError;
 }
-
-// export interface VerificationMessage   {
-//   VerificationSuccess
-// }
-//
-// { data: VerificationMessage }
-// |

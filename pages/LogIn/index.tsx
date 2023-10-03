@@ -6,63 +6,62 @@ import {
   Label,
   SearchBox,
   SignUpBtn,
-  SubHeader,
   Wrapper,
-  StatusPassword,
 } from "@pages/SignUp/styles";
-import StatusBar from "@components/StatusBar";
 import useInput from "@hooks/useInput";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router";
+import { memberApi } from "@api/memberApi";
+import { toast, ToastContainer } from "react-toastify";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
+import { login } from "@redux/reducers/userInfoSlice";
 
 const LogIn = () => {
-  const [id, onChangeId, setId] = useInput("");
+  const [loginId, onChangeLoginId, setLoginId] = useInput("");
   const [password, onChangePassword, setPassword] = useInput("");
-  const [logInError, setLogInError] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const [loginMutation] = memberApi.useLoginMutation();
 
   const headers = {
     "X-Requested-With": "XMLHttpRequest",
   };
 
-  const [isLogin, setIsLogin] = useState(localStorage.getItem("jwt") !== null);
-
   const onSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
+    async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      setLogInError(false);
 
-      axios
-        .post(
-          "https://waycabvav.shop/login",
-          {
-            loginId: id,
-            password: password,
-          },
-          { withCredentials: true, headers },
-        )
-        .then((response) => {
-          localStorage.setItem("jwt", response.data.jwt);
-          setIsLogin(true);
-        })
-        .catch((error) => {
-          alert("에러");
-          setLogInError(error.response?.data?.statuseCode === 401);
+      if (!loginId || !password) {
+        toast.warning("모든 정보를 입력하거나 체크를 완료해주세요.", {
+          position: toast.POSITION.TOP_CENTER,
         });
+        return;
+      }
+
+      const res = await loginMutation({ loginId, password });
+
+      if ("data" in res) {
+        if (res.data.message === "Login succeeded.") {
+          dispatch(login());
+          navigate("/main");
+        } else {
+          toast.warning(res.data.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      } else if ("error" in res) {
+        toast.error("잠시 후 다시 시도해 주세요.", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
     },
-    [id, password],
+    [loginId, password],
   );
 
-  if (isLogin) {
-    navigate("/main", { replace: true });
-  }
-
   return (
-    <Wrapper>
-      <StatusBar />
-      <Header style={{ marginTop: "-4rem" }}>WAYC</Header>
-      <SubHeader>Why Are You Coding?</SubHeader>
+    <Wrapper isLogin={true}>
+      <Header>WAYC</Header>
       <Form onSubmit={onSubmit}>
         <Label>
           <span>아이디</span>
@@ -71,9 +70,9 @@ const LogIn = () => {
               type="text"
               id="id"
               name="id"
-              value={id}
-              onChange={onChangeId}
-              placeholder="예) Wayc"
+              value={loginId}
+              onChange={onChangeLoginId}
+              placeholder="아이디를 입력해주세요."
             />
           </div>
         </Label>
@@ -86,14 +85,9 @@ const LogIn = () => {
               name="password"
               value={password}
               onChange={onChangePassword}
-              placeholder="예) 영문, 숫자, 특수문자 조합 8-16자"
+              placeholder="비밀번호를 입력해주세요."
             />
           </div>
-          {/*{logInError && (*/}
-          {/*  <StatusPassword>*/}
-          {/*    이메일과 비밀번호 조합이 일치하지 않습니다.*/}
-          {/*  </StatusPassword>*/}
-          {/*)}*/}
         </Label>
         <SignUpBtn type="submit">Log In</SignUpBtn>{" "}
         <SearchBox>

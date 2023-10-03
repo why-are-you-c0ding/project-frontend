@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { SignUpInfo } from "@typings/member";
+import { LoginInfo, SignUpInfo } from "@typings/member";
 const URL = process.env.REACT_APP_BASE_URL;
 const isDevelopment = process.env.NODE_ENV !== "development";
 
 export const memberApi = createApi({
   reducerPath: "memberApi",
   baseQuery: fetchBaseQuery({ baseUrl: isDevelopment ? URL : "/" }),
-  tagTypes: ["signUp"],
+  tagTypes: ["member"],
   endpoints: (builder) => ({
     validateId: builder.mutation({
       query: ({ loginId }: { loginId: string }) => {
@@ -60,7 +60,7 @@ export const memberApi = createApi({
         };
       },
     }),
-    signUSellers: builder.mutation({
+    signUpSellers: builder.mutation({
       query: ({
         nickName,
         email,
@@ -82,6 +82,26 @@ export const memberApi = createApi({
             age,
             authKey,
           },
+        };
+      },
+    }),
+    login: builder.mutation({
+      query: ({ loginId, password }: LoginInfo) => {
+        return {
+          url: "/login",
+          method: "POST",
+          body: {
+            loginId,
+            password,
+          },
+        };
+      },
+    }),
+    logout: builder.mutation({
+      query: () => {
+        return {
+          url: "/logout",
+          method: "POST",
         };
       },
     }),

@@ -1,25 +1,23 @@
 import styled from "@emotion/styled";
 
 export const BarWrapper = styled.div<{ sideBar: boolean | undefined }>`
-  margin-bottom: 9rem;
-
   @media screen and (max-width: 769px) {
     margin-bottom: 0;
+  }
 `;
 
 export const Bar = styled.div`
   background-color: white;
   z-index: 999;
+  height: 7.2rem;
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  @media screen and (max-width: 769px) {
+    height: 5.2rem;
+  }
 `;
 
 export const SubBar = styled.div`
   padding: 0.5rem 3rem;
-  //border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   & span a {
     text-decoration: none;

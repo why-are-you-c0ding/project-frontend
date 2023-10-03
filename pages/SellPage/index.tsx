@@ -32,7 +32,7 @@ const SellPage = () => {
 
   return (
     <div>
-      <StatusBar sideBar={sideBar} />
+      {/*<StatusBar sideBar={sideBar} />*/}
       <Wrapper>
         <SideBar>
           <SellpageSidebar sideBar={sideBar} />

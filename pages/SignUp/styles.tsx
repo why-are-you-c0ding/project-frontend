@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
-import { verificationNickname } from "@mock/api/data/member/signUp";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ isLogin?: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  margin-top: 6rem;
+  height: ${(props) => props.isLogin && "100%"};
+  margin: ${(props) => !props.isLogin && "2rem 0"};
 `;
 
 export const Header = styled.header`
