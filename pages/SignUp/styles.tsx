@@ -56,7 +56,6 @@ export const Label = styled.label`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   margin-bottom: 2rem;
 
   & span {
@@ -97,19 +96,19 @@ export const SuccessVerification = styled.span`
 `;
 
 export const SignUpBtn = styled.button`
-  width: 25rem;
-  height: 4rem;
-  background-color: cornflowerblue;
+  width: 14rem;
+  height: 3.5rem;
+  background-color: black;
   color: white;
   border: transparent;
-  border-radius: 20px;
+  border-radius: 10px;
   text-align: center;
   outline: none;
-  margin-top: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin: 0 auto;
   cursor: pointer;
+
   &:hover {
     background-color: blueviolet;
     border: none;
@@ -157,7 +156,8 @@ export const SearchBox = styled.div`
 export const LinkContainer = styled.p`
   font-size: 13px;
   color: #616061;
-  margin: 0 auto 8px;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
   width: 400px;
   max-width: 400px;
   & a {
@@ -172,7 +172,9 @@ export const LinkContainer = styled.p`
 
 export const CheckSeller = styled.div`
   color: dodgerblue;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
 
   & span {
     margin-right: 0.3rem;

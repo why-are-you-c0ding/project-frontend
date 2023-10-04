@@ -423,7 +423,9 @@ const SignUp = () => {
             <span>*판매자로 가입하시려면 체크해주세요</span>
             <input type="checkbox" onChange={onChangeSeller} />
           </CheckSeller>
-          <SignUpBtn type="submit">가입하기</SignUpBtn>
+          <Label>
+            <SignUpBtn type="submit">가입하기</SignUpBtn>
+          </Label>
         </Form>
         <LinkContainer>
           이미 회원이신가요? &nbsp;
