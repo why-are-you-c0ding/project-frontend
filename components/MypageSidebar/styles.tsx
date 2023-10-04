@@ -9,8 +9,9 @@ export const Wrapper = styled.div<{ sideBar: boolean }>`
 `;
 
 export const Title = styled.header`
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   margin-bottom: 1.8rem;
+  font-weight: bold;
 
   //@media (max-width: 769px) {
   //  display: none;
@@ -25,6 +26,7 @@ export const Info = styled.div`
     //  display: none;
     //}
   }
+  font-weight: bold;
 
   display: flex;
   flex-direction: column;
@@ -38,6 +40,11 @@ export const Info = styled.div`
   & span {
     margin-top: 0.5rem;
     color: rgba(0, 0, 0, 0.4);
+    font-size: 1rem;
+
+    :hover {
+      color: #0078ff;
+    }
 
     //@media (max-width: 769px) {
     //  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
