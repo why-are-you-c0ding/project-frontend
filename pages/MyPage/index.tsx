@@ -4,6 +4,7 @@ import { Wrapper, SideBar, RightSide } from "@pages/MyPage/styles";
 import MypageSidebar from "@components/MypageSidebar";
 import { Outlet, useNavigate, Route, Routes } from "react-router-dom";
 import loadable from "@loadable/component";
+import { getCookie } from "@utils/cookie";
 
 const Buying = loadable(() => import("@components/Buying"));
 const Like = loadable(() => import("@components/Like"));
@@ -15,16 +16,14 @@ const My = loadable(() => import("@components/My"));
 const MyPage = () => {
   const navigate = useNavigate();
 
-  //잠시 로그인 문제 해결전에 주석 처리
-  // useEffect(() => {
-  //   if (!localStorage.getItem("jwt")) {
-  //     navigate("/login", { replace: true });
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    if (!getCookie("JSESSIONID")) {
+      navigate("/login", { replace: true });
+    }
+  }, [navigate]);
 
   return (
     <div>
-      {/*<StatusBar sideBar={true} />*/}
       <Wrapper>
         <SideBar>
           <MypageSidebar sideBar={true} />
