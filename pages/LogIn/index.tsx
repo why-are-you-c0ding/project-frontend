@@ -89,7 +89,9 @@ const LogIn = () => {
             />
           </div>
         </Label>
-        <SignUpBtn type="submit">Log In</SignUpBtn>{" "}
+        <Label>
+          <SignUpBtn type="submit">로그인</SignUpBtn>{" "}
+        </Label>
         <SearchBox>
           <span>
             <Link to="/signup">회원 가입</Link>
