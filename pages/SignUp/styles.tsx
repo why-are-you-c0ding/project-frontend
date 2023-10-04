@@ -108,11 +108,6 @@ export const SignUpBtn = styled.button`
   font-weight: bold;
   margin: 0 auto;
   cursor: pointer;
-
-  &:hover {
-    background-color: blueviolet;
-    border: none;
-  }
 `;
 
 export const ResultPasswordCircle = styled.div<{ status: boolean }>`
