@@ -74,7 +74,7 @@ const Like = () => {
     [deleteMutation],
   );
 
-  const onClickLenDown2 = useCallback(
+  const onClickLenDown = useCallback(
     async (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
       id: number,
@@ -99,7 +99,7 @@ const Like = () => {
     [downMutation],
   );
 
-  const onClickLenUp2 = useCallback(
+  const onClickLenUp = useCallback(
     async (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
       id: number,
@@ -168,11 +168,7 @@ const Like = () => {
                     <div>
                       <button
                         onClick={(event) =>
-                          onClickLenDown2(
-                            event,
-                            item[index]?.id,
-                            eachLen[index],
-                          )
+                          onClickLenDown(event, item[index]?.id, eachLen[index])
                         }
                       >
                         -
@@ -180,7 +176,7 @@ const Like = () => {
                       <span>{eachLen[index]}개</span>
                       <button
                         onClick={(event) =>
-                          onClickLenUp2(event, item[index]?.id, eachLen[index])
+                          onClickLenUp(event, item[index]?.id, eachLen[index])
                         }
                       >
                         +
