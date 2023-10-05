@@ -121,7 +121,7 @@ const Like = () => {
         }
       }
     },
-    [downMutation],
+    [upMutation],
   );
 
   return (
