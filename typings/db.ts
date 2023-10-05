@@ -81,11 +81,10 @@ export interface cartLineItems {
   ["imageUrl"]: string;
   ["cartOptionGroups"]: Array<{
     ["id"]: number;
-    ["cartOptions"]: Array<{
-      ["id"]: number;
+    ["cartOption"]: {
       ["name"]: string;
       ["price"]: number;
-    }>;
+    };
     ["name"]: string;
   }>;
 }

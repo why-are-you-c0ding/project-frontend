@@ -10,10 +10,10 @@ export const myPage = [
   rest.get("/carts", (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(cartData));
   }),
-  rest.get("/carts/cart-line-items", (req, res, ctx) => {
+  rest.delete("/carts/cart-line-items", (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(deleteCartItem));
   }),
-  rest.get("/carts/cart-line-items", (req, res, ctx) => {
+  rest.patch("/carts/cart-line-items", (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(updateCartItemCount));
   }),
 ];

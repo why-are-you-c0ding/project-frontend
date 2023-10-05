@@ -42,15 +42,15 @@ export const cartData = {
         {
           id: 22,
           cartOption: {
-            name: "Large",
-            price: 2000,
+            name: "작은거",
+            price: 20000,
           },
           name: "기초 옵션",
         },
         {
           id: 23,
           cartOption: {
-            name: "Black",
+            name: "큰거",
             price: 1000,
           },
           name: "Color",
@@ -58,7 +58,7 @@ export const cartData = {
         {
           id: 24,
           cartOption: {
-            name: "Large",
+            name: "중간거",
             price: 2000,
           },
           name: "Sizee",
@@ -70,9 +70,9 @@ export const cartData = {
 };
 
 export const updateCartItemCount = {
-  message: "장바구니 상품 업데이트를 성공하셨습니다",
+  message: "장바구니 상품 업데이트를 성공하셨습니다.",
 };
 
 export const deleteCartItem = {
-  message: "장바구니 상품 삭제에 성공하셨습니다",
+  message: "장바구니 상품 삭제에 성공하셨습니다.",
 };

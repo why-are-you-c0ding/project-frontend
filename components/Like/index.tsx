@@ -9,33 +9,24 @@ import {
 } from "@components/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 import ReponsiveBar from "@components/ReponsiveBar";
-import useSWR from "swr";
-import fetcher from "@utils/fetcher";
-import axios from "axios";
 import NullData from "@components/NullData";
 import { cartLineItems, ICartData } from "@typings/db";
 import { myPageApi } from "@api/myPageApi";
-import { GetCartDataSuccess } from "@typings/myPage";
+import { toast } from "react-toastify";
 
 const Like = () => {
-  const {
-    data: cartData,
-    mutate: mutateCart,
-    error,
-  } = useSWR<ICartData>("https://waycabvav.shop/carts", fetcher);
+  const [deleteMutation] = myPageApi.useDeleteCartItemMutation();
+  const [upMutation] = myPageApi.useUpCartItemMutation();
+  const [downMutation] = myPageApi.useDownCartItemMutation();
 
   const { data: Mockdata, isLoading } =
     myPageApi.useGetCartQuery<any>("bulbasaur");
 
-  if (Mockdata) {
-    console.log(Mockdata?.cartLineItems);
-    console.log(Mockdata?.cartLineItems.length);
-    console.log(Mockdata?.cartLineItems.length);
-  }
   let item: cartLineItems[] = [];
 
-  // if (cartData) item = Object.values(cartData)[0];
-  if (cartData) item = Mockdata?.cartLineItems;
+  if (Mockdata) {
+    item = Mockdata?.cartLineItems;
+  }
 
   const getItemLen = (item: cartLineItems[]) => {
     let ary: number[] = [];
@@ -54,99 +45,83 @@ const Like = () => {
     let total = 0;
 
     for (let j = 0; j < item[len]?.cartOptionGroups.length; j++) {
-      total += item[len]?.cartOptionGroups[j].cartOptions[0].price;
+      total += item[len]?.cartOptionGroups[j].cartOption.price;
     }
 
     return total;
   };
 
-  const onClickLenUp = useCallback(
-    (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-      id: number,
-      idx: number,
-    ) => {
-      e.preventDefault();
-
-      const len = idx + 1;
-
-      axios
-        .patch(
-          "https://waycabvav.shop/carts/cart-line-items",
-          {
-            count: len,
-            cartLineItemId: id,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-            },
-          },
-        )
-        .then((res) => {
-          mutateCart();
-        })
-        .catch((err) => {});
-    },
-    [],
-  );
-
-  const onClickLenDown = useCallback(
-    (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-      id: number,
-      idx: number,
-    ) => {
-      e.preventDefault();
-
-      if (idx < 2) return;
-
-      const len = idx - 1;
-
-      axios
-        .patch(
-          "https://waycabvav.shop/carts/cart-line-items",
-          {
-            count: len,
-            cartLineItemId: id,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-            },
-          },
-        )
-        .then((res) => {
-          mutateCart();
-        })
-        .catch((err) => {
-          alert("수량을 변경하지 못했습니다.");
-        });
-    },
-    [],
-  );
-
   const onDeleteItem = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number) => {
-      e.preventDefault();
+    async (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+      id: number,
+    ) => {
+      event.preventDefault();
+      const res = await deleteMutation({ cartLineItemId: id });
 
-      axios
-        .delete("https://waycabvav.shop/carts/cart-line-items", {
-          data: {
-            cartLineItemId: id,
-          },
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          },
-        })
-        .then((res) => {
-          mutateCart();
-        })
-        .catch((err) => {
-          alert("상품을 삭제하지 못했습니다.");
-        });
+      if ("data" in res) {
+        if (res.data.message === "장바구니 상품 삭제에 성공하셨습니다.") {
+          toast.success(res.data.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        } else {
+          toast.error("상품 삭제에 실패하였습니다.", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      }
     },
-    [],
+    [deleteMutation],
+  );
+
+  const onClickLenDown2 = useCallback(
+    async (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+      id: number,
+      idx: number,
+    ) => {
+      event.preventDefault();
+      const len = idx - 1;
+      const res = await downMutation({ cartLineItemId: id, count: len });
+
+      if ("data" in res) {
+        if (res.data.message === "장바구니 상품 업데이트를 성공하셨습니다.") {
+          toast.success(res.data.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        } else {
+          toast.error("수량 업데이트에 실패하였습니다.", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      }
+    },
+    [downMutation],
+  );
+
+  const onClickLenUp2 = useCallback(
+    async (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+      id: number,
+      idx: number,
+    ) => {
+      event.preventDefault();
+      const len = idx + 1;
+      const res = await upMutation({ cartLineItemId: id, count: len });
+
+      if ("data" in res) {
+        if (res.data.message === "장바구니 상품 업데이트를 성공하셨습니다.") {
+          toast.success(res.data.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        } else {
+          toast.error("수량 업데이트에 실패하였습니다.", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      }
+    },
+    [downMutation],
   );
 
   return (
@@ -171,15 +146,18 @@ const Like = () => {
                     <span>{getTotalPrice(item, index)}원</span>
                   </div>
                   <div style={{ color: "rgba(0,0,0,0.4)" }}>
-                    {item[index]?.cartOptionGroups[0]?.cartOptions[0]?.name}
-                    &nbsp;&nbsp;
-                    {item[index]?.cartOptionGroups[1]?.cartOptions[0]?.name}
-                    &nbsp;&nbsp;
-                    {item[index]?.cartOptionGroups[2]?.cartOptions[0]?.name}
-                    &nbsp;&nbsp;
-                    {item[index]?.cartOptionGroups[3]?.cartOptions[0]?.name}
-                    &nbsp;&nbsp;
-                    {item[index]?.cartOptionGroups[4]?.cartOptions[0]?.name}
+                    {
+                      Mockdata?.cartLineItems[index].cartOptionGroups[0]
+                        .cartOption.name
+                    }
+                    {
+                      Mockdata?.cartLineItems[index].cartOptionGroups[1]
+                        .cartOption.name
+                    }
+                    {
+                      Mockdata?.cartLineItems[index].cartOptionGroups[2]
+                        .cartOption.name
+                    }
                   </div>
                 </InfoTop>
                 <InfoBottom>
@@ -190,7 +168,11 @@ const Like = () => {
                     <div>
                       <button
                         onClick={(event) =>
-                          onClickLenDown(event, item[index]?.id, eachLen[index])
+                          onClickLenDown2(
+                            event,
+                            item[index]?.id,
+                            eachLen[index],
+                          )
                         }
                       >
                         -
@@ -198,7 +180,7 @@ const Like = () => {
                       <span>{eachLen[index]}개</span>
                       <button
                         onClick={(event) =>
-                          onClickLenUp(event, item[index]?.id, eachLen[index])
+                          onClickLenUp2(event, item[index]?.id, eachLen[index])
                         }
                       >
                         +
