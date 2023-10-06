@@ -5,7 +5,7 @@ import {
   CartItem,
   InfoBottom,
   InfoTop,
-  ItemInfo,
+  ItemBox,
   Wrapper,
 } from "@components/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
@@ -23,7 +23,7 @@ const SellOrderList = () => {
     setSize,
   } = useSWRInfinite<orderData>(
     (index) => `https://waycabvav.shop/orders/sellers?page=${index}`,
-    fetcher
+    fetcher,
   );
 
   let orderList: any = [];
@@ -71,7 +71,7 @@ const SellOrderList = () => {
                     src={orderList[index]?.itemImageUrl}
                     alt={orderList[index]?.itemName}
                   />
-                  <ItemInfo>
+                  <ItemBox>
                     <InfoTop>
                       <div>
                         <span
@@ -108,7 +108,7 @@ const SellOrderList = () => {
                         </div>
                       </div>
                     </InfoBottom>
-                  </ItemInfo>
+                  </ItemBox>
                 </CartItem>
               </Link>
             );

@@ -5,7 +5,7 @@ import {
   CartItem,
   InfoBottom,
   InfoTop,
-  ItemInfo,
+  ItemBox,
 } from "@components/Like/styles";
 import useSWRInfinite from "swr/infinite";
 import fetcher from "@utils/fetcher";
@@ -18,7 +18,7 @@ import { IOrderData, orders } from "@typings/db";
 const Buying = () => {
   const { data: orderData, setSize } = useSWRInfinite<IOrderData>(
     (index) => `https://waycabvav.shop/orders/customers?page=${index}`,
-    fetcher
+    fetcher,
   );
 
   let orderTemp: Array<orders[]> = [];
@@ -55,7 +55,7 @@ const Buying = () => {
               <Link key={index} to={`/customerorders/${v.orderId}`}>
                 <CartItem ref={ref}>
                   <img src={v.itemImageUrl} alt={v.itemName} />
-                  <ItemInfo>
+                  <ItemBox>
                     <InfoTop>
                       <div>
                         <span>{v.itemName}</span>
@@ -78,7 +78,7 @@ const Buying = () => {
                         </div>
                       </div>
                     </InfoBottom>
-                  </ItemInfo>
+                  </ItemBox>
                 </CartItem>
               </Link>
             );

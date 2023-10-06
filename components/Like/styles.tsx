@@ -37,7 +37,7 @@ export const CartItem = styled.div`
   }
 `;
 
-export const ItemInfo = styled.div`
+export const ItemBox = styled.div`
   width: 100%;
 
   display: flex;
@@ -56,6 +56,16 @@ export const ItemInfo = styled.div`
 
     padding-left: 1rem;
   }
+`;
+
+export const ItemInfo = styled.div`
+  display: grid;
+  grid-template-columns: minmax(50px, 5fr) minmax(50px, 1fr) minmax(50px, 1fr) minmax(
+      50px,
+      1fr
+    );
+  align-items: center;
+  justify-items: center;
 `;
 
 export const InfoTop = styled.div`

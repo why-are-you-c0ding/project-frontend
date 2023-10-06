@@ -4,6 +4,7 @@ import {
   CartItem,
   InfoBottom,
   InfoTop,
+  ItemBox,
   ItemInfo,
   Wrapper,
 } from "@components/Like/styles";
@@ -135,12 +136,18 @@ const Like = () => {
         {[...Array(Mockdata?.cartLineItems.length)].map((v, index) => {
           return (
             <CartItem key={index}>
-              <img
-                src={Mockdata?.cartLineItems[index]?.imageUrl}
-                alt={Mockdata?.cartLineItems[index]?.name}
-              />
-              <ItemInfo>
+              <ItemBox>
+                <ItemInfo>
+                  <div>상품정보</div>
+                  <div>상품금액</div>
+                  <div>수량</div>
+                  <div>주문금액</div>
+                </ItemInfo>
                 <InfoTop>
+                  <img
+                    src={Mockdata?.cartLineItems[index]?.imageUrl}
+                    alt={Mockdata?.cartLineItems[index]?.name}
+                  />
                   <div>
                     <span>{Mockdata?.cartLineItems[index]?.name}</span>
                     <span>{getTotalPrice(item, index)}원</span>
@@ -202,7 +209,7 @@ const Like = () => {
                     </div>
                   </div>
                 </InfoBottom>
-              </ItemInfo>
+              </ItemBox>
             </CartItem>
           );
         })}
