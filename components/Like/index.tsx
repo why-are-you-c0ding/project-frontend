@@ -1,17 +1,17 @@
 import React, { useCallback } from "react";
 
 import {
-  CartItem,
-  InfoBottom,
-  InfoTop,
-  ItemBox,
   ItemBox2,
   ItemBoxInfo,
   ItemInfo,
   ItemInfoCount,
+  ItemInfoDeleteBtn,
   ItemInfoImg,
   ItemInfoPrice,
   ItemInfoSys,
+  ItemInfoTitle,
+  ItemInfoTitleName,
+  ItemInfoTitleOption,
   Wrapper,
 } from "@components/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
@@ -139,105 +139,73 @@ const Like = () => {
 
         {Mockdata?.cartLineItems.length === 0 && <NullData />}
 
-        {[...Array(Mockdata?.cartLineItems.length)].map((v, index) => {
-          return (
-            <CartItem key={index}>
-              <ItemBox>
-                <InfoTop>
-                  <img
-                    src={Mockdata?.cartLineItems[index]?.imageUrl}
-                    alt={Mockdata?.cartLineItems[index]?.name}
-                  />
-                  <div>
-                    <span>{Mockdata?.cartLineItems[index]?.name}</span>
-                    <span>{getTotalPrice(item, index)}원</span>
-                  </div>
-                  <div style={{ color: "rgba(0,0,0,0.4)" }}>
-                    {
-                      Mockdata?.cartLineItems[index].cartOptionGroups[0]
-                        .cartOption.name
-                    }
-                    {
-                      Mockdata?.cartLineItems[index].cartOptionGroups[1]
-                        .cartOption.name
-                    }
-                    {
-                      Mockdata?.cartLineItems[index].cartOptionGroups[2]
-                        .cartOption.name
-                    }
-                  </div>
-                </InfoTop>
-                <InfoBottom>
-                  <div>
-                    <span>2~3일 내 도착</span>
-                  </div>
-                  <div>
-                    <div>
-                      <button
-                        onClick={(event) =>
-                          onClickLenDown(event, item[index]?.id, eachLen[index])
-                        }
-                      >
-                        -
-                      </button>
-                      <span>{eachLen[index]}개</span>
-                      <button
-                        onClick={(event) =>
-                          onClickLenUp(event, item[index]?.id, eachLen[index])
-                        }
-                      >
-                        +
-                      </button>
-                    </div>
-
-                    <div>
-                      {/*<span>*/}
-                      {/*  {getTotalPrice(item, index) * eachLen[index]}원*/}
-                      {/*</span>*/}
-                      <span>
-                        <button
-                          onClick={(event) => {
-                            onDeleteItem(
-                              event,
-                              Mockdata?.cartLineItems[index]?.id,
-                            );
-                          }}
-                        >
-                          X
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                </InfoBottom>
-              </ItemBox>
-            </CartItem>
-          );
-        })}
-        {[...Array(Mockdata?.cartLineItems.length)].map((v, index) => {
-          return (
-            <ItemBox2>
-              <ItemBoxInfo>
-                <div>상품정보</div>
-                <div>수량</div>
-                <div>주문금액</div>
-                <div>배송 형태</div>
-              </ItemBoxInfo>
+        <ItemBox2>
+          <ItemBoxInfo>
+            <div>상품정보</div>
+            <div>수량</div>
+            <div>주문금액</div>
+            <div>배송 형태</div>
+          </ItemBoxInfo>
+          {[...Array(Mockdata?.cartLineItems.length)].map((v, index) => {
+            return (
               <ItemInfo>
                 <ItemInfoImg>
                   <img
                     src={Mockdata?.cartLineItems[index]?.imageUrl}
                     alt={Mockdata?.cartLineItems[index]?.name}
                   />
-                  <div>{Mockdata?.cartLineItems[index]?.name}</div>
+                  <ItemInfoTitle>
+                    <ItemInfoTitleName>
+                      {Mockdata?.cartLineItems[index]?.name}
+                    </ItemInfoTitleName>
+                    <ItemInfoTitleOption>
+                      {
+                        Mockdata?.cartLineItems[index].cartOptionGroups[0]
+                          .cartOption.name
+                      }
+                      {
+                        Mockdata?.cartLineItems[index].cartOptionGroups[1]
+                          .cartOption.name
+                      }
+                      {
+                        Mockdata?.cartLineItems[index].cartOptionGroups[2]
+                          .cartOption.name
+                      }
+                    </ItemInfoTitleOption>
+                  </ItemInfoTitle>
                 </ItemInfoImg>
-                <ItemInfoCount></ItemInfoCount>
-                <ItemInfoPrice></ItemInfoPrice>
-                <ItemInfoSys></ItemInfoSys>
-                <div>X</div>
+                <ItemInfoCount>
+                  <button
+                    onClick={(event) =>
+                      onClickLenDown(event, item[index]?.id, eachLen[index])
+                    }
+                  >
+                    -
+                  </button>
+                  <div>{eachLen[index]}</div>
+                  <button
+                    onClick={(event) =>
+                      onClickLenUp(event, item[index]?.id, eachLen[index])
+                    }
+                  >
+                    +
+                  </button>
+                </ItemInfoCount>
+                <ItemInfoPrice>{getTotalPrice(item, index)}원</ItemInfoPrice>
+                <ItemInfoSys>택배 배송</ItemInfoSys>
+                <ItemInfoDeleteBtn>
+                  <button
+                    onClick={(event) => {
+                      onDeleteItem(event, Mockdata?.cartLineItems[index]?.id);
+                    }}
+                  >
+                    X
+                  </button>
+                </ItemInfoDeleteBtn>
               </ItemInfo>
-            </ItemBox2>
-          );
-        })}
+            );
+          })}
+        </ItemBox2>
       </Wrapper>
     </div>
   );
