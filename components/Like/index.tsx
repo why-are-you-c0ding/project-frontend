@@ -5,7 +5,13 @@ import {
   InfoBottom,
   InfoTop,
   ItemBox,
+  ItemBox2,
+  ItemBoxInfo,
   ItemInfo,
+  ItemInfoCount,
+  ItemInfoImg,
+  ItemInfoPrice,
+  ItemInfoSys,
   Wrapper,
 } from "@components/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
@@ -137,12 +143,6 @@ const Like = () => {
           return (
             <CartItem key={index}>
               <ItemBox>
-                <ItemInfo>
-                  <div>상품정보</div>
-                  <div>상품금액</div>
-                  <div>수량</div>
-                  <div>주문금액</div>
-                </ItemInfo>
                 <InfoTop>
                   <img
                     src={Mockdata?.cartLineItems[index]?.imageUrl}
@@ -211,6 +211,31 @@ const Like = () => {
                 </InfoBottom>
               </ItemBox>
             </CartItem>
+          );
+        })}
+        {[...Array(Mockdata?.cartLineItems.length)].map((v, index) => {
+          return (
+            <ItemBox2>
+              <ItemBoxInfo>
+                <div>상품정보</div>
+                <div>수량</div>
+                <div>주문금액</div>
+                <div>배송 형태</div>
+              </ItemBoxInfo>
+              <ItemInfo>
+                <ItemInfoImg>
+                  <img
+                    src={Mockdata?.cartLineItems[index]?.imageUrl}
+                    alt={Mockdata?.cartLineItems[index]?.name}
+                  />
+                  <div>{Mockdata?.cartLineItems[index]?.name}</div>
+                </ItemInfoImg>
+                <ItemInfoCount></ItemInfoCount>
+                <ItemInfoPrice></ItemInfoPrice>
+                <ItemInfoSys></ItemInfoSys>
+                <div>X</div>
+              </ItemInfo>
+            </ItemBox2>
           );
         })}
       </Wrapper>

@@ -58,15 +58,39 @@ export const ItemBox = styled.div`
   }
 `;
 
-export const ItemInfo = styled.div`
+export const ItemBox2 = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ItemBoxInfo = styled.div`
   display: grid;
-  grid-template-columns: minmax(50px, 5fr) minmax(50px, 1fr) minmax(50px, 1fr) minmax(
-      50px,
-      1fr
-    );
+  grid-template-columns:
+    minmax(50px, 4fr) minmax(50px, 1fr) minmax(50px, 1fr) minmax(50px, 1fr)
+    minmax(20px, 0.5fr);
   align-items: center;
   justify-items: center;
+  height: 3rem;
+  border-top: 3px solid black;
 `;
+
+export const ItemInfo = styled.div`
+  display: grid;
+  grid-template-columns:
+    minmax(50px, 4fr) minmax(50px, 1fr) minmax(50px, 1fr) minmax(50px, 1fr)
+    minmax(10px, 0.2fr);
+  height: 9rem;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  align-items: center;
+`;
+
+export const ItemInfoImg = styled.div`
+  display: flex;
+`;
+export const ItemInfoCount = styled.div``;
+export const ItemInfoPrice = styled.div``;
+export const ItemInfoSys = styled.div``;
 
 export const InfoTop = styled.div`
   display: flex;
