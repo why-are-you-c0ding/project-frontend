@@ -18,12 +18,15 @@ export const myPageApi = createApi({
           url: "/carts/cart-line-items",
           method: "delete",
           body: { cartLineItemId },
+          headers: {
+            Authorization: `Bearer ${getCookie("JSESSIONID")}`,
+          },
         };
       },
     }),
     downCartItem: builder.mutation({
       query: ({ cartLineItemId, count }: CartItemInfo) => ({
-        url: `/carts/cart-line-items`,
+        url: "/carts/cart-line-items",
         method: "PATCH",
         body: { cartLineItemId, count },
         headers: {
@@ -33,7 +36,7 @@ export const myPageApi = createApi({
     }),
     upCartItem: builder.mutation({
       query: ({ cartLineItemId, count }: CartItemInfo) => ({
-        url: `/carts/cart-line-items`,
+        url: "/carts/cart-line-items",
         method: "PATCH",
         body: { cartLineItemId, count },
         headers: {

@@ -4,7 +4,7 @@ import {
   CartItem,
   InfoBottom,
   InfoTop,
-  ItemInfo,
+  ItemBox,
   Wrapper,
 } from "@components/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
@@ -17,7 +17,7 @@ import { ListData } from "@typings/db";
 const SellList = () => {
   const { data: ListData, error } = useSWR<ListData | undefined>(
     "https://waycabvav.shop/items/sellers?page=0",
-    fetcher
+    fetcher,
   );
 
   const list = ListData?.items;
@@ -40,7 +40,7 @@ const SellList = () => {
             return (
               <CartItem key={index}>
                 <img src={list[index]?.imageUrl} alt={list[index]?.itemName} />
-                <ItemInfo>
+                <ItemBox>
                   <InfoTop>
                     <div>
                       <span>{list[index]?.itemName}</span>
@@ -51,7 +51,7 @@ const SellList = () => {
                   <InfoBottom>
                     <div>{list[index]?.shopName}</div>
                   </InfoBottom>
-                </ItemInfo>
+                </ItemBox>
               </CartItem>
             );
           })}
