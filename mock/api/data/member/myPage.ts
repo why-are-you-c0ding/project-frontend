@@ -69,6 +69,53 @@ export const cartData = {
   ],
 };
 
+export const orderData = {
+  finalPage: true,
+  orderLineItems: [
+    {
+      itemImageUrl: "www.image.com",
+      shopName: "맥 스토어",
+      itemName: "맥북",
+      count: 2,
+      shopId: 2,
+      itemId: 3,
+      orderLineItemId: 7,
+      orderStatus: "PAYMENT_COMPLETED",
+      price: 20000,
+      orderOptionGroups: [
+        {
+          optionGroupName: "Ram",
+          optionName: "16GB",
+        },
+        {
+          optionGroupName: "SSD",
+          optionName: "512GB",
+        },
+      ],
+    },
+    {
+      itemImageUrl: "www.image.com",
+      shopName: "맥 스토어",
+      itemName: "맥북",
+      count: 2,
+      shopId: 2,
+      itemId: 3,
+      orderLineItemId: 8,
+      orderStatus: "PAYMENT_COMPLETED",
+      price: 20000,
+      orderOptionGroups: [
+        {
+          optionGroupName: "Ram",
+          optionName: "16GB",
+        },
+        {
+          optionGroupName: "SSD",
+          optionName: "512GB",
+        },
+      ],
+    },
+  ],
+};
 export const updateCartItemCount = {
   message: "장바구니 상품 업데이트를 성공하셨습니다.",
 };
