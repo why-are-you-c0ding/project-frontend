@@ -130,7 +130,7 @@ export const ItemInfoTitleOption = styled.div`
 export const ItemInfoCount = styled.div`
   height: 2rem;
   width: 6rem;
-  background-color: #eeeeee;
+  background-color: #d1d1d1;
   display: flex;
   justify-content: center;
   align-items: center;
