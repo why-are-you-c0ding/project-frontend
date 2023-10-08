@@ -44,5 +44,13 @@ export const myPageApi = createApi({
         },
       }),
     }),
+    getCustomersOrder: builder.query({
+      query: (ItemId: number) =>
+        `/order-line-items/customers?lastLookUpOrderLineItemId=${ItemId}`,
+    }),
+    getSellersOrder: builder.query({
+      query: (ItemId: number) =>
+        `/order-line-items/sellers?lastLookUpOrderLineItemId=${ItemId}`,
+    }),
   }),
 });

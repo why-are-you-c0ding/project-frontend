@@ -14,12 +14,19 @@ import { useInView } from "react-intersection-observer";
 import NullData from "@components/NullData";
 import { Link } from "react-router-dom";
 import { IOrderData, orders } from "@typings/db";
+import { myPageApi } from "@api/myPageApi";
 
 const Buying = () => {
   const { data: orderData, setSize } = useSWRInfinite<IOrderData>(
     (index) => `https://waycabvav.shop/orders/customers?page=${index}`,
     fetcher,
   );
+
+  const {
+    data: orderData2,
+    error,
+    isLoading,
+  } = myPageApi.useGetCustomersOrderQuery<any>(0);
 
   let orderTemp: Array<orders[]> = [];
 
