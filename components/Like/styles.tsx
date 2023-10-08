@@ -58,14 +58,106 @@ export const ItemBox = styled.div`
   }
 `;
 
-export const ItemInfo = styled.div`
+export const ItemBox2 = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ItemBoxInfo = styled.div`
   display: grid;
-  grid-template-columns: minmax(50px, 5fr) minmax(50px, 1fr) minmax(50px, 1fr) minmax(
-      50px,
-      1fr
-    );
+  grid-template-columns:
+    minmax(50px, 4fr) minmax(50px, 1fr) minmax(50px, 1fr) minmax(50px, 1fr)
+    minmax(20px, 0.2fr);
   align-items: center;
   justify-items: center;
+  height: 3rem;
+  border-top: 3px solid black;
+  border-bottom: 1px solid black;
+`;
+
+export const ItemInfo = styled.div`
+  display: grid;
+  grid-template-columns:
+    minmax(50px, 4fr) minmax(50px, 1fr) minmax(50px, 1fr) minmax(50px, 1fr)
+    minmax(20px, 0.2fr);
+  height: 9rem;
+  border-bottom: 2px solid #f5f5f5;
+  align-items: center;
+  justify-items: center;
+
+  &:hover {
+    background-color: #eeeeee;
+  }
+`;
+
+export const ItemInfoImg = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  width: 100%;
+
+  align-items: center;
+  padding-left: 2rem;
+
+  & img {
+    min-width: 6rem;
+    max-width: 6rem;
+    min-height: 6rem;
+    max-height: 6rem;
+
+    @media (max-width: 769px) {
+      min-width: 4rem;
+      max-width: 4rem;
+      min-height: 4rem;
+      max-height: 4rem;
+    }
+  }
+`;
+
+export const ItemInfoTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+export const ItemInfoTitleName = styled.div`
+  font-weight: bold;
+`;
+export const ItemInfoTitleOption = styled.div`
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.4);
+`;
+
+export const ItemInfoCount = styled.div`
+  height: 2rem;
+  width: 6rem;
+  background-color: #d1d1d1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & button {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+  }
+
+  & div {
+    width: 2rem;
+    height: 1.8rem;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+export const ItemInfoPrice = styled.div``;
+export const ItemInfoSys = styled.div``;
+
+export const ItemInfoDeleteBtn = styled.div`
+  color: #d0d0d0;
 `;
 
 export const InfoTop = styled.div`
