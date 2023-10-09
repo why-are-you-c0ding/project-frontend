@@ -24,4 +24,10 @@ export const myPage = [
     );
     return res(ctx.status(200), ctx.json(orderData));
   }),
+  rest.get("/order-line-items/sellers", (req, res, ctx) => {
+    const lastLookUpOrderLineItemId = req.url.searchParams.get(
+      "lastLookUpOrderLineItemId",
+    );
+    return res(ctx.status(200), ctx.json(orderData));
+  }),
 ];
