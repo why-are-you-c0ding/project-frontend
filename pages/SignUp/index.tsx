@@ -405,7 +405,7 @@ const SignUp = () => {
                 onChangeNickName(event);
                 setIsCheckNickName(false);
               }}
-              placeholder="예) 나비, 2자 이상"
+              placeholder="닉네임을 입력해주세요.(2자 이상)"
               minLength={2}
               maxLength={10}
             />
