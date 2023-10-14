@@ -328,7 +328,7 @@ const SignUp = () => {
                   marginTop: "0.5rem",
                 }}
               >
-                비밀번호는 8자 이상 및 영문, 숫자, 특수 문자 1자 이상 포함
+                비밀번호는 8자 이상/영문, 숫자, 특수 문자 1자 이상 포함
               </span>
               <Input
                 type="password"
