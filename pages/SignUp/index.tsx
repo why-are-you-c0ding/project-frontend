@@ -307,7 +307,7 @@ const SignUp = () => {
             />
           </Label>
           <Label>
-            <span>인증 번호</span>
+            <span>인증번호</span>
             <Input
               type="text"
               id="authKey"
@@ -319,7 +319,7 @@ const SignUp = () => {
             />
           </Label>
           <Label>
-            <span>비밀 번호*</span>
+            <span>비밀번호*</span>
             <div>
               <span
                 style={{
@@ -359,7 +359,7 @@ const SignUp = () => {
             )}
           </Label>
           <Label>
-            <span>비밀 번호 체크* </span>
+            <span>비밀번호 체크* </span>
             <div>
               <Input
                 type="password"
@@ -412,7 +412,7 @@ const SignUp = () => {
             {isCheckNickName && <SuccessVerification>✅</SuccessVerification>}
           </Label>
           <Label>
-            <span>생년 월일*</span>
+            <span>생년월일*</span>
             <Input
               type="date"
               value={birthDay}
