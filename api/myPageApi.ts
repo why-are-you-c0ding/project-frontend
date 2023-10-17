@@ -6,7 +6,10 @@ const isDevelopment = process.env.NODE_ENV !== "development";
 
 export const myPageApi = createApi({
   reducerPath: "myPageApi",
-  baseQuery: fetchBaseQuery({ baseUrl: isDevelopment ? URL : "/" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: isDevelopment ? URL : "/",
+    credentials: "include",
+  }),
   tagTypes: ["cart"],
   endpoints: (builder) => ({
     getCart: builder.query({
