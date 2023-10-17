@@ -5,7 +5,10 @@ const isDevelopment = process.env.NODE_ENV !== "development";
 
 export const memberApi = createApi({
   reducerPath: "memberApi",
-  baseQuery: fetchBaseQuery({ baseUrl: isDevelopment ? URL : "/" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: isDevelopment ? URL : "/",
+    credentials: "include",
+  }),
   tagTypes: ["member"],
   endpoints: (builder) => ({
     validateId: builder.mutation({
@@ -88,7 +91,7 @@ export const memberApi = createApi({
     login: builder.mutation({
       query: ({ loginId, password }: LoginInfo) => {
         return {
-          url: "/login",
+          url: "/local/login",
           method: "POST",
           body: {
             loginId,
