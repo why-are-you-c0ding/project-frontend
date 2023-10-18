@@ -24,7 +24,7 @@ export const auth = [
   rest.post("/members/consumers", (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(signupMember));
   }),
-  rest.post("/login", (req, res, ctx) => {
+  rest.post("/local/login", (req, res, ctx) => {
     const oneHourLater = new Date();
     oneHourLater.setTime(oneHourLater.getTime() + 60 * 60 * 100000000000);
 
