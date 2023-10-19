@@ -24,10 +24,6 @@ const LogIn = () => {
 
   const [loginMutation] = memberApi.useLoginMutation();
 
-  const headers = {
-    "X-Requested-With": "XMLHttpRequest",
-  };
-
   const onSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -42,7 +38,7 @@ const LogIn = () => {
       const res = await loginMutation({ loginId, password });
 
       if ("data" in res) {
-        if (res.data.message === "Login succeeded.") {
+        if (res.data.message === "로그인을 성공했습니다.") {
           dispatch(login());
           navigate("/main");
         } else {
@@ -77,7 +73,7 @@ const LogIn = () => {
           </div>
         </Label>
         <Label>
-          <span>비밀 번호</span>
+          <span>비밀번호</span>
           <div>
             <Input
               type="password"
@@ -94,7 +90,7 @@ const LogIn = () => {
         </Label>
         <SearchBox>
           <span>
-            <Link to="/signup">회원 가입</Link>
+            <Link to="/signup">회원가입</Link>
           </span>
         </SearchBox>
       </Form>
