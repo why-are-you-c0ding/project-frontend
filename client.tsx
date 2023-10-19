@@ -9,7 +9,7 @@ import { ChakraProvider, extendBaseTheme } from "@chakra-ui/react";
 import store from "@redux/store";
 
 import { worker } from "@mock/browser";
-if (process.env.NODE_ENV === "development") {
+if (process.env.REACT_START_MSW === "true") {
   worker.start();
 }
 

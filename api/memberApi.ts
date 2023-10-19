@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { LoginInfo, SignUpInfo } from "@typings/member";
 const URL = process.env.REACT_APP_BASE_URL;
-const isDevelopment = process.env.NODE_ENV !== "development";
+const isDevelopment = process.env.REACT_START_MSW !== "true";
 
 export const memberApi = createApi({
   reducerPath: "memberApi",
