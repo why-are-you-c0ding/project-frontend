@@ -27,7 +27,7 @@ const Like = () => {
   const [downMutation] = myPageApi.useDownCartItemMutation();
 
   const { data: Mockdata, isLoading } =
-    myPageApi.useGetCartQuery<any>("bulbasaur");
+    myPageApi.useGetCartQuery<any>("qustndlfma");
 
   let item: cartLineItems[] = [];
 

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import StatusBar from "@components/StatusBar";
 import { Wrapper, SideBar, RightSide } from "@pages/MyPage/styles";
 import MypageSidebar from "@components/MypageSidebar";
-import { Outlet, useNavigate, Route, Routes } from "react-router-dom";
+import { useNavigate, Route, Routes } from "react-router-dom";
 import loadable from "@loadable/component";
 import { getCookie } from "@utils/cookie";
 
@@ -15,12 +15,6 @@ const My = loadable(() => import("@components/My"));
 
 const MyPage = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!getCookie("JSESSIONID")) {
-      navigate("/login", { replace: true });
-    }
-  }, [navigate]);
 
   return (
     <div>
