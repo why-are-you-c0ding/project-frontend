@@ -1,4 +1,10 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, {
+  FC,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import {
   Bar,
   BarWrapper,
@@ -11,13 +17,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
 import Menu from "@components/Menu";
 import MenuList from "@components/MenuList";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useInput from "@hooks/useInput";
 import { ToastContainer } from "react-toastify";
-import { Cookies } from "react-cookie";
 import { memberApi } from "@api/memberApi";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { logout } from "@redux/reducers/userInfoSlice";
+import { login, logout } from "@redux/reducers/userInfoSlice";
+import { getCookie, removeCookie } from "@utils/cookie";
+import { decrypt } from "@utils/cryptho";
+import { useNavigate } from "react-router";
 
 interface Props {
   sideBar?: boolean;
@@ -26,9 +34,10 @@ interface Props {
 const StatusBar: FC<Props> = ({ sideBar }) => {
   const [menu, setMenu] = useState(false);
   const [word, onChangeWord, setWord] = useInput("");
-  const cookie = new Cookies();
   const isLogin = useAppSelector((state) => state.userInfo.isLogin);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [logoutMutation] = memberApi.useLogoutMutation();
 
@@ -36,13 +45,12 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
     setMenu((prev) => !prev);
   }, []);
 
-  const onLogout = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      logoutMutation({});
-      dispatch(logout());
-    },
-    [isLogin],
-  );
+  const onLogout = useCallback(() => {
+    logoutMutation({});
+    dispatch(logout());
+    removeCookie("isLogin");
+    navigate("/main");
+  }, [isLogin]);
 
   useEffect(() => {
     const windowResize = () => {
@@ -57,6 +65,20 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
       window.removeEventListener(`resize`, windowResize);
     };
   }, []);
+
+  useLayoutEffect(() => {
+    // TODO: 쿠키 만료되었을때 로그아웃 처리해야됨
+    const loginStatus: string = getCookie("isLogin");
+
+    if (decrypt(loginStatus) === "로그인매우성공") {
+      dispatch(login());
+    } else {
+      dispatch(logout());
+      if (pathname !== "/") {
+        navigate("/login");
+      }
+    }
+  }, [pathname]);
 
   return (
     <BarWrapper sideBar={sideBar}>
