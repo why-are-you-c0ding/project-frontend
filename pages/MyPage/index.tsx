@@ -16,12 +16,6 @@ const My = loadable(() => import("@components/My"));
 const MyPage = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!getCookie("JSESSIONID")) {
-      navigate("/login", { replace: true });
-    }
-  }, [navigate]);
-
   return (
     <div>
       <Wrapper>
