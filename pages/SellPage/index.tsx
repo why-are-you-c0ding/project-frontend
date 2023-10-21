@@ -24,12 +24,6 @@ const SellPage = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (!localStorage.getItem("jwt")) {
-      navigate("/login", { replace: true });
-    }
-  }, [navigate]);
-
   return (
     <div>
       {/*<StatusBar sideBar={sideBar} />*/}
