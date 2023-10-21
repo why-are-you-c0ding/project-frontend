@@ -15,6 +15,9 @@ import { memberApi } from "@api/memberApi";
 import { toast, ToastContainer } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { login } from "@redux/reducers/userInfoSlice";
+import { useCookies } from "react-cookie";
+import { setCookie } from "@utils/cookie";
+import { decrypt, encrypt } from "@utils/cryptho";
 
 const LogIn = () => {
   const [loginId, onChangeLoginId, setLoginId] = useInput("");
@@ -40,6 +43,13 @@ const LogIn = () => {
       if ("data" in res) {
         if (res.data.message === "로그인을 성공했습니다.") {
           dispatch(login());
+
+          const oneMonthLater = new Date();
+          oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+          setCookie("isLogin", encrypt("로그인매우성공"), {
+            path: "/",
+            expires: oneMonthLater,
+          });
           navigate("/main");
         } else {
           toast.warning(res.data.message, {
