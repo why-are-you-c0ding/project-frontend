@@ -42,7 +42,7 @@ export const auth = [
     return res(
       ctx.status(200),
       ctx.json(logout),
-      ctx.cookie("JSESSIONID", "", {
+      ctx.cookie("SESSION", "", {
         expires: now,
       }),
     );
