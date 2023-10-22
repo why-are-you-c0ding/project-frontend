@@ -31,7 +31,7 @@ export const auth = [
     return res(
       ctx.status(200),
       ctx.json(login),
-      ctx.cookie("JSESSIONID", "cookievalue", {
+      ctx.cookie("SESSION", "cookievalue", {
         expires: oneHourLater,
       }),
     );
