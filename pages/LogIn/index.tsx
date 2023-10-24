@@ -6,6 +6,7 @@ import {
   Label,
   SearchBox,
   SignUpBtn,
+  SocialLoginWrapper,
   Wrapper,
 } from "@pages/SignUp/styles";
 import useInput from "@hooks/useInput";
@@ -96,8 +97,19 @@ const LogIn = () => {
           </div>
         </Label>
         <Label>
-          <SignUpBtn type="submit">로그인</SignUpBtn>{" "}
+          <SignUpBtn type="submit">로그인</SignUpBtn>
         </Label>
+        <SocialLoginWrapper>
+          <span>소셜 로그인</span>
+          <div>
+            <Link to={"https://wayc.store/oauth2/authorization/google"}>
+              <img src="/public/google.svg" alt="구글 로그인" />
+            </Link>
+            <Link to={"https://wayc.store/oauth2/authorization/kakao"}>
+              <img src="/public/kakao.svg" alt="카카오 로그인" />
+            </Link>
+          </div>
+        </SocialLoginWrapper>
         <SearchBox>
           <span>
             <Link to="/signup">회원가입</Link>
