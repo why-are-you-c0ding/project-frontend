@@ -96,15 +96,15 @@ export const SuccessVerification = styled.span`
 `;
 
 export const SignUpBtn = styled.button`
-  width: 14rem;
-  height: 3.5rem;
+  width: 10rem;
+  height: 2.8rem;
   background-color: black;
   color: white;
   border: transparent;
   border-radius: 10px;
   text-align: center;
   outline: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   margin: 0 auto;
   cursor: pointer;
@@ -138,7 +138,7 @@ export const SearchBox = styled.div`
   text-align: center;
   & span {
     padding: 20px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: bolder;
 
     & a {
@@ -173,5 +173,31 @@ export const CheckSeller = styled.div`
 
   & span {
     margin-right: 0.3rem;
+  }
+`;
+
+export const SocialLoginWrapper = styled.div`
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  & > span {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50%;
+
+    img {
+      width: 4rem;
+    }
   }
 `;
