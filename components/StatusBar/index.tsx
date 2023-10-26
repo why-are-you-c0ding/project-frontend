@@ -38,6 +38,7 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const loginKey = process.env.REACT_LOGIN_KEY!;
 
   const [logoutMutation] = memberApi.useLogoutMutation();
 
@@ -70,7 +71,7 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
     // TODO: 쿠키 만료되었을때 로그아웃 처리해야됨
     const loginStatus: string = getCookie("isLogin");
 
-    if (decrypt(loginStatus) === "로그인매우성공") {
+    if (decrypt(loginStatus) === loginKey) {
       dispatch(login());
     } else {
       dispatch(logout());
