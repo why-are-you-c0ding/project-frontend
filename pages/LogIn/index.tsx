@@ -25,6 +25,7 @@ const LogIn = () => {
   const [password, onChangePassword, setPassword] = useInput("");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const loginKey = process.env.REACT_LOGIN_KEY!;
 
   const [loginMutation] = memberApi.useLoginMutation();
 
@@ -47,7 +48,7 @@ const LogIn = () => {
 
           const oneMonthLater = new Date();
           oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
-          setCookie("isLogin", encrypt("로그인매우성공"), {
+          setCookie("isLogin", encrypt(loginKey), {
             path: "/",
             expires: oneMonthLater,
           });
@@ -63,7 +64,7 @@ const LogIn = () => {
         });
       }
     },
-    [loginId, password],
+    [loginId, password, loginKey],
   );
 
   return (
