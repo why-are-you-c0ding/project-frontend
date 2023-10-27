@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useState } from "react";
+import React, { FormEvent, useCallback } from "react";
 import {
   Form,
   Header,
@@ -13,12 +13,11 @@ import useInput from "@hooks/useInput";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { memberApi } from "@api/memberApi";
-import { toast, ToastContainer } from "react-toastify";
-import { useAppDispatch, useAppSelector } from "@redux/hooks";
+import { toast } from "react-toastify";
+import { useAppDispatch } from "@redux/hooks";
 import { login } from "@redux/reducers/userInfoSlice";
-import { useCookies } from "react-cookie";
 import { setCookie } from "@utils/cookie";
-import { decrypt, encrypt } from "@utils/cryptho";
+import { encrypt } from "@utils/cryptho";
 
 const LogIn = () => {
   const [loginId, onChangeLoginId, setLoginId] = useInput("");
