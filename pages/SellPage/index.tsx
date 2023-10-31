@@ -26,15 +26,12 @@ const SellPage = () => {
 
   return (
     <div>
-      {/*<StatusBar sideBar={sideBar} />*/}
       <Wrapper>
         <SideBar>
           <SellpageSidebar sideBar={sideBar} />
         </SideBar>
         <RightSide>
           <Routes>
-            {" "}
-            {/* Use Routes component */}
             <Route path="/info" element={<SellInfo />} />
             <Route path="/signupitem" element={<SignUpItem />} />
             <Route path="/sellstock" element={<SellStock />} />
@@ -44,7 +41,7 @@ const SellPage = () => {
           </Routes>
         </RightSide>
       </Wrapper>
-      <Outlet /> {/* Render nested routes */}
+      <Outlet />
     </div>
   );
 };
