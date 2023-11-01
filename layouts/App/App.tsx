@@ -16,6 +16,12 @@ const Order = loadable(() => import(`@pages/Order`));
 const CustomerOrder = loadable(() => import(`@pages/CustomerOrder`));
 const Checkout = loadable(() => import("@components/Checkout"));
 const SearchItem = loadable(() => import(`@pages/SearchItem`));
+const SignUpItem = loadable(() => import("@components/SignUpItem"));
+const SellInfo = loadable(() => import("@components/SellInfo"));
+const SellStock = loadable(() => import("@components/SellStock"));
+const SellStockLook = loadable(() => import("@components/SellStockLook"));
+const SellList = loadable(() => import("@components/SellList"));
+const SellOrderList = loadable(() => import("@components/SellOrderList"));
 
 const App = () => {
   return (
@@ -29,7 +35,14 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/mypage/*" element={<MyPage />} />
-          <Route path="/sellpage" element={<SellPage />} />
+          <Route path="/sellpage" element={<SellPage />}>
+            <Route path=":signupitem" element={<SignUpItem />} />
+            <Route path=":info" element={<SellInfo />} />
+            <Route path=":sellstock" element={<SellStock />} />
+            <Route path=":sellstocklook" element={<SellStockLook />} />
+            <Route path=":selllist" element={<SellList />} />
+            <Route path=":sellorderlist" element={<SellOrderList />} />
+          </Route>
           <Route path="/sellpage/:id" element={<SellPage />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/:itemId" element={<Shop />} />
