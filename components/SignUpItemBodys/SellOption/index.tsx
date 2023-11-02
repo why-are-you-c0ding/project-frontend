@@ -21,8 +21,8 @@ import { ItemTitle } from "@components/SignUpItem/styles";
 import SellOptionTable from "@components/SignUpItemBodys/SellOptionTable";
 import { makeOptionTableList } from "@utils/makeOptionTableList";
 import { useDispatch } from "react-redux";
-import { getOptionTableList } from "../../../redux/reducers/signUpItemSlice";
-import { useAppSelector } from "../../../redux/hooks";
+import { useAppSelector } from "@redux/hooks";
+import { getOptionTableList } from "@redux/reducers/signUpItemSlice";
 
 export interface ItemInfo {
   id: number;
@@ -32,7 +32,33 @@ export interface ItemInfo {
 
 const SellOption = () => {
   const dispatch = useDispatch();
-  const { optionTableList } = useAppSelector((state: any) => state.sellOption);
+  // const { optionTableList } = useAppSelector((state: any) => state.sellOption);
+  const optionTableList = [
+    {
+      options: [
+        {
+          name: "Option 1",
+          price: 1000,
+        },
+        {
+          name: "Option 2",
+          price: 1500,
+        },
+      ],
+    },
+    {
+      options: [
+        {
+          name: "Option A",
+          price: 1200,
+        },
+        {
+          name: "Option B",
+          price: 1700,
+        },
+      ],
+    },
+  ];
 
   const ItemId = useRef(1);
   const [itemInfos, setItemInfos] = useState<ItemInfo[]>([
@@ -107,7 +133,7 @@ const SellOption = () => {
 
   useEffect(() => {
     let optionMul = 1;
-    optionTableList.map((option: any) => {
+    optionTableList?.map((option: any) => {
       optionMul *= option.options.length;
     });
 

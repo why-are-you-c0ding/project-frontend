@@ -22,15 +22,46 @@ import SellOption from "@components/SignUpItemBodys/SellOption";
 import useInput from "@hooks/useInput";
 import autosize from "autosize";
 import SellOptionImg from "@components/SignUpItemBodys/SellOptionImg";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { signUpItem } from "../../redux/actions/signUpItemAPI";
+// import { useAppDispatch, useAppSelector } from "@redux/hooks";
+// import { signUpItem } from "@redux/actions/signUpItemAPI";
+// import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+// import { signUpItem } from "../../redux/actions/signUpItemAPI";
 
 const SignUpItem = () => {
-  const dispatch = useAppDispatch();
-  const { optionTableList, itemImg, isTable } = useAppSelector(
-    (state: any) => state.sellOption,
-  );
-  const { jwt } = useAppSelector((state: any) => state.userInfo);
+  // const dispatch = useAppDispatch();
+  // const { optionTableList, itemImg, isTable } = useAppSelector(
+  //   (state: any) => state.sellOption,
+  // );
+  const optionTableList = [
+    {
+      options: [
+        {
+          name: "Option 1",
+          price: 1000,
+        },
+        {
+          name: "Option 2",
+          price: 1500,
+        },
+      ],
+    },
+    {
+      options: [
+        {
+          name: "Option A",
+          price: 1200,
+        },
+        {
+          name: "Option B",
+          price: 1700,
+        },
+      ],
+    },
+  ];
+  const itemImg = "";
+  const isTable = false;
+
+  // const { jwt } = useAppSelector((state: any) => state.userInfo);
 
   const categoryList = [
     "Food",
@@ -99,18 +130,18 @@ const SignUpItem = () => {
       }
     }
 
-    dispatch(
-      signUpItem({
-        jwt,
-        itemImg,
-        itemName,
-        information,
-        category,
-        optionGroups: optionTableList,
-        isTable,
-      }),
-    );
-  }, [jwt, itemImg, itemName, information, category, optionTableList]);
+    // dispatch(
+    //   signUpItem({
+    //     jwt,
+    //     itemImg,
+    //     itemName,
+    //     information,
+    //     category,
+    //     optionGroups: optionTableList,
+    //     isTable,
+    //   }),
+    // );
+  }, [itemImg, itemName, information, category, optionTableList]);
 
   const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -173,9 +204,9 @@ const SignUpItem = () => {
           </OptionInfo>
         </EachWrapper>
 
-        <EachWrapper>
-          <SellOption />
-        </EachWrapper>
+        {/*<EachWrapper>*/}
+        {/*  <SellOption />*/}
+        {/*</EachWrapper>*/}
 
         <SignBtn>
           <button onClick={onClickSignItem}>상품 등록</button>
