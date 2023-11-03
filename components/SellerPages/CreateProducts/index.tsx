@@ -16,18 +16,18 @@ import {
   SignBtn,
   Textarea,
   Wrapper,
-} from "@components/SignUpItem/styles";
+} from "@components/SellerPages/CreateProducts/styles";
 import { Input } from "@pages/SignUp/styles";
-import SellOption from "@components/SignUpItemBodys/SellOption";
+import SellOption from "@components/SellerPages/CreateProductsBodys/SellOption";
 import useInput from "@hooks/useInput";
 import autosize from "autosize";
-import SellOptionImg from "@components/SignUpItemBodys/SellOptionImg";
+import SellOptionImg from "@components/SellerPages/CreateProductsBodys/SellOptionImg";
 // import { useAppDispatch, useAppSelector } from "@redux/hooks";
 // import { signUpItem } from "@redux/actions/signUpItemAPI";
 // import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 // import { signUpItem } from "../../redux/actions/signUpItemAPI";
 
-const SignUpItem = () => {
+const CreateProducts = () => {
   // const dispatch = useAppDispatch();
   // const { optionTableList, itemImg, isTable } = useAppSelector(
   //   (state: any) => state.sellOption,
@@ -216,4 +216,4 @@ const SignUpItem = () => {
   );
 };
 
-export default SignUpItem;
+export default CreateProducts;

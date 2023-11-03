@@ -9,7 +9,7 @@ import {
   Wrapper,
 } from "@components/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
-import { SubHeader } from "@components/SellList/style";
+import { SubHeader } from "@components/SellerPages/SellList/style";
 import { Link } from "react-router-dom";
 import NullData from "@components/NullData";
 import useSWRInfinite from "swr/infinite";

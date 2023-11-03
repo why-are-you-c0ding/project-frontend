@@ -1,5 +1,5 @@
-import { ItemInfo } from "@components/SignUpItemBodys/SellOption";
-import { Option } from "../redux/reducers/signUpItemSlice";
+import { ItemInfo } from "@components/SellerPages/CreateProductsBodys/SellOption";
+import { Option } from "@redux/reducers/signUpItemSlice";
 
 export const makeOptionTableList = (itemInfos: ItemInfo[]) => {
   let list: Option[] = [];
@@ -12,7 +12,7 @@ export const makeOptionTableList = (itemInfos: ItemInfo[]) => {
     };
 
     let temp = itemInfos[i].values.split(",");
-    temp = temp.filter((v) => v !== "");
+    temp = temp.filter((v: any) => v !== "");
     for (let i = 0; i < temp.length; i++) {
       item.options.push({
         optionName: temp[i].trim(),

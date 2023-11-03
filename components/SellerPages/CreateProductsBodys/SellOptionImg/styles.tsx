@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const SellOptionImgWrapper = styled.div`
   .upload__image-wrapper {
     width: 20rem;
-    height: 20rem;
+    min-height: 20rem;
 
     display: flex;
     justify-content: center;
@@ -14,7 +14,7 @@ export const SellOptionImgWrapper = styled.div`
       cursor: pointer;
 
       width: 100%;
-      height: 100%;
+      height: 20rem;
 
       font-size: 1rem;
 

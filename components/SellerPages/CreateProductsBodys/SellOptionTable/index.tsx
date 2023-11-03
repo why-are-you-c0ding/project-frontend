@@ -1,14 +1,14 @@
 import React, { ChangeEvent, useCallback, useState } from "react";
-import { useAppSelector } from "../../../redux/hooks";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@redux/hooks";
+import { changePrice } from "@redux/reducers/signUpItemSlice";
 import {
   OptionName,
   Options,
   Table,
   Wrapper,
   ZeroData,
-} from "@components/SignUpItemBodys/SellOptionTable/styles";
-import { useDispatch } from "react-redux";
-import { changePrice } from "../../../redux/reducers/signUpItemSlice";
+} from "@components/SellerPages/CreateProductsBodys/SellOptionTable/styles";
 // import shortId from "shortid";
 
 const SellOptionTable = () => {

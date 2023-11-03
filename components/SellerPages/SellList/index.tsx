@@ -8,7 +8,7 @@ import {
   Wrapper,
 } from "@components/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
-import { SubHeader } from "@components/SellList/style";
+import { SubHeader } from "@components/SellerPages/SellList/style";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import NullData from "@components/NullData";

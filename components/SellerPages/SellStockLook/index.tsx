@@ -9,13 +9,13 @@ import {
   StockOption,
   StockID,
   StockNumber,
-} from "@components/SellStockLook/styles";
+} from "@components/SellerPages/SellStockLook/styles";
 
 const SellStockLook = () => {
   const params = { optionGroup1: [1] };
   const { data: StockData, error } = useSWR<any>(
     "https://waycabvav.shop/stocks?optionGroup1=21,32&optionGroup2=29",
-    fetcher
+    fetcher,
   );
 
   // const { data: StockOption, error } = useSWR<any>(

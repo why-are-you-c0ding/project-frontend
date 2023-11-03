@@ -16,9 +16,9 @@ import {
   Option,
   OptDeleteBtn,
   MakeTableBtn,
-} from "@components/SignUpItemBodys/SellOption/styles";
-import { ItemTitle } from "@components/SignUpItem/styles";
-import SellOptionTable from "@components/SignUpItemBodys/SellOptionTable";
+} from "@components/SellerPages/CreateProductsBodys/SellOption/styles";
+import { ItemTitle } from "@components/SellerPages/CreateProducts/styles";
+import SellOptionTable from "@components/SellerPages/CreateProductsBodys/SellOptionTable";
 import { makeOptionTableList } from "@utils/makeOptionTableList";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@redux/hooks";
@@ -157,7 +157,7 @@ const SellOption = () => {
             <OptionName
               type="text"
               value={itemInfos[0].name}
-              onChange={(e) => {
+              onChange={(e: any) => {
                 onChangeItemName(e, 0);
               }}
               placeholder={"예시) 색상"}
@@ -165,7 +165,7 @@ const SellOption = () => {
             <OptionValue
               type="text"
               value={itemInfos[0].values}
-              onChange={(e) => {
+              onChange={(e: any) => {
                 onChangeItemValues(e, 0);
               }}
               placeholder={"예시) 화이트, 블랙"}
@@ -188,7 +188,7 @@ const SellOption = () => {
                     <OptionName
                       type="text"
                       value={item.name}
-                      onChange={(e) => {
+                      onChange={(e: any) => {
                         onChangeItemName(e, item.id);
                       }}
                       placeholder={"예시) 색상"}
@@ -196,7 +196,7 @@ const SellOption = () => {
                     <OptionValue
                       type="text"
                       value={item.values}
-                      onChange={(e) => {
+                      onChange={(e: any) => {
                         onChangeItemValues(e, item.id);
                       }}
                       placeholder={"예시) 화이트, 블랙"}

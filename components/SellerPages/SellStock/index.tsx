@@ -14,11 +14,11 @@ import {
   RegisterRight,
   CheckName,
   CheckValue,
-} from "@components/SellStock/styles";
+} from "@components/SellerPages/SellStock/styles";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
-import option from "@components/SignUpItemBodys/SellOption";
-import { Input } from "@components/SignUpItemBodys/SellOption/styles";
+import option from "@components/SellerPages/CreateProductsBodys/SellOption";
+import { Input } from "@components/SellerPages/CreateProductsBodys/SellOption/styles";
 
 const SellStock = () => {
   const [number, setNumber] = useState<any>({});
@@ -53,7 +53,7 @@ const SellStock = () => {
 
   const { data: eachData, error } = useSWR<any>(
     "https://waycabvav.shop/items/1",
-    fetcher
+    fetcher,
   );
 
   //상위 옵션 이름 길이
@@ -80,7 +80,7 @@ const SellStock = () => {
     if (temp) {
       for (let j = 0; j < temp; j++) {
         optGroupValue[i].push(
-          eachData?.optionGroups[i]?.options[j]?.optionName
+          eachData?.optionGroups[i]?.options[j]?.optionName,
         );
       }
     }
@@ -158,7 +158,7 @@ const SellStock = () => {
           alert("등록 실패");
         });
     },
-    [data]
+    [data],
   );
 
   return (
