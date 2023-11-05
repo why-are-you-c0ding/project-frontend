@@ -91,6 +91,7 @@ const config: Configuration = {
     port: 3000,
     devMiddleware: { publicPath: "/dist/" },
     static: { directory: path.resolve(__dirname) },
+    hot: true,
 
     // proxy: {
     //   "/api/": {
