@@ -58,11 +58,6 @@ const SignUp = () => {
   const [signupConsumersMutation] = memberApi.useSignUpConsumersMutation();
   const [signupSellersMutation] = memberApi.useSignUpSellersMutation();
 
-  // TODO: 백엔드 다 작동 시 필요할 수도 있어서 남겨둠
-  const headers = {
-    "X-Requested-With": "XMLHttpRequest",
-  };
-
   const onSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
