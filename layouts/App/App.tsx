@@ -16,8 +16,8 @@ const Order = loadable(() => import(`@pages/Order`));
 const CustomerOrder = loadable(() => import(`@pages/CustomerOrder`));
 const Checkout = loadable(() => import("@components/Checkout"));
 const SearchItem = loadable(() => import(`@pages/SearchItem`));
-const CreateProducts = loadable(
-  () => import("@components/SellerPages/CreateProducts"),
+const CreateItems = loadable(
+  () => import("@components/SellerPages/CreateItems"),
 );
 const SellInfo = loadable(() => import("@components/SellerPages/SellInfo"));
 const SellStock = loadable(() => import("@components/SellerPages/SellStock"));
@@ -42,7 +42,7 @@ const App = () => {
           <Route path="/login" element={<LogIn />} />
           <Route path="/mypage/*" element={<MyPage />} />
           <Route path="/sellpage" element={<SellPage />}>
-            <Route path=":signupitem" element={<CreateProducts />} />
+            <Route path=":signupitem" element={<CreateItems />} />
             <Route path=":info" element={<SellInfo />} />
             <Route path=":sellstock" element={<SellStock />} />
             <Route path=":sellstocklook" element={<SellStockLook />} />
