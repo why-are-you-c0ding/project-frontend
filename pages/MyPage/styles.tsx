@@ -6,8 +6,6 @@ export const Wrapper = styled.div`
 
   min-height: 100vh;
 
-  margin-top: -2rem;
-
   & a {
     text-decoration: none;
     color: inherit;
