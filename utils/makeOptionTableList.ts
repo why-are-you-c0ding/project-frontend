@@ -1,13 +1,12 @@
 import { ItemInfo } from "@components/SellerPages/CreateItemsBodys/SellOption";
-import { Option } from "@typings/sellerPages";
+import { OptionInfo } from "@typings/sellerPages";
 
 export const makeOptionTableList = (itemInfos: ItemInfo[]) => {
-  const list: Option[] = [];
+  const list: OptionInfo[] = [];
 
   for (let i = 0; i < itemInfos.length; i++) {
-    const item: Option = {
+    const item: OptionInfo = {
       optionGroupName: itemInfos[i].name,
-      basic: i === 0,
       options: [],
     };
 

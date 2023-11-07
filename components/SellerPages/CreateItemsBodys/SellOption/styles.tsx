@@ -61,6 +61,12 @@ export const OptionValue = styled(Input)`
   margin-right: 0.5rem;
 `;
 
+export const OptionButtonWrapper = styled.div`
+  width: 20%;
+  display: flex;
+  padding-left: 1rem;
+`;
+
 export const OptPlusBtn = styled(Button)`
   margin-left: 0.5rem;
   font-size: 1.3rem;

@@ -22,14 +22,17 @@ import SellOption from "@components/SellerPages/CreateItemsBodys/SellOption";
 import useInput from "@hooks/useInput";
 import autosize from "autosize";
 import SellOptionImg from "@components/SellerPages/CreateItemsBodys/SellOptionImg";
-import { useAppSelector } from "@redux/hooks";
-// import { useAppDispatch, useAppSelector } from "@redux/hooks";
-// import { signUpItem } from "@redux/actions/signUpItemAPI";
-// import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-// import { signUpItem } from "../../redux/actions/signUpItemAPI";
+import { useAppDispatch, useAppSelector } from "@redux/hooks";
+import { toast } from "react-toastify";
+import { imageUrl } from "@mock/api/data/sellers/createItem";
+import { ImageType } from "react-images-uploading/dist/typings";
+import { sellersApi } from "@api/sellersApi";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { SerializedError } from "@reduxjs/toolkit";
+import { Item } from "@typings/sellerPages";
 
 const CreateItems = () => {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const { optionTableList, isTable, itemImg, categoryList } = useAppSelector(
     (state) => state.createItems,
@@ -39,6 +42,9 @@ const CreateItems = () => {
   const [price, setPrice] = useState("");
   const [information, setInformation] = useState("");
   const [category, setCategory] = useState(categoryList[0]);
+
+  const [createImgMutation] = sellersApi.useCreateImgMutation();
+  const [createItemsMutation] = sellersApi.useCreateItemsMutation();
 
   const onChangePrice = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 9) return;
@@ -75,49 +81,96 @@ const CreateItems = () => {
     [],
   );
 
-  const onClickSignItem = useCallback(() => {
+  const onClickSignItem = useCallback(async () => {
     if (itemImg.length === 0) {
-      alert("이미지를 입력하세요.");
+      toast.warning("이미지를 입력하세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       return;
     }
     if (!itemName) {
-      alert("아이템 이름을 입력하세요.");
+      toast.warning("상품 이름을 입력하세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+    if (price && +price < 1000) {
+      toast.warning("상품 가격은 1,000원 이상 입력해주세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+    if (!price) {
+      toast.warning("상품 가격을 입력하세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       return;
     }
     if (!information) {
-      alert("상세 설명을 입력하세요.");
+      toast.warning("상세 설명을 입력하세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       return;
     }
     if (!isTable) {
-      alert("옵션을 입력하세요.");
+      toast.warning("옵션을 입력하세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       return;
     }
 
     for (let options of optionTableList) {
       for (let option of options.options) {
         if (!option.price) {
-          alert("추가 가격을 입력해주세요.");
+          toast.warning("추가 가격을 입력해주세요.", {
+            position: toast.POSITION.TOP_CENTER,
+          });
           return;
         }
         if (option.price < 1000) {
-          alert("추가 가격은 1,000원 이상 입력해주세요.");
+          toast.warning("추가 가격은 1,000원 이상 입력해주세요.", {
+            position: toast.POSITION.TOP_CENTER,
+          });
           return;
         }
       }
     }
 
-    // dispatch(
-    //   signUpItem({
-    //     jwt,
-    //     itemImg,
-    //     itemName,
-    //     information,
-    //     category,
-    //     optionGroups: optionTableList,
-    //     isTable,
-    //   }),
-    // );
-  }, [itemImg, itemName, information, category, optionTableList]);
+    let imageUrl = "";
+    const createImg:
+      | { data: { imageUrl: string } }
+      | { error: FetchBaseQueryError | SerializedError } =
+      await createImgMutation((itemImg?.[0] as ImageType)?.file!);
+
+    if ("data" in createImg) {
+      imageUrl = createImg.data.imageUrl;
+    } else {
+      toast.error("다시 시도해주세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+
+    const data: Item = {
+      itemName,
+      imageUrl,
+      information,
+      category,
+      price: +price,
+      optionGroups: optionTableList,
+    };
+
+    console.log(JSON.stringify(data));
+    createItemsMutation(data);
+  }, [
+    itemImg,
+    itemName,
+    price,
+    information,
+    category,
+    optionTableList,
+    dispatch,
+  ]);
 
   const ref = useRef<HTMLTextAreaElement>(null);
 
@@ -152,7 +205,10 @@ const CreateItems = () => {
                     type="text"
                     name="item-name"
                     value={itemName}
-                    onChange={onChangeItemName}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      if (e.target.value.length > 20) return;
+                      onChangeItemName(e);
+                    }}
                     placeholder="상품 이름을 입력해주세요."
                   />
                 </label>
@@ -181,7 +237,10 @@ const CreateItems = () => {
                   <Textarea
                     ref={ref}
                     value={information}
-                    onChange={onChangeInformation}
+                    onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+                      if (e.target.value.length > 300) return;
+                      onChangeInformation(e);
+                    }}
                     placeholder={"상품 설명을 입력해주세요."}
                   />
                 </label>

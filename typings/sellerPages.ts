@@ -1,21 +1,20 @@
 import { ImageListType } from "react-images-uploading";
 
 export interface SellOption {
-  optionTableList: Option[];
+  optionTableList: OptionInfo[];
   isTable: boolean;
   itemImg: Array<ImageListType>;
   itemInfos: ItemInfo[];
   categoryList: string[];
 }
-export interface OptionInfos {
+export interface EachOption {
   optionName: string;
   price: number;
 }
 
-export interface Option {
-  options: OptionInfos[];
+export interface OptionInfo {
+  options: EachOption[];
   optionGroupName: string;
-  basic: boolean;
 }
 
 export interface ItemInfo {
@@ -28,4 +27,13 @@ export interface ChangeInfo {
   num1: number;
   num2: number;
   price: number;
+}
+
+export interface Item {
+  itemName: string;
+  imageUrl: string;
+  information: string;
+  category: string;
+  price: number;
+  optionGroups: OptionInfo[];
 }

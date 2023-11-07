@@ -16,6 +16,7 @@ import {
   Option,
   OptDeleteBtn,
   MakeTableBtn,
+  OptionButtonWrapper,
 } from "@components/SellerPages/CreateItemsBodys/SellOption/styles";
 import { ItemTitle } from "@components/SellerPages/CreateItems/styles";
 import SellOptionTable from "@components/SellerPages/CreateItemsBodys/SellOptionTable";
@@ -28,6 +29,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import createItems from "@components/SellerPages/CreateItems";
 import { useAppSelector } from "@redux/hooks";
+import { OptionInfo } from "@typings/sellerPages";
 
 export interface ItemInfo {
   id: number;
@@ -69,10 +71,13 @@ const SellOption = () => {
 
   const onChangeItemName = useCallback(
     (e: ChangeEvent<HTMLInputElement>, index: number) => {
+      const { value } = e.target;
+      if (value.length > 10) return;
+
       let temp: ItemInfo[] = JSON.parse(JSON.stringify(itemInfos));
       temp.find((v, idx) => {
         if (v.id === index) {
-          temp[idx].name = e.target.value;
+          temp[idx].name = value;
         }
       });
 
@@ -83,6 +88,9 @@ const SellOption = () => {
 
   const onChangeItemValues = useCallback(
     (e: ChangeEvent<HTMLInputElement>, index: number) => {
+      const { value } = e.target;
+      if (value.length > 50) return;
+
       let temp: ItemInfo[] = JSON.parse(JSON.stringify(itemInfos));
       temp.find((v, idx) => {
         if (v.id === index) {
@@ -108,20 +116,26 @@ const SellOption = () => {
       }
     }
 
-    if (flag) dispatch(getOptionTableList(makeOptionTableList(itemInfos)));
-  }, [itemInfos]);
+    // 옵션 개수가 150개 초과되면 안됨
+    let optionMul = 1;
+    const tempOptionTableList: {
+      type: "createItems/getOptionTableList";
+      payload: OptionInfo[];
+    } = getOptionTableList(makeOptionTableList(itemInfos));
 
-  // useEffect(() => {
-  //   let optionMul = 1;
-  //   optionTableList?.map((option: any) => {
-  //     optionMul *= option.options.length;
-  //   });
-  //
-  //   if (optionMul > 150) {
-  //     dispatch(getOptionTableList([]));
-  //     alert("상품 옵션의 개수가 150개 초과될 수 없습니다.");
-  //   }
-  // }, [optionTableList]);
+    tempOptionTableList.payload.map((option: OptionInfo) => {
+      optionMul *= option.options.length;
+    });
+
+    if (optionMul > 125) {
+      toast.warning("상품 옵션의 개수가 125개 초과될 수 없습니다.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+
+    if (flag) dispatch(tempOptionTableList);
+  }, [itemInfos]);
 
   return (
     <SellOptionContainer>
@@ -153,13 +167,15 @@ const SellOption = () => {
                   }}
                   placeholder={"예시) 화이트, 블랙(최대 5개)"}
                 />
-                <OptDeleteBtn
-                  icon={"-"}
-                  onClick={() => deleteInput(item.id)}
-                ></OptDeleteBtn>
-                {idx === itemInfos.length - 1 && itemInfos.length < 3 && (
-                  <OptPlusBtn icon={"+"} onClick={addInput} />
-                )}
+                <OptionButtonWrapper>
+                  <OptDeleteBtn
+                    icon={"-"}
+                    onClick={() => deleteInput(item.id)}
+                  ></OptDeleteBtn>
+                  {idx === itemInfos.length - 1 && itemInfos.length < 3 && (
+                    <OptPlusBtn icon={"+"} onClick={addInput} />
+                  )}
+                </OptionButtonWrapper>
               </Option>
             );
           })}

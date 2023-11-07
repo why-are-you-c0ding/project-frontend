@@ -9,7 +9,7 @@ import {
   Wrapper,
   ZeroData,
 } from "@components/SellerPages/CreateItemsBodys/SellOptionTable/styles";
-import { Option, OptionInfos } from "@typings/sellerPages";
+import { OptionInfo, EachOption } from "@typings/sellerPages";
 
 const SellOptionTable = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,8 @@ const SellOptionTable = () => {
   const onChangePrice = useCallback(
     (num1: number, num2: number, e: ChangeEvent<HTMLInputElement>) => {
       const p = e.target.value.trim();
-      if (parseInt(p) < 10 ** 9 || p === "") {
+
+      if (parseInt(p) < 10 ** 7 || p === "") {
         dispatch(
           changePrice({
             num1: num1,
@@ -43,22 +44,21 @@ const SellOptionTable = () => {
       {optionTableList.length === 0 && (
         <ZeroData>데이터가 존재하지 않습니다.</ZeroData>
       )}
-      {optionTableList.map((item: Option, index: number) => (
+      {optionTableList.map((item: OptionInfo, index: number) => (
         <div key={index}>
           <OptionName>{item.optionGroupName.trim()}의 추가 가격</OptionName>
           <div>
-            {item.options.map((option: OptionInfos, optIdx: number) => {
-              console.log(option);
+            {item.options.map((option: EachOption, optIdx: number) => {
               return (
                 <Options key={optIdx}>
                   <div>{option.optionName}</div>
                   <div>
                     <input
+                      type="text"
                       value={option.price === 0 ? "" : option.price.toString()}
                       onChange={(event) => {
                         onChangePrice(index, optIdx, event);
                       }}
-                      type="text"
                     />
                   </div>
                 </Options>

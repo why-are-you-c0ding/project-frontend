@@ -1,11 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ChangeInfo, SellOption } from "@typings/sellerPages";
+import { isTable, itemInfos } from "@mock/api/data/sellers/createItem";
 
 const initialState: SellOption = {
+  // optionTableList: [],
+  // isTable: false,
+  // itemImg: [],
+  // itemInfos: [{ id: 0, name: "", values: "" }],
+
+  // 더미 값
   optionTableList: [],
-  isTable: false,
+  isTable: isTable,
   itemImg: [],
-  itemInfos: [{ id: 0, name: "", values: "" }],
+  itemInfos: itemInfos,
+
+  // 카테고리는 항상 고정
   categoryList: [
     "Food",
     "Health",
