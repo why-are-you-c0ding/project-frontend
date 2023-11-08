@@ -1,11 +1,19 @@
 import styled from "@emotion/styled";
+import { SignUpBtn } from "@pages/SignUp/styles";
 
 export const Wrapper = styled.section`
   padding-left: 2rem;
   padding-right: 2rem;
+
+  h3 {
+    font-size: 1.1rem;
+  }
 `;
 
 export const Image = styled.section`
+  //border: 1px solid red;
+  //height: auto;
+
   & > div {
     margin-top: 1rem;
 
@@ -143,11 +151,12 @@ export const Textarea = styled.textarea`
   width: 100%;
   min-height: 8rem;
   margin-top: 0.5rem;
+  padding: 0.6rem;
 
   border: 1px solid #ebebeb;
   border-radius: 10px;
 
-  font-size: 1rem;
+  //font-size: 0.8rem;
 
   :focus {
     outline: none;
@@ -155,13 +164,14 @@ export const Textarea = styled.textarea`
   }
 
   ::placeholder {
-    font-size: 0.9rem;
+    //font-size: 0.8rem;
   }
 `;
 
 export const EachWrapper = styled.div`
   border: 2px solid #cccccc;
   border-radius: 1rem;
+  height: auto;
 
   margin: 0 -2rem;
   padding: 1rem;
@@ -172,29 +182,10 @@ export const EachWrapper = styled.div`
   margin-bottom: 2rem;
 `;
 
-export const SignBtn = styled.div`
+export const SignBtn = styled(SignUpBtn)`
   display: flex;
   justify-content: center;
+  align-items: center;
 
-  & > button {
-    padding: 0.4rem 1rem;
-    background-color: cornflowerblue;
-    color: white;
-    border: 1px solid rgb(77, 77, 77);
-    border-radius: 10px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 10rem;
-    height: 3rem;
-    margin-bottom: 1rem;
-
-    &:hover {
-      background-color: #d63535;
-      border: none;
-    }
-  }
+  margin-bottom: 1rem;
 `;

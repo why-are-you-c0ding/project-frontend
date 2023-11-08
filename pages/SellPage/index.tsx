@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from "react";
-import StatusBar from "@components/StatusBar";
 import { Wrapper, SideBar, RightSide } from "@pages/MyPage/styles";
-import { Outlet, useNavigate, Route, Routes } from "react-router-dom"; // Updated imports
+import { Outlet, useNavigate, Route, Routes } from "react-router-dom";
 import loadable from "@loadable/component";
-import SellpageSidebar from "@components/SellpageSidebar";
-
-const SellInfo = loadable(() => import("@components/SellInfo"));
-const SignUpItem = loadable(() => import("@components/SignUpItem"));
-const SellStock = loadable(() => import("@components/SellStock"));
-const SellStockLook = loadable(() => import("@components/SellStockLook"));
-const SellList = loadable(() => import("@components/SellList"));
-const SellOrderList = loadable(() => import("@components/SellOrderList"));
+import SellpageSidebar from "@components/SellerPages/SellpageSidebar";
 
 const SellPage = () => {
   const navigate = useNavigate();
@@ -31,17 +23,9 @@ const SellPage = () => {
           <SellpageSidebar sideBar={sideBar} />
         </SideBar>
         <RightSide>
-          <Routes>
-            <Route path="/info" element={<SellInfo />} />
-            <Route path="/signupitem" element={<SignUpItem />} />
-            <Route path="/sellstock" element={<SellStock />} />
-            <Route path="/sellstocklook" element={<SellStockLook />} />
-            <Route path="/selllist" element={<SellList />} />
-            <Route path="/sellorderlist" element={<SellOrderList />} />
-          </Routes>
+          <Outlet />
         </RightSide>
       </Wrapper>
-      <Outlet />
     </div>
   );
 };

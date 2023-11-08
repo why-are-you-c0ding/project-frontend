@@ -3,22 +3,21 @@ import ImageUploading, { ImageListType } from "react-images-uploading";
 import {
   EditBtn,
   SellOptionImgWrapper,
-} from "@components/SignUpItemBodys/SellOptionImg/styles";
-import { changeItemImg } from "../../../redux/reducers/signUpItemSlice";
-import { useAppDispatch } from "../../../redux/hooks";
+} from "@components/SellerPages/CreateItemsBodys/SellOptionImg/styles";
+import { useAppDispatch } from "@redux/hooks";
+import { changeItemImg } from "@redux/reducers/createItemsSlice";
 
 const SellOptionImg = () => {
-  const dispatch = useAppDispatch();
-
-  const [images, setImages] = useState([]);
   const maxNumber = 1;
+  const dispatch = useAppDispatch();
+  const [images, setImages] = useState([]);
 
   const onChange = useCallback(
     (imageList: ImageListType, addUpdateIndex: number[] | undefined) => {
       setImages(imageList as never[]);
       dispatch(changeItemImg(imageList));
     },
-    [images]
+    [images],
   );
 
   return (

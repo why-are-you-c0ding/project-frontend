@@ -1,5 +1,9 @@
 import React, { FC } from "react";
-import { Info, Title, Wrapper } from "@components/SellpageSidebar/styles";
+import {
+  Info,
+  Title,
+  Wrapper,
+} from "@components/SellerPages/SellpageSidebar/styles";
 import { Link, NavLink } from "react-router-dom";
 
 interface Props {

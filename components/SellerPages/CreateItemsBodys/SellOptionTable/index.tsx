@@ -1,26 +1,27 @@
 import React, { ChangeEvent, useCallback, useState } from "react";
-import { useAppSelector } from "../../../redux/hooks";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@redux/hooks";
+import { changePrice } from "@redux/reducers/createItemsSlice";
 import {
   OptionName,
   Options,
   Table,
   Wrapper,
   ZeroData,
-} from "@components/SignUpItemBodys/SellOptionTable/styles";
-import { useDispatch } from "react-redux";
-import { changePrice } from "../../../redux/reducers/signUpItemSlice";
-// import shortId from "shortid";
+} from "@components/SellerPages/CreateItemsBodys/SellOptionTable/styles";
+import { OptionInfo, EachOption } from "@typings/sellerPages";
 
 const SellOptionTable = () => {
   const dispatch = useDispatch();
   const { optionTableList, isTable } = useAppSelector(
-    (state: any) => state.sellOption,
+    (state) => state.createItems,
   );
 
   const onChangePrice = useCallback(
     (num1: number, num2: number, e: ChangeEvent<HTMLInputElement>) => {
       const p = e.target.value.trim();
-      if (parseInt(p) < 10 ** 9 || p === "") {
+
+      if (parseInt(p) < 10 ** 7 || p === "") {
         dispatch(
           changePrice({
             num1: num1,
@@ -43,24 +44,21 @@ const SellOptionTable = () => {
       {optionTableList.length === 0 && (
         <ZeroData>데이터가 존재하지 않습니다.</ZeroData>
       )}
-      {optionTableList.map((item: any, idx1: number) => (
-        <div key={idx1}>
-          <OptionName>
-            {item.optionGroupName.trim()}
-            {idx1 === 0 ? "의 기본 가격" : "의 추가 가격"}
-          </OptionName>
+      {optionTableList.map((item: OptionInfo, index: number) => (
+        <div key={index}>
+          <OptionName>{item.optionGroupName.trim()}의 추가 가격</OptionName>
           <div>
-            {item.options.map((option: any, idx2: number) => {
+            {item.options.map((option: EachOption, optIdx: number) => {
               return (
-                <Options key={idx2}>
+                <Options key={optIdx}>
                   <div>{option.optionName}</div>
                   <div>
                     <input
+                      type="text"
                       value={option.price === 0 ? "" : option.price.toString()}
                       onChange={(event) => {
-                        onChangePrice(idx1, idx2, event);
+                        onChangePrice(index, optIdx, event);
                       }}
-                      type="text"
                     />
                   </div>
                 </Options>

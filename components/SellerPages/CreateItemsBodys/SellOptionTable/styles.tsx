@@ -4,14 +4,14 @@ export const Wrapper = styled.div`
   width: 100%;
 
   margin-top: 0.5rem;
-  border: 1px solid;
-  border-radius: 10px;
+  border: 2px solid #ececec;
 `;
 
 export const Table = styled.div<{ isTable?: boolean }>`
   display: flex;
-
-  border-bottom: ${(props) => (!props.isTable ? "1px solid" : "")};
+  border-bottom: ${(props) => (!props.isTable ? "1px solid #ececec" : "")};
+  background-color: #f4f5f7;
+  font-weight: 500;
 
   & > div {
     width: 50%;
@@ -19,7 +19,7 @@ export const Table = styled.div<{ isTable?: boolean }>`
     display: flex;
     justify-content: center;
 
-    border-left: 1px solid;
+    border-left: 2px solid #ececec;
   }
 
   & > div:first-of-type {
@@ -28,7 +28,7 @@ export const Table = styled.div<{ isTable?: boolean }>`
 `;
 
 export const Options = styled(Table)`
-  border-top: 1px solid;
+  border-top: 1px solid #ececec;
   border-bottom: none;
 
   & > div:last-of-type {
@@ -44,7 +44,7 @@ export const Options = styled(Table)`
 
 export const OptionName = styled.div`
   text-align: center;
-  border-top: 1px solid;
+  border-top: 1px solid #ececec;
 `;
 
 export const ZeroData = styled.div`
@@ -56,4 +56,5 @@ export const ZeroData = styled.div`
   align-items: center;
 
   margin-bottom: 8rem;
+  color: #696969;
 `;

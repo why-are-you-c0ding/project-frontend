@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Button } from "antd";
+import { EditBtn } from "@components/SellerPages/CreateItemsBodys/SellOptionImg/styles";
 
 export const SellOptionContainer = styled.section`
   & > h2 {
@@ -60,6 +61,12 @@ export const OptionValue = styled(Input)`
   margin-right: 0.5rem;
 `;
 
+export const OptionButtonWrapper = styled.div`
+  width: 20%;
+  display: flex;
+  padding-left: 1rem;
+`;
+
 export const OptPlusBtn = styled(Button)`
   margin-left: 0.5rem;
   font-size: 1.3rem;
@@ -67,6 +74,15 @@ export const OptPlusBtn = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  :hover {
+    background-color: black;
+    border: transparent;
+
+    .ant-btn-icon {
+      color: white;
+    }
+  }
 `;
 
 export const OptDeleteBtn = styled(OptPlusBtn)`
@@ -75,23 +91,6 @@ export const OptDeleteBtn = styled(OptPlusBtn)`
   margin-left: 0;
 `;
 
-export const MakeTableBtn = styled.button`
-  padding: 0.4rem 1rem;
-  background-color: cornflowerblue;
-  color: white;
-  border: 1px solid rgb(77, 77, 77);
-  border-radius: 10px;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 8rem;
+export const MakeTableBtn = styled(EditBtn)`
   margin-bottom: 1rem;
-
-  &:hover {
-    background-color: #d63535;
-    border: none;
-  }
 `;

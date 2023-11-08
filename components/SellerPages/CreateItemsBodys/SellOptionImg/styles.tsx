@@ -2,8 +2,7 @@ import styled from "@emotion/styled";
 
 export const SellOptionImgWrapper = styled.div`
   .upload__image-wrapper {
-    width: 20rem;
-    height: 20rem;
+    width: 16rem;
 
     display: flex;
     justify-content: center;
@@ -14,7 +13,7 @@ export const SellOptionImgWrapper = styled.div`
       cursor: pointer;
 
       width: 100%;
-      height: 100%;
+      height: 16rem;
 
       font-size: 1rem;
 
@@ -36,9 +35,6 @@ export const SellOptionImgWrapper = styled.div`
       .image-item__btn-wrapper {
         margin-top: 1rem;
 
-        & > button {
-        }
-
         & > button:first-of-type {
           margin-right: 1rem;
         }
@@ -50,6 +46,7 @@ export const SellOptionImgWrapper = styled.div`
 export const EditBtn = styled.button`
   width: 5rem;
   height: 2rem;
+  font-size: 0.8rem;
 
   background-color: #ececec;
   border-radius: 5px;
