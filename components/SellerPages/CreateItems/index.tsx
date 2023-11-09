@@ -37,6 +37,7 @@ const CreateItems = () => {
   const { optionTableList, isTable, itemImg, categoryList } = useAppSelector(
     (state) => state.createItems,
   );
+  const ref = useRef<HTMLTextAreaElement>(null);
 
   const [itemName, onChangeItemName, setItemName] = useInput("");
   const [price, setPrice] = useState("");
@@ -171,8 +172,6 @@ const CreateItems = () => {
     optionTableList,
     dispatch,
   ]);
-
-  const ref = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (ref) {
