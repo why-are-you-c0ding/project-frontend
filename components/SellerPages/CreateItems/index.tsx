@@ -161,8 +161,17 @@ const CreateItems = () => {
       optionGroups: optionTableList,
     };
 
-    console.log(JSON.stringify(data));
-    createItemsMutation(data);
+    const result:
+      | { data: { message: string } }
+      | { error: FetchBaseQueryError | SerializedError } =
+      await createItemsMutation(data);
+
+    // TODO: 에러처리 + 상품 생성 성공하면 리다이렉팅 시켜야함
+    if ("data" in result) {
+      toast.success(result.data.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
   }, [
     itemImg,
     itemName,
