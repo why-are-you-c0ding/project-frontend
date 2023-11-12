@@ -92,6 +92,7 @@ const config: Configuration = {
     devMiddleware: { publicPath: "/dist/" },
     static: { directory: path.resolve(__dirname) },
     hot: true,
+    liveReload: false, // 실시간 새로고침 비활성화
 
     // proxy: {
     //   "/api/": {
