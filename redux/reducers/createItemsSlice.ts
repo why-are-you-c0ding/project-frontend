@@ -3,16 +3,16 @@ import { ChangeInfo, SellOption } from "@typings/sellerPages";
 import { isTable, itemInfos } from "@mock/api/data/sellers/createItem";
 
 const initialState: SellOption = {
-  // optionTableList: [],
-  // isTable: false,
-  // itemImg: [],
-  // itemInfos: [{ id: 0, name: "", values: "" }],
+  optionTableList: [],
+  isTable: false,
+  itemImg: [],
+  itemInfos: [{ id: 0, name: "", values: "" }],
 
   // 더미 값
-  optionTableList: [],
-  isTable: isTable,
-  itemImg: [],
-  itemInfos: itemInfos,
+  // optionTableList: [],
+  // isTable: isTable,
+  // itemImg: [],
+  // itemInfos: itemInfos,
 
   // 카테고리는 항상 고정
   categoryList: [
