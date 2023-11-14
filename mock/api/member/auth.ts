@@ -47,10 +47,4 @@ export const auth = [
       }),
     );
   }),
-
-  // // 할일 추가
-  // rest.post("/todos", (req, res, ctx) => {
-  //   todos.push(req.body);
-  //   return res(ctx.status(201));
-  // }),
 ];
