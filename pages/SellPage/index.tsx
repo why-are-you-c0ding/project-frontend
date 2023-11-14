@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Wrapper, SideBar, RightSide } from "@pages/MyPage/styles";
-import { Outlet, useNavigate, Route, Routes } from "react-router-dom";
-import loadable from "@loadable/component";
+import { Outlet, useNavigate } from "react-router-dom";
 import SellpageSidebar from "@components/SellerPages/SellpageSidebar";
 
 const SellPage = () => {

@@ -10,6 +10,8 @@ const SignUp = loadable(() => import("@pages/SignUp"));
 const LogIn = loadable(() => import("@pages/LogIn"));
 const Main = loadable(() => import(`@layouts/Main`));
 const MyPage = loadable(() => import(`@pages/MyPage`));
+const Buying = loadable(() => import("@components/Buying"));
+const Like = loadable(() => import("@components/Like"));
 const SellPage = loadable(() => import(`@pages/SellPage`));
 const Shop = loadable(() => import(`@pages/Shop`));
 const Order = loadable(() => import(`@pages/Order`));
@@ -40,7 +42,10 @@ const App = () => {
           <Route path="/main/:main" element={<Main />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
-          <Route path="/mypage/*" element={<MyPage />} />
+          <Route path="/mypage" element={<MyPage />}>
+            <Route path="like" element={<Like />} />
+            <Route path="buying" element={<Buying />} />
+          </Route>
           <Route path="/sellpage" element={<SellPage />}>
             <Route path=":signupitem" element={<CreateItems />} />
             <Route path=":info" element={<SellInfo />} />
