@@ -84,7 +84,7 @@ const CreateItems = () => {
 
   const onClickSignItem = useCallback(async () => {
     if (itemImg.length === 0) {
-      toast.warning("이미지를 입력하세요.", {
+      toast.warning("이미지를 올려주세요.", {
         position: toast.POSITION.TOP_CENTER,
       });
       return;
