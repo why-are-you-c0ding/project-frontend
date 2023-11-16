@@ -96,7 +96,7 @@ const CreateItems = () => {
       return;
     }
     if (price && +price < 1000) {
-      toast.warning("상품 가격은 1,000원 이상 입력해주세요.", {
+      toast.warning("상품 가격은 1,000원 이상 입력하세요..", {
         position: toast.POSITION.TOP_CENTER,
       });
       return;
