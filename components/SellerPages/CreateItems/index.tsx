@@ -96,7 +96,7 @@ const CreateItems = () => {
       return;
     }
     if (price && +price < 1000) {
-      toast.warning("상품 가격은 1,000원 이상 입력하세요..", {
+      toast.warning("상품 가격은 1,000원 이상 입력하세요.", {
         position: toast.POSITION.TOP_CENTER,
       });
       return;
@@ -123,13 +123,13 @@ const CreateItems = () => {
     for (let options of optionTableList) {
       for (let option of options.options) {
         if (!option.price) {
-          toast.warning("추가 가격을 입력해주세요.", {
+          toast.warning("추가 가격을 입력하세.", {
             position: toast.POSITION.TOP_CENTER,
           });
           return;
         }
         if (option.price < 1000) {
-          toast.warning("추가 가격은 1,000원 이상 입력해주세요.", {
+          toast.warning("추가 가격은 1,000원 이상 입력하세.", {
             position: toast.POSITION.TOP_CENTER,
           });
           return;
@@ -217,7 +217,7 @@ const CreateItems = () => {
                       if (e.target.value.length > 20) return;
                       onChangeItemName(e);
                     }}
-                    placeholder="상품 이름을 입력해주세요."
+                    placeholder="상품 이름을 입력하세."
                   />
                 </label>
                 <label>
@@ -227,7 +227,7 @@ const CreateItems = () => {
                     name="item-price"
                     value={price ?? ""}
                     onChange={onChangePrice}
-                    placeholder="1,000원 이상 입력해주세요."
+                    placeholder="1,000원 이상 입력하세."
                   />
                 </label>
                 <label>
@@ -249,7 +249,7 @@ const CreateItems = () => {
                       if (e.target.value.length > 300) return;
                       onChangeInformation(e);
                     }}
-                    placeholder={"상품 설명을 입력해주세요."}
+                    placeholder={"상품 설명을 입력하세요."}
                   />
                 </label>
               </div>
