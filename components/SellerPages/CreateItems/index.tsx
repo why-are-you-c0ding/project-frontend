@@ -123,13 +123,13 @@ const CreateItems = () => {
     for (let options of optionTableList) {
       for (let option of options.options) {
         if (!option.price) {
-          toast.warning("추가 가격을 입력하세.", {
+          toast.warning("추가 가격을 입력하세요.", {
             position: toast.POSITION.TOP_CENTER,
           });
           return;
         }
         if (option.price < 1000) {
-          toast.warning("추가 가격은 1,000원 이상 입력하세.", {
+          toast.warning("추가 가격은 1,000원 이상 입력하세요.", {
             position: toast.POSITION.TOP_CENTER,
           });
           return;
