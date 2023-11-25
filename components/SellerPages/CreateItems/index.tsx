@@ -168,7 +168,7 @@ const CreateItems = () => {
 
     // TODO: 에러처리 + 상품 생성 성공하면 리다이렉팅 시켜야함
     if ("data" in result) {
-      toast.success(result.data.message, {
+      toast.success("상품 등록에 성공했습니다.", {
         position: toast.POSITION.TOP_CENTER,
       });
     }
