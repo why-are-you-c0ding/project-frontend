@@ -184,7 +184,7 @@ const CreateItems = () => {
 
   useEffect(() => {
     if (ref) {
-      autosize(ref.current as HTMLTextAreaElement);
+      autosize(ref.current!);
     }
   }, []);
 
@@ -217,7 +217,7 @@ const CreateItems = () => {
                       if (e.target.value.length > 20) return;
                       onChangeItemName(e);
                     }}
-                    placeholder="상품 이름을 입력하세."
+                    placeholder="상품 이름을 입력하세요."
                   />
                 </label>
                 <label>
@@ -227,7 +227,7 @@ const CreateItems = () => {
                     name="item-price"
                     value={price ?? ""}
                     onChange={onChangePrice}
-                    placeholder="1,000원 이상 입력하세."
+                    placeholder="1,000원 이상 입력하세요."
                   />
                 </label>
                 <label>
