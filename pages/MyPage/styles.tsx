@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 0.2fr 1fr;
+  grid-template-columns: 0.2fr 0.8fr;
 
   min-height: 100vh;
 
@@ -53,7 +53,7 @@ export const SideBar = styled.section`
 `;
 
 export const RightSide = styled.section`
-  padding: 0 6rem;
+  //padding: 0 3rem;
   padding-bottom: 1rem;
 
   @media screen and (max-width: 769px) {

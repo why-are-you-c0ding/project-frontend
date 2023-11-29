@@ -171,9 +171,11 @@ export const Textarea = styled.textarea`
 export const EachWrapper = styled.div`
   border: 2px solid #cccccc;
   border-radius: 1rem;
+  width: 80%;
   height: auto;
 
-  margin: 0 -2rem;
+  margin: 0 auto;
+  //margin: 0 -2rem;
   padding: 1rem;
 
   box-shadow: 5px 5px 15px #ececec;
