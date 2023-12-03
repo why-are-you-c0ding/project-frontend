@@ -5,12 +5,14 @@ import { createItemsSlice } from "@redux/reducers/createItemsSlice";
 import { myPageApi } from "@api/myPageApi";
 import { memberApi } from "@api/memberApi";
 import { sellersApi } from "@api/sellersApi";
+import { itemsApi } from "@api/itemsApi";
 
 export const store = configureStore({
   reducer: {
     [memberApi.reducerPath]: memberApi.reducer,
     [myPageApi.reducerPath]: myPageApi.reducer,
     [sellersApi.reducerPath]: sellersApi.reducer,
+    [itemsApi.reducerPath]: itemsApi.reducer,
     [userInfoSlice.name]: userInfoSlice.reducer,
     [createItemsSlice.name]: createItemsSlice.reducer,
   },
@@ -21,6 +23,7 @@ export const store = configureStore({
       memberApi.middleware,
       myPageApi.middleware,
       sellersApi.middleware,
+      itemsApi.middleware,
     ),
 });
 
