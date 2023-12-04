@@ -12,10 +12,10 @@ export const itemsApi = createApi({
   }),
   tagTypes: ["items"],
   endpoints: (builder) => ({
-    getEachItem: builder.query({
+    getEachItems: builder.query({
       query: (id: number) => `/items/${id}`,
     }),
-    getAllItem: builder.query({
+    getAllItems: builder.query({
       query: (index: number) => `/items?page=${index}`,
     }),
   }),
