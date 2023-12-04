@@ -15,5 +15,8 @@ export const itemsApi = createApi({
     getEachItem: builder.query({
       query: (id: number) => `/items/${id}`,
     }),
+    getAllItem: builder.query({
+      query: (index: number) => `/items?page=${index}`,
+    }),
   }),
 });
