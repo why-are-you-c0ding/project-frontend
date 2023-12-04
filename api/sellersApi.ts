@@ -33,5 +33,8 @@ export const sellersApi = createApi({
         };
       },
     }),
+    getCreateItems: builder.query({
+      query: (index: number) => `/items/sellers?page=${index}`,
+    }),
   }),
 });
