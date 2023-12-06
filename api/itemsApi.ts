@@ -16,7 +16,11 @@ export const itemsApi = createApi({
       query: (id: number) => `/items/${id}`,
     }),
     getAllItems: builder.query({
-      query: (index: number) => `/items?page=${index}`,
+      query: (page: number) => `/items?page=${page}`,
+    }),
+    getSearchItems: builder.query({
+      query: ({ word, page }: { word: string; page: number }) =>
+        `/items/search?keyword=${word}&page=${page}`,
     }),
   }),
 });
