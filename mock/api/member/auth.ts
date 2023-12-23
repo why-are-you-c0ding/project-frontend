@@ -2,7 +2,6 @@ import { rest } from "msw";
 import {
   failValidateId,
   failVerificationNickname,
-  login,
   logout,
   receiveEmail,
   signupMember,
@@ -34,13 +33,16 @@ export const auth = [
   rest.post("/members/consumers", (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(signupMember));
   }),
-  rest.post("/local/login", (req, res, ctx) => {
+  rest.post("/local/login", async (req, res, ctx) => {
+    const { loginId } = await req.json();
+
+    if (loginId === "중복") return res(ctx.status(401));
+
     const oneHourLater = new Date();
     oneHourLater.setTime(oneHourLater.getTime() + 60 * 60 * 100000000000);
 
     return res(
       ctx.status(200),
-      ctx.json(login),
       ctx.cookie("SESSION", "cookievalue", {
         expires: oneHourLater,
       }),

@@ -53,8 +53,6 @@ const LogIn = () => {
         navigate("/main");
       } else if ("error" in res) {
         if ("status" in res.error) {
-          console.log(res.error.status);
-
           res.error.status === 401
             ? toast.warning("아이디와 비밀번호가 일치하지 않습니다.", {
                 position: toast.POSITION.TOP_CENTER,
