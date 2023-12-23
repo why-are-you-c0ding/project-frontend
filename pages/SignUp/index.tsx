@@ -26,6 +26,7 @@ import StatusBar from "@components/UI/StatusBar";
 import { toast, ToastContainer } from "react-toastify";
 import { memberApi } from "@api/memberApi";
 import {
+  duplicateError,
   SignUpInfo,
   VerificationFail,
   VerificationSuccess,
@@ -154,15 +155,18 @@ const SignUp = () => {
         toast.success("아이디 사용이 가능합니다!", {
           position: toast.POSITION.TOP_CENTER,
         });
-      } else {
-        toast.warning(res.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-        });
       }
     } else if ("error" in res) {
-      toast.error("다시 시도해주세요.", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      const resError = res.error as duplicateError;
+
+      resError.data.message ===
+      "해당 로그인 아이디는 이미 존재하는 로그인 아이디입니다."
+        ? toast.error("이미 사용중입니다.", {
+            position: toast.POSITION.TOP_CENTER,
+          })
+        : toast.error("다시 시도해주세요.", {
+            position: toast.POSITION.TOP_CENTER,
+          });
     }
   }, [loginId]);
 
@@ -221,9 +225,17 @@ const SignUp = () => {
       });
       setIsCheckNickName(true);
     } else if ("error" in res) {
-      toast.error("다시 시도해주세요.", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      const resError = res.error as duplicateError;
+
+      console.log(resError);
+
+      resError.data.message === "해당 닉네임은 이미 존재하는 닉네임입니다."
+        ? toast.error("이미 사용중입니다.", {
+            position: toast.POSITION.TOP_CENTER,
+          })
+        : toast.error("다시 시도해주세요.", {
+            position: toast.POSITION.TOP_CENTER,
+          });
     }
   }, [nickName]);
 
