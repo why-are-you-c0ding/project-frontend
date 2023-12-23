@@ -17,6 +17,17 @@ export const itemsApi = createApi({
     }),
     getAllItems: builder.query({
       query: (page: number) => `/items?page=${page}`,
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      merge: (currentCache, newItems) => {
+        console.log("currentCache", currentCache);
+        console.log("newItems", newItems);
+        // currentCache.results.push(...newItems);
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
     }),
     getSearchItems: builder.query({
       query: ({ word, page }: { word: string; page: number }) =>
