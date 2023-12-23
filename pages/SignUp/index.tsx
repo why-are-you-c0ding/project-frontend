@@ -227,8 +227,6 @@ const SignUp = () => {
     } else if ("error" in res) {
       const resError = res.error as duplicateError;
 
-      console.log(resError);
-
       resError.data.message === "해당 닉네임은 이미 존재하는 닉네임입니다."
         ? toast.error("이미 사용중입니다.", {
             position: toast.POSITION.TOP_CENTER,
