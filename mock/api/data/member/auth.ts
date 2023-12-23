@@ -2,7 +2,16 @@ export const validateId = {
   message: "검증에 성공했습니다.",
   // message: "검증에 실패했습니다.",
 };
+
+export const failValidateId = {
+  message: "해당 로그인 아이디는 이미 존재하는 로그인 아이디입니다.",
+};
+
 export const verificationNickname = { message: "검증에 성공했습니다." };
+
+export const failVerificationNickname = {
+  message: "해당 닉네임은 이미 존재하는 닉네임입니다.",
+};
 
 export const receiveEmail = { message: "이메일 발송에 성공했습니다." };
 
