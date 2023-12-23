@@ -111,8 +111,17 @@ export const MainBar = styled.div`
 `;
 
 export const Name = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 2rem;
-  & a {
+
+  & > img {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 0.5rem;
+  }
+
+  & > a {
     text-decoration: none;
     color: inherit;
   }

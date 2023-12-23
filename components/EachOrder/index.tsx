@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
-import StatusBar from "@components/StatusBar";
+import StatusBar from "@components/UI/StatusBar";
 import {
   Item,
   ItemInfo,
@@ -28,11 +28,11 @@ const EachOrder = () => {
     error,
   } = useSWR<IEachOrder | undefined>(
     `https://waycabvav.shop/orders/${location.pathname.split("/")[2]}`,
-    fetcher
+    fetcher,
   );
 
   const [isComplete, setIsComplete] = useState(
-    orderData?.orderStatus === "COMPLETED"
+    orderData?.orderStatus === "COMPLETED",
   );
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const EachOrder = () => {
     (
       e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
       orderId: number | undefined,
-      itemId: number | undefined
+      itemId: number | undefined,
     ) => {
       e.preventDefault();
 
@@ -59,7 +59,7 @@ const EachOrder = () => {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("jwt")}`,
             },
-          }
+          },
         )
         .then((res) => {
           alert("주문 상태가 변경되었습니다.");
@@ -69,14 +69,14 @@ const EachOrder = () => {
           alert("주문 상태 변경에 실패하였습니다.");
         });
     },
-    [isComplete]
+    [isComplete],
   );
 
   const onClickUpdateOngoing = useCallback(
     (
       e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
       orderId: number | undefined,
-      itemId: number | undefined
+      itemId: number | undefined,
     ) => {
       e.preventDefault();
 
@@ -92,7 +92,7 @@ const EachOrder = () => {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("jwt")}`,
             },
-          }
+          },
         )
         .then((res) => {
           alert("주문 상태가 변경되었습니다.");
@@ -102,7 +102,7 @@ const EachOrder = () => {
           alert("주문 상태 변경에 실패하였습니다.");
         });
     },
-    []
+    [],
   );
 
   return (

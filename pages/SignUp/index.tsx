@@ -22,7 +22,7 @@ import {
   IsCheckWrapper,
   SuccessVerification,
 } from "./styles";
-import StatusBar from "@components/StatusBar";
+import StatusBar from "@components/UI/StatusBar";
 import { toast, ToastContainer } from "react-toastify";
 import { memberApi } from "@api/memberApi";
 import {

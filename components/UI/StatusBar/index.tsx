@@ -12,7 +12,7 @@ import {
   Name,
   SubBar,
   SubMenu,
-} from "@components/StatusBar/styles";
+} from "@components/UI/StatusBar/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
 import Menu from "@components/Menu";
@@ -108,6 +108,7 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
         </SubBar>
         <MainBar>
           <Name>
+            <img src="/public/wayc.png" alt="logo" />
             <a href="/">WAYC</a>
           </Name>
           <div>

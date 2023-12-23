@@ -1,5 +1,4 @@
 import React from "react";
-import StatusBar from "@components/StatusBar";
 import SliderImage from "@components/SliderImage";
 
 import MainItem from "@components/MainItem";
