@@ -59,6 +59,8 @@ const SignUp = () => {
   const [signupConsumersMutation] = memberApi.useSignUpConsumersMutation();
   const [signupSellersMutation] = memberApi.useSignUpSellersMutation();
 
+  // TODO: 아이디, 닉네임 체크 api만 확인 | 이메일 주소, 회원 가입은 확인 필요
+
   const onSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
