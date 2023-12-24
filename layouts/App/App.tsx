@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router";
 import loadable from "@loadable/component";
 import "react-toastify/dist/ReactToastify.css";
-import StatusBar from "@components/StatusBar";
+import StatusBar from "@components/UI/StatusBar";
 import { BrowserRouter } from "react-router-dom";
 import { NoneHeader } from "@layouts/App/styles";
 

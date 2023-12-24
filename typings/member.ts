@@ -19,6 +19,13 @@ export interface VerificationSuccess {
   };
 }
 
+export type duplicateError = {
+  status: number;
+  data: {
+    message: string;
+  };
+};
+
 export interface VerificationFail {
-  error: FetchBaseQueryError | SerializedError;
+  error: FetchBaseQueryError | SerializedError | duplicateError;
 }

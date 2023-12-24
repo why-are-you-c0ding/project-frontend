@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import { SearchBox, TitleContainer } from "@pages/SearchItem/styles";
 
-import StatusBar from "@components/StatusBar";
 import {
   ItemBox,
   ItemContainer,

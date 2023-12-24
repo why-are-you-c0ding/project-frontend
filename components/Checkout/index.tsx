@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from "react";
-import StatusBar from "@components/StatusBar";
+import StatusBar from "@components/UI/StatusBar";
 import {
   Button,
   DetailInput,

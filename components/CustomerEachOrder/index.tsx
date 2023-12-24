@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
-import StatusBar from "@components/StatusBar";
+import StatusBar from "@components/UI/StatusBar";
 import {
   Item,
   ItemInfo,
@@ -22,12 +22,12 @@ const CustomerEachOrder = () => {
   const { data: orderData, error } = useSWR<IEachOrder | undefined>(
     `https://waycabvav.shop/orders/${location.pathname.split("/")[2]}`,
 
-    fetcher
+    fetcher,
   );
 
   return (
     <div>
-      <StatusBar />
+      {/*<StatusBar />*/}
       <Wrapper>
         <LeftSide>
           <Item>

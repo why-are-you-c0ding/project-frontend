@@ -22,10 +22,11 @@ import {
   IsCheckWrapper,
   SuccessVerification,
 } from "./styles";
-import StatusBar from "@components/StatusBar";
+import StatusBar from "@components/UI/StatusBar";
 import { toast, ToastContainer } from "react-toastify";
 import { memberApi } from "@api/memberApi";
 import {
+  duplicateError,
   SignUpInfo,
   VerificationFail,
   VerificationSuccess,
@@ -57,6 +58,8 @@ const SignUp = () => {
   const [checkNicknameMutation] = memberApi.useVerificationNickNameMutation();
   const [signupConsumersMutation] = memberApi.useSignUpConsumersMutation();
   const [signupSellersMutation] = memberApi.useSignUpSellersMutation();
+
+  // TODO: 아이디, 닉네임 체크 api만 확인 | 이메일 주소, 회원 가입은 확인 필요
 
   const onSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
@@ -154,15 +157,18 @@ const SignUp = () => {
         toast.success("아이디 사용이 가능합니다!", {
           position: toast.POSITION.TOP_CENTER,
         });
-      } else {
-        toast.warning(res.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-        });
       }
     } else if ("error" in res) {
-      toast.error("다시 시도해주세요.", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      const resError = res.error as duplicateError;
+
+      resError.data.message ===
+      "해당 로그인 아이디는 이미 존재하는 로그인 아이디입니다."
+        ? toast.error("이미 사용중입니다.", {
+            position: toast.POSITION.TOP_CENTER,
+          })
+        : toast.error("다시 시도해주세요.", {
+            position: toast.POSITION.TOP_CENTER,
+          });
     }
   }, [loginId]);
 
@@ -221,9 +227,15 @@ const SignUp = () => {
       });
       setIsCheckNickName(true);
     } else if ("error" in res) {
-      toast.error("다시 시도해주세요.", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      const resError = res.error as duplicateError;
+
+      resError.data.message === "해당 닉네임은 이미 존재하는 닉네임입니다."
+        ? toast.error("이미 사용중입니다.", {
+            position: toast.POSITION.TOP_CENTER,
+          })
+        : toast.error("다시 시도해주세요.", {
+            position: toast.POSITION.TOP_CENTER,
+          });
     }
   }, [nickName]);
 

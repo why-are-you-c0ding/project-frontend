@@ -41,26 +41,26 @@ const LogIn = () => {
 
       const res = await loginMutation({ loginId, password });
 
-      if ("data" in res) {
-        if (res.data.message === "로그인을 성공했습니다.") {
-          dispatch(login());
+      if ("data" in res && res.data === null) {
+        dispatch(login());
 
-          const oneMonthLater = new Date();
-          oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
-          setCookie("isLogin", encrypt(loginKey), {
-            path: "/",
-            expires: oneMonthLater,
-          });
-          navigate("/main");
-        } else {
-          toast.warning(res.data.message, {
-            position: toast.POSITION.TOP_CENTER,
-          });
-        }
-      } else if ("error" in res) {
-        toast.error("잠시 후 다시 시도해 주세요.", {
-          position: toast.POSITION.TOP_CENTER,
+        const oneMonthLater = new Date();
+        oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+        setCookie("isLogin", encrypt(loginKey), {
+          path: "/",
+          expires: oneMonthLater,
         });
+        navigate("/main");
+      } else if ("error" in res) {
+        if ("status" in res.error) {
+          res.error.status === 401
+            ? toast.warning("아이디와 비밀번호가 일치하지 않습니다.", {
+                position: toast.POSITION.TOP_CENTER,
+              })
+            : toast.warning("잠시 후 다시 시도해주세요.", {
+                position: toast.POSITION.TOP_CENTER,
+              });
+        }
       }
     },
     [loginId, password, loginKey],

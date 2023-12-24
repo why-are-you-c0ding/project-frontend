@@ -2,7 +2,16 @@ export const validateId = {
   message: "검증에 성공했습니다.",
   // message: "검증에 실패했습니다.",
 };
+
+export const failValidateId = {
+  message: "해당 로그인 아이디는 이미 존재하는 로그인 아이디입니다.",
+};
+
 export const verificationNickname = { message: "검증에 성공했습니다." };
+
+export const failVerificationNickname = {
+  message: "해당 닉네임은 이미 존재하는 닉네임입니다.",
+};
 
 export const receiveEmail = { message: "이메일 발송에 성공했습니다." };
 
@@ -21,12 +30,6 @@ export const signupMember = {
 
   //   로그인 아이디 중복
   // message: "해당 로그인 아이디는 이미 존재하는 로그인 아이디입니다.",
-};
-
-export const login = {
-  message: "Login succeeded.",
-  // message: "Login fail.",
-  // jwt: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0b2tlbiIsImlkIjoxLCJhdXRob3JpdGllcyI6IlJPTEVfQ09OU1VNRVIiLCJpYXQiOjE2OTQxODI0NTcsImV4cCI6MTY5NDE4MjU0NH0.UsUqVLhkMChJmyJak8uaYaqbDiiza2fZJUWdayT2I4Q",
 };
 
 export const logout = {
