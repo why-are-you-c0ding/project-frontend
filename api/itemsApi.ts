@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { CartItemInfo } from "@typings/myPage";
 import { getCookie } from "@utils/cookie";
-import { item } from "@typings/items";
+import { eachItem, item } from "@typings/items";
 const URL = process.env.REACT_APP_BASE_URL;
 const isDevelopment = process.env.REACT_START_MSW !== "true";
 
@@ -13,7 +13,7 @@ export const itemsApi = createApi({
   }),
   tagTypes: ["items"],
   endpoints: (builder) => ({
-    getEachItems: builder.query({
+    getEachItems: builder.query<eachItem, number>({
       query: (id: number) => `/items/${id}`,
     }),
     getAllItems: builder.query({
