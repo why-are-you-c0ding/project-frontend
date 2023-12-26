@@ -27,13 +27,14 @@ const Like = () => {
   const [downMutation] = myPageApi.useDownCartItemMutation();
 
   const { data: Mockdata, isLoading } =
-    myPageApi.useGetCartQuery<any>("qustndlfma");
+    myPageApi.useGetAllCartQuery<any>("qustndlfma");
 
   let item: cartLineItems[] = [];
 
   if (Mockdata) {
     item = Mockdata?.cartLineItems;
   }
+  console.log(Mockdata);
 
   const getItemLen = (item: cartLineItems[]) => {
     let ary: number[] = [];
@@ -159,18 +160,11 @@ const Like = () => {
                       {Mockdata?.cartLineItems[index]?.name}
                     </ItemInfoTitleName>
                     <ItemInfoTitleOption>
-                      {
-                        Mockdata?.cartLineItems[index].cartOptionGroups[0]
-                          .cartOption.name
-                      }
-                      {
-                        Mockdata?.cartLineItems[index].cartOptionGroups[1]
-                          .cartOption.name
-                      }
-                      {
-                        Mockdata?.cartLineItems[index].cartOptionGroups[2]
-                          .cartOption.name
-                      }
+                      {Mockdata?.cartLineItems[index].cartOptionGroups.map(
+                        (group: any, groupIndex: number) => (
+                          <div key={groupIndex}>{group.cartOption.name}</div>
+                        ),
+                      )}
                     </ItemInfoTitleOption>
                   </ItemInfoTitle>
                 </ItemInfoImg>

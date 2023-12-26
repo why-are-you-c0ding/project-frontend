@@ -12,7 +12,7 @@ export const myPageApi = createApi({
   }),
   tagTypes: ["cart"],
   endpoints: (builder) => ({
-    getCart: builder.query({
+    getAllCart: builder.query({
       query: () => "/carts",
     }),
     deleteCartItem: builder.mutation({
