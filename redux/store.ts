@@ -6,6 +6,7 @@ import { myPageApi } from "@api/myPageApi";
 import { memberApi } from "@api/memberApi";
 import { sellersApi } from "@api/sellersApi";
 import { itemsApi } from "@api/itemsApi";
+import { commonSlice } from "@redux/reducers/commonSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     [itemsApi.reducerPath]: itemsApi.reducer,
     [userInfoSlice.name]: userInfoSlice.reducer,
     [createItemsSlice.name]: createItemsSlice.reducer,
+    [commonSlice.name]: commonSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

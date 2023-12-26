@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useCallback, useRef } from "react";
 import { Route, Routes } from "react-router";
 import loadable from "@loadable/component";
 import "react-toastify/dist/ReactToastify.css";
 import StatusBar from "@components/UI/StatusBar";
 import { BrowserRouter } from "react-router-dom";
 import { NoneHeader } from "@layouts/App/styles";
+import Scrollbars from "react-custom-scrollbars";
+import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@redux/hooks";
+import { onChangeScrollTrue } from "@redux/reducers/commonSlice";
 
 const SignUp = loadable(() => import("@pages/SignUp"));
 const LogIn = loadable(() => import("@pages/LogIn"));
@@ -32,40 +36,52 @@ const SellOrderList = loadable(
 );
 
 const App = () => {
+  const dispatch = useAppDispatch();
+  const onScroll = useCallback((values: { top: number }) => {
+    if (values.top === 1) {
+      dispatch(onChangeScrollTrue());
+    }
+  }, []);
+
   return (
     <BrowserRouter>
-      <StatusBar />
-      <NoneHeader>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/main" element={<Main />} />
-          <Route path="/main/:main" element={<Main />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<LogIn />} />
-          <Route path="/mypage" element={<MyPage />}>
-            <Route path="like" element={<Like />} />
-            <Route path="buying" element={<Buying />} />
-          </Route>
-          <Route path="/sellpage" element={<SellPage />}>
-            <Route path=":signupitem" element={<CreateItems />} />
-            <Route path=":info" element={<SellInfo />} />
-            <Route path=":sellstock" element={<SellStock />} />
-            <Route path=":sellstocklook" element={<SellStockLook />} />
-            <Route path=":selllist" element={<SellList />} />
-            <Route path=":sellorderlist" element={<SellOrderList />} />
-          </Route>
-          <Route path="/sellpage/:id" element={<SellPage />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/shop/:itemId" element={<Shop />} />
-          <Route path="/orders" element={<Order />} />
-          <Route path="/orders/:orderId" element={<Order />} />
-          <Route path="/customerorders" element={<CustomerOrder />} />
-          <Route path="/customerorders/:orderId" element={<CustomerOrder />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/checkout/:id" element={<Checkout />} />
-          <Route path="/searchitem" element={<SearchItem />} />
-        </Routes>
-      </NoneHeader>
+      <Scrollbars onScrollFrame={onScroll}>
+        <StatusBar />
+        <NoneHeader>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/main" element={<Main />} />
+            <Route path="/main/:main" element={<Main />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/mypage" element={<MyPage />}>
+              <Route path="like" element={<Like />} />
+              <Route path="buying" element={<Buying />} />
+            </Route>
+            <Route path="/sellpage" element={<SellPage />}>
+              <Route path=":signupitem" element={<CreateItems />} />
+              <Route path=":info" element={<SellInfo />} />
+              <Route path=":sellstock" element={<SellStock />} />
+              <Route path=":sellstocklook" element={<SellStockLook />} />
+              <Route path=":selllist" element={<SellList />} />
+              <Route path=":sellorderlist" element={<SellOrderList />} />
+            </Route>
+            <Route path="/sellpage/:id" element={<SellPage />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/shop/:itemId" element={<Shop />} />
+            <Route path="/orders" element={<Order />} />
+            <Route path="/orders/:orderId" element={<Order />} />
+            <Route path="/customerorders" element={<CustomerOrder />} />
+            <Route
+              path="/customerorders/:orderId"
+              element={<CustomerOrder />}
+            />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/checkout/:id" element={<Checkout />} />
+            <Route path="/searchitem" element={<SearchItem />} />
+          </Routes>
+        </NoneHeader>
+      </Scrollbars>
     </BrowserRouter>
   );
 };

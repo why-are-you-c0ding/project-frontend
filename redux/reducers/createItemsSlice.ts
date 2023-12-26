@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ChangeInfo, SellOption } from "@typings/sellerPages";
-import { isTable, itemInfos } from "@mock/api/data/sellers/createItem";
 
 const initialState: SellOption = {
   optionTableList: [],
