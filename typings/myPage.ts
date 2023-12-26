@@ -17,7 +17,7 @@ export interface CartLineItem {
   cartOptionGroups: CartOptionGroup[];
   imageUrl: string;
 }
-export interface GetCartDataSuccess {
+export interface CartData {
   cartLineItems: CartLineItem[];
 }
 

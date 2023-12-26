@@ -27,7 +27,7 @@ const Like = () => {
   const [downMutation] = myPageApi.useDownCartItemMutation();
 
   const { data: Mockdata, isLoading } =
-    myPageApi.useGetAllCartQuery<any>("qustndlfma");
+    myPageApi.useGetAllCartQuery("getCartData");
 
   let item: cartLineItems[] = [];
 
@@ -190,6 +190,7 @@ const Like = () => {
                 <ItemInfoDeleteBtn>
                   <button
                     onClick={(event) => {
+                      // @ts-ignore
                       onDeleteItem(event, Mockdata?.cartLineItems[index]?.id);
                     }}
                   >
