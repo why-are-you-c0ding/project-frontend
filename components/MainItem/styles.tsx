@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.section`
   margin: 2rem 4rem;
+  padding-bottom: 2rem;
 
   @media (max-width: 769px) {
     margin-top: 6rem;
