@@ -10,6 +10,3 @@ export function createRandomItem() {
     category: faker.commerce.productAdjective(), // userId: faker.string.uuid(),
   };
 }
-export const pagingAllItems = {
-  items: faker.helpers.multiple(createRandomItem, { count: 10 }),
-};
