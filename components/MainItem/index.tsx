@@ -52,7 +52,7 @@ const MainItem = () => {
         <ItemContainer>
           {items?.map((item: item) => {
             return (
-              <Link to={`/shop`} key={item.itemId}>
+              <Link to={`/shop/${item.itemId}`} key={item.itemId}>
                 <ItemBox>
                   <ItemImg>
                     <img src={item.imageUrl} alt={"상품 사진"} />

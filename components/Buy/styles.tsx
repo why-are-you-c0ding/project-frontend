@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { SignUpBtn } from "@pages/SignUp/styles";
 
 export const Wrapper = styled.section`
   display: grid;
@@ -97,7 +98,7 @@ export const Option = styled.div`
 
   & select {
     margin: 0.5rem 0;
-    width: 10rem;
+    width: 12rem;
     height: 3rem;
     border: 1px solid #c4c4c4;
     border-radius: 10px;
@@ -154,25 +155,12 @@ export const Btn = styled.section`
   }
 `;
 
-export const BuyBtn = styled.button`
-  width: 27rem;
+export const BuyBtn = styled(SignUpBtn)`
+  width: 16rem;
   height: 4rem;
-  background-color: red;
-  color: white;
-  border: transparent;
-  border-radius: 20px;
-  text-align: center;
-  outline: none;
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  cursor: pointer;
 
-  &:hover {
-    background-color: #d63535;
-    border: none;
-  }
+  font-size: 1.5rem;
+  margin-top: 1rem;
 `;
 
 export const CountBtn = styled.div`
@@ -201,13 +189,23 @@ export const CountBtn = styled.div`
 `;
 
 export const SelectBtn = styled.button`
-  width: 18rem;
+  width: 16rem;
   height: 4rem;
   background-color: white;
-  color: black;
+  color: #696969;
   border-radius: 20px;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bold;
   cursor: pointer;
+
+  border: 1px solid;
+
+  & > span {
+    margin-left: 0.6rem;
+  }
+
+  &:hover {
+    color: black;
+  }
 `;
