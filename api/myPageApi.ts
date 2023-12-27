@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { CartItemInfo } from "@typings/myPage";
+import { CartData, CartItemInfo } from "@typings/myPage";
 import { getCookie } from "@utils/cookie";
 const URL = process.env.REACT_APP_BASE_URL;
 const isDevelopment = process.env.REACT_START_MSW !== "true";
@@ -12,7 +12,7 @@ export const myPageApi = createApi({
   }),
   tagTypes: ["cart"],
   endpoints: (builder) => ({
-    getCart: builder.query({
+    getAllCart: builder.query<CartData, string>({
       query: () => "/carts",
     }),
     deleteCartItem: builder.mutation({
