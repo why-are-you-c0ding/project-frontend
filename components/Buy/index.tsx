@@ -22,7 +22,12 @@ import { itemsApi } from "@api/itemsApi";
 import { useAppSelector } from "@redux/hooks";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
-import { orderLineItem, orderOptionGroup } from "@typings/items";
+import {
+  addCartItem,
+  cartOptionGroup,
+  orderLineItem,
+  orderOptionGroup,
+} from "@typings/items";
 
 const Buy = () => {
   const { pathname } = useLocation();
@@ -32,6 +37,9 @@ const Buy = () => {
     {},
   );
   const [price, setPrice] = useState(0);
+
+  const [addCartItemMutation] = itemsApi.useAddCartItemMutation();
+
   const { data, error, isFetching } = itemsApi.useGetEachItemsQuery(
     +pathname.slice(6),
   );
@@ -64,14 +72,50 @@ const Buy = () => {
   );
 
   // TODO: 장바구니 담기 버튼
-  const onClickCart = useCallback(() => {
+  const onClickCart = useCallback(async () => {
     if (!isLogin) {
       toast.warning("로그인 해주세요.", {
         position: toast.POSITION.TOP_CENTER,
       });
       return;
     }
-  }, [isLogin]);
+
+    if (data) {
+      const cartOptionGroups: cartOptionGroup[] = [];
+
+      Object.values(selectOptions).map(
+        (selectIdx: number, optionIdx: number) => {
+          cartOptionGroups.push({
+            name: data.optionGroups[optionIdx].optionGroupName,
+            cartOption: {
+              name: data.optionGroups[optionIdx].options[selectIdx].optionName,
+              price: data.optionGroups[optionIdx].options[selectIdx].price,
+            },
+          });
+        },
+      );
+
+      const cartItemInfo: addCartItem = {
+        itemId: data.itemId,
+        name: data.itemName,
+        count: count,
+        imageUrl: data.imageUrl,
+        price: +data.price,
+        cartOptionGroups: cartOptionGroups,
+      };
+
+      try {
+        await addCartItemMutation(cartItemInfo);
+        toast.success("성공해써", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      } catch (error) {
+        console.error("에러내용내용", error);
+      }
+
+      //장바구니에 담는 api 호출하고 장바구니로 이동하시겠습니까? 라는 모달출력
+    }
+  }, [isLogin, data, count, price]);
 
   const onClickBuy = useCallback(() => {
     if (!isLogin) {
