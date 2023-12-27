@@ -23,7 +23,9 @@ export function createRandomEachOptionGroup() {
   return {
     optionGroupId: faker.number.int(),
     optionGroupName: faker.commerce.productAdjective(),
-    options: faker.helpers.multiple(createRandomEachOption, { count: 5 }),
+    options: faker.helpers.multiple(createRandomEachOption, {
+      count: faker.number.int({ min: 1, max: 5 }),
+    }),
   };
 }
 
@@ -34,10 +36,11 @@ export function createRandomEachItem() {
     shopId: faker.number.int(),
     shopName: faker.company.name(),
     optionGroups: faker.helpers.multiple(createRandomEachOptionGroup, {
-      count: 3,
+      count: faker.number.int({ min: 1, max: 3 }),
     }),
     imageUrl: faker.image.url(),
     information: faker.commerce.productDescription(),
     category: faker.commerce.productAdjective(),
+    price: faker.commerce.price({ dec: 0 }),
   };
 }

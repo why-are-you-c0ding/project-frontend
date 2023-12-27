@@ -75,7 +75,11 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
       dispatch(login());
     } else {
       dispatch(logout());
-      if (pathname !== "/" && pathname !== "/signup") {
+      if (
+        pathname !== "/" &&
+        pathname !== "/signup" &&
+        pathname.slice(0, 5) !== "/shop"
+      ) {
         navigate("/login");
       }
     }
