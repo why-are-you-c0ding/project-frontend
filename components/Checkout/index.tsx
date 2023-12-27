@@ -56,87 +56,87 @@ const Checkout: FC = () => {
 
   const location = useLocation();
 
-  const order = makeOrder(
-    location.state.eachData,
-    location.state.optInfo,
-    location.state.count,
-    address,
-    zoneCode,
-    detailAddr,
-    location.state.total,
-  );
-
-  const onClickBuyBtn = useCallback(
-    (e: any) => {
-      if (address === "") {
-        alert("주소를 입력해주세요");
-        return;
-      }
-      if (detailAddr === "") {
-        alert("상세 주소를 입력해주세요");
-        return;
-      }
-
-      if (window.confirm("주문하시겠습니까?")) {
-        axios
-          .post("https://waycabvav.shop/orders", order, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-            },
-          })
-          .then((res) => {
-            alert("주문 성공");
-
-            navigate("/");
-          })
-          .catch((err) => {
-            alert("실패");
-          });
-      } else {
-        alert("취소합니다.");
-      }
-    },
-    [order],
-  );
-
-  let option: string = "";
-
-  for (let i = 0; i < location.state.optInfo.cartOptionGroups.length; i++) {
-    if (i !== 0) option += ", ";
-    option += location.state.optInfo.cartOptionGroups[i].cartOptions[0].name;
-  }
-
-  const item_id2 = Number(location.state.eachData.itemId);
-  const item_id = JSON.stringify(item_id2);
-  const BuyRating2 = 4.5;
-  const BuyRating = JSON.stringify(BuyRating2);
-
-  const PlusBuy = useCallback(
-    (e: any) => {
-      axios
-        .post(
-          "http://localhost:8000/recommend",
-          {
-            item_id: item_id,
-            rating: BuyRating,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-              "Content-type": "application/json",
-            },
-          },
-        )
-        .then((res) => {})
-        .catch((err) => {});
-    },
-    [location.state.eachData],
-  );
+  console.log(location.state);
+  //
+  // const order = makeOrder(
+  //   location.state.eachData,
+  //   location.state.optInfo,
+  //   location.state.count,
+  //   address,
+  //   zoneCode,
+  //   detailAddr,
+  //   location.state.total,
+  // );
+  //
+  // const onClickBuyBtn = useCallback(
+  //   (e: any) => {
+  //     if (address === "") {
+  //       alert("주소를 입력해주세요");
+  //       return;
+  //     }
+  //     if (detailAddr === "") {
+  //       alert("상세 주소를 입력해주세요");
+  //       return;
+  //     }
+  //
+  //     if (window.confirm("주문하시겠습니까?")) {
+  //       axios
+  //         .post("https://waycabvav.shop/orders", order, {
+  //           headers: {
+  //             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+  //           },
+  //         })
+  //         .then((res) => {
+  //           alert("주문 성공");
+  //
+  //           navigate("/");
+  //         })
+  //         .catch((err) => {
+  //           alert("실패");
+  //         });
+  //     } else {
+  //       alert("취소합니다.");
+  //     }
+  //   },
+  //   [order],
+  // );
+  //
+  // let option: string = "";
+  //
+  // for (let i = 0; i < location.state.optInfo.cartOptionGroups.length; i++) {
+  //   if (i !== 0) option += ", ";
+  //   option += location.state.optInfo.cartOptionGroups[i].cartOptions[0].name;
+  // }
+  //
+  // const item_id2 = Number(location.state.eachData.itemId);
+  // const item_id = JSON.stringify(item_id2);
+  // const BuyRating2 = 4.5;
+  // const BuyRating = JSON.stringify(BuyRating2);
+  //
+  // const PlusBuy = useCallback(
+  //   (e: any) => {
+  //     axios
+  //       .post(
+  //         "http://localhost:8000/recommend",
+  //         {
+  //           item_id: item_id,
+  //           rating: BuyRating,
+  //         },
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+  //             "Content-type": "application/json",
+  //           },
+  //         },
+  //       )
+  //       .then((res) => {})
+  //       .catch((err) => {});
+  //   },
+  //   [location.state.eachData],
+  // );
 
   return (
     <div>
-      <StatusBar />
-
       <Wrapper>
         <Header>
           <h2>주문/결제</h2>
@@ -176,23 +176,23 @@ const Checkout: FC = () => {
           </Title>
           <div>
             <span>상품명</span>
-            <span>{location.state.eachData.itemName}</span>
+            <span>이름</span>
           </div>
           <div>
             <span>카테고리</span>
-            <span>{location.state.eachData.category}</span>
+            <span>고리</span>
           </div>
           <div>
             <span>선택 옵션</span>
-            <span>{option}</span>
+            <span>옵션</span>
           </div>
           <div>
             <span>수량</span>
-            <span>{location.state.count}개</span>
+            <span>1000개</span>
           </div>
           <div>
             <span>개당 가격</span>
-            <span>{location.state.total}원</span>
+            <span>백만원</span>
           </div>
           <div>
             <span>배송비</span>
@@ -207,8 +207,8 @@ const Checkout: FC = () => {
         <Button>
           <button
             onClick={() => {
-              onClickBuyBtn(order);
-              PlusBuy(location.state.eachData);
+              // onClickBuyBtn(order);
+              // PlusBuy(location.state.eachData);
             }}
           >
             결제하기
