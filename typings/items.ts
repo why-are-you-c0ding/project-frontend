@@ -30,4 +30,24 @@ export interface eachItem {
   imageUrl: string;
   information: string;
   category: string;
+  price: number;
+}
+
+// 상품 구매로 넘겨줄때
+export interface orderOption {
+  name: string;
+  price: number;
+}
+
+export interface orderOptionGroup {
+  name: string;
+  orderOption: orderOption;
+}
+
+export interface orderLineItem {
+  itemId: number;
+  name: string;
+  count: number;
+  price: number;
+  orderOptionGroups: orderOptionGroup[];
 }
