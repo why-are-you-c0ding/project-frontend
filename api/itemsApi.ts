@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { CartItemInfo } from "@typings/myPage";
 import { getCookie } from "@utils/cookie";
-import { eachItem, item } from "@typings/items";
+import { addCartItem, eachItem, item } from "@typings/items";
 const URL = process.env.REACT_APP_BASE_URL;
 const isDevelopment = process.env.REACT_START_MSW !== "true";
 
@@ -27,6 +27,16 @@ export const itemsApi = createApi({
     getSearchItems: builder.query({
       query: ({ word, page }: { word: string; page: number }) =>
         `/items/search?keyword=${word}&page=${page}`,
+    }),
+    addCartItem: builder.mutation({
+      query: (cartItemInfo: addCartItem) => ({
+        url: "/carts/cart-line-items",
+        method: "POST",
+        body: { cartItemInfo },
+        headers: {
+          Authorization: `Bearer ${getCookie("JSESSIONID")}`,
+        },
+      }),
     }),
   }),
 });

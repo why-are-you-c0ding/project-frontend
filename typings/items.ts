@@ -51,3 +51,23 @@ export interface orderLineItem {
   price: number;
   orderOptionGroups: orderOptionGroup[];
 }
+
+//상품 장바구니에 넣기
+export interface cartOption {
+  name: string;
+  price: number;
+}
+
+export interface cartOptionGroup {
+  name: string;
+  cartOption: cartOption;
+}
+
+export interface addCartItem {
+  itemId: number;
+  name: string;
+  count: number;
+  imageUrl: string;
+  price: number;
+  cartOptionGroups: cartOptionGroup[];
+}
