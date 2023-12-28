@@ -22,12 +22,7 @@ export const SearchBtn = styled.button`
 
   font-size: 0.8rem;
   color: white;
-  background-color: cornflowerblue;
-
-  &:hover {
-    background-color: blueviolet;
-    border: none;
-  }
+  background-color: black;
 `;
 
 export const DetailInput = styled.input`
@@ -80,11 +75,6 @@ export const Button = styled.div`
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
-    background-color: cornflowerblue;
-
-    &:hover {
-      background-color: blueviolet;
-      border: none;
-    }
+    background-color: black;
   }
 `;

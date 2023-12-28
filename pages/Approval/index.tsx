@@ -8,7 +8,7 @@ import {
   SearchBtn,
   Title,
   Wrapper,
-} from "@components/Checkout/styles";
+} from "@pages/Approval/styles";
 import { useLocation } from "react-router-dom";
 import { makeOrder } from "@utils/makeOrder";
 import axios from "axios";
@@ -41,7 +41,7 @@ interface cartOptions {
   ["price"]: number;
 }
 
-const Checkout: FC = () => {
+const Approval: FC = () => {
   const [addrSearch, setAddrSearch] = useState(false);
   const [popup, setPopup] = useState(false);
   const [address, setAddress] = useState("");
@@ -199,7 +199,7 @@ const Checkout: FC = () => {
             <span>0원</span>
           </div>
           <div>
-            <span>총 결제금액</span>
+            <span>결제금액</span>
             <span>{location.state.total * location.state.count}원</span>
           </div>
         </Info>
@@ -231,4 +231,4 @@ const Checkout: FC = () => {
   );
 };
 
-export default Checkout;
+export default Approval;

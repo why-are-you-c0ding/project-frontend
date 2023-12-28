@@ -1,27 +1,28 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { EachItemWrapper } from "./styles";
 import {
-  Wrapper,
-  LeftSide,
-  MiddleSide,
-  RightSide,
-  Item,
-  ItemName,
-  Option,
-  Itemdetail,
   Btn,
   BuyBtn,
-  SelectBtn,
   CountBtn,
-  TotalPrice,
+  Item,
+  Itemdetail,
   ItemInfo,
-} from "@components/Buy/styles";
+  ItemName,
+  LeftSide,
+  MiddleSide,
+  Option,
+  RightSide,
+  SelectBtn,
+  TotalPrice,
+  Wrapper,
+} from "@pages/EachItem/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
-import { itemsApi } from "@api/itemsApi";
 import { useAppSelector } from "@redux/hooks";
-import { toast } from "react-toastify";
+import { itemsApi } from "@api/itemsApi";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 import {
   addCartItem,
   cartOptionGroup,
@@ -29,7 +30,7 @@ import {
   orderOptionGroup,
 } from "@typings/items";
 
-const Buy = () => {
+const EachItem = () => {
   const { pathname } = useLocation();
   const isLogin = useAppSelector((state) => state.userInfo.isLogin);
   const [count, setCount] = useState(1);
@@ -149,7 +150,7 @@ const Buy = () => {
         totalPayment: price,
       };
 
-      navigate("/checkout", { state: { itemInfo } });
+      navigate("/approval", { state: { itemInfo } });
     }
   }, [isLogin, data, count, price]);
 
@@ -169,79 +170,78 @@ const Buy = () => {
   }, [data]);
 
   return (
-    <div>
-      {error && <div>새로고침하여 주세요.</div>}
+    <EachItemWrapper>
+      <div>
+        {error && <div>새로고침하여 주세요.</div>}
+        {isFetching && <div>로딩중...</div>}
+        {!error && !isFetching && data && (
+          <Wrapper>
+            <LeftSide>
+              <Item>
+                <img src={data.imageUrl} alt="상품 사진" />
+              </Item>
+            </LeftSide>
+            <MiddleSide />
+            <RightSide>
+              <Itemdetail>
+                <ItemName>{data.itemName}</ItemName>
+              </Itemdetail>
+              <Option>
+                <div>
+                  {data.optionGroups.map((optionGroup, optionGroupIdx) => (
+                    <select
+                      key={optionGroup.optionGroupId}
+                      name={optionGroup.optionGroupName}
+                      onChange={(e) =>
+                        onChangeSelect(optionGroupIdx, +e.target.value)
+                      }
+                    >
+                      {optionGroup.options.map((option, optionIdx) => (
+                        <option
+                          key={option.optionId}
+                          value={optionIdx}
 
-      {isFetching && <div>로딩중...</div>}
+                          // onClick={() => {
+                          //   onChangeSelect(optionGroupIdx, optionIdx);
+                          //   console.log("여기 실행");
+                          // }}
+                        >
+                          {option.optionName.length > 12
+                            ? `${option.optionName.slice(0, 12)}...`
+                            : option.optionName}{" "}
+                          (+{option.price})
+                        </option>
+                      ))}
+                    </select>
+                  ))}
+                </div>
+              </Option>
 
-      {!error && !isFetching && data && (
-        <Wrapper>
-          <LeftSide>
-            <Item>
-              <img src={data.imageUrl} alt="상품 사진" />
-            </Item>
-          </LeftSide>
-          <MiddleSide />
-          <RightSide>
-            <Itemdetail>
-              <ItemName>{data.itemName}</ItemName>
-            </Itemdetail>
-            <Option>
-              <div>
-                {data.optionGroups.map((optionGroup, optionGroupIdx) => (
-                  <select
-                    key={optionGroup.optionGroupId}
-                    name={optionGroup.optionGroupName}
-                    onChange={(e) =>
-                      onChangeSelect(optionGroupIdx, +e.target.value)
-                    }
-                  >
-                    {optionGroup.options.map((option, optionIdx) => (
-                      <option
-                        key={option.optionId}
-                        value={optionIdx}
+              <ItemInfo>상품 설명: {data.information}</ItemInfo>
+              <ItemInfo>카테고리: {data.category}</ItemInfo>
 
-                        // onClick={() => {
-                        //   onChangeSelect(optionGroupIdx, optionIdx);
-                        //   console.log("여기 실행");
-                        // }}
-                      >
-                        {option.optionName.length > 12
-                          ? `${option.optionName.slice(0, 12)}...`
-                          : option.optionName}{" "}
-                        (+{option.price})
-                      </option>
-                    ))}
-                  </select>
-                ))}
-              </div>
-            </Option>
+              <TotalPrice>총 가격: {price}원</TotalPrice>
 
-            <ItemInfo>상품 설명: {data.information}</ItemInfo>
-            <ItemInfo>카테고리: {data.category}</ItemInfo>
+              <Btn>
+                <div>
+                  <CountBtn>
+                    <button onClick={minusCount}>-</button>
+                    <span>{count}</span>
+                    <button onClick={plusCount}>+</button>
+                  </CountBtn>
+                  <SelectBtn onClick={onClickCart}>
+                    <FontAwesomeIcon icon={faBasketShopping} />
+                    <span>장바구니</span>
+                  </SelectBtn>
+                </div>
 
-            <TotalPrice>총 가격: {price}원</TotalPrice>
-
-            <Btn>
-              <div>
-                <CountBtn>
-                  <button onClick={minusCount}>-</button>
-                  <span>{count}</span>
-                  <button onClick={plusCount}>+</button>
-                </CountBtn>
-                <SelectBtn onClick={onClickCart}>
-                  <FontAwesomeIcon icon={faBasketShopping} />
-                  <span>장바구니</span>
-                </SelectBtn>
-              </div>
-
-              <BuyBtn onClick={onClickBuy}>구매</BuyBtn>
-            </Btn>
-          </RightSide>
-        </Wrapper>
-      )}
-    </div>
+                <BuyBtn onClick={onClickBuy}>구매</BuyBtn>
+              </Btn>
+            </RightSide>
+          </Wrapper>
+        )}
+      </div>
+    </EachItemWrapper>
   );
 };
-
-export default Buy;
+export default EachItem;
