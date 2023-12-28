@@ -71,3 +71,8 @@ export interface addCartItem {
   price: number;
   cartOptionGroups: cartOptionGroup[];
 }
+
+// 결제 페이지에서 사용되는 아이템 정보
+export interface approvalItemInfo extends orderLineItem {
+  totalPayment: number;
+}
