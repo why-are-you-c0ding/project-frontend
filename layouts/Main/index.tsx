@@ -1,7 +1,7 @@
 import React from "react";
 import SliderImage from "@components/SliderImage";
 
-import MainItem from "@components/MainItem";
+import MainItem from "@components/Items/MainItem";
 
 const Main = () => {
   return (

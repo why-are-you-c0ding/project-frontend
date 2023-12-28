@@ -1,5 +1,5 @@
 import React, { Dispatch, FC, SetStateAction } from "react";
-import Post from "@components/Post";
+import Post from "@components/Items/Post";
 
 interface Props {
   popup: boolean;

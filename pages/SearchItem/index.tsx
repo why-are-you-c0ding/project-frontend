@@ -10,7 +10,7 @@ import {
   ItemName,
   ItemPrice,
   Wrapper,
-} from "@components/MainItem/styles";
+} from "@components/Items/MainItem/styles";
 import NullData from "@components/NullData";
 import { Link, useLocation } from "react-router-dom";
 import useSWRInfinite from "swr/infinite";
