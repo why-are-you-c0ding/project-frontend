@@ -28,7 +28,7 @@ export default function ModalWrapper({
   height = "20rem",
 }: Props) {
   return (
-    <Modal isCentered onClose={onClose} isOpen={isOpen}>
+    <Modal onClose={onClose} isOpen={isOpen}>
       <ModalOverlay />
 
       <ModalContent
@@ -55,7 +55,7 @@ export default function ModalWrapper({
         />
         <ModalBody>{content}</ModalBody>
 
-        <ModalFooter>{footer}</ModalFooter>
+        {footer && <ModalFooter>{footer}</ModalFooter>}
       </ModalContent>
     </Modal>
   );
