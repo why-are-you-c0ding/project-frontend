@@ -4,6 +4,7 @@ export const Wrapper = styled.section`
   width: 80vw;
   margin: 0 auto;
   padding-bottom: 2rem;
+  margin-top: 2rem;
 `;
 
 export const Header = styled.header`

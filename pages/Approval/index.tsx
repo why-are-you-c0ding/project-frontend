@@ -61,10 +61,6 @@ const Approval: FC = () => {
   return (
     <div>
       <Wrapper>
-        <Header>
-          <h2>주문/결제</h2>
-        </Header>
-
         <Info>
           <Title>
             <h3>구매자 정보</h3>
