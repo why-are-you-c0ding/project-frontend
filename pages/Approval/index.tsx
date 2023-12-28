@@ -1,139 +1,62 @@
-import React, { FC, useCallback, useState } from "react";
-import StatusBar from "@components/UI/StatusBar";
+import React, { CSSProperties, FC, useCallback, useState } from "react";
 import {
   Button,
   DetailInput,
   Header,
   Info,
+  PostWrapper,
   SearchBtn,
   Title,
   Wrapper,
 } from "@pages/Approval/styles";
 import { useLocation } from "react-router-dom";
-import { makeOrder } from "@utils/makeOrder";
-import axios from "axios";
-import Menu from "@components/Menu";
 import useInput from "@hooks/useInput";
-import AddressSearchModal from "@components/AddressSearchModal";
-import { IEachData } from "@typings/db";
 import { useNavigate } from "react-router";
-
-interface state {
-  ["count"]: number;
-  ["eachData"]: IEachData;
-  ["optInfo"]: {
-    ["itemId"]: number;
-    ["name"]: string;
-    ["count"]: number;
-    ["imageUrl"]: string;
-    ["cartOptionGroups"]: cartOptionGroups[];
-  };
-  ["total"]: number;
-}
-
-interface cartOptionGroups {
-  ["name"]: string;
-  ["cartOptions"]: cartOptions[];
-}
-
-interface cartOptions {
-  ["name"]: string;
-  ["price"]: number;
-}
+import { approvalItemInfo, orderLineItem } from "@typings/items";
+import EachApproval from "@components/Approval/EachApproval";
+import DaumPostcode from "react-daum-postcode";
+import { useDisclosure } from "@chakra-ui/react";
+import ModalWrapper from "@components/UI/Modal";
 
 const Approval: FC = () => {
+  const location = useLocation();
+  const itemInfos: (approvalItemInfo & { image: string })[] =
+    location.state ?? [];
+
   const [addrSearch, setAddrSearch] = useState(false);
   const [popup, setPopup] = useState(false);
   const [address, setAddress] = useState("");
   const [zoneCode, setZoneCode] = useState("");
   const [detailAddr, onChangeDetailAddr, setDetailAddr] = useInput("");
+  const totalPrice = itemInfos.reduce((a, c) => a + c.totalPayment, 0);
   const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const postCodeStyle: CSSProperties = {
+    display: "block",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    marginTop: "3rem",
+    width: "100%",
+    height: "88%",
+  };
+
+  const onCompletePost = (data: {
+    ["address"]: string;
+    ["zonecode"]: string;
+  }) => {
+    onClickAddrSearch();
+    setZoneCode(data.zonecode);
+    setAddress(data.address);
+    onClose();
+  };
 
   const onClickAddrSearch = useCallback(() => {
     setAddrSearch((prev) => !prev);
     setPopup((prev) => !prev);
   }, []);
-
-  const location = useLocation();
-
-  console.log(location.state);
-  //
-  // const order = makeOrder(
-  //   location.state.eachData,
-  //   location.state.optInfo,
-  //   location.state.count,
-  //   address,
-  //   zoneCode,
-  //   detailAddr,
-  //   location.state.total,
-  // );
-  //
-  // const onClickBuyBtn = useCallback(
-  //   (e: any) => {
-  //     if (address === "") {
-  //       alert("주소를 입력해주세요");
-  //       return;
-  //     }
-  //     if (detailAddr === "") {
-  //       alert("상세 주소를 입력해주세요");
-  //       return;
-  //     }
-  //
-  //     if (window.confirm("주문하시겠습니까?")) {
-  //       axios
-  //         .post("https://waycabvav.shop/orders", order, {
-  //           headers: {
-  //             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-  //           },
-  //         })
-  //         .then((res) => {
-  //           alert("주문 성공");
-  //
-  //           navigate("/");
-  //         })
-  //         .catch((err) => {
-  //           alert("실패");
-  //         });
-  //     } else {
-  //       alert("취소합니다.");
-  //     }
-  //   },
-  //   [order],
-  // );
-  //
-  // let option: string = "";
-  //
-  // for (let i = 0; i < location.state.optInfo.cartOptionGroups.length; i++) {
-  //   if (i !== 0) option += ", ";
-  //   option += location.state.optInfo.cartOptionGroups[i].cartOptions[0].name;
-  // }
-  //
-  // const item_id2 = Number(location.state.eachData.itemId);
-  // const item_id = JSON.stringify(item_id2);
-  // const BuyRating2 = 4.5;
-  // const BuyRating = JSON.stringify(BuyRating2);
-  //
-  // const PlusBuy = useCallback(
-  //   (e: any) => {
-  //     axios
-  //       .post(
-  //         "http://localhost:8000/recommend",
-  //         {
-  //           item_id: item_id,
-  //           rating: BuyRating,
-  //         },
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-  //             "Content-type": "application/json",
-  //           },
-  //         },
-  //       )
-  //       .then((res) => {})
-  //       .catch((err) => {});
-  //   },
-  //   [location.state.eachData],
-  // );
 
   return (
     <div>
@@ -149,8 +72,10 @@ const Approval: FC = () => {
           <div>
             <span>배송주소</span>
             <span>
-              {address}
-              <SearchBtn onClick={onClickAddrSearch}>주소 검색</SearchBtn>
+              <PostWrapper>
+                <div>{address}</div>
+                <SearchBtn onClick={onOpen}>주소 검색</SearchBtn>
+              </PostWrapper>
             </span>
           </div>
           <div>
@@ -170,63 +95,49 @@ const Approval: FC = () => {
           </div>
         </Info>
 
+        <Title>
+          <h3>상품 정보</h3>
+        </Title>
+        <EachApproval itemInfos={itemInfos} />
+
         <Info>
           <Title>
             <h3>결제 정보</h3>
           </Title>
           <div>
-            <span>상품명</span>
-            <span>이름</span>
-          </div>
-          <div>
-            <span>카테고리</span>
-            <span>고리</span>
-          </div>
-          <div>
-            <span>선택 옵션</span>
-            <span>옵션</span>
-          </div>
-          <div>
-            <span>수량</span>
-            <span>1000개</span>
-          </div>
-          <div>
-            <span>개당 가격</span>
-            <span>백만원</span>
+            <span>상품 가격</span>
+            <span>{totalPrice}원</span>
           </div>
           <div>
             <span>배송비</span>
-            <span>0원</span>
+            <span>3000원</span>
           </div>
           <div>
-            <span>결제금액</span>
-            <span>{location.state.total * location.state.count}원</span>
+            <span>총 가격</span>
+            <span>{totalPrice + 3000}원</span>
           </div>
         </Info>
 
         <Button>
-          <button
-            onClick={() => {
-              // onClickBuyBtn(order);
-              // PlusBuy(location.state.eachData);
-            }}
-          >
-            결제하기
-          </button>
+          <button onClick={() => {}}>결제하기</button>
         </Button>
       </Wrapper>
 
-      <Menu show={addrSearch} onCloseModal={onClickAddrSearch}>
-        {
-          <AddressSearchModal
-            popup={popup}
-            address={address}
-            setZoneCode={setZoneCode}
-            setAddress={setAddress}
-            onClickAddrSearch={onClickAddrSearch}
+      <ModalWrapper
+        onClose={onClose}
+        isOpen={isOpen}
+        title={"주소 검색"}
+        content={
+          <DaumPostcode
+            className={"post"}
+            style={postCodeStyle}
+            autoClose
+            onComplete={onCompletePost}
           />
         }
-      </Menu>
+        footer={null}
+        height={"70vh"}
+      />
     </div>
   );
 };
