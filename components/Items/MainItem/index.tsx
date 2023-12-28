@@ -8,7 +8,7 @@ import {
   ItemPrice,
   ItemImg,
   ItemInfo,
-} from "@components/MainItem/styles";
+} from "@components/Items/MainItem/styles";
 import { Link } from "react-router-dom";
 import { itemsApi } from "@api/itemsApi";
 import { item } from "@typings/items";

@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import DaumPostcode from "react-daum-postcode";
-import { Wrapper } from "@components/Post/styles";
+import { Wrapper } from "@components/Items/Post/styles";
 
 interface Props {
   address: string;
