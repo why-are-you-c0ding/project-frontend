@@ -25,6 +25,7 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import {
   addCartItem,
+  approvalItemInfo,
   cartOptionGroup,
   orderLineItem,
   orderOptionGroup,
@@ -42,7 +43,7 @@ const EachItem = () => {
   const [addCartItemMutation] = itemsApi.useAddCartItemMutation();
 
   const { data, error, isFetching } = itemsApi.useGetEachItemsQuery(
-    +pathname.slice(6),
+    +pathname.slice(10),
   );
   const navigate = useNavigate();
 
@@ -141,16 +142,19 @@ const EachItem = () => {
         },
       );
 
-      const itemInfo: orderLineItem & { totalPayment: number } = {
-        itemId: data.itemId,
-        name: data.itemName,
-        count: count,
-        price: +data.price,
-        orderOptionGroups: orderOptionGroups,
-        totalPayment: price,
-      };
+      const itemInfo: (approvalItemInfo & { image: string })[] = [
+        {
+          itemId: data.itemId,
+          name: data.itemName,
+          count: count,
+          price: +data.price,
+          orderOptionGroups: orderOptionGroups,
+          totalPayment: price,
+          image: data.imageUrl,
+        },
+      ];
 
-      navigate("/approval", { state: { itemInfo } });
+      navigate("/approval", { state: itemInfo });
     }
   }, [isLogin, data, count, price]);
 
@@ -173,7 +177,9 @@ const EachItem = () => {
     <EachItemWrapper>
       <div>
         {error && <div>새로고침하여 주세요.</div>}
+
         {isFetching && <div>로딩중...</div>}
+
         {!error && !isFetching && data && (
           <Wrapper>
             <LeftSide>
