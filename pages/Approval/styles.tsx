@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.section`
-  margin: 0 auto;
   width: 80vw;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+  margin-top: 2rem;
 `;
 
 export const Header = styled.header`
@@ -22,21 +24,21 @@ export const SearchBtn = styled.button`
 
   font-size: 0.8rem;
   color: white;
-  background-color: cornflowerblue;
-
-  &:hover {
-    background-color: blueviolet;
-    border: none;
-  }
+  background-color: black;
 `;
 
 export const DetailInput = styled.input`
+  width: 100%;
   font-size: 1rem;
   border: none;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const Info = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 
   & > div:first-of-type {
     span {
@@ -66,11 +68,15 @@ export const Info = styled.div`
   }
 `;
 
+export const PostWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1%;
+`;
+
 export const Button = styled.div`
   display: flex;
   justify-content: center;
-
-  margin-bottom: 1rem;
 
   & button {
     padding: 1.3rem 6rem;
@@ -80,11 +86,6 @@ export const Button = styled.div`
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
-    background-color: cornflowerblue;
-
-    &:hover {
-      background-color: blueviolet;
-      border: none;
-    }
+    background-color: black;
   }
 `;

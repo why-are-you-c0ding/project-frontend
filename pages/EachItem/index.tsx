@@ -1,35 +1,37 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { EachItemWrapper } from "./styles";
 import {
-  Wrapper,
-  LeftSide,
-  MiddleSide,
-  RightSide,
-  Item,
-  ItemName,
-  Option,
-  Itemdetail,
   Btn,
   BuyBtn,
-  SelectBtn,
   CountBtn,
-  TotalPrice,
+  Item,
+  Itemdetail,
   ItemInfo,
-} from "@components/Buy/styles";
+  ItemName,
+  LeftSide,
+  MiddleSide,
+  Option,
+  RightSide,
+  SelectBtn,
+  TotalPrice,
+  Wrapper,
+} from "@pages/EachItem/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
-import { itemsApi } from "@api/itemsApi";
 import { useAppSelector } from "@redux/hooks";
-import { toast } from "react-toastify";
+import { itemsApi } from "@api/itemsApi";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 import {
   addCartItem,
+  approvalItemInfo,
   cartOptionGroup,
   orderLineItem,
   orderOptionGroup,
 } from "@typings/items";
 
-const Buy = () => {
+const EachItem = () => {
   const { pathname } = useLocation();
   const isLogin = useAppSelector((state) => state.userInfo.isLogin);
   const [count, setCount] = useState(1);
@@ -41,7 +43,7 @@ const Buy = () => {
   const [addCartItemMutation] = itemsApi.useAddCartItemMutation();
 
   const { data, error, isFetching } = itemsApi.useGetEachItemsQuery(
-    +pathname.slice(6),
+    +pathname.slice(10),
   );
   const navigate = useNavigate();
 
@@ -140,16 +142,19 @@ const Buy = () => {
         },
       );
 
-      const itemInfo: orderLineItem & { totalPayment: number } = {
-        itemId: data.itemId,
-        name: data.itemName,
-        count: count,
-        price: +data.price,
-        orderOptionGroups: orderOptionGroups,
-        totalPayment: price,
-      };
+      const itemInfo: (approvalItemInfo & { image: string })[] = [
+        {
+          itemId: data.itemId,
+          name: data.itemName,
+          count: count,
+          price: +data.price,
+          orderOptionGroups: orderOptionGroups,
+          totalPayment: price,
+          image: data.imageUrl,
+        },
+      ];
 
-      navigate("/checkout", { state: { itemInfo } });
+      navigate("/approval", { state: itemInfo });
     }
   }, [isLogin, data, count, price]);
 
@@ -169,79 +174,80 @@ const Buy = () => {
   }, [data]);
 
   return (
-    <div>
-      {error && <div>새로고침하여 주세요.</div>}
+    <EachItemWrapper>
+      <div>
+        {error && <div>새로고침하여 주세요.</div>}
 
-      {isFetching && <div>로딩중...</div>}
+        {isFetching && <div>로딩중...</div>}
 
-      {!error && !isFetching && data && (
-        <Wrapper>
-          <LeftSide>
-            <Item>
-              <img src={data.imageUrl} alt="상품 사진" />
-            </Item>
-          </LeftSide>
-          <MiddleSide />
-          <RightSide>
-            <Itemdetail>
-              <ItemName>{data.itemName}</ItemName>
-            </Itemdetail>
-            <Option>
-              <div>
-                {data.optionGroups.map((optionGroup, optionGroupIdx) => (
-                  <select
-                    key={optionGroup.optionGroupId}
-                    name={optionGroup.optionGroupName}
-                    onChange={(e) =>
-                      onChangeSelect(optionGroupIdx, +e.target.value)
-                    }
-                  >
-                    {optionGroup.options.map((option, optionIdx) => (
-                      <option
-                        key={option.optionId}
-                        value={optionIdx}
+        {!error && !isFetching && data && (
+          <Wrapper>
+            <LeftSide>
+              <Item>
+                <img src={data.imageUrl} alt="상품 사진" />
+              </Item>
+            </LeftSide>
+            <MiddleSide />
+            <RightSide>
+              <Itemdetail>
+                <ItemName>{data.itemName}</ItemName>
+              </Itemdetail>
+              <Option>
+                <div>
+                  {data.optionGroups.map((optionGroup, optionGroupIdx) => (
+                    <select
+                      key={optionGroup.optionGroupId}
+                      name={optionGroup.optionGroupName}
+                      onChange={(e) =>
+                        onChangeSelect(optionGroupIdx, +e.target.value)
+                      }
+                    >
+                      {optionGroup.options.map((option, optionIdx) => (
+                        <option
+                          key={option.optionId}
+                          value={optionIdx}
 
-                        // onClick={() => {
-                        //   onChangeSelect(optionGroupIdx, optionIdx);
-                        //   console.log("여기 실행");
-                        // }}
-                      >
-                        {option.optionName.length > 12
-                          ? `${option.optionName.slice(0, 12)}...`
-                          : option.optionName}{" "}
-                        (+{option.price})
-                      </option>
-                    ))}
-                  </select>
-                ))}
-              </div>
-            </Option>
+                          // onClick={() => {
+                          //   onChangeSelect(optionGroupIdx, optionIdx);
+                          //   console.log("여기 실행");
+                          // }}
+                        >
+                          {option.optionName.length > 12
+                            ? `${option.optionName.slice(0, 12)}...`
+                            : option.optionName}{" "}
+                          (+{option.price})
+                        </option>
+                      ))}
+                    </select>
+                  ))}
+                </div>
+              </Option>
 
-            <ItemInfo>상품 설명: {data.information}</ItemInfo>
-            <ItemInfo>카테고리: {data.category}</ItemInfo>
+              <ItemInfo>상품 설명: {data.information}</ItemInfo>
+              <ItemInfo>카테고리: {data.category}</ItemInfo>
 
-            <TotalPrice>총 가격: {price}원</TotalPrice>
+              <TotalPrice>총 가격: {price}원</TotalPrice>
 
-            <Btn>
-              <div>
-                <CountBtn>
-                  <button onClick={minusCount}>-</button>
-                  <span>{count}</span>
-                  <button onClick={plusCount}>+</button>
-                </CountBtn>
-                <SelectBtn onClick={onClickCart}>
-                  <FontAwesomeIcon icon={faBasketShopping} />
-                  <span>장바구니</span>
-                </SelectBtn>
-              </div>
+              <Btn>
+                <div>
+                  <CountBtn>
+                    <button onClick={minusCount}>-</button>
+                    <span>{count}</span>
+                    <button onClick={plusCount}>+</button>
+                  </CountBtn>
+                  <SelectBtn onClick={onClickCart}>
+                    <FontAwesomeIcon icon={faBasketShopping} />
+                    <span>장바구니</span>
+                  </SelectBtn>
+                </div>
 
-              <BuyBtn onClick={onClickBuy}>구매</BuyBtn>
-            </Btn>
-          </RightSide>
-        </Wrapper>
-      )}
-    </div>
+                <BuyBtn onClick={onClickBuy}>구매</BuyBtn>
+              </Btn>
+            </RightSide>
+          </Wrapper>
+        )}
+      </div>
+    </EachItemWrapper>
   );
 };
-
-export default Buy;
+export default EachItem;

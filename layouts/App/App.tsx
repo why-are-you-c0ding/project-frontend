@@ -17,10 +17,10 @@ const MyPage = loadable(() => import(`@pages/MyPage`));
 const Buying = loadable(() => import("@components/Buying"));
 const Like = loadable(() => import("@components/Like"));
 const SellPage = loadable(() => import(`@pages/SellPage`));
-const Shop = loadable(() => import(`@pages/Shop`));
+const EachItem = loadable(() => import(`@pages/EachItem`));
 const Order = loadable(() => import(`@pages/Order`));
 const CustomerOrder = loadable(() => import(`@pages/CustomerOrder`));
-const Checkout = loadable(() => import("@components/Checkout"));
+const Approval = loadable(() => import("@pages/Approval"));
 const SearchItem = loadable(() => import(`@pages/SearchItem`));
 const CreateItems = loadable(
   () => import("@components/SellerPages/CreateItems"),
@@ -67,8 +67,8 @@ const App = () => {
               <Route path=":sellorderlist" element={<SellOrderList />} />
             </Route>
             <Route path="/sellpage/:id" element={<SellPage />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/shop/:itemId" element={<Shop />} />
+            <Route path="/eachitem" element={<EachItem />} />
+            <Route path="/eachitem/:itemId" element={<EachItem />} />
             <Route path="/orders" element={<Order />} />
             <Route path="/orders/:orderId" element={<Order />} />
             <Route path="/customerorders" element={<CustomerOrder />} />
@@ -76,8 +76,7 @@ const App = () => {
               path="/customerorders/:orderId"
               element={<CustomerOrder />}
             />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/checkout/:id" element={<Checkout />} />
+            <Route path="/approval" element={<Approval />} />
             <Route path="/searchitem" element={<SearchItem />} />
           </Routes>
         </NoneHeader>

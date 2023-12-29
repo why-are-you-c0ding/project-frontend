@@ -8,7 +8,7 @@ import {
   ItemPrice,
   ItemImg,
   ItemInfo,
-} from "@components/MainItem/styles";
+} from "@components/Items/MainItem/styles";
 import { Link } from "react-router-dom";
 import { itemsApi } from "@api/itemsApi";
 import { item } from "@typings/items";
@@ -52,7 +52,7 @@ const MainItem = () => {
         <ItemContainer>
           {items?.map((item: item) => {
             return (
-              <Link to={`/shop/${item.itemId}`} key={item.itemId}>
+              <Link to={`/eachitem/${item.itemId}`} key={item.itemId}>
                 <ItemBox>
                   <ItemImg>
                     <img src={item.imageUrl} alt={"상품 사진"} />

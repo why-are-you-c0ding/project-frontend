@@ -1,6 +1,14 @@
 import styled from "@emotion/styled";
 import { SignUpBtn } from "@pages/SignUp/styles";
 
+export const EachItemWrapper = styled.div`
+  display: block;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+`;
+
 export const Wrapper = styled.section`
   display: grid;
   grid-template-columns: 4fr 0.8fr 5fr;
