@@ -18,9 +18,17 @@ export const ItemContainer = styled.div`
   grid-template-columns: repeat(4, minmax(18rem, 1fr));
   grid-gap: 1rem;
 
+  @media (max-width: 1314px) {
+    grid-template-columns: repeat(3, minmax(18rem, 1fr));
+  }
+
+  @media (max-width: 1012px) {
+    grid-template-columns: repeat(2, minmax(18rem, 1fr));
+  }
+
   @media (max-width: 769px) {
-    display: flex;
-    flex-direction: column;
+    justify-content: center;
+    grid-template-columns: repeat(1, minmax(18rem, 26rem));
   }
 
   & a {
@@ -55,6 +63,8 @@ export const ItemImg = styled.div`
   & img {
     width: 15rem;
     height: 15rem;
+
+    margin-top: 1rem;
   }
 `;
 
