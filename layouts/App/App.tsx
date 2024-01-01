@@ -38,7 +38,7 @@ const SellOrderList = loadable(
 const App = () => {
   const dispatch = useAppDispatch();
   const onScroll = useCallback((values: { top: number }) => {
-    if (values.top === 1) {
+    if (values.top > 0.8) {
       dispatch(onChangeScrollTrue());
     }
   }, []);
