@@ -14,6 +14,7 @@ import { itemsApi } from "@api/itemsApi";
 import { item } from "@typings/items";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { onChangeScrollFalse } from "@redux/reducers/commonSlice";
+import { throttle } from "lodash";
 
 const MainItem = () => {
   const [page, setPage] = useState(1);
@@ -25,9 +26,12 @@ const MainItem = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isScrollBottom && !finalPage) {
-      setPage((prev) => prev + 1);
-    }
+    throttle(() => {
+      if (isScrollBottom && !finalPage) {
+        setPage((prev) => prev + 1);
+        dispatch(onChangeScrollFalse());
+      }
+    }, 200);
   }, [isScrollBottom, finalPage]);
 
   useEffect(() => {
@@ -37,6 +41,8 @@ const MainItem = () => {
       dispatch(onChangeScrollFalse());
     }
   }, [data]);
+
+  console.log(items.length);
 
   return (
     <Wrapper>
