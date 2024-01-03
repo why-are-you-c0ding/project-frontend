@@ -66,8 +66,8 @@ export const ItemBox2 = styled.div`
 export const ItemBoxInfo = styled.div`
   display: grid;
   grid-template-columns:
-    minmax(50px, 4fr) minmax(50px, 1fr) minmax(50px, 1fr) minmax(50px, 1fr)
-    minmax(20px, 0.2fr);
+    minmax(50px, 0.8fr) minmax(50px, 3fr) minmax(50px, 1fr) minmax(50px, 1fr)
+    minmax(20px, 1fr);
   align-items: center;
   justify-items: center;
   height: 3rem;
@@ -78,8 +78,8 @@ export const ItemBoxInfo = styled.div`
 export const ItemInfo = styled.div`
   display: grid;
   grid-template-columns:
-    minmax(50px, 4fr) minmax(50px, 1fr) minmax(50px, 1fr) minmax(50px, 1fr)
-    minmax(20px, 0.2fr);
+    minmax(50px, 0.8fr) minmax(50px, 3fr) minmax(50px, 1fr) minmax(50px, 1fr)
+    minmax(20px, 1fr) minmax(20px, 0.2fr);
   height: 9rem;
   border-bottom: 2px solid #f5f5f5;
   align-items: center;
