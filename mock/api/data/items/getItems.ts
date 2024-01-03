@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import { eachItem, option, optionGroup } from "@typings/items";
 
 export function createRandomItem() {
   return {
@@ -11,15 +12,15 @@ export function createRandomItem() {
   };
 }
 
-export function createRandomEachOption() {
+export function createRandomEachOption(): option {
   return {
     optionId: faker.number.int(),
     optionName: faker.commerce.productAdjective(),
-    price: faker.commerce.price({ dec: 0 }),
+    price: +faker.commerce.price({ dec: 0 }),
   };
 }
 
-export function createRandomEachOptionGroup() {
+export function createRandomEachOptionGroup(): optionGroup {
   return {
     optionGroupId: faker.number.int(),
     optionGroupName: faker.commerce.productAdjective(),
@@ -29,7 +30,7 @@ export function createRandomEachOptionGroup() {
   };
 }
 
-export function createRandomEachItem() {
+export function createRandomEachItem(): eachItem {
   return {
     itemId: 0,
     itemName: faker.commerce.product(),
@@ -41,6 +42,6 @@ export function createRandomEachItem() {
     imageUrl: faker.image.url(),
     information: faker.commerce.productDescription(),
     category: faker.commerce.productAdjective(),
-    price: faker.commerce.price({ dec: 0 }),
+    price: +faker.commerce.price({ dec: 0 }),
   };
 }
