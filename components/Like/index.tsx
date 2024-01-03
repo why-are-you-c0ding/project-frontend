@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 import {
   ItemBox2,
@@ -25,6 +25,7 @@ const Like = () => {
   const [deleteMutation] = myPageApi.useDeleteCartItemMutation();
   const [upMutation] = myPageApi.useUpCartItemMutation();
   const [downMutation] = myPageApi.useDownCartItemMutation();
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const { data: Mockdata, isLoading } =
     myPageApi.useGetAllCartQuery("getCartData");
@@ -131,6 +132,9 @@ const Like = () => {
     },
     [upMutation],
   );
+  const handleClick = (product: any) => {
+    console.log("Clicked on product:", product);
+  };
 
   return (
     <div>
@@ -142,14 +146,17 @@ const Like = () => {
 
         <ItemBox2>
           <ItemBoxInfo>
+            <div>전체 몇개</div>
             <div>상품정보</div>
             <div>수량</div>
             <div>주문금액</div>
             <div>배송 형태</div>
           </ItemBoxInfo>
           {[...Array(Mockdata?.cartLineItems.length)].map((v, index) => {
+            const product = Mockdata?.cartLineItems[index];
             return (
-              <ItemInfo>
+              <ItemInfo onClick={() => handleClick(product)}>
+                <div>체크박스</div>
                 <ItemInfoImg>
                   <img
                     src={Mockdata?.cartLineItems[index]?.imageUrl}
