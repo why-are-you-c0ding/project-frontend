@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 
 import {
+  BuyAllBtn,
   ItemBox2,
   ItemBoxInfo,
   ItemInfo,
@@ -25,7 +26,7 @@ const Like = () => {
   const [deleteMutation] = myPageApi.useDeleteCartItemMutation();
   const [upMutation] = myPageApi.useUpCartItemMutation();
   const [downMutation] = myPageApi.useDownCartItemMutation();
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState<any[]>([]);
 
   const { data: Mockdata, isLoading } =
     myPageApi.useGetAllCartQuery("getCartData");
@@ -35,7 +36,7 @@ const Like = () => {
   if (Mockdata) {
     item = Mockdata?.cartLineItems;
   }
-  console.log(Mockdata);
+  // console.log(Mockdata);
 
   const getItemLen = (item: cartLineItems[]) => {
     let ary: number[] = [];
@@ -132,8 +133,20 @@ const Like = () => {
     },
     [upMutation],
   );
-  const handleClick = (product: any) => {
-    console.log("Clicked on product:", product);
+  const handleCheckboxChange = (product: any, index: number) => {
+    const isSelected = selectedItems.some((item) => item.index === index);
+
+    if (isSelected) {
+      setSelectedItems((prevSelectedItems) =>
+        prevSelectedItems.filter((item) => item.index !== index),
+      );
+    } else {
+      setSelectedItems((prevSelectedItems) => [
+        ...prevSelectedItems,
+        { index, product },
+      ]);
+    }
+    console.log(selectedItems);
   };
 
   return (
@@ -155,8 +168,14 @@ const Like = () => {
           {[...Array(Mockdata?.cartLineItems.length)].map((v, index) => {
             const product = Mockdata?.cartLineItems[index];
             return (
-              <ItemInfo onClick={() => handleClick(product)}>
-                <div>체크박스</div>
+              <ItemInfo>
+                <div>
+                  <input
+                    type="checkbox"
+                    onChange={(e) => handleCheckboxChange(product, index)}
+                    checked={selectedItems.some((item) => item.index === index)}
+                  />
+                </div>
                 <ItemInfoImg>
                   <img
                     src={Mockdata?.cartLineItems[index]?.imageUrl}
@@ -208,6 +227,8 @@ const Like = () => {
             );
           })}
         </ItemBox2>
+        <BuyAllBtn>구매하기</BuyAllBtn>
+        <div>선택삭제</div>
       </Wrapper>
     </div>
   );
