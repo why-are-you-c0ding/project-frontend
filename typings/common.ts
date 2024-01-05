@@ -1,3 +1,1 @@
-export interface common {
-  isScrollBottom: boolean;
-}
+export interface common {}

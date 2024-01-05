@@ -1,19 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { EachItemWrapper } from "./styles";
+import { ItemCount, ItemDescription, ItemPrice } from "./styles";
 import {
-  Btn,
+  ButtonWrapper,
   BuyBtn,
   CountBtn,
-  Item,
-  Itemdetail,
-  ItemInfo,
   ItemName,
-  LeftSide,
-  MiddleSide,
+  ItemImgWrapper,
   Option,
-  RightSide,
+  ItemInfoWrapper,
   SelectBtn,
-  TotalPrice,
   Wrapper,
 } from "@pages/EachItem/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,27 +22,25 @@ import {
   addCartItem,
   approvalItemInfo,
   cartOptionGroup,
-  orderLineItem,
   orderOptionGroup,
 } from "@typings/items";
 
 const EachItem = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const isLogin = useAppSelector((state) => state.userInfo.isLogin);
   const [count, setCount] = useState(1);
+  const [price, setPrice] = useState(0);
   const [selectOptions, setSelectOptions] = useState<{ [key: number]: number }>(
     {},
   );
-  const [price, setPrice] = useState(0);
-
   const [addCartItemMutation] = itemsApi.useAddCartItemMutation();
-
-  const { data, error, isFetching } = itemsApi.useGetEachItemsQuery(
+  const { data, error, isLoading } = itemsApi.useGetEachItemsQuery(
     +pathname.slice(10),
   );
-  const navigate = useNavigate();
 
   const plusCount = () => {
+    if (count + 1 > 10000) return;
     setCount((prev) => prev + 1);
   };
 
@@ -73,7 +66,6 @@ const EachItem = () => {
     [data, selectOptions],
   );
 
-  // TODO: 장바구니 담기 버튼
   const onClickCart = useCallback(async () => {
     if (!isLogin) {
       toast.warning("로그인 해주세요.", {
@@ -108,11 +100,11 @@ const EachItem = () => {
 
       try {
         await addCartItemMutation(cartItemInfo);
-        toast.success("성공해써", {
+        toast.success("장바구니에 담았습니다!", {
           position: toast.POSITION.TOP_CENTER,
         });
       } catch (error) {
-        console.error("에러내용내용", error);
+        console.error("잠시 후에 다시 시도해 주세요.", error);
       }
 
       //장바구니에 담는 api 호출하고 장바구니로 이동하시겠습니까? 라는 모달출력
@@ -174,24 +166,27 @@ const EachItem = () => {
   }, [data]);
 
   return (
-    <EachItemWrapper>
-      <div>
-        {error && <div>새로고침하여 주세요.</div>}
+    <div>
+      {error && <div>새로고침하여 주세요.</div>}
 
-        {isFetching && <div>로딩중...</div>}
+      {isLoading && <div>로딩중...</div>}
 
-        {!error && !isFetching && data && (
-          <Wrapper>
-            <LeftSide>
-              <Item>
-                <img src={data.imageUrl} alt="상품 사진" />
-              </Item>
-            </LeftSide>
-            <MiddleSide />
-            <RightSide>
-              <Itemdetail>
-                <ItemName>{data.itemName}</ItemName>
-              </Itemdetail>
+      {data && (
+        <Wrapper>
+          <ItemImgWrapper>
+            <img src={data.imageUrl} alt="상품 사진" />
+          </ItemImgWrapper>
+          <ItemInfoWrapper>
+            <ItemName>
+              <div>
+                <span>{data.itemName}</span>
+                <span>({data.category})</span>
+              </div>
+            </ItemName>
+
+            <div>
+              <ItemDescription>{data.information}</ItemDescription>
+
               <Option>
                 <div>
                   {data.optionGroups.map((optionGroup, optionGroupIdx) => (
@@ -203,15 +198,7 @@ const EachItem = () => {
                       }
                     >
                       {optionGroup.options.map((option, optionIdx) => (
-                        <option
-                          key={option.optionId}
-                          value={optionIdx}
-
-                          // onClick={() => {
-                          //   onChangeSelect(optionGroupIdx, optionIdx);
-                          //   console.log("여기 실행");
-                          // }}
-                        >
+                        <option key={option.optionId} value={optionIdx}>
                           {option.optionName.length > 12
                             ? `${option.optionName.slice(0, 12)}...`
                             : option.optionName}{" "}
@@ -223,31 +210,32 @@ const EachItem = () => {
                 </div>
               </Option>
 
-              <ItemInfo>상품 설명: {data.information}</ItemInfo>
-              <ItemInfo>카테고리: {data.category}</ItemInfo>
+              <ItemPrice>총 가격: {price}원</ItemPrice>
+              <ItemCount>
+                <span>수량:</span>
+                <CountBtn>
+                  <button onClick={minusCount}>-</button>
+                  <span>{count}</span>
+                  <button onClick={plusCount}>+</button>
+                </CountBtn>
+              </ItemCount>
 
-              <TotalPrice>총 가격: {price}원</TotalPrice>
-
-              <Btn>
+              <ButtonWrapper>
                 <div>
-                  <CountBtn>
-                    <button onClick={minusCount}>-</button>
-                    <span>{count}</span>
-                    <button onClick={plusCount}>+</button>
-                  </CountBtn>
                   <SelectBtn onClick={onClickCart}>
                     <FontAwesomeIcon icon={faBasketShopping} />
                     <span>장바구니</span>
                   </SelectBtn>
                 </div>
-
-                <BuyBtn onClick={onClickBuy}>구매</BuyBtn>
-              </Btn>
-            </RightSide>
-          </Wrapper>
-        )}
-      </div>
-    </EachItemWrapper>
+                <div>
+                  <BuyBtn onClick={onClickBuy}>구매</BuyBtn>
+                </div>
+              </ButtonWrapper>
+            </div>
+          </ItemInfoWrapper>
+        </Wrapper>
+      )}
+    </div>
   );
 };
 export default EachItem;
