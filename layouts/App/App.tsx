@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React from "react";
 import { Route, Routes } from "react-router";
 import loadable from "@loadable/component";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,9 +6,6 @@ import StatusBar from "@components/UI/StatusBar";
 import { BrowserRouter } from "react-router-dom";
 import { NoneHeader } from "@layouts/App/styles";
 import Scrollbars from "react-custom-scrollbars";
-import { useDispatch } from "react-redux";
-import { useAppDispatch } from "@redux/hooks";
-import { onChangeScrollTrue } from "@redux/reducers/commonSlice";
 
 const SignUp = loadable(() => import("@pages/SignUp"));
 const LogIn = loadable(() => import("@pages/LogIn"));
@@ -36,16 +33,9 @@ const SellOrderList = loadable(
 );
 
 const App = () => {
-  const dispatch = useAppDispatch();
-  const onScroll = useCallback((values: { top: number }) => {
-    if (values.top > 0.95) {
-      dispatch(onChangeScrollTrue());
-    }
-  }, []);
-
   return (
     <BrowserRouter>
-      <Scrollbars onScrollFrame={onScroll}>
+      <Scrollbars>
         <StatusBar />
         <NoneHeader>
           <Routes>
