@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Wrapper,
   TitleContainer,
@@ -12,37 +12,27 @@ import {
 import { Link } from "react-router-dom";
 import { itemsApi } from "@api/itemsApi";
 import { item } from "@typings/items";
-import { useAppDispatch, useAppSelector } from "@redux/hooks";
-import { onChangeScrollFalse } from "@redux/reducers/commonSlice";
-import { throttle } from "lodash";
+import { useInView } from "react-intersection-observer";
 
 const MainItem = () => {
   const [page, setPage] = useState(1);
-  const { data, error, isFetching } = itemsApi.useGetAllItemsQuery(page);
+  const { data, error, isLoading } = itemsApi.useGetAllItemsQuery(page);
   const [items, setItems] = useState<item[]>([]);
   const [finalPage, setFinalPage] = useState(false);
-
-  const { isScrollBottom } = useAppSelector((state) => state.commonSlice);
-  const dispatch = useAppDispatch();
+  const { ref, inView } = useInView();
 
   useEffect(() => {
-    throttle(() => {
-      if (isScrollBottom && !finalPage) {
-        setPage((prev) => prev + 1);
-        dispatch(onChangeScrollFalse());
-      }
-    }, 200);
-  }, [isScrollBottom, finalPage]);
+    if (inView && !finalPage) {
+      setPage((prev) => prev + 1);
+    }
+  }, [inView, finalPage]);
 
   useEffect(() => {
     if (data) {
       setItems((prev) => [...prev, ...data.items]);
       setFinalPage(data.finalPage);
-      dispatch(onChangeScrollFalse());
     }
   }, [data]);
-
-  console.log(items.length);
 
   return (
     <Wrapper>
@@ -52,13 +42,17 @@ const MainItem = () => {
 
       {error && <div>새로고침하여 주세요.</div>}
 
-      {isFetching && <div>로딩중...</div>}
+      {isLoading && <div>로딩중...</div>}
 
-      {!error && !isFetching && (
+      {data && (
         <ItemContainer>
-          {items?.map((item: item) => {
+          {items?.map((item: item, index) => {
             return (
-              <Link to={`/eachitem/${item.itemId}`} key={item.itemId}>
+              <Link
+                to={`/eachitem/${item.itemId}`}
+                key={item.itemId}
+                ref={items.length - 5 === index ? ref : null}
+              >
                 <ItemBox>
                   <ItemImg>
                     <img src={item.imageUrl} alt={"상품 사진"} />
