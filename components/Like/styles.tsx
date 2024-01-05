@@ -209,6 +209,21 @@ export const InfoTop = styled.div`
   }
 `;
 
+export const BuyAllBtn = styled.div`
+  width: 10rem;
+  height: 2.8rem;
+  background-color: black;
+  color: white;
+  border: transparent;
+  border-radius: 10px;
+  text-align: center;
+  outline: none;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 auto;
+  cursor: pointer;
+`;
+
 export const InfoBottom = styled.div`
   display: flex;
   align-items: center;
