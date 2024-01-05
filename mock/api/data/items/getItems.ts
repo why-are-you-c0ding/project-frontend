@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { eachItem, option, optionGroup } from "@typings/items";
+import { categoryList } from "@redux/reducers/createItemsSlice";
 
 export function createRandomItem() {
   return {
@@ -8,7 +9,7 @@ export function createRandomItem() {
     shopName: faker.company.name(),
     basicPrice: faker.commerce.price({ dec: 0 }),
     imageUrl: faker.image.url(),
-    category: faker.commerce.productAdjective(),
+    category: categoryList[faker.number.int({ min: 0, max: 17 })],
   };
 }
 
@@ -41,7 +42,7 @@ export function createRandomEachItem(): eachItem {
     }),
     imageUrl: faker.image.url(),
     information: faker.commerce.productDescription(),
-    category: faker.commerce.productAdjective(),
+    category: categoryList[faker.number.int({ min: 0, max: 17 })],
     price: +faker.commerce.price({ dec: 0 }),
   };
 }
