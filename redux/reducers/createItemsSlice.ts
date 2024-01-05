@@ -1,6 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ChangeInfo, SellOption } from "@typings/sellerPages";
 
+export const categoryList = [
+  "Food",
+  "Health",
+  "Electronics",
+  "Sports & Outdoors",
+  "Baby",
+  "Home",
+  "Household Essentials",
+  "Clothing",
+  "Personal Care",
+  "Toys",
+  "Beauty",
+  "Shop by Brand",
+  "Home Improvement",
+  "Industrial & Scientific",
+  "Patio & Garden",
+  "Pets",
+  "Arts Crafts & Sewing",
+  "Premium Beauty",
+];
+
 const initialState: SellOption = {
   optionTableList: [],
   isTable: false,
@@ -14,26 +35,7 @@ const initialState: SellOption = {
   // itemInfos: itemInfos,
 
   // 카테고리는 항상 고정
-  categoryList: [
-    "Food",
-    "Health",
-    "Electronics",
-    "Sports & Outdoors",
-    "Baby",
-    "Home",
-    "Household Essentials",
-    "Clothing",
-    "Personal Care",
-    "Toys",
-    "Beauty",
-    "Shop by Brand",
-    "Home Improvement",
-    "Industrial & Scientific",
-    "Patio & Garden",
-    "Pets",
-    "Arts Crafts & Sewing",
-    "Premium Beauty",
-  ],
+  categoryList: categoryList,
 };
 
 export const createItemsSlice = createSlice({
