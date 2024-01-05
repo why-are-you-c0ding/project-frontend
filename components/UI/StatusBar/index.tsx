@@ -15,8 +15,8 @@ import {
 } from "@components/UI/StatusBar/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
-import Menu from "@components/Menu";
-import MenuList from "@components/MenuList";
+import Menu from "@components/UI/Menu";
+import MenuList from "@components/UI/MenuList";
 import { Link, useLocation } from "react-router-dom";
 import useInput from "@hooks/useInput";
 import { ToastContainer } from "react-toastify";
