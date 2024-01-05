@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { TopHeader } from "@pages/MyPage/styles";
-import ReponsiveBar from "@components/ReponsiveBar";
+import ReponsiveBar from "@components/UI/ReponsiveBar";
 import {
   EachWrapper,
   Image,

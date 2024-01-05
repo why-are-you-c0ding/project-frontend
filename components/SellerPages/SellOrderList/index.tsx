@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import fetcher from "@utils/fetcher";
-import ReponsiveBar from "@components/ReponsiveBar";
+import ReponsiveBar from "@components/UI/ReponsiveBar";
 import {
   CartItem,
   InfoBottom,

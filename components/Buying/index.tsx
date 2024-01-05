@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ReponsiveBar from "@components/ReponsiveBar";
+import ReponsiveBar from "@components/UI/ReponsiveBar";
 import { TopHeader } from "@pages/MyPage/styles";
 import {
   CartItem,
