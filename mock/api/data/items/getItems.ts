@@ -2,10 +2,10 @@ import { faker } from "@faker-js/faker";
 import { eachItem, option, optionGroup } from "@typings/items";
 import { categoryList } from "@redux/reducers/createItemsSlice";
 
-export function createRandomItem() {
+export function createRandomItem(word = "") {
   return {
     itemId: faker.number.int(),
-    itemName: faker.commerce.product(),
+    itemName: faker.commerce.product() + ` ${word}`,
     shopName: faker.company.name(),
     basicPrice: faker.commerce.price({ dec: 0 }),
     imageUrl: faker.image.url(),
