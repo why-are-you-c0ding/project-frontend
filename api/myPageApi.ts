@@ -27,6 +27,18 @@ export const myPageApi = createApi({
         };
       },
     }),
+    deleteSelectedCartItem: builder.mutation({
+      query: ({ cartLineItemId }: { cartLineItemId: number }) => {
+        return {
+          url: "/carts/cart-line-items",
+          method: "delete",
+          body: { cartLineItemId },
+          headers: {
+            Authorization: `Bearer ${getCookie("JSESSIONID")}`,
+          },
+        };
+      },
+    }),
     downCartItem: builder.mutation({
       query: ({ cartLineItemId, count }: CartItemInfo) => ({
         url: "/carts/cart-line-items",
@@ -42,6 +54,16 @@ export const myPageApi = createApi({
         url: "/carts/cart-line-items",
         method: "PATCH",
         body: { cartLineItemId, count },
+        headers: {
+          Authorization: `Bearer ${getCookie("JSESSIONID")}`,
+        },
+      }),
+    }),
+    buyAllLikeItem: builder.mutation({
+      query: ({ selectedItems }: any) => ({
+        url: "/carts/cart-line-items",
+        method: "POST",
+        body: { selectedItems },
         headers: {
           Authorization: `Bearer ${getCookie("JSESSIONID")}`,
         },
