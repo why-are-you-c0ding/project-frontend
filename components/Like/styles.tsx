@@ -208,6 +208,14 @@ export const InfoTop = styled.div`
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   }
 `;
+export const EachDeleteBtn = styled.div`
+  width: 7rem;
+  height: 2rem;
+  border: 1px solid #d8d8d8;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 15px;
+`;
 
 export const BuyAllBtn = styled.div`
   width: 10rem;
@@ -216,10 +224,12 @@ export const BuyAllBtn = styled.div`
   color: white;
   border: transparent;
   border-radius: 10px;
-  text-align: center;
   outline: none;
   font-size: 1rem;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
   cursor: pointer;
 `;
