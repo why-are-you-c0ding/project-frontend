@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback, useState } from "react";
 import { TopHeader } from "@pages/MyPage/styles";
-import ReponsiveBar from "@components/ReponsiveBar";
+import ReponsiveBar from "@components/UI/ReponsiveBar";
 import axios from "axios";
 import useInput from "@hooks/useInput";
 import { makeStock } from "@utils/makeStock";

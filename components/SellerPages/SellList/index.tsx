@@ -1,5 +1,5 @@
 import React from "react";
-import ReponsiveBar from "@components/ReponsiveBar";
+import ReponsiveBar from "@components/UI/ReponsiveBar";
 import {
   CartItem,
   InfoBottom,

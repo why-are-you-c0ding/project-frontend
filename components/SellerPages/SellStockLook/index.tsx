@@ -1,6 +1,6 @@
 import React from "react";
 import { TopHeader } from "@pages/MyPage/styles";
-import ReponsiveBar from "@components/ReponsiveBar";
+import ReponsiveBar from "@components/UI/ReponsiveBar";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
 import qs from "qs";

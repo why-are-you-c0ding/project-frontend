@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from "react";
-import { CreateModal } from "@components/Menu/styles";
+import { CreateModal } from "@components/UI/Menu/styles";
 
 interface Props {
   show: boolean;

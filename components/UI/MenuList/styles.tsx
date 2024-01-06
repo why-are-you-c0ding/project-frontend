@@ -43,7 +43,7 @@ export const List = styled.div`
     }
   }
 
-  & a {
+  & span {
     text-decoration: none;
     color: inherit;
   }

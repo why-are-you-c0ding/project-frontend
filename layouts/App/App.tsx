@@ -68,6 +68,7 @@ const App = () => {
             />
             <Route path="/approval" element={<Approval />} />
             <Route path="/searchitem" element={<SearchItem />} />
+            <Route path="/searchitem/:word" element={<SearchItem />} />
           </Routes>
         </NoneHeader>
       </Scrollbars>

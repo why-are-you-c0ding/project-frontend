@@ -1,5 +1,5 @@
 import React, { CSSProperties, FC, useEffect } from "react";
-import { Back, Title, Wrapper } from "@components/ReponsiveBar/styles";
+import { Back, Title, Wrapper } from "@components/UI/ReponsiveBar/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";

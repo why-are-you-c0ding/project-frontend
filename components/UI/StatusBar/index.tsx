@@ -1,4 +1,5 @@
 import React, {
+  ChangeEvent,
   FC,
   useCallback,
   useEffect,
@@ -15,11 +16,10 @@ import {
 } from "@components/UI/StatusBar/styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
-import Menu from "@components/Menu";
-import MenuList from "@components/MenuList";
+import Menu from "@components/UI/Menu";
+import MenuList from "@components/UI/MenuList";
 import { Link, useLocation } from "react-router-dom";
-import useInput from "@hooks/useInput";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { memberApi } from "@api/memberApi";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { login, logout } from "@redux/reducers/userInfoSlice";
@@ -33,7 +33,7 @@ interface Props {
 
 const StatusBar: FC<Props> = ({ sideBar }) => {
   const [menu, setMenu] = useState(false);
-  const [word, onChangeWord, setWord] = useInput("");
+  const [word, setWord] = useState("");
   const isLogin = useAppSelector((state) => state.userInfo.isLogin);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -52,6 +52,47 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
     removeCookie("isLogin");
     navigate("/main");
   }, [isLogin]);
+
+  const onChangeWord = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+
+    if (inputValue === "") {
+      setWord(inputValue);
+      return;
+    }
+
+    if (!/^[ㄱ-ㅎ가-힣a-zA-Z0-9\s]+$/.test(inputValue)) {
+      toast.warning("특수 문자는 입력하지 못합니다.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+    if (inputValue.length > 20) {
+      toast.warning("입력 글자는 20자를 초과할 수 없습니다.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+
+    setWord(inputValue);
+  };
+
+  const onClickSearch = useCallback(() => {
+    if (!word) {
+      toast.warning("단어를 입력해주세요.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+
+    navigate(`/searchitem/${word}`);
+  }, [word]);
+
+  const onKeyDownWord = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      onClickSearch();
+    }
+  };
 
   useEffect(() => {
     const windowResize = () => {
@@ -116,24 +157,20 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
             <a href="/">WAYC</a>
           </Name>
           <div>
-            {/*모두 완성되면 하나 지우면됨 구매페이지*/}
-            <span className="hidden">
-              <Link to="/ProductPage">Shop</Link>
-            </span>
             <span>
               <label>
-                <input type="text" value={word} onChange={onChangeWord} />
-                <Link
-                  to={"/searchitem"}
-                  state={{
-                    word: word,
-                  }}
-                >
+                <input
+                  type="text"
+                  value={word}
+                  onChange={onChangeWord}
+                  onKeyDown={onKeyDownWord}
+                />
+                <div onClick={onClickSearch}>
                   <FontAwesomeIcon
                     className={"icon"}
                     icon={faMagnifyingGlass}
                   />
-                </Link>
+                </div>
               </label>
             </span>
             <span className="faBars" onClick={onClickBar}>
