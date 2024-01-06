@@ -10,6 +10,13 @@ export const getItems = [
     const page = req.url.searchParams.get("page")!;
     const keyword = req.url.searchParams.get("keyword")!;
 
+    if (keyword === "없음") {
+      return res(
+        ctx.status(200),
+        ctx.json("검색하려는 상품이 존재하지 않습니다."),
+      );
+    }
+
     const tempItems = faker.helpers.multiple(() => createRandomItem(keyword), {
       count: 20,
     });

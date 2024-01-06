@@ -14,6 +14,7 @@ import { item } from "@typings/items";
 import { useInView } from "react-intersection-observer";
 import { itemsApi } from "@api/itemsApi";
 import { Link, useLocation } from "react-router-dom";
+import NullData from "@components/NullData";
 
 const SearchItem = () => {
   const path = useLocation();
@@ -34,7 +35,7 @@ const SearchItem = () => {
   }, [inView, finalPage]);
 
   useEffect(() => {
-    if (data) {
+    if (data && typeof data !== "string") {
       setItems((prev) => [...prev, ...data.items]);
       setFinalPage(data.finalPage);
     }
@@ -44,6 +45,10 @@ const SearchItem = () => {
     setPage(1);
     setItems([]);
   }, [path]);
+  //
+  // if (typeof data === "string") {
+  //   return <div>검색 결과가 없습니다.</div>;
+  // }
 
   return (
     <Wrapper>
@@ -55,7 +60,9 @@ const SearchItem = () => {
 
       {isLoading && <div>로딩중...</div>}
 
-      {data && (
+      {typeof data === "string" && <NullData />}
+
+      {typeof data !== "string" && (
         <ItemContainer>
           {items?.map((item: item, index) => {
             return (
