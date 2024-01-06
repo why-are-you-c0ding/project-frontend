@@ -217,6 +217,8 @@ export const EachDeleteBtn = styled.div`
   font-size: 15px;
 `;
 
+
+
 export const BuyAllBtn = styled.div`
   width: 10rem;
   height: 2.8rem;
@@ -230,21 +232,6 @@ export const BuyAllBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
-  cursor: pointer;
-`;
-
-export const BuyAllBtn = styled.div`
-  width: 10rem;
-  height: 2.8rem;
-  background-color: black;
-  color: white;
-  border: transparent;
-  border-radius: 10px;
-  text-align: center;
-  outline: none;
-  font-size: 1rem;
-  font-weight: bold;
   margin: 0 auto;
   cursor: pointer;
 `;
