@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 export const Wrapper = styled.section`
   @media (max-width: 769px) {
@@ -61,29 +62,38 @@ export const ItemBox = styled.div`
 export const ItemBox2 = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: 1rem;
 `;
 
 export const ItemBoxInfo = styled.div`
   display: grid;
   grid-template-columns:
-    minmax(50px, 4fr) minmax(50px, 1fr) minmax(50px, 1fr) minmax(50px, 1fr)
-    minmax(20px, 0.2fr);
+    minmax(10px, 0.5fr) minmax(5px, 0.2fr) minmax(50px, 1.5fr) minmax(
+      50px,
+      0.5fr
+    )
+    minmax(50px, 0.5fr) minmax(50px, 0.5fr) minmax(10px, 0.3fr);
   align-items: center;
   justify-items: center;
   height: 3rem;
   border-top: 3px solid black;
   border-bottom: 1px solid black;
+  font-size: 12px;
 `;
 
 export const ItemInfo = styled.div`
   display: grid;
   grid-template-columns:
-    minmax(50px, 4fr) minmax(50px, 1fr) minmax(50px, 1fr) minmax(50px, 1fr)
-    minmax(20px, 0.2fr);
+    minmax(10px, 0.5fr) minmax(5px, 0.2fr) minmax(50px, 1.5fr) minmax(
+      50px,
+      0.5fr
+    )
+    minmax(50px, 0.5fr) minmax(50px, 0.5fr) minmax(10px, 0.3fr);
   height: 9rem;
   border-bottom: 2px solid #f5f5f5;
   align-items: center;
   justify-items: center;
+  font-size: 14px;
 
   &:hover {
     background-color: #eeeeee;
@@ -117,10 +127,12 @@ export const ItemInfoTitle = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding-left: 10px;
 `;
 
 export const ItemInfoTitleName = styled.div`
   font-weight: bold;
+  font-size: 16px;
 `;
 export const ItemInfoTitleOption = styled.div`
   font-size: 0.9rem;
@@ -157,7 +169,14 @@ export const ItemInfoPrice = styled.div``;
 export const ItemInfoSys = styled.div``;
 
 export const ItemInfoDeleteBtn = styled.div`
-  color: #d0d0d0;
+  width: 5rem;
+  height: 2rem;
+  border: 1px solid #d8d8d8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 13px;
 `;
 
 export const InfoTop = styled.div`
@@ -207,6 +226,37 @@ export const InfoTop = styled.div`
 
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   }
+`;
+export const EachDeleteBtn = styled.button`
+  width: 7rem;
+  height: 2rem;
+  border: 1px solid #d8d8d8;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 15px;
+  margin-top: 5px;
+  ${(props) =>
+    props.disabled &&
+    css`
+      opacity: 0.5;
+    `};
+`;
+
+export const BuyAllBtn = styled.button`
+  width: 10rem;
+  height: 2.8rem;
+  background-color: black;
+  color: white;
+  border: transparent;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  cursor: pointer;
 `;
 
 export const InfoBottom = styled.div`
