@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 
 import {
   BuyAllBtn,
+  EachDeleteBtn,
   ItemBox2,
   ItemBoxInfo,
   ItemInfo,
@@ -226,9 +227,9 @@ const Like = () => {
               </ItemInfo>
             );
           })}
+          <EachDeleteBtn>선택삭제</EachDeleteBtn>
         </ItemBox2>
         <BuyAllBtn>구매하기</BuyAllBtn>
-        <div>선택삭제</div>
       </Wrapper>
     </div>
   );
