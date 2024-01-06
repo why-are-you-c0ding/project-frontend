@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { SearchBox, TitleContainer } from "@pages/SearchItem/styles";
-
 import {
   ItemBox,
   ItemContainer,
@@ -9,85 +7,78 @@ import {
   ItemInfo,
   ItemName,
   ItemPrice,
+  TitleContainer,
   Wrapper,
 } from "@components/Items/MainItem/styles";
-import NullData from "@components/NullData";
-import { Link, useLocation } from "react-router-dom";
-import useSWRInfinite from "swr/infinite";
-import { ListData } from "@typings/db";
-import fetcher from "@utils/fetcher";
+import { item } from "@typings/items";
 import { useInView } from "react-intersection-observer";
-
-interface state {
-  ["word"]: string;
-}
+import { itemsApi } from "@api/itemsApi";
+import { Link, useLocation } from "react-router-dom";
 
 const SearchItem = () => {
-  const location = useLocation();
+  const path = useLocation();
 
-  console.log(location.state.word);
-
-  const {
-    data: SearchData,
-    size,
-    setSize,
-  } = useSWRInfinite<ListData>(
-    (index) =>
-      `https://waycabvav.shop/items/search?keyword=${location.state.word}&page=${index}`,
-    fetcher,
-  );
-
-  let SearchList: any = [];
-
-  if (SearchData) {
-    for (let i = 0; i < SearchData?.length; i++) {
-      SearchList.push(SearchData[i].items);
-    }
-  }
-
-  SearchList = SearchList.flat();
-
-  const [ref, inView] = useInView({
-    threshold: [0, 0.25, 0.5, 0.75, 1],
+  const [page, setPage] = useState(1);
+  const [items, setItems] = useState<item[]>([]);
+  const [finalPage, setFinalPage] = useState(false);
+  const { ref, inView } = useInView();
+  const { data, error, isLoading } = itemsApi.useGetSearchItemsQuery({
+    word: decodeURI(path.pathname.slice(12)),
+    page,
   });
 
   useEffect(() => {
-    // 사용자가 마지막 요소를 보고 있고, 로딩 중이 아니라면
-    if (inView) {
-      setSize((prevState) => prevState + 1);
+    if (inView && !finalPage) {
+      setPage((prev) => prev + 1);
     }
-  }, [inView]);
+  }, [inView, finalPage]);
+
+  useEffect(() => {
+    if (data) {
+      setItems((prev) => [...prev, ...data.items]);
+      setFinalPage(data.finalPage);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    setPage(1);
+    setItems([]);
+  }, [path]);
 
   return (
     <Wrapper>
-      {/*<StatusBar />*/}
+      <TitleContainer>
+        <h2>검색결과</h2>
+      </TitleContainer>
 
-      <h2>검색 결과</h2>
+      {error && <div>새로고침하여 주세요.</div>}
 
-      {SearchList.length === 0 && <NullData />}
-      <ItemContainer>
-        {SearchData &&
-          SearchList &&
-          [...Array(SearchList?.length)].map((e, ind) => {
-            const MainId = SearchList[ind].itemId;
+      {isLoading && <div>로딩중...</div>}
+
+      {data && (
+        <ItemContainer>
+          {items?.map((item: item, index) => {
             return (
-              <Link to={`/shop/${MainId}`} key={ind}>
-                <ItemBox ref={ref}>
+              <Link
+                to={`/eachitem/${item.itemId}`}
+                key={item.itemId}
+                ref={items.length - 5 === index ? ref : null}
+              >
+                <ItemBox>
                   <ItemImg>
-                    <img
-                      src={SearchList[ind].imageUrl}
-                      alt={SearchList[ind].itemName}
-                    />
+                    <img src={item.imageUrl} alt={"상품 사진"} />
                   </ItemImg>
                   <ItemInfo>
-                    <ItemName>{SearchList[ind].itemName}</ItemName>
-                    <ItemPrice>{SearchList[ind].basicPrice}원</ItemPrice>
+                    <ItemName>{item.itemName}</ItemName>
+                    <span>{item.category}</span>
+                    <ItemPrice>{item.basicPrice}원</ItemPrice>
                   </ItemInfo>
                 </ItemBox>
               </Link>
             );
           })}
-      </ItemContainer>
+        </ItemContainer>
+      )}
     </Wrapper>
   );
 };

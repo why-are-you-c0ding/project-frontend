@@ -25,8 +25,10 @@ export const itemsApi = createApi({
       },
     }),
     getSearchItems: builder.query({
-      query: ({ word, page }: { word: string; page: number }) =>
-        `/items/search?keyword=${word}&page=${page}`,
+      query: ({ word, page }: { word: string; page: number }) => ({
+        url: "/items/search",
+        params: { keyword: word, page },
+      }),
     }),
     addCartItem: builder.mutation({
       query: (cartItemInfo: addCartItem) => ({
