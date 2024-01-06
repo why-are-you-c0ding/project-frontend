@@ -22,12 +22,14 @@ import NullData from "@components/NullData";
 import { cartLineItems, ICartData } from "@typings/db";
 import { myPageApi } from "@api/myPageApi";
 import { toast } from "react-toastify";
+import { CartLineItem } from "@typings/myPage";
 
 const Like = () => {
   const [deleteMutation] = myPageApi.useDeleteCartItemMutation();
   const [upMutation] = myPageApi.useUpCartItemMutation();
   const [downMutation] = myPageApi.useDownCartItemMutation();
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
+  const [selectAllCheckbox, setSelectAllCheckbox] = useState(false);
 
   const { data: Mockdata, isLoading } =
     myPageApi.useGetAllCartQuery("getCartData");
@@ -37,7 +39,6 @@ const Like = () => {
   if (Mockdata) {
     item = Mockdata?.cartLineItems;
   }
-  // console.log(Mockdata);
 
   const getItemLen = (item: cartLineItems[]) => {
     let ary: number[] = [];
@@ -147,7 +148,38 @@ const Like = () => {
         { index, product },
       ]);
     }
+
+    const allChecked = Mockdata?.cartLineItems?.length === selectedItems.length;
+    setSelectAllCheckbox(allChecked);
+  };
+
+  const handleDeleteClick = (): void => {
     console.log(selectedItems);
+  };
+
+  const onBuyItemClick = (): void => {
+    if (selectedItems.length === 0) {
+      toast.warning("구매할 상품을 선택해주세요", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      return;
+    }
+    console.log(selectedItems);
+  };
+  const toggleSelectAllCheckbox = (): void => {
+    setSelectAllCheckbox((prev: boolean) => !prev);
+
+    const allProducts = Mockdata?.cartLineItems || [];
+    const allSelected = allProducts.map(
+      (product: CartLineItem, index: number) => ({
+        index,
+        product,
+      }),
+    );
+
+    setSelectedItems((prevSelectedItems) =>
+      prevSelectedItems.length === allSelected.length ? [] : allSelected,
+    );
   };
 
   return (
@@ -160,17 +192,26 @@ const Like = () => {
 
         <ItemBox2>
           <ItemBoxInfo>
-            <div>전체 몇개</div>
-            <div>상품정보</div>
+            <div>전체 {Mockdata?.cartLineItems.length}개</div>
+            <div>
+              <input
+                type="checkbox"
+                onChange={toggleSelectAllCheckbox}
+                checked={selectAllCheckbox}
+              />
+            </div>
+            <div>상품명(옵션)</div>
             <div>수량</div>
             <div>주문금액</div>
+            <div>주문관리</div>
             <div>배송 형태</div>
           </ItemBoxInfo>
           {[...Array(Mockdata?.cartLineItems.length)].map((v, index) => {
             const product = Mockdata?.cartLineItems[index];
             return (
-              <ItemInfo>
-                <div>
+              <ItemInfo key={index}>
+                <div>{index + 1}</div>
+                <div key={`checkbox-${index}`}>
                   <input
                     type="checkbox"
                     onChange={(e) => handleCheckboxChange(product, index)}
@@ -213,7 +254,6 @@ const Like = () => {
                   </button>
                 </ItemInfoCount>
                 <ItemInfoPrice>{getTotalPrice(item, index)}원</ItemInfoPrice>
-                <ItemInfoSys>택배 배송</ItemInfoSys>
                 <ItemInfoDeleteBtn>
                   <button
                     onClick={(event) => {
@@ -221,15 +261,21 @@ const Like = () => {
                       onDeleteItem(event, Mockdata?.cartLineItems[index]?.id);
                     }}
                   >
-                    X
+                    삭제하기
                   </button>
                 </ItemInfoDeleteBtn>
+                <ItemInfoSys>택배 배송</ItemInfoSys>
               </ItemInfo>
             );
           })}
-          <EachDeleteBtn>선택삭제</EachDeleteBtn>
+          <EachDeleteBtn
+            disabled={selectedItems.length === 0}
+            onClick={handleDeleteClick}
+          >
+            선택 삭제
+          </EachDeleteBtn>
         </ItemBox2>
-        <BuyAllBtn>구매하기</BuyAllBtn>
+        <BuyAllBtn onClick={onBuyItemClick}>구매하기</BuyAllBtn>
       </Wrapper>
     </div>
   );
