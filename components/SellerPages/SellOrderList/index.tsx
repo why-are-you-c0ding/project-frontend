@@ -11,7 +11,7 @@ import {
 import { TopHeader } from "@pages/MyPage/styles";
 import { SubHeader } from "@components/SellerPages/SellList/style";
 import { Link } from "react-router-dom";
-import NullData from "@components/NullData";
+import NullData from "@components/UI/NullData";
 import useSWRInfinite from "swr/infinite";
 import { useInView } from "react-intersection-observer";
 import { orderData } from "@typings/db";

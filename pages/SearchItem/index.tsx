@@ -14,7 +14,7 @@ import { item } from "@typings/items";
 import { useInView } from "react-intersection-observer";
 import { itemsApi } from "@api/itemsApi";
 import { Link, useLocation } from "react-router-dom";
-import NullData from "@components/NullData";
+import NullData from "@components/UI/NullData";
 
 const SearchItem = () => {
   const path = useLocation();

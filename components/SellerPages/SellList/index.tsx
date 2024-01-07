@@ -11,7 +11,7 @@ import { TopHeader } from "@pages/MyPage/styles";
 import { SubHeader } from "@components/SellerPages/SellList/style";
 import useSWR from "swr";
 import fetcher from "@utils/fetcher";
-import NullData from "@components/NullData";
+import NullData from "@components/UI/NullData";
 import { ListData } from "@typings/db";
 
 const SellList = () => {

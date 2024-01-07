@@ -18,7 +18,7 @@ import {
 } from "@components/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 import ReponsiveBar from "@components/UI/ReponsiveBar";
-import NullData from "@components/NullData";
+import NullData from "@components/UI/NullData";
 import { cartLineItems, ICartData } from "@typings/db";
 import { myPageApi } from "@api/myPageApi";
 import { toast } from "react-toastify";

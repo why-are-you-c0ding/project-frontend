@@ -11,7 +11,7 @@ import useSWRInfinite from "swr/infinite";
 import fetcher from "@utils/fetcher";
 import { Wrapper } from "@components/Buying/styles";
 import { useInView } from "react-intersection-observer";
-import NullData from "@components/NullData";
+import NullData from "@components/UI/NullData";
 import { Link } from "react-router-dom";
 import { IOrderData, orders } from "@typings/db";
 import { myPageApi } from "@api/myPageApi";
