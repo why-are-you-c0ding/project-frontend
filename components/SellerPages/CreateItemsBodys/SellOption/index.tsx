@@ -142,7 +142,7 @@ const SellOption = () => {
       <h3>옵션</h3>
       <ItemInfoWrapper>
         <ItemInfo>
-          <ItemTitle>옵션</ItemTitle>
+          <ItemTitle>옵션 입력</ItemTitle>
           <Explain>
             옵션은 필수로 입력해주세요.(최대 3개 입력 가능)
             <br /> 옵션은 ","을 기준으로 나눠주세요.

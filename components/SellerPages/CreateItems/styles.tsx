@@ -8,23 +8,18 @@ export const Wrapper = styled.section`
   h3 {
     font-size: 1.1rem;
   }
+
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 `;
 
 export const Image = styled.section`
-  //border: 1px solid red;
-  //height: auto;
-
   & > div {
-    margin-top: 1rem;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    @media (max-width: 769px) {
-      margin-top: 16rem;
-    }
 
     & > span {
       display: flex;
@@ -35,13 +30,11 @@ export const Image = styled.section`
 
     & > div:last-of-type {
       margin-top: 1rem;
+      padding: 0.5rem 0;
 
       display: flex;
 
-      padding: 0.5rem 0;
-
       & > label {
-        padding: 0.4rem 1rem;
         background-color: cornflowerblue;
         color: white;
         border: 1px solid rgb(77, 77, 77);
@@ -56,10 +49,6 @@ export const Image = styled.section`
           background-color: #d63535;
           border: none;
         }
-      }
-
-      #file {
-        display: none;
       }
     }
   }
@@ -91,10 +80,6 @@ export const DragOver = styled.div`
 export const OptionInfo = styled.section`
   display: flex;
   flex-direction: column;
-
-  & > h2 {
-    margin-bottom: 0.5rem;
-  }
 `;
 
 export const ItemInfo = styled.div`
@@ -140,6 +125,11 @@ export const ItemInfo = styled.div`
   & input {
     width: 100%;
   }
+
+  @media (max-width: 769px) {
+    width: 95%;
+    margin-top: 1rem;
+  }
 `;
 
 export const ItemTitle = styled.header`
@@ -156,15 +146,9 @@ export const Textarea = styled.textarea`
   border: 1px solid #ebebeb;
   border-radius: 10px;
 
-  //font-size: 0.8rem;
-
   :focus {
     outline: none;
     border: 2px solid black;
-  }
-
-  ::placeholder {
-    //font-size: 0.8rem;
   }
 `;
 
@@ -175,13 +159,22 @@ export const EachWrapper = styled.div`
   height: auto;
 
   margin: 0 auto;
-  //margin: 0 -2rem;
   padding: 1rem;
 
   box-shadow: 5px 5px 15px #ececec;
 
   min-width: 800px;
   margin-bottom: 2rem;
+
+  & h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 769px) {
+    min-width: 450px;
+    width: 95%;
+  }
 `;
 
 export const SignBtn = styled(SignUpBtn)`
