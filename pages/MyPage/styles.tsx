@@ -27,9 +27,6 @@ export const TopHeader = styled.div`
 
   margin-top: 2rem;
   margin-bottom: 2rem;
-
-  @media (max-width: 769px) {
-  }
 `;
 
 export const Hr = styled.hr`
@@ -42,12 +39,6 @@ export const SideBar = styled.section`
   padding-top: 2rem;
 
   margin: 0 auto;
-
-  //@media screen and (max-width: 769px) {
-  //  order: 1;
-  //  margin: 0;
-  //  padding-left: 2rem;
-  //}
 `;
 
 export const RightSide = styled.section`

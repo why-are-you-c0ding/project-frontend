@@ -30,13 +30,11 @@ export const Image = styled.section`
 
     & > div:last-of-type {
       margin-top: 1rem;
+      padding: 0.5rem 0;
 
       display: flex;
 
-      padding: 0.5rem 0;
-
       & > label {
-        padding: 0.4rem 1rem;
         background-color: cornflowerblue;
         color: white;
         border: 1px solid rgb(77, 77, 77);
