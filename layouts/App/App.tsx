@@ -22,6 +22,10 @@ const SearchItem = loadable(() => import(`@pages/SearchItem`));
 const CreateItems = loadable(
   () => import("@components/SellerPages/CreateItems"),
 );
+const OrderItems = loadable(() => import("@components/SellerPages/OrderItems"));
+const RegisteredItems = loadable(
+  () => import("@components/SellerPages/RegisteredItems"),
+);
 const SellInfo = loadable(() => import("@components/SellerPages/SellInfo"));
 const SellStock = loadable(() => import("@components/SellerPages/SellStock"));
 const SellStockLook = loadable(
@@ -61,12 +65,9 @@ const App = () => {
             <Route path="buying" element={<Buying />} />
           </Route>
           <Route path="/sellpage" element={<SellPage />}>
-            <Route path=":signupitem" element={<CreateItems />} />
-            <Route path=":info" element={<SellInfo />} />
-            <Route path=":sellstock" element={<SellStock />} />
-            <Route path=":sellstocklook" element={<SellStockLook />} />
-            <Route path=":selllist" element={<SellList />} />
-            <Route path=":sellorderlist" element={<SellOrderList />} />
+            <Route path="registereditems" element={<RegisteredItems />} />
+            <Route path="orderitems" element={<OrderItems />} />
+            <Route path="createitems" element={<CreateItems />} />
           </Route>
           <Route path="/sellpage/:id" element={<SellPage />} />
           <Route path="/eachitem" element={<EachItem />} />
