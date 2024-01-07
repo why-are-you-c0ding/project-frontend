@@ -189,81 +189,77 @@ const CreateItems = () => {
   }, []);
 
   return (
-    <div>
-      <ReponsiveBar title={"상품 등록"} />
+    <Wrapper>
+      <TopHeader>상품 등록</TopHeader>
 
-      <Wrapper>
-        <TopHeader>상품 등록</TopHeader>
+      <EachWrapper>
+        <Image>
+          <h3>등록 상품 이미지</h3>
+          <SellOptionImg />
+        </Image>
+      </EachWrapper>
 
-        <EachWrapper>
-          <Image>
-            <h3>등록 상품 이미지</h3>
-            <SellOptionImg />
-          </Image>
-        </EachWrapper>
+      <EachWrapper>
+        <OptionInfo>
+          <h3>상품 정보</h3>
+          <ItemInfo>
+            <div>
+              <label>
+                <ItemTitle>상품 이름</ItemTitle>
+                <Input
+                  type="text"
+                  name="item-name"
+                  value={itemName}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    if (e.target.value.length > 20) return;
+                    onChangeItemName(e);
+                  }}
+                  placeholder="상품 이름을 입력하세요."
+                />
+              </label>
+              <label>
+                <ItemTitle>기본 가격</ItemTitle>
+                <Input
+                  type="number"
+                  name="item-price"
+                  value={price ?? ""}
+                  onChange={onChangePrice}
+                  placeholder="1,000원 이상 입력하세요."
+                />
+              </label>
+              <label>
+                <ItemTitle>카테고리</ItemTitle>
+                <select onChange={onChangeCategory} value={category}>
+                  {categoryList.map((item) => (
+                    <option value={item} key={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <ItemTitle>상세 설명</ItemTitle>
+                <Textarea
+                  ref={ref}
+                  value={information}
+                  onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+                    if (e.target.value.length > 300) return;
+                    onChangeInformation(e);
+                  }}
+                  placeholder={"상품 설명을 입력하세요."}
+                />
+              </label>
+            </div>
+          </ItemInfo>
+        </OptionInfo>
+      </EachWrapper>
 
-        <EachWrapper>
-          <OptionInfo>
-            <h3>상품 정보</h3>
-            <ItemInfo>
-              <div>
-                <label>
-                  <ItemTitle>상품 이름</ItemTitle>
-                  <Input
-                    type="text"
-                    name="item-name"
-                    value={itemName}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                      if (e.target.value.length > 20) return;
-                      onChangeItemName(e);
-                    }}
-                    placeholder="상품 이름을 입력하세요."
-                  />
-                </label>
-                <label>
-                  <ItemTitle>기본 가격</ItemTitle>
-                  <Input
-                    type="number"
-                    name="item-price"
-                    value={price ?? ""}
-                    onChange={onChangePrice}
-                    placeholder="1,000원 이상 입력하세요."
-                  />
-                </label>
-                <label>
-                  <ItemTitle>카테고리</ItemTitle>
-                  <select onChange={onChangeCategory} value={category}>
-                    {categoryList.map((item) => (
-                      <option value={item} key={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label>
-                  <ItemTitle>상세 설명</ItemTitle>
-                  <Textarea
-                    ref={ref}
-                    value={information}
-                    onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
-                      if (e.target.value.length > 300) return;
-                      onChangeInformation(e);
-                    }}
-                    placeholder={"상품 설명을 입력하세요."}
-                  />
-                </label>
-              </div>
-            </ItemInfo>
-          </OptionInfo>
-        </EachWrapper>
+      <EachWrapper>
+        <SellOption />
+      </EachWrapper>
 
-        <EachWrapper>
-          <SellOption />
-        </EachWrapper>
-
-        <SignBtn onClick={onClickSignItem}>상품 등록</SignBtn>
-      </Wrapper>
-    </div>
+      <SignBtn onClick={onClickSignItem}>상품 등록</SignBtn>
+    </Wrapper>
   );
 };
 

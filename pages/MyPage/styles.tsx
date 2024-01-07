@@ -29,7 +29,6 @@ export const TopHeader = styled.div`
   margin-bottom: 2rem;
 
   @media (max-width: 769px) {
-    display: none;
   }
 `;
 
@@ -44,11 +43,11 @@ export const SideBar = styled.section`
 
   margin: 0 auto;
 
-  @media screen and (max-width: 769px) {
-    order: 1;
-    margin: 0;
-    padding-left: 2rem;
-  }
+  //@media screen and (max-width: 769px) {
+  //  order: 1;
+  //  margin: 0;
+  //  padding-left: 2rem;
+  //}
 `;
 
 export const RightSide = styled.section`

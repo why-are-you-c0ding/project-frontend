@@ -24,6 +24,10 @@ export const Input = styled.input`
 export const ItemInfoWrapper = styled.div`
   display: flex;
   justify-content: center;
+
+  @media (max-width: 769px) {
+    margin-top: 1rem;
+  }
 `;
 
 export const ItemInfo = styled.div`
@@ -31,6 +35,10 @@ export const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  @media (max-width: 769px) {
+    width: 95%;
+  }
 `;
 
 export const Explain = styled.span`

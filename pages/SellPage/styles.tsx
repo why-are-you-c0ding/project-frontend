@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
 
 export const SideBar = styled.div<{ sideBar: boolean }>`
   width: 18%;
+  min-width: 14rem;
   height: 100%;
 
   display: flex;
@@ -20,13 +21,7 @@ export const SideBar = styled.div<{ sideBar: boolean }>`
   padding-top: 2rem;
 
   @media (max-width: 769px) {
-    margin-bottom: 0;
-
-    ${({ sideBar }) =>
-      !sideBar &&
-      `
     display: none;
-  `};
   }
 `;
 
@@ -37,6 +32,6 @@ export const SellPageMainWrapper = styled.section`
   min-height: calc(100vh - 7.2rem);
 
   @media screen and (max-width: 769px) {
-    //padding: 0;
+    width: 100%;
   }
 `;
