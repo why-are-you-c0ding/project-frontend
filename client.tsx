@@ -7,6 +7,7 @@ import App from "@layouts/App/App";
 import { Provider } from "react-redux";
 import { ChakraProvider, extendBaseTheme } from "@chakra-ui/react";
 import store from "@redux/store";
+import { BrowserRouter } from "react-router-dom";
 
 async function enableMocking() {
   if (process.env.REACT_START_MSW !== "true") {
@@ -45,7 +46,9 @@ enableMocking().then(() => {
   root.render(
     <Provider store={store}>
       <ChakraProvider>
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </ChakraProvider>
     </Provider>,
   );
