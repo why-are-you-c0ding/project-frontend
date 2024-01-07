@@ -16,19 +16,10 @@ const SellpageSidebar: FC<Props> = ({ sideBar }) => {
       <Title>판매자 페이지</Title>
 
       <Info>
-        <header>상품 등록</header>
         <span>
           <NavLink
             className={(isActive) => (isActive ? "selected" : "")}
-            to={"/sellpage/signupitem"}
-          >
-            상품 등록
-          </NavLink>
-        </span>
-        <span>
-          <NavLink
-            className={(isActive) => (isActive ? "selected" : "")}
-            to={"/sellpage/selllist"}
+            to={"/sellpage/registereditems"}
           >
             등록 상품 조회
           </NavLink>
@@ -36,9 +27,17 @@ const SellpageSidebar: FC<Props> = ({ sideBar }) => {
         <span>
           <NavLink
             className={(isActive) => (isActive ? "selected" : "")}
-            to={"/sellpage/sellorderlist"}
+            to={"/sellpage/orderitems"}
           >
             주문 내역 조회
+          </NavLink>
+        </span>
+        <span>
+          <NavLink
+            className={(isActive) => (isActive ? "selected" : "")}
+            to={"/sellpage/createitems"}
+          >
+            상품 등록
           </NavLink>
         </span>
       </Info>

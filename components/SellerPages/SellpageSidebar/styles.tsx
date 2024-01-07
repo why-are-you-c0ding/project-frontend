@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div<{ sideBar: boolean }>`
-  margin-left: 2.3rem;
   font-weight: 400;
-  min-width: 150px;
+
+  border: 1px solid;
+  width: 100%;
+  height: 100%;
 
   @media (max-width: 769px) {
     margin-bottom: 0;
@@ -18,7 +20,8 @@ export const Wrapper = styled.div<{ sideBar: boolean }>`
 
 export const Title = styled.header`
   font-size: 1.4rem;
-  margin-bottom: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
 
   @media (max-width: 769px) {
     display: none;
@@ -26,17 +29,8 @@ export const Title = styled.header`
 `;
 
 export const Info = styled.div`
-  & header {
-    font-size: 1.3rem;
-
-    @media (max-width: 769px) {
-      display: none;
-    }
-  }
-
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.5rem;
 
   @media (max-width: 769px) {
     margin-bottom: 0;
@@ -51,11 +45,9 @@ export const Info = styled.div`
       border-bottom: 1px solid rgba(0, 0, 0, 0.4);
       padding-bottom: 1rem;
     }
-  }
 
-  .hidden {
-    @media (min-width: 769px) {
-      display: none;
+    .active {
+      color: black;
     }
   }
 `;

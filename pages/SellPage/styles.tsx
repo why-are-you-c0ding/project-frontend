@@ -1,21 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 0.2fr 1fr;
-
-  min-height: 100vh;
-
-  margin-top: -2rem;
-
-  & a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .selected {
-    color: black;
-  }
+  display: flex;
 
   @media screen and (max-width: 769px) {
     display: flex;
@@ -23,42 +9,46 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const TopHeader = styled.div`
-  font-size: 1.5rem;
-  font-weight: 500;
-  padding-bottom: 1rem;
-  max-width: 100rem;
+export const SideBar = styled.div<{ sideBar: boolean }>`
+  width: 18%;
+  height: 100%;
 
-  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  @media (max-width: 769px) {
-    display: none;
-  }
-`;
-
-export const Hr = styled.hr`
-  border: 2px solid;
-  margin-bottom: 2rem;
-`;
-
-export const SideBar = styled.section`
-  font-weight: bolder;
   padding-top: 2rem;
 
-  margin: 0 auto;
+  @media (max-width: 769px) {
+    margin-bottom: 0;
 
-  @media screen and (max-width: 769px) {
-    order: 1;
-    margin: 0;
-    padding-left: 2rem;
+    ${({ sideBar }) =>
+      !sideBar &&
+      `
+    display: none;
+  `};
   }
 `;
 
-export const RightSide = styled.section`
-  padding: 0 6rem;
-  padding-bottom: 1rem;
+// export const SideBar = styled.section`
+//   border: 1px solid;
+//   width: 20%;
+//   height: 100%;
+//
+//   @media screen and (max-width: 769px) {
+//     order: 1;
+//     margin: 0;
+//     padding-left: 2rem;
+//   }
+// `;
+
+export const SellPageMainWrapper = styled.section`
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+
+  width: 82%;
+  height: 100%;
 
   @media screen and (max-width: 769px) {
-    padding: 0;
+    //padding: 0;
   }
 `;
