@@ -22,12 +22,11 @@ export const Wrapper = styled.div`
 `;
 
 export const TopHeader = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 500;
-  padding-bottom: 1rem;
-  max-width: 100rem;
 
   margin-top: 2rem;
+  margin-bottom: 2rem;
 
   @media (max-width: 769px) {
     display: none;
@@ -53,7 +52,6 @@ export const SideBar = styled.section`
 `;
 
 export const RightSide = styled.section`
-  //padding: 0 3rem;
   padding-bottom: 1rem;
 
   @media screen and (max-width: 769px) {
