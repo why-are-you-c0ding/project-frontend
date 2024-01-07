@@ -6,7 +6,6 @@ import React, {
   useState,
 } from "react";
 import { TopHeader } from "@pages/MyPage/styles";
-import ReponsiveBar from "@components/UI/ReponsiveBar";
 import {
   EachWrapper,
   Image,
@@ -24,15 +23,16 @@ import autosize from "autosize";
 import SellOptionImg from "@components/SellerPages/CreateItemsBodys/SellOptionImg";
 import { useAppDispatch, useAppSelector } from "@redux/hooks";
 import { toast } from "react-toastify";
-import { imageUrl } from "@mock/api/data/sellers/createItem";
 import { ImageType } from "react-images-uploading/dist/typings";
 import { sellersApi } from "@api/sellersApi";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import { Item } from "@typings/sellerPages";
+import { useNavigate } from "react-router";
 
 const CreateItems = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { optionTableList, isTable, itemImg, categoryList } = useAppSelector(
     (state) => state.createItems,
@@ -166,9 +166,16 @@ const CreateItems = () => {
       | { error: FetchBaseQueryError | SerializedError } =
       await createItemsMutation(data);
 
-    // TODO: 에러처리 + 상품 생성 성공하면 리다이렉팅 시켜야함
     if ("data" in result) {
-      toast.success("상품 등록에 성공했습니다.", {
+      if ("message" in result.data) {
+        result.data.message === "제품 생성에 성공하였습니다." &&
+          toast.success("상품 등록에 성공했습니다.", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        navigate("/sellpage/registereditems");
+      }
+    } else if ("error" in result) {
+      toast.warning("잠시 후에 다시 시도해주세요.", {
         position: toast.POSITION.TOP_CENTER,
       });
     }

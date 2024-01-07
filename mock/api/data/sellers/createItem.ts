@@ -1,6 +1,8 @@
+import { faker } from "@faker-js/faker";
+
 export const isTable = true;
 
-export const imageUrl = "https://www.youtube.com/watch?v=OsA3iPO2fEg&t=5572s";
+export const imageUrl = faker.image.url();
 
 export const information = "멋쟁이 옷";
 
