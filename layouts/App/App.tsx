@@ -1,10 +1,10 @@
-import React from "react";
-import { Route, Routes } from "react-router";
+import React, { HTMLProps, UIEvent, useRef, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router";
 import loadable from "@loadable/component";
 import "react-toastify/dist/ReactToastify.css";
 import StatusBar from "@components/UI/StatusBar";
-import { BrowserRouter } from "react-router-dom";
-import { NoneHeader } from "@layouts/App/styles";
+import { BrowserRouter, useLocation } from "react-router-dom";
+import { NoneHeader, ScrollTop } from "@layouts/App/styles";
 import Scrollbars from "react-custom-scrollbars";
 
 const SignUp = loadable(() => import("@pages/SignUp"));
@@ -31,48 +31,64 @@ const SellList = loadable(() => import("@components/SellerPages/SellList"));
 const SellOrderList = loadable(
   () => import("@components/SellerPages/SellOrderList"),
 );
+import { FaArrowUp } from "react-icons/fa";
 
 const App = () => {
+  const { pathname } = useLocation();
+  const ref = useRef<Scrollbars>(null);
+
+  const [positionY, setPositionY] = useState(0);
+  const handleScroll = (e: any) => {
+    setPositionY(e.target.scrollTop);
+  };
+
+  const onScrollTop = () => {
+    ref.current?.scrollTop(0);
+  };
+
   return (
-    <BrowserRouter>
-      <Scrollbars>
-        <StatusBar />
-        <NoneHeader>
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/main" element={<Main />} />
-            <Route path="/main/:main" element={<Main />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<LogIn />} />
-            <Route path="/mypage" element={<MyPage />}>
-              <Route path="like" element={<Like />} />
-              <Route path="buying" element={<Buying />} />
-            </Route>
-            <Route path="/sellpage" element={<SellPage />}>
-              <Route path=":signupitem" element={<CreateItems />} />
-              <Route path=":info" element={<SellInfo />} />
-              <Route path=":sellstock" element={<SellStock />} />
-              <Route path=":sellstocklook" element={<SellStockLook />} />
-              <Route path=":selllist" element={<SellList />} />
-              <Route path=":sellorderlist" element={<SellOrderList />} />
-            </Route>
-            <Route path="/sellpage/:id" element={<SellPage />} />
-            <Route path="/eachitem" element={<EachItem />} />
-            <Route path="/eachitem/:itemId" element={<EachItem />} />
-            <Route path="/orders" element={<Order />} />
-            <Route path="/orders/:orderId" element={<Order />} />
-            <Route path="/customerorders" element={<CustomerOrder />} />
-            <Route
-              path="/customerorders/:orderId"
-              element={<CustomerOrder />}
-            />
-            <Route path="/approval" element={<Approval />} />
-            <Route path="/searchitem" element={<SearchItem />} />
-            <Route path="/searchitem/:word" element={<SearchItem />} />
-          </Routes>
-        </NoneHeader>
-      </Scrollbars>
-    </BrowserRouter>
+    <Scrollbars ref={ref} onScroll={handleScroll}>
+      <StatusBar />
+      <NoneHeader>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/main" element={<Main />} />
+          <Route path="/main/:main" element={<Main />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/mypage" element={<MyPage />}>
+            <Route path="like" element={<Like />} />
+            <Route path="buying" element={<Buying />} />
+          </Route>
+          <Route path="/sellpage" element={<SellPage />}>
+            <Route path=":signupitem" element={<CreateItems />} />
+            <Route path=":info" element={<SellInfo />} />
+            <Route path=":sellstock" element={<SellStock />} />
+            <Route path=":sellstocklook" element={<SellStockLook />} />
+            <Route path=":selllist" element={<SellList />} />
+            <Route path=":sellorderlist" element={<SellOrderList />} />
+          </Route>
+          <Route path="/sellpage/:id" element={<SellPage />} />
+          <Route path="/eachitem" element={<EachItem />} />
+          <Route path="/eachitem/:itemId" element={<EachItem />} />
+          <Route path="/orders" element={<Order />} />
+          <Route path="/orders/:orderId" element={<Order />} />
+          <Route path="/customerorders" element={<CustomerOrder />} />
+          <Route path="/customerorders/:orderId" element={<CustomerOrder />} />
+          <Route path="/approval" element={<Approval />} />
+          <Route path="/searchitem" element={<SearchItem />} />
+          <Route path="/searchitem/:word" element={<SearchItem />} />
+        </Routes>
+
+        {positionY > 1000 &&
+          (pathname === "/" || pathname.slice(0, 11) === "/searchitem") && (
+            <ScrollTop onClick={onScrollTop}>
+              <FaArrowUp />
+              <span>TOP</span>
+            </ScrollTop>
+          )}
+      </NoneHeader>
+    </Scrollbars>
   );
 };
 
