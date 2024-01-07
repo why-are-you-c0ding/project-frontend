@@ -175,7 +175,6 @@ export const EachWrapper = styled.div`
   height: auto;
 
   margin: 0 auto;
-  //margin: 0 -2rem;
   padding: 1rem;
 
   box-shadow: 5px 5px 15px #ececec;

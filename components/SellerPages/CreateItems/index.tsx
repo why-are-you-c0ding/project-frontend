@@ -192,9 +192,9 @@ const CreateItems = () => {
     <div>
       <ReponsiveBar title={"상품 등록"} />
 
-      <TopHeader>상품 등록</TopHeader>
-
       <Wrapper>
+        <TopHeader>상품 등록</TopHeader>
+
         <EachWrapper>
           <Image>
             <h3>등록 상품 이미지</h3>
