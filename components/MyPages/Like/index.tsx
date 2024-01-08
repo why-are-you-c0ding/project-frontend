@@ -15,7 +15,7 @@ import {
   ItemInfoTitleName,
   ItemInfoTitleOption,
   Wrapper,
-} from "@components/Like/styles";
+} from "@components/MyPages/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 import ReponsiveBar from "@components/UI/ReponsiveBar";
 import NullData from "@components/UI/NullData";
