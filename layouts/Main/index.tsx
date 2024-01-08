@@ -1,5 +1,5 @@
 import React from "react";
-import SliderImage from "@components/SliderImage";
+import SliderImage from "@components/UI/SliderImage";
 
 import MainItem from "@components/Items/MainItem";
 

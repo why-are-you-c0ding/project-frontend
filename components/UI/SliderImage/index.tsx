@@ -1,8 +1,8 @@
-import React, { CSSProperties, FC } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { SliderItem, Wrapper } from "@components/SliderImage/styles";
+import { SliderItem, Wrapper } from "@components/UI/SliderImage/styles";
 import { slideList } from "@utils/slideList";
 
 const SliderImage = () => {
