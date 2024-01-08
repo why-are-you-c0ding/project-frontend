@@ -9,7 +9,7 @@ import {
 } from "@components/Like/styles";
 import useSWRInfinite from "swr/infinite";
 import fetcher from "@utils/fetcher";
-import { Wrapper } from "@components/Buying/styles";
+import { Wrapper } from "@components/Approval/Buying/styles";
 import { useInView } from "react-intersection-observer";
 import NullData from "@components/UI/NullData";
 import { Link } from "react-router-dom";

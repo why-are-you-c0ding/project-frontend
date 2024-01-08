@@ -11,7 +11,7 @@ const SignUp = loadable(() => import("@pages/SignUp"));
 const LogIn = loadable(() => import("@pages/LogIn"));
 const Main = loadable(() => import(`@layouts/Main`));
 const MyPage = loadable(() => import(`@pages/MyPage`));
-const Buying = loadable(() => import("@components/Buying"));
+const Buying = loadable(() => import("@components/Approval/Buying"));
 const Like = loadable(() => import("@components/Like"));
 const SellPage = loadable(() => import(`@pages/SellPage`));
 const EachItem = loadable(() => import(`@pages/EachItem`));
