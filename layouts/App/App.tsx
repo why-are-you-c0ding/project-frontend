@@ -26,6 +26,10 @@ const OrderItems = loadable(() => import("@components/SellerPages/OrderItems"));
 const RegisteredItems = loadable(
   () => import("@components/SellerPages/RegisteredItems"),
 );
+const DetailRegisteredItem = loadable(
+  () => import("@components/SellerPages/DetailRegisteredItem"),
+);
+
 const SellInfo = loadable(() => import("@components/SellerPages/SellInfo"));
 const SellStock = loadable(() => import("@components/SellerPages/SellStock"));
 const SellStockLook = loadable(
@@ -65,6 +69,10 @@ const App = () => {
             <Route path="buying" element={<Buying />} />
           </Route>
           <Route path="/sellpage" element={<SellPage />}>
+            <Route
+              path="registereditems/:id"
+              element={<DetailRegisteredItem />}
+            />
             <Route path="registereditems" element={<RegisteredItems />} />
             <Route path="orderitems" element={<OrderItems />} />
             <Route path="createitems" element={<CreateItems />} />
