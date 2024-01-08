@@ -8,6 +8,11 @@ export interface item {
   category: string;
 }
 
+export interface ItemPaging {
+  finalPage: boolean;
+  items: item[];
+}
+
 export interface option {
   optionId: number;
   optionName: string;
