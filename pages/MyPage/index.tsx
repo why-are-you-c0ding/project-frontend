@@ -1,6 +1,6 @@
 import React from "react";
 import { Wrapper, SideBar, RightSide } from "@pages/MyPage/styles";
-import MypageSidebar from "@components/MypageSidebar";
+import MypageSidebar from "@components/MyPages/MypageSidebar";
 import { useNavigate, Route, Routes, Outlet } from "react-router-dom";
 
 const MyPage = () => {
