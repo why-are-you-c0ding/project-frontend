@@ -11,8 +11,8 @@ const SignUp = loadable(() => import("@pages/SignUp"));
 const LogIn = loadable(() => import("@pages/LogIn"));
 const Main = loadable(() => import(`@layouts/Main`));
 const MyPage = loadable(() => import(`@pages/MyPage`));
-const Buying = loadable(() => import("@components/Approval/Buying"));
-const Like = loadable(() => import("@components/Like"));
+const Buying = loadable(() => import("@components/MyPages/Buying"));
+const Like = loadable(() => import("@components/MyPages/Like"));
 const SellPage = loadable(() => import(`@pages/SellPage`));
 const EachItem = loadable(() => import(`@pages/EachItem`));
 const Order = loadable(() => import(`@pages/Order`));
@@ -20,14 +20,14 @@ const CustomerOrder = loadable(() => import(`@pages/CustomerOrder`));
 const Approval = loadable(() => import("@pages/Approval"));
 const SearchItem = loadable(() => import(`@pages/SearchItem`));
 const CreateItems = loadable(
-  () => import("@components/SellerPages/CreateItems"),
+  () => import("@components/SellerPages/CreateItems")
 );
 const OrderItems = loadable(() => import("@components/SellerPages/OrderItems"));
 const RegisteredItems = loadable(
-  () => import("@components/SellerPages/RegisteredItems"),
+  () => import("@components/SellerPages/RegisteredItems")
 );
 const DetailRegisteredItem = loadable(
-  () => import("@components/SellerPages/DetailRegisteredItem"),
+  () => import("@components/SellerPages/DetailRegisteredItem")
 );
 
 import { FaArrowUp } from "react-icons/fa";

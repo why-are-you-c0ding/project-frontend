@@ -1,19 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 0.2fr 0.8fr;
-
-  min-height: 100vh;
-
-  & a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .selected {
-    color: black;
-  }
+  display: flex;
 
   @media screen and (max-width: 769px) {
     display: flex;
@@ -29,22 +17,28 @@ export const TopHeader = styled.div`
   margin-bottom: 2rem;
 `;
 
-export const Hr = styled.hr`
-  border: 2px solid;
-  margin-bottom: 2rem;
-`;
-
 export const SideBar = styled.section`
-  font-weight: bolder;
+  width: 18%;
+  min-width: 14rem;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   padding-top: 2rem;
 
-  margin: 0 auto;
+  @media (max-width: 769px) {
+    display: none;
+  }
 `;
+export const RightSide = styled.div`
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
 
-export const RightSide = styled.section`
-  padding-bottom: 1rem;
+  width: 82%;
+  min-height: calc(100vh - 7.2rem);
 
   @media screen and (max-width: 769px) {
-    padding: 0;
+    width: 100%;
   }
 `;
