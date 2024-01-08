@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ImageListType } from "react-images-uploading";
 import { Item } from "@typings/sellerPages";
+import { ItemPaging } from "@typings/items";
 const URL = process.env.REACT_APP_BASE_URL!;
 const isDevelopment = process.env.REACT_START_MSW !== "true";
 
@@ -33,8 +34,19 @@ export const sellersApi = createApi({
         };
       },
     }),
-    getCreateItems: builder.query({
-      query: (index: number) => `/items/sellers?page=${index}`,
+    getSellerItems: builder.query<ItemPaging, number>({
+      query: (page: number) => ({ url: "/items/sellers", params: { page } }),
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      // Always merge incoming data to the cache entry
+      merge: (currentCache, newItems) => {
+        currentCache.items.push(...newItems.items);
+      },
+      // Refetch when the page arg changes
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
     }),
     getItemStocks: builder.query({
       query: (data: string) => `/stocks?${data}`,
