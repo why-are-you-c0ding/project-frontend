@@ -30,15 +30,6 @@ const DetailRegisteredItem = loadable(
   () => import("@components/SellerPages/DetailRegisteredItem"),
 );
 
-const SellInfo = loadable(() => import("@components/SellerPages/SellInfo"));
-const SellStock = loadable(() => import("@components/SellerPages/SellStock"));
-const SellStockLook = loadable(
-  () => import("@components/SellerPages/SellStockLook"),
-);
-const SellList = loadable(() => import("@components/SellerPages/SellList"));
-const SellOrderList = loadable(
-  () => import("@components/SellerPages/SellOrderList"),
-);
 import { FaArrowUp } from "react-icons/fa";
 
 const App = () => {
