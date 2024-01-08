@@ -1,9 +1,9 @@
-import React, { HTMLProps, UIEvent, useRef, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router";
+import React, { useRef, useState } from "react";
+import { Route, Routes } from "react-router";
 import loadable from "@loadable/component";
 import "react-toastify/dist/ReactToastify.css";
 import StatusBar from "@components/UI/StatusBar";
-import { BrowserRouter, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { NoneHeader, ScrollTop } from "@layouts/App/styles";
 import Scrollbars from "react-custom-scrollbars";
 

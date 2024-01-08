@@ -1,5 +1,4 @@
 import React from "react";
-import ReponsiveBar from "@components/UI/ReponsiveBar";
 import { Wrapper } from "@components/SellerPages/CreateItems/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 
