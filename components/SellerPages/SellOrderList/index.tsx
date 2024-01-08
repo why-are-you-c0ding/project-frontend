@@ -7,7 +7,7 @@ import {
   InfoTop,
   ItemBox,
   Wrapper,
-} from "@components/Like/styles";
+} from "@components/MyPages/Like/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 import { SubHeader } from "@components/SellerPages/SellList/style";
 import { Link } from "react-router-dom";
