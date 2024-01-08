@@ -19,7 +19,7 @@ import NullData from "@components/UI/NullData";
 const SearchItem = () => {
   const path = useLocation();
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [items, setItems] = useState<item[]>([]);
   const [finalPage, setFinalPage] = useState(false);
   const { ref, inView } = useInView();

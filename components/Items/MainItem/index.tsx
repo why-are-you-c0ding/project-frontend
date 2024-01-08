@@ -15,7 +15,7 @@ import { item } from "@typings/items";
 import { useInView } from "react-intersection-observer";
 
 const MainItem = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const { data, error, isLoading } = itemsApi.useGetAllItemsQuery(page);
   const [items, setItems] = useState<item[]>([]);
   const [finalPage, setFinalPage] = useState(false);
