@@ -16,9 +16,9 @@ import { useInView } from "react-intersection-observer";
 
 const MainItem = () => {
   const [page, setPage] = useState(0);
-  const { data, error, isLoading } = itemsApi.useGetAllItemsQuery(page);
   const [finalPage, setFinalPage] = useState(false);
   const { ref, inView } = useInView();
+  const { data, error, isLoading } = itemsApi.useGetAllItemsQuery(page);
 
   useEffect(() => {
     if (inView && !finalPage) {
