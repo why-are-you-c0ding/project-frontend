@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, Outlet } from "react-router-dom";
 import { Info, Title } from "@components/SellerPages/SellpageSidebar/styles";
 import { SellPageMainWrapper, SideBar, Wrapper } from "@pages/SellPage/styles";
 
 const SellPage = () => {
-  const navigate = useNavigate();
   const [sideBar, setSideBar] = useState(false);
-
-  // useEffect(() => {
-  //   if (window.location.pathname === "/sellpage/info") {
-  //     setSideBar(true);
-  //   } else {
-  //     setSideBar(false);
-  //   }
-  // }, []);
 
   return (
     <div>
