@@ -2,10 +2,9 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
 export const Wrapper = styled.section`
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding: 0 2rem 2rem 2rem;
   @media (max-width: 769px) {
-    padding: 0 2rem;
+    padding: 0 2rem 2rem 2rem;
   }
 `;
 
@@ -278,6 +277,10 @@ export const EachDeleteBtn = styled.button`
     css`
       opacity: 0.5;
     `};
+  @media (max-width: 769px) {
+    width: 5rem;
+    font-size: 13px;
+  }
 `;
 
 export const BuyAllBtn = styled.button`
@@ -295,6 +298,11 @@ export const BuyAllBtn = styled.button`
   justify-content: center;
   margin: 0 auto;
   cursor: pointer;
+  @media (max-width: 769px) {
+    width: 8rem;
+    height: 2rem;
+    font-size: 13px;
+  }
 `;
 
 export const InfoBottom = styled.div`
