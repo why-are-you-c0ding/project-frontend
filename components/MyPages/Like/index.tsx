@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import {
   BuyAllBtn,
   EachDeleteBtn,
-  ItemBox2,
+  ItemBox,
   ItemBoxInfo,
   ItemInfo,
   ItemInfoCount,
@@ -190,7 +190,7 @@ const Like = () => {
 
         {Mockdata?.cartLineItems.length === 0 && <NullData />}
 
-        <ItemBox2>
+        <ItemBox>
           <ItemBoxInfo>
             <div>전체 {Mockdata?.cartLineItems.length}개</div>
             <div>
@@ -274,7 +274,7 @@ const Like = () => {
           >
             선택 삭제
           </EachDeleteBtn>
-        </ItemBox2>
+        </ItemBox>
         <BuyAllBtn onClick={onBuyItemClick}>구매하기</BuyAllBtn>
       </Wrapper>
     </div>

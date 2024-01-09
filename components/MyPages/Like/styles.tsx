@@ -39,7 +39,7 @@ export const CartItem = styled.div`
   }
 `;
 
-export const ItemBox = styled.div`
+export const ItemBox2 = styled.div`
   width: 100%;
 
   display: flex;
@@ -60,7 +60,7 @@ export const ItemBox = styled.div`
   }
 `;
 
-export const ItemBox2 = styled.div`
+export const ItemBox = styled.div`
   display: flex;
   flex-direction: column;
 `;

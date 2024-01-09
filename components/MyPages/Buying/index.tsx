@@ -5,7 +5,7 @@ import {
   CartItem,
   InfoBottom,
   InfoTop,
-  ItemBox,
+  ItemBox2,
 } from "@components/MyPages/Like/styles";
 import useSWRInfinite from "swr/infinite";
 import fetcher from "@utils/fetcher";
@@ -62,7 +62,7 @@ const Buying = () => {
               <Link key={index} to={`/customerorders/${v.orderId}`}>
                 <CartItem ref={ref}>
                   <img src={v.itemImageUrl} alt={v.itemName} />
-                  <ItemBox>
+                  <ItemBox2>
                     <InfoTop>
                       <div>
                         <span>{v.itemName}</span>
@@ -85,7 +85,7 @@ const Buying = () => {
                         </div>
                       </div>
                     </InfoBottom>
-                  </ItemBox>
+                  </ItemBox2>
                 </CartItem>
               </Link>
             );
