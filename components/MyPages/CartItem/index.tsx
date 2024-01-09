@@ -15,7 +15,7 @@ import {
   ItemInfoTitleName,
   ItemInfoTitleOption,
   Wrapper,
-} from "@components/MyPages/Like/styles";
+} from "@components/MyPages/CartItem/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 import ReponsiveBar from "@components/UI/ReponsiveBar";
 import NullData from "@components/UI/NullData";
@@ -23,6 +23,7 @@ import { cartLineItems, ICartData } from "@typings/db";
 import { myPageApi } from "@api/myPageApi";
 import { toast } from "react-toastify";
 import { CartLineItem } from "@typings/myPage";
+import { approvalItemInfo, orderOptionGroup } from "@typings/items";
 
 const Like = () => {
   const [deleteMutation] = myPageApi.useDeleteCartItemMutation();
@@ -135,53 +136,54 @@ const Like = () => {
     },
     [upMutation],
   );
-  const handleCheckboxChange = (product: any, index: number) => {
-    const isSelected = selectedItems.some((item) => item.index === index);
+  const handleCheckboxChange = useCallback(
+    (product: any) => {
+      setSelectedItems((prevSelectedItems) => {
+        const isSelected = prevSelectedItems.some(
+          (item) => item.product === product,
+        );
 
-    if (isSelected) {
-      setSelectedItems((prevSelectedItems) =>
-        prevSelectedItems.filter((item) => item.index !== index),
+        if (isSelected) {
+          return prevSelectedItems.filter((item) => item.product !== product);
+        } else {
+          return [...prevSelectedItems, { product }];
+        }
+      });
+
+      setSelectAllCheckbox(
+        Mockdata?.cartLineItems?.length === selectedItems.length,
       );
-    } else {
-      setSelectedItems((prevSelectedItems) => [
-        ...prevSelectedItems,
-        { index, product },
-      ]);
-    }
+    },
+    [Mockdata?.cartLineItems, selectedItems],
+  );
 
-    const allChecked = Mockdata?.cartLineItems?.length === selectedItems.length;
-    setSelectAllCheckbox(allChecked);
-  };
+  const toggleSelectAllCheckbox = useCallback(() => {
+    setSelectAllCheckbox((prev) => !prev);
+
+    const allProducts = Mockdata?.cartLineItems || [];
+    const allSelected = allProducts.map((product: CartLineItem) => ({
+      product,
+    }));
+
+    setSelectedItems((prevSelectedItems) =>
+      prevSelectedItems.length === allSelected.length ? [] : allSelected,
+    );
+  }, [Mockdata?.cartLineItems]);
 
   const handleDeleteClick = (): void => {
     console.log(selectedItems);
   };
 
-  const onBuyItemClick = (): void => {
+  const onBuyItemClick = useCallback((): void => {
     if (selectedItems.length === 0) {
       toast.warning("구매할 상품을 선택해주세요", {
         position: toast.POSITION.TOP_CENTER,
       });
       return;
     }
+
     console.log(selectedItems);
-  };
-  const toggleSelectAllCheckbox = (): void => {
-    setSelectAllCheckbox((prev: boolean) => !prev);
-
-    const allProducts = Mockdata?.cartLineItems || [];
-    const allSelected = allProducts.map(
-      (product: CartLineItem, index: number) => ({
-        index,
-        product,
-      }),
-    );
-
-    setSelectedItems((prevSelectedItems) =>
-      prevSelectedItems.length === allSelected.length ? [] : allSelected,
-    );
-  };
-
+  }, [selectedItems]);
   return (
     <div>
       <ReponsiveBar title={"장바구니"} />
@@ -214,8 +216,10 @@ const Like = () => {
                 <div key={`checkbox-${index}`}>
                   <input
                     type="checkbox"
-                    onChange={(e) => handleCheckboxChange(product, index)}
-                    checked={selectedItems.some((item) => item.index === index)}
+                    onChange={(e) => handleCheckboxChange(product)}
+                    checked={selectedItems.some(
+                      (item) => item.product === product,
+                    )}
                   />
                 </div>
                 <ItemInfoImg>
