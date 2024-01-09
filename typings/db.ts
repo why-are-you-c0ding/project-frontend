@@ -23,7 +23,7 @@ export interface options {
   ["price"]: number;
 }
 
-// Buying 컴포넌트에서 사용, 주문내역
+// OrderHistory 컴포넌트에서 사용, 주문내역
 export interface IOrderData {
   ["finalPage"]: boolean;
   ["orders"]: orders[];
@@ -68,7 +68,7 @@ export interface IEachOrder {
   ["orderOptionGroups"]: orderOptionGroups[];
 }
 
-//Like 컴포넌트에서 사용, 장바구니 조회
+//CartItem 컴포넌트에서 사용, 장바구니 조회
 export interface ICartData {
   ["cartLineItems"]: cartLineItems;
 }
