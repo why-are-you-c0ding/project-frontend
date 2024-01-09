@@ -2,9 +2,10 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
 export const Wrapper = styled.section`
+  padding-left: 2rem;
+  padding-right: 2rem;
   @media (max-width: 769px) {
-    margin-top: 5rem;
-    padding: 2rem 2rem;
+    padding: 0 2rem;
   }
 `;
 
@@ -62,33 +63,35 @@ export const ItemBox = styled.div`
 export const ItemBox2 = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 1rem;
 `;
 
 export const ItemBoxInfo = styled.div`
   display: grid;
   grid-template-columns:
-    minmax(10px, 0.5fr) minmax(5px, 0.2fr) minmax(50px, 1.5fr) minmax(
-      50px,
+    minmax(10px, 0.5fr) minmax(5px, 0.2fr) minmax(30px, 1.2fr) minmax(
+      30px,
       0.5fr
     )
-    minmax(50px, 0.5fr) minmax(50px, 0.5fr) minmax(10px, 0.3fr);
+    minmax(30px, 0.5fr) minmax(30px, 0.5fr) minmax(10px, 0.3fr);
   align-items: center;
   justify-items: center;
   height: 3rem;
   border-top: 3px solid black;
   border-bottom: 1px solid black;
   font-size: 12px;
+  @media (max-width: 769px) {
+    height: 3rem;
+  }
 `;
 
 export const ItemInfo = styled.div`
   display: grid;
   grid-template-columns:
-    minmax(10px, 0.5fr) minmax(5px, 0.2fr) minmax(50px, 1.5fr) minmax(
-      50px,
+    minmax(10px, 0.5fr) minmax(5px, 0.2fr) minmax(30px, 1.2fr) minmax(
+      30px,
       0.5fr
     )
-    minmax(50px, 0.5fr) minmax(50px, 0.5fr) minmax(10px, 0.3fr);
+    minmax(30px, 0.5fr) minmax(30px, 0.5fr) minmax(10px, 0.3fr);
   height: 9rem;
   border-bottom: 2px solid #f5f5f5;
   align-items: center;
@@ -97,6 +100,10 @@ export const ItemInfo = styled.div`
 
   &:hover {
     background-color: #eeeeee;
+  }
+  @media (max-width: 769px) {
+    height: 11rem;
+    font-size: 12px;
   }
 `;
 
@@ -128,15 +135,24 @@ export const ItemInfoTitle = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   padding-left: 10px;
+  @media (max-width: 769px) {
+    font-size: 10px;
+  }
 `;
 
 export const ItemInfoTitleName = styled.div`
   font-weight: bold;
   font-size: 16px;
+  @media (max-width: 769px) {
+    font-size: 12px;
+  }
 `;
 export const ItemInfoTitleOption = styled.div`
   font-size: 0.9rem;
   color: rgba(0, 0, 0, 0.4);
+  @media (max-width: 769px) {
+    font-size: 10px;
+  }
 `;
 
 export const ItemInfoCount = styled.div`
@@ -147,6 +163,11 @@ export const ItemInfoCount = styled.div`
   justify-content: center;
   align-items: center;
 
+  @media (max-width: 769px) {
+    width: 4rem;
+    height: 1.2rem;
+  }
+
   & button {
     width: 2rem;
     height: 2rem;
@@ -154,6 +175,10 @@ export const ItemInfoCount = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
+    @media (max-width: 769px) {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
   }
 
   & div {
@@ -163,10 +188,18 @@ export const ItemInfoCount = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 769px) {
+      width: 1.2rem;
+      height: 1rem;
+    }
   }
 `;
 export const ItemInfoPrice = styled.div``;
-export const ItemInfoSys = styled.div``;
+export const ItemInfoSys = styled.div`
+  @media (max-width: 769px) {
+    font-size: 10px;
+  }
+`;
 
 export const ItemInfoDeleteBtn = styled.div`
   width: 5rem;
@@ -177,6 +210,11 @@ export const ItemInfoDeleteBtn = styled.div`
   align-items: center;
   box-sizing: border-box;
   font-size: 13px;
+  @media (max-width: 769px) {
+    width: 3.2rem;
+    height: 2rem;
+    font-size: 10px;
+  }
 `;
 
 export const InfoTop = styled.div`
