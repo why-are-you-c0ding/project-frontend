@@ -8,6 +8,7 @@ import {
 } from "@components/SellerPages/RegisteredItems/styled";
 import { useNavigate } from "react-router";
 import { useInView } from "react-intersection-observer";
+import NullData from "@components/UI/NullData";
 
 export default function RegisteredItems() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export default function RegisteredItems() {
   }, [inView, finalPage]);
 
   useEffect(() => {
-    if (data) {
+    if (data && "finalPage" in data) {
       setFinalPage(data.finalPage);
     }
   }, [data]);
@@ -37,7 +38,9 @@ export default function RegisteredItems() {
 
         {isLoading && <div>로딩중...</div>}
 
-        {data && (
+        {data && "message" in data && <NullData />}
+
+        {data && "finalPage" in data && (
           <div>
             {data.items.map((item, index) => {
               return (
