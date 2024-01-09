@@ -20,14 +20,14 @@ const CustomerOrder = loadable(() => import(`@pages/CustomerOrder`));
 const Approval = loadable(() => import("@pages/Approval"));
 const SearchItem = loadable(() => import(`@pages/SearchItem`));
 const CreateItems = loadable(
-  () => import("@components/SellerPages/CreateItems")
+  () => import("@components/SellerPages/CreateItems"),
 );
 const OrderItems = loadable(() => import("@components/SellerPages/OrderItems"));
 const RegisteredItems = loadable(
-  () => import("@components/SellerPages/RegisteredItems")
+  () => import("@components/SellerPages/RegisteredItems"),
 );
 const DetailRegisteredItem = loadable(
-  () => import("@components/SellerPages/DetailRegisteredItem")
+  () => import("@components/SellerPages/DetailRegisteredItems"),
 );
 
 import { FaArrowUp } from "react-icons/fa";

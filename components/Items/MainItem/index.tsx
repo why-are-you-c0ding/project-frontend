@@ -17,7 +17,6 @@ import { useInView } from "react-intersection-observer";
 const MainItem = () => {
   const [page, setPage] = useState(0);
   const { data, error, isLoading } = itemsApi.useGetAllItemsQuery(page);
-  const [items, setItems] = useState<item[]>([]);
   const [finalPage, setFinalPage] = useState(false);
   const { ref, inView } = useInView();
 
@@ -29,7 +28,6 @@ const MainItem = () => {
 
   useEffect(() => {
     if (data) {
-      setItems((prev) => [...prev, ...data.items]);
       setFinalPage(data.finalPage);
     }
   }, [data]);
@@ -46,12 +44,12 @@ const MainItem = () => {
 
       {data && (
         <ItemContainer>
-          {items?.map((item: item, index) => {
+          {data?.items?.map((item: item, index) => {
             return (
               <Link
                 to={`/eachitem/${item.itemId}`}
                 key={item.itemId}
-                ref={items.length - 5 === index ? ref : null}
+                ref={data.items.length - 5 === index ? ref : null}
               >
                 <ItemBox>
                   <ItemImg>

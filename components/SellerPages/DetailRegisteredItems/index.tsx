@@ -2,7 +2,7 @@ import React from "react";
 import { Wrapper } from "@components/SellerPages/CreateItems/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 
-export default function DetailRegisteredItem() {
+export default function DetailRegisteredItems() {
   return (
     <div>
       <Wrapper>

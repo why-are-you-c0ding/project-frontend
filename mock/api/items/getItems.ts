@@ -13,7 +13,7 @@ export const getItems = [
     if (keyword === "없음") {
       return res(
         ctx.status(200),
-        ctx.json("검색하려는 상품이 존재하지 않습니다."),
+        ctx.json({ message: "검색하려는 상품이 존재하지 않습니다." }),
       );
     }
 

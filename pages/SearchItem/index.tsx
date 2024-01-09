@@ -10,7 +10,7 @@ import {
   TitleContainer,
   Wrapper,
 } from "@components/Items/MainItem/styles";
-import { item } from "@typings/items";
+import { item, ItemPaging } from "@typings/items";
 import { useInView } from "react-intersection-observer";
 import { itemsApi } from "@api/itemsApi";
 import { Link, useLocation } from "react-router-dom";
@@ -20,7 +20,6 @@ const SearchItem = () => {
   const path = useLocation();
 
   const [page, setPage] = useState(0);
-  const [items, setItems] = useState<item[]>([]);
   const [finalPage, setFinalPage] = useState(false);
   const { ref, inView } = useInView();
   const { data, error, isLoading } = itemsApi.useGetSearchItemsQuery({
@@ -35,20 +34,14 @@ const SearchItem = () => {
   }, [inView, finalPage]);
 
   useEffect(() => {
-    if (data && typeof data !== "string") {
-      setItems((prev) => [...prev, ...data.items]);
+    if (data && "finalPage" in data) {
       setFinalPage(data.finalPage);
     }
   }, [data]);
 
   useEffect(() => {
     setPage(1);
-    setItems([]);
   }, [path]);
-  //
-  // if (typeof data === "string") {
-  //   return <div>검색 결과가 없습니다.</div>;
-  // }
 
   return (
     <Wrapper>
@@ -60,16 +53,18 @@ const SearchItem = () => {
 
       {isLoading && <div>로딩중...</div>}
 
-      {typeof data === "string" && <NullData />}
+      {data && "message" in data && <NullData />}
 
-      {typeof data !== "string" && (
+      {data && "finalPage" in data && (
         <ItemContainer>
-          {items?.map((item: item, index) => {
+          {(data as ItemPaging)?.items?.map((item: item, index) => {
             return (
               <Link
                 to={`/eachitem/${item.itemId}`}
                 key={item.itemId}
-                ref={items.length - 5 === index ? ref : null}
+                ref={
+                  (data as ItemPaging)?.items?.length - 5 === index ? ref : null
+                }
               >
                 <ItemBox>
                   <ItemImg>
