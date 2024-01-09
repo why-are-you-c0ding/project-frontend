@@ -42,6 +42,7 @@ export const sellersApi = createApi({
       // Always merge incoming data to the cache entry
       merge: (currentCache, newItems) => {
         currentCache.items.push(...newItems.items);
+        currentCache.finalPage = newItems.finalPage;
       },
       // Refetch when the page arg changes
       forceRefetch({ currentArg, previousArg }) {
