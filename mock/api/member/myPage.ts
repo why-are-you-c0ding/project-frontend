@@ -5,7 +5,6 @@ import {
   orderData,
   updateCartItemCount,
 } from "@mock/api/data/member/myPage";
-// import { pagingAllItems } from "@mock/api/data/items/getItems";
 import { getAllCartList } from "@mock/api/data/myPage/cartList";
 
 export const myPage = [
