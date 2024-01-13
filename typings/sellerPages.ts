@@ -37,3 +37,12 @@ export interface Item {
   price: number;
   optionGroups: OptionInfo[];
 }
+
+// 재고 불러오기
+export interface StockQuantity {
+  quantity: number;
+}
+
+export interface StockList {
+  stockList: StockQuantity[];
+}
