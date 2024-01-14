@@ -20,14 +20,8 @@ export const registeredItems = [
       count: 20,
     });
 
-    tempItems = tempItems.map((item) => {
-      item.shopName = shopName;
-
-      return item;
-    });
-
     const items = {
-      items: tempItems,
+      orderLineItems: tempItems,
       finalPage: finalPage,
     };
 
