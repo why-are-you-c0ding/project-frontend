@@ -1,6 +1,8 @@
 import { rest } from "msw";
 import { faker } from "@faker-js/faker";
 import { createRandomItem } from "@mock/api/data/items/getItems";
+import { stockQuantity } from "@mock/api/data/sellers/createItem";
+import { StockList } from "@typings/sellerPages";
 const shopName = faker.company.name();
 
 export const registeredItems = [
@@ -32,5 +34,24 @@ export const registeredItems = [
     };
 
     return res(ctx.status(200), ctx.json(items));
+  }),
+  rest.get("/stocks", (req, res, ctx) => {
+    const params = req.url.searchParams;
+    let optionList: string[][] = [];
+    let optionListSize: number = 1;
+
+    for (let i = 1; i <= params.size; i++) {
+      optionList.push(params.get(`optionGroup${i}`)!.split(","));
+    }
+
+    optionList.forEach((option) => (optionListSize *= option.length));
+
+    let stockList: StockList = {
+      stockList: faker.helpers.multiple(stockQuantity, {
+        count: optionListSize,
+      }),
+    };
+
+    return res(ctx.status(200), ctx.json(stockList));
   }),
 ];
