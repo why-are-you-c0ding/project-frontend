@@ -101,7 +101,7 @@ export default function ManageStocks({ optionGroup, isEdit }: Props) {
                   isPreviewFocusable={false}
                 >
                   <StockQuantityWrapper isEdit={isEdit}>
-                    <div>{/*<Input as={EditableInput} />*/}</div>
+                    <div></div>
                     <div>
                       <EditablePreview />
                       {/* Here is the custom input */}
