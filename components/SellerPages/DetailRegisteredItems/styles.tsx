@@ -75,3 +75,15 @@ export const MangeStocksBtn = styled(SignUpBtn)`
 export const ModifyAllBtn = styled(MangeStocksBtn)`
   width: 6rem;
 `;
+
+export const CompleteBtnWrapper = styled.div`
+  text-align: center;
+
+  margin-bottom: 2rem;
+`;
+export const CompleteBtn = styled(MangeStocksBtn)`
+  width: 10rem;
+  height: 2.8rem;
+
+  font-size: 1.2rem;
+`;

@@ -1,5 +1,5 @@
 import { optionGroup } from "@typings/items";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { sellersApi } from "@api/sellersApi";
 import {
   StockQuantityWrapper,
@@ -14,10 +14,13 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { EditStocks } from "@components/SellerPages/DetailRegisteredItemsBodys/EditStocks";
+import { ModifyStocks, StockList } from "@typings/sellerPages";
 
 interface Props {
   optionGroup: optionGroup[];
   isEdit: boolean;
+  modifyStocks: ModifyStocks;
+  setModifyStocks: React.Dispatch<React.SetStateAction<ModifyStocks>>;
 }
 
 function getOptionParams(obj: { [key: string]: string }) {
@@ -34,11 +37,11 @@ function getOptionParams(obj: { [key: string]: string }) {
   return optionParams.join("&");
 }
 
-function getOptionCombinations(options: string[][]): string[][] {
-  const queue: string[][] = [[]];
+function getOptionCombinations(options: number[][]): number[][] {
+  const queue: number[][] = [[]];
 
   for (const option of options) {
-    const nextQueue: string[][] = [];
+    const nextQueue: number[][] = [];
 
     for (const combination of queue) {
       for (const element of option) {
@@ -53,7 +56,12 @@ function getOptionCombinations(options: string[][]): string[][] {
   return queue;
 }
 
-export default function ManageStocks({ optionGroup, isEdit }: Props) {
+export default function ManageStocks({
+  optionGroup,
+  isEdit,
+  modifyStocks,
+  setModifyStocks,
+}: Props) {
   let options: { [key: string]: string } = {};
   let optionIdHash = new Map();
 
@@ -67,12 +75,48 @@ export default function ManageStocks({ optionGroup, isEdit }: Props) {
     options[`optionGroup${index + 1}`] = optionList.join(",");
   });
 
+  const [stocksList, setStocksList] = useState<StockList>();
   const { data, error, isLoading } = sellersApi.useGetItemStocksQuery(
     getOptionParams(options),
   );
   const optionCombinations = getOptionCombinations(
-    Object.values(options).map((v) => v.split(",")),
+    Object.values(options).map((option) => option.split(",").map(Number)),
   );
+
+  const onChangeStocks = useCallback(
+    (value: string, num: number) => {
+      if (stocksList) {
+        const tempStockList: StockList = {
+          ...JSON.parse(JSON.stringify(stocksList)),
+        };
+
+        tempStockList.stockList[num].quantity = +value;
+
+        setStocksList(tempStockList);
+      }
+    },
+    [modifyStocks, stocksList, optionCombinations],
+  );
+
+  const onSubmitStocks = useCallback(
+    (value: string, num: number) => {
+      const tempModifyStocks: ModifyStocks = { ...modifyStocks };
+
+      tempModifyStocks.stockInfos.push({
+        optionIdList: optionCombinations[num],
+        quantity: +value,
+      });
+
+      setModifyStocks(tempModifyStocks);
+    },
+    [modifyStocks],
+  );
+
+  useEffect(() => {
+    if (data) {
+      setStocksList(data);
+    }
+  }, [data]);
 
   return (
     <div>
@@ -80,7 +124,7 @@ export default function ManageStocks({ optionGroup, isEdit }: Props) {
 
       {isLoading && <div>로딩중...</div>}
 
-      {data && (
+      {data && stocksList && (
         <TableWrapper>
           <TopHeader length={optionGroup.length}>
             <div>
@@ -107,14 +151,20 @@ export default function ManageStocks({ optionGroup, isEdit }: Props) {
                 </div>
                 <Editable
                   textAlign="center"
-                  defaultValue={`${data.stockList[index].quantity}개`}
+                  value={
+                    isEdit
+                      ? `${stocksList.stockList[index].quantity}`
+                      : `${stocksList.stockList[index].quantity}개`
+                  }
                   isPreviewFocusable={false}
+                  onChange={(e) => onChangeStocks(e, index)}
+                  onSubmit={(e) => onSubmitStocks(e, index)}
                 >
                   <StockQuantityWrapper isEdit={isEdit}>
                     <div>
                       <EditablePreview />
                       {/* Here is the custom input */}
-                      <Input value={"123"} as={EditableInput} />
+                      <Input type={"number"} as={EditableInput} />
                     </div>
                     <div>{isEdit && <EditStocks />}</div>
                   </StockQuantityWrapper>

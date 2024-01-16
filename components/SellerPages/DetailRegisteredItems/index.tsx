@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Wrapper } from "@components/SellerPages/CreateItems/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 import { useParams } from "react-router";
 import { itemsApi } from "@api/itemsApi";
 import {
+  CompleteBtn,
+  CompleteBtnWrapper,
   ItemImg,
   ItemInfo,
   ItemInfosWrapper,
@@ -12,6 +14,8 @@ import {
   StocksWrapper,
 } from "@components/SellerPages/DetailRegisteredItems/styles";
 import ManageStocks from "@components/SellerPages/DetailRegisteredItemsBodys/ManageStocks";
+import { ModifyStocks } from "@typings/sellerPages";
+import { sellersApi } from "@api/sellersApi";
 
 export default function DetailRegisteredItems() {
   const { id } = useParams();
@@ -21,7 +25,17 @@ export default function DetailRegisteredItems() {
     isLoading: eachItemLoading,
   } = itemsApi.useGetEachItemsQuery(+id!);
   const [isEdit, setIsEdit] = useState(false);
+
+  const [mutate] = sellersApi.useModifyItemStocksMutation();
+  const [modifyStocks, setModifyStocks] = useState<ModifyStocks>({
+    stockInfos: [],
+  });
   const onClickIsEdit = () => setIsEdit((prev) => !prev);
+
+  const onClickComplete = useCallback(() => {
+    mutate(modifyStocks);
+    setModifyStocks({ stockInfos: [] });
+  }, [modifyStocks]);
 
   return (
     <div>
@@ -57,7 +71,12 @@ export default function DetailRegisteredItems() {
               <div>
                 <span>재고</span>
                 <div>
-                  <MangeStocksBtn onClick={onClickIsEdit}>
+                  <MangeStocksBtn
+                    onClick={() => {
+                      onClickIsEdit();
+                      isEdit && onClickComplete();
+                    }}
+                  >
                     {isEdit ? "수정 완료" : "재고 수정"}
                   </MangeStocksBtn>
                 </div>
@@ -70,10 +89,24 @@ export default function DetailRegisteredItems() {
                 </div>
               </div>
               <ManageStocks
+                modifyStocks={modifyStocks}
+                setModifyStocks={setModifyStocks}
                 optionGroup={eachItemData?.optionGroups}
                 isEdit={isEdit}
               />
             </StocksWrapper>
+            {isEdit && (
+              <CompleteBtnWrapper>
+                <CompleteBtn
+                  onClick={() => {
+                    onClickIsEdit();
+                    onClickComplete();
+                  }}
+                >
+                  수정 완료
+                </CompleteBtn>
+              </CompleteBtnWrapper>
+            )}
           </ItemInfosWrapper>
         )}
       </Wrapper>
