@@ -46,3 +46,12 @@ export interface StockQuantity {
 export interface StockList {
   stockList: StockQuantity[];
 }
+
+export interface ModifyStock {
+  optionIdList: number[];
+  quantity: number;
+}
+
+export interface ModifyStocks {
+  stockInfos: ModifyStock[];
+}
