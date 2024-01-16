@@ -16,7 +16,6 @@ export default function RegisteredItems() {
   const [finalPage, setFinalPage] = useState(false);
   const { ref, inView } = useInView();
   const { data, error, isLoading } = sellersApi.useGetSellerItemsQuery(page);
-
   useEffect(() => {
     if (inView && !finalPage) {
       setPage((prev) => prev + 1);
