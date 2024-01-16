@@ -54,4 +54,7 @@ export const registeredItems = [
 
     return res(ctx.status(200), ctx.json(stockList));
   }),
+  rest.post("/stocks", async (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ message: "상품 수정 성공" }));
+  }),
 ];
