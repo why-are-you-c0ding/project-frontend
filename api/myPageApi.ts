@@ -44,9 +44,6 @@ export const myPageApi = createApi({
         url: "/carts/cart-line-items",
         method: "PATCH",
         body: { cartLineItemId, count },
-        headers: {
-          Authorization: `Bearer ${getCookie("JSESSIONID")}`,
-        },
       }),
     }),
     upCartItem: builder.mutation({
@@ -54,9 +51,6 @@ export const myPageApi = createApi({
         url: "/carts/cart-line-items",
         method: "PATCH",
         body: { cartLineItemId, count },
-        headers: {
-          Authorization: `Bearer ${getCookie("JSESSIONID")}`,
-        },
       }),
     }),
     buyAllLikeItem: builder.mutation({
@@ -64,9 +58,6 @@ export const myPageApi = createApi({
         url: "/carts/cart-line-items",
         method: "POST",
         body: { selectedItems },
-        headers: {
-          Authorization: `Bearer ${getCookie("JSESSIONID")}`,
-        },
       }),
     }),
     getCustomersOrder: builder.query({
