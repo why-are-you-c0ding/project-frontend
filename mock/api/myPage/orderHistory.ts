@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker";
 import { createRandomOrderHistoryItem } from "@mock/api/data/myPage/orderHistory";
 const shopName = faker.company.name();
 
-export const registeredItems = [
+export const orderHistoryItems = [
   rest.get("/order-line-items/customers", (req, res, ctx) => {
     const page = req.url.searchParams.get("page")!;
     const nullData = faker.number.int({ min: 0, max: 100 }) % 2 === 0;
