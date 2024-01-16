@@ -2,10 +2,10 @@ import { optionGroup } from "@typings/items";
 import React, { useState } from "react";
 import { sellersApi } from "@api/sellersApi";
 import {
-  OptionTable,
   StockQuantityWrapper,
   Table,
   TableWrapper,
+  TopHeader,
 } from "@components/SellerPages/DetailRegisteredItemsBodys/ManageStocks/styles";
 import {
   Editable,
@@ -82,35 +82,44 @@ export default function ManageStocks({ optionGroup, isEdit }: Props) {
 
       {data && (
         <TableWrapper>
-          <Table length={optionGroup.length + 1}>
-            {optionGroup.map((optionGroup, index) => {
-              return <span key={index}>{optionGroup.optionGroupName}</span>;
-            })}
-            <span>개수</span>
-          </Table>
+          <TopHeader length={optionGroup.length}>
+            <div>
+              <span>옵션</span>
+              <div>
+                {optionGroup.map((option) => {
+                  return (
+                    <span key={option.optionGroupId}>
+                      {option.optionGroupName}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+            <div>개수</div>
+          </TopHeader>
           {optionCombinations.map((options, index) => {
             return (
-              <OptionTable key={index} length={optionGroup.length}>
-                {options.map((option, idx) => {
-                  return <span key={idx}>{optionIdHash.get(+option)}</span>;
-                })}
+              <Table key={index} length={optionGroup.length}>
+                <div>
+                  {options.map((option, idx) => {
+                    return <span key={idx}>{optionIdHash.get(+option)}</span>;
+                  })}
+                </div>
                 <Editable
                   textAlign="center"
                   defaultValue={`${data.stockList[index].quantity}개`}
-                  // fontSize="2xl"
                   isPreviewFocusable={false}
                 >
                   <StockQuantityWrapper isEdit={isEdit}>
-                    <div></div>
                     <div>
                       <EditablePreview />
                       {/* Here is the custom input */}
-                      <Input as={EditableInput} />
+                      <Input value={"123"} as={EditableInput} />
                     </div>
                     <div>{isEdit && <EditStocks />}</div>
                   </StockQuantityWrapper>
                 </Editable>
-              </OptionTable>
+              </Table>
             );
           })}
         </TableWrapper>

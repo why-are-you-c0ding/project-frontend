@@ -8,61 +8,131 @@ export const TableWrapper = styled.div`
   margin-bottom: 2rem;
 `;
 
-export const Table = styled.div<{ length: number }>`
-  width: 100%;
+export const TopHeader = styled.div<{ length: number }>`
+  display: flex;
+  border-bottom: 2px solid #ececec;
   background-color: #f4f5f7;
 
-  display: grid;
-  grid-template-columns: repeat(${(props) => props.length - 1}, 0.9fr) 1fr;
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  border-bottom: 1px solid #ececec;
-
-  & > span {
-    text-align: center;
+    width: 35%;
 
     font-size: 1.2rem;
     font-weight: 500;
 
-    border-right: 1px solid #ececec;
-    padding: 0.2rem 0;
+    @media (max-width: 800px) {
+      font-size: 1rem;
+    }
   }
 
-  & > span:last-of-type {
-    border-right: none;
+  & > div:first-of-type {
+    width: 65%;
+    border-right: 1px solid #ececec;
+    flex-direction: column;
+
+    & > span {
+      padding: 0.2rem 0;
+    }
+
+    & > div {
+      display: grid;
+      grid-template-columns: repeat(${(props) => props.length}, 1fr);
+
+      width: 100%;
+
+      color: gray;
+
+      border-top: 1px solid #ececec;
+
+      & > span {
+        text-align: center;
+        font-size: 1rem;
+
+        border-right: 1px solid #ececec;
+        padding: 0.2rem 0;
+
+        @media (max-width: 800px) {
+          font-size: 0.86rem;
+        }
+      }
+
+      & > span:last-of-type {
+        border-right: none;
+      }
+    }
   }
 `;
 
-export const OptionTable = styled(Table)`
-  margin-top: 0;
-  background-color: inherit;
+export const Table = styled.div<{ length: number }>`
+  width: 100%;
 
-  & > span {
-    font-size: 0.9rem;
-    font-weight: 400;
+  display: flex;
+
+  border-bottom: 1px solid #ececec;
+
+  // 옵션 부분
+  & > div:first-of-type {
+    width: 65%;
+
+    display: grid;
+    grid-template-columns: repeat(${(props) => props.length}, 1fr);
+
+    & > span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border-right: 1px solid #ececec;
+    }
   }
 
-  & > span:last-of-type {
-    border-right: 1px solid #ececec;
+  // 개수 부분
+  & > div:last-of-type {
+    width: 35%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 800px) {
+    font-size: 0.86rem;
   }
 `;
 
 export const StockQuantityWrapper = styled.span<{ isEdit: boolean }>`
-  display: grid;
-  grid-template-columns: 0.25fr 1fr 0.25fr;
+  display: flex;
+  align-items: center;
 
-  @media (max-width: 1200px) {
-    grid-template-columns: 0fr 1fr 0.25fr;
-  }
-
-  border: 1px solid red;
+  width: 100%;
 
   & > div {
-    border: 1px solid;
+    padding: 0.2rem 0;
+  }
 
-    input {
-      color: red;
+  & > div:first-of-type {
+    width: ${(props) => (props.isEdit ? "60%" : "100%")};
+    text-align: ${(props) => (props.isEdit ? "right" : "center")};
 
-      border: 1px solid blue;
+    @media (max-width: 800px) {
+      width: ${(props) => props.isEdit && "50%"};
+    }
+  }
+
+  & > div:last-of-type {
+    width: ${(props) => (props.isEdit ? "40%" : "0%")};
+
+    @media (max-width: 800px) {
+      width: ${(props) => props.isEdit && "50%"};
+    }
+  }
+
+  input {
+    @media (max-width: 800px) {
+      font-size: 0.86rem;
     }
   }
 `;

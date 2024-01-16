@@ -15,8 +15,6 @@ export function EditStocks() {
     getEditButtonProps,
   } = useEditableControls();
 
-  console.log(isEditing);
-
   return (
     <EditStocksWrapper>
       {isEditing ? (

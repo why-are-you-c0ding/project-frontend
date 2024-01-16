@@ -8,6 +8,7 @@ import {
   ItemInfo,
   ItemInfosWrapper,
   MangeStocksBtn,
+  ModifyAllBtn,
   StocksWrapper,
 } from "@components/SellerPages/DetailRegisteredItems/styles";
 import ManageStocks from "@components/SellerPages/DetailRegisteredItemsBodys/ManageStocks";
@@ -55,9 +56,18 @@ export default function DetailRegisteredItems() {
             <StocksWrapper>
               <div>
                 <span>재고</span>
-                <MangeStocksBtn onClick={onClickIsEdit}>
-                  재고 수정
-                </MangeStocksBtn>
+                <div>
+                  <MangeStocksBtn onClick={onClickIsEdit}>
+                    {isEdit ? "수정 완료" : "재고 수정"}
+                  </MangeStocksBtn>
+                </div>
+                <div>
+                  {isEdit && (
+                    <ModifyAllBtn onClick={onClickIsEdit}>
+                      재고 일괄 수정
+                    </ModifyAllBtn>
+                  )}
+                </div>
               </div>
               <ManageStocks
                 optionGroup={eachItemData?.optionGroups}

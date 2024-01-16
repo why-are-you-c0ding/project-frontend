@@ -4,7 +4,11 @@ import { SignUpBtn } from "@pages/SignUp/styles";
 export const ItemInfosWrapper = styled.div`
   padding: 0 4rem;
 
-  @media (max-width: 769px) {
+  @media (max-width: 1000px) {
+    padding: 0 2rem;
+  }
+
+  @media (max-width: 800px) {
     padding: 0;
   }
 `;
@@ -56,6 +60,7 @@ export const StocksWrapper = styled.div`
 
     display: flex;
     align-items: center;
+    gap: 0.1rem;
   }
 `;
 
@@ -65,4 +70,8 @@ export const MangeStocksBtn = styled(SignUpBtn)`
 
   font-size: 0.8rem;
   margin-left: 0.5rem;
+`;
+
+export const ModifyAllBtn = styled(MangeStocksBtn)`
+  width: 6rem;
 `;
