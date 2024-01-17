@@ -53,11 +53,13 @@ export const sellersApi = createApi({
     }),
     getItemStocks: builder.query<StockList, string>({
       query: (data: string) => `/stocks?${data}`,
+      providesTags: [{ type: "sellers", id: "stocks" }],
     }),
     modifyItemStocks: builder.mutation({
       query: (data: ModifyStocks) => {
         return { url: "stocks", method: "post", body: data };
       },
+      invalidatesTags: [{ type: "sellers", id: "stocks" }],
     }),
   }),
 });
