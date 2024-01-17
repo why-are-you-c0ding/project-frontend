@@ -32,8 +32,10 @@ const DetailRegisteredItem = loadable(
 
 import { FaArrowUp } from "react-icons/fa";
 import { Spinner } from "@chakra-ui/react";
+import { useAppSelector } from "@redux/hooks";
 
 const App = () => {
+  const { isLoading } = useAppSelector((state) => state.commonSlice);
   const { pathname } = useLocation();
   const ref = useRef<Scrollbars>(null);
 
@@ -48,17 +50,19 @@ const App = () => {
 
   return (
     <Scrollbars ref={ref} onScroll={handleScroll}>
-      <SpinnerWrapper>
-        <div>
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="blue.500"
-            size="xl"
-          />
-        </div>
-      </SpinnerWrapper>
+      {isLoading && (
+        <SpinnerWrapper>
+          <div>
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          </div>
+        </SpinnerWrapper>
+      )}
       <StatusBar />
       <NoneHeader>
         <Routes>
