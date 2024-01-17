@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Wrapper } from "@components/SellerPages/CreateItems/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 import { useParams } from "react-router";
@@ -16,9 +16,17 @@ import {
 import ManageStocks from "@components/SellerPages/DetailRegisteredItemsBodys/ManageStocks";
 import { ModifyStocks } from "@typings/sellerPages";
 import { sellersApi } from "@api/sellersApi";
+import { toast } from "react-toastify";
+import { useAppDispatch } from "@redux/hooks";
+import { onSetIsLoading } from "@redux/reducers/commonSlice";
+import ModalWrapper from "@components/UI/Modal";
+import { useDisclosure } from "@chakra-ui/react";
+import AllStocksModifyModal from "@components/SellerPages/DetailRegisteredItemsBodys/AllStocksModifyModal";
 
 export default function DetailRegisteredItems() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { id } = useParams();
+  const dispatch = useAppDispatch();
   const {
     data: eachItemData,
     error: eachItemError,
@@ -26,16 +34,32 @@ export default function DetailRegisteredItems() {
   } = itemsApi.useGetEachItemsQuery(+id!);
   const [isEdit, setIsEdit] = useState(false);
 
-  const [mutate] = sellersApi.useModifyItemStocksMutation();
+  const [mutate, { isLoading }] = sellersApi.useModifyItemStocksMutation();
   const [modifyStocks, setModifyStocks] = useState<ModifyStocks>({
     stockInfos: [],
   });
   const onClickIsEdit = () => setIsEdit((prev) => !prev);
 
-  const onClickComplete = useCallback(() => {
-    mutate(modifyStocks);
-    setModifyStocks({ stockInfos: [] });
-  }, [modifyStocks]);
+  const onClickComplete = useCallback(
+    (temp?: ModifyStocks) => {
+      console.log("여기", modifyStocks);
+
+      if (modifyStocks.stockInfos.length === 0) {
+        toast.warning("수정하신 재고가 없습니다.", {
+          position: "top-center",
+        });
+        return;
+      }
+
+      temp ? mutate(temp) : mutate(modifyStocks);
+      setModifyStocks({ stockInfos: [] });
+    },
+    [modifyStocks],
+  );
+
+  useEffect(() => {
+    dispatch(onSetIsLoading(isLoading));
+  }, [isLoading]);
 
   return (
     <div>
@@ -82,9 +106,7 @@ export default function DetailRegisteredItems() {
                 </div>
                 <div>
                   {isEdit && (
-                    <ModifyAllBtn onClick={onClickIsEdit}>
-                      재고 일괄 수정
-                    </ModifyAllBtn>
+                    <ModifyAllBtn onClick={onOpen}>재고 일괄 수정</ModifyAllBtn>
                   )}
                 </div>
               </div>
@@ -109,6 +131,20 @@ export default function DetailRegisteredItems() {
             )}
           </ItemInfosWrapper>
         )}
+
+        <ModalWrapper
+          isOpen={isOpen}
+          onClose={onClose}
+          title={"재고 일괄 수정"}
+          content={
+            <AllStocksModifyModal
+              onClose={onClose}
+              onClickComplete={onClickComplete}
+              setModifyStocks={setModifyStocks}
+            />
+          }
+          footer={null}
+        />
       </Wrapper>
     </div>
   );

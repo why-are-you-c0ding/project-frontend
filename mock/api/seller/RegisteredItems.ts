@@ -4,6 +4,7 @@ import { createRandomItem } from "@mock/api/data/items/getItems";
 import { stockQuantity } from "@mock/api/data/sellers/createItem";
 import { StockList } from "@typings/sellerPages";
 const shopName = faker.company.name();
+let stockList: StockList;
 
 export const registeredItems = [
   rest.get("/items/sellers", (req, res, ctx) => {
@@ -46,7 +47,7 @@ export const registeredItems = [
 
     optionList.forEach((option) => (optionListSize *= option.length));
 
-    let stockList: StockList = {
+    stockList = {
       stockList: faker.helpers.multiple(stockQuantity, {
         count: optionListSize,
       }),
@@ -55,6 +56,7 @@ export const registeredItems = [
     return res(ctx.status(200), ctx.json(stockList));
   }),
   rest.post("/stocks", async (req, res, ctx) => {
+    console.log("목 api에서 받은거", await req.json());
     return res(ctx.status(200), ctx.json({ message: "상품 수정 성공" }));
   }),
 ];

@@ -15,6 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { EditStocks } from "@components/SellerPages/DetailRegisteredItemsBodys/EditStocks";
 import { ModifyStocks, StockList } from "@typings/sellerPages";
+import { useAppDispatch } from "@redux/hooks";
+import { onSetOptionCombinations } from "@redux/reducers/sellersSlice";
 
 interface Props {
   optionGroup: optionGroup[];
@@ -62,6 +64,7 @@ export default function ManageStocks({
   modifyStocks,
   setModifyStocks,
 }: Props) {
+  const dispatch = useAppDispatch();
   let options: { [key: string]: string } = {};
   let optionIdHash = new Map();
 
@@ -85,7 +88,7 @@ export default function ManageStocks({
 
   const onChangeStocks = useCallback(
     (value: string, num: number) => {
-      if (stocksList) {
+      if (stocksList && value.length <= 9) {
         const tempStockList: StockList = {
           ...JSON.parse(JSON.stringify(stocksList)),
         };
@@ -117,6 +120,12 @@ export default function ManageStocks({
       setStocksList(data);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (optionCombinations) {
+      dispatch(onSetOptionCombinations(optionCombinations));
+    }
+  }, [optionCombinations]);
 
   return (
     <div>
@@ -164,7 +173,12 @@ export default function ManageStocks({
                     <div>
                       <EditablePreview />
                       {/* Here is the custom input */}
-                      <Input type={"number"} as={EditableInput} />
+                      <Input
+                        type={"number"}
+                        maxLength={9}
+                        focusBorderColor={"none"}
+                        as={EditableInput}
+                      />
                     </div>
                     <div>{isEdit && <EditStocks />}</div>
                   </StockQuantityWrapper>
