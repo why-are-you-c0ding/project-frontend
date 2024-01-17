@@ -1,5 +1,17 @@
 import styled from "@emotion/styled";
 
+export const SpinnerWrapper = styled.div`
+  position: absolute;
+  z-index: 1000;
+
+  & > div {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+`;
+
 export const NoneHeader = styled.div`
   position: relative;
   box-sizing: border-box;

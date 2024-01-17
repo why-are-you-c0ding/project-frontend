@@ -4,7 +4,7 @@ import loadable from "@loadable/component";
 import "react-toastify/dist/ReactToastify.css";
 import StatusBar from "@components/UI/StatusBar";
 import { useLocation } from "react-router-dom";
-import { NoneHeader, ScrollTop } from "@layouts/App/styles";
+import { NoneHeader, ScrollTop, SpinnerWrapper } from "@layouts/App/styles";
 import Scrollbars from "react-custom-scrollbars";
 
 const SignUp = loadable(() => import("@pages/SignUp"));
@@ -31,6 +31,7 @@ const DetailRegisteredItem = loadable(
 );
 
 import { FaArrowUp } from "react-icons/fa";
+import { Spinner } from "@chakra-ui/react";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -47,6 +48,17 @@ const App = () => {
 
   return (
     <Scrollbars ref={ref} onScroll={handleScroll}>
+      <SpinnerWrapper>
+        <div>
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+        </div>
+      </SpinnerWrapper>
       <StatusBar />
       <NoneHeader>
         <Routes>
