@@ -1,1 +1,3 @@
-export interface common {}
+export interface common {
+  isLoading: boolean;
+}

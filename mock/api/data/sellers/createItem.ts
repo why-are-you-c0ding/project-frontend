@@ -14,3 +14,9 @@ export const itemInfos = [
   { id: 0, name: "color", values: "bluee, green" },
   { id: 1, name: "sizzze", values: "small,middle,large" },
 ];
+
+export function stockQuantity() {
+  return {
+    quantity: faker.number.int({ min: 0, max: 100000 }),
+  };
+}

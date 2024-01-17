@@ -1,14 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { common } from "@typings/common";
 
-const initialState: common = {};
+const initialState: common = {
+  isLoading: false,
+};
 
 export const commonSlice = createSlice({
   name: "commonSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    onSetIsLoading: (state, action: { payload: boolean }) => {
+      state.isLoading = action.payload;
+    },
+  },
 });
 
-export const {} = commonSlice.actions;
+export const { onSetIsLoading } = commonSlice.actions;
 
 export default commonSlice.reducer;

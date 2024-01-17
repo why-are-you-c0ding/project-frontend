@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ImageListType } from "react-images-uploading";
-import { Item } from "@typings/sellerPages";
+import { Item, ModifyStocks, StockList } from "@typings/sellerPages";
 import { ItemPaging } from "@typings/items";
 const URL = process.env.REACT_APP_BASE_URL!;
 const isDevelopment = process.env.REACT_START_MSW !== "true";
@@ -51,8 +51,15 @@ export const sellersApi = createApi({
         return currentArg !== previousArg;
       },
     }),
-    getItemStocks: builder.query({
+    getItemStocks: builder.query<StockList, string>({
       query: (data: string) => `/stocks?${data}`,
+      providesTags: [{ type: "sellers", id: "stocks" }],
+    }),
+    modifyItemStocks: builder.mutation({
+      query: (data: ModifyStocks) => {
+        return { url: "stocks", method: "post", body: data };
+      },
+      invalidatesTags: [{ type: "sellers", id: "stocks" }],
     }),
   }),
 });
