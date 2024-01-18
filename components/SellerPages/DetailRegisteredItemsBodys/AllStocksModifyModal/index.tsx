@@ -43,7 +43,6 @@ export default function AllStocksModifyModal({
       temp.stockInfos.push({ optionIdList: options, quantity: +value });
     });
 
-    console.log("temp", temp);
     onClickComplete(temp);
 
     setModifyStocks(temp);
