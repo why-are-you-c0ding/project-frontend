@@ -44,8 +44,7 @@ export default function AllStocksModifyModal({
     });
 
     onClickComplete(temp);
-
-    setModifyStocks(temp);
+    // setModifyStocks(temp);
   }, [optionCombinations, value]);
 
   return (
