@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ReponsiveBar from "@components/UI/ReponsiveBar";
 import { TopHeader } from "@pages/MyPage/styles";
-import { Wrapper } from "@components/MyPages/OrderHistory/styles";
 import NullData from "@components/UI/NullData";
 
 import { myPageApi } from "@api/myPageApi";
 import { useInView } from "react-intersection-observer";
-import { sellersApi } from "@api/sellersApi";
 import { RegisteredItem } from "@components/SellerPages/RegisteredItems/styled";
+import { Wrapper } from "@components/MyPages/CartItem/styles";
 
 const Buying = () => {
   const [page, setPage] = useState(0);
@@ -16,6 +15,8 @@ const Buying = () => {
 
   const { data, error, isLoading } =
     myPageApi.useGetCustomerOrderHistoryItemsQuery(page);
+
+  console.log(data);
 
   useEffect(() => {
     if (inView && !finalPage) {
@@ -56,14 +57,24 @@ const Buying = () => {
                       <span>{item.itemName}</span>
                       <span>({item.shopName})</span>
                     </div>
-                    <div>{item.shopName}</div>
+                    <span>상품 개수</span>
+                    <span>{item.count}개</span>
                   </div>
                   <div>
                     <span>상품 가격</span>
                     <span>{item.price}원</span>
                   </div>
                   <div>
-                    <div></div>
+                    <span>상품 상태</span>
+                    <span>({item.orderStatus})</span>
+                  </div>
+                  <div>
+                    <span>상품 옵션 그룹 이름</span>
+                    <span>({item.orderStatus})</span>
+                  </div>
+                  <div>
+                    <span>상품 옵션 이름</span>
+                    <span>({item.orderStatus})</span>
                   </div>
                 </RegisteredItem>
               );
