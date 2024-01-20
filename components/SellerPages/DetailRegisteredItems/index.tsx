@@ -38,13 +38,11 @@ export default function DetailRegisteredItems() {
   const [modifyStocks, setModifyStocks] = useState<ModifyStocks>({
     stockInfos: [],
   });
-  const onClickIsEdit = () => setIsEdit((prev) => !prev);
+  const onClickIsEdit = (value: boolean) => setIsEdit(value);
 
   const onClickComplete = useCallback(
     (temp?: ModifyStocks) => {
-      console.log("여기", modifyStocks);
-
-      if (modifyStocks.stockInfos.length === 0) {
+      if (!temp && modifyStocks.stockInfos.length === 0) {
         toast.warning("수정하신 재고가 없습니다.", {
           position: "top-center",
         });
@@ -53,6 +51,12 @@ export default function DetailRegisteredItems() {
 
       temp ? mutate(temp) : mutate(modifyStocks);
       setModifyStocks({ stockInfos: [] });
+      onClose();
+      onClickIsEdit(false);
+
+      toast.success("재고 수정이 완료되었습니다.", {
+        position: "top-center",
+      });
     },
     [modifyStocks],
   );
@@ -97,7 +101,7 @@ export default function DetailRegisteredItems() {
                 <div>
                   <MangeStocksBtn
                     onClick={() => {
-                      onClickIsEdit();
+                      onClickIsEdit(true);
                       isEdit && onClickComplete();
                     }}
                   >
@@ -121,7 +125,6 @@ export default function DetailRegisteredItems() {
               <CompleteBtnWrapper>
                 <CompleteBtn
                   onClick={() => {
-                    onClickIsEdit();
                     onClickComplete();
                   }}
                 >
@@ -140,7 +143,6 @@ export default function DetailRegisteredItems() {
             <AllStocksModifyModal
               onClose={onClose}
               onClickComplete={onClickComplete}
-              setModifyStocks={setModifyStocks}
             />
           }
           footer={null}

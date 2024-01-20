@@ -4,9 +4,6 @@ import {
   AllStocksModifyModalBtn,
   AllStocksModifyModalWrapper,
 } from "@components/SellerPages/DetailRegisteredItemsBodys/AllStocksModifyModal/styles";
-import useInput from "@hooks/useInput";
-import { SignUpBtn } from "@pages/SignUp/styles";
-import { SignBtn } from "@components/SellerPages/CreateItems/styles";
 import { toast } from "react-toastify";
 import { useAppSelector } from "@redux/hooks";
 import { ModifyStocks } from "@typings/sellerPages";
@@ -14,12 +11,10 @@ import { ModifyStocks } from "@typings/sellerPages";
 interface Props {
   onClickComplete: (temp: ModifyStocks) => void;
   onClose: () => void;
-  setModifyStocks: React.Dispatch<React.SetStateAction<ModifyStocks>>;
 }
 export default function AllStocksModifyModal({
   onClickComplete,
   onClose,
-  setModifyStocks,
 }: Props) {
   const [value, setValue] = useState("");
   const { optionCombinations } = useAppSelector((state) => state.sellersSlice);
@@ -44,7 +39,6 @@ export default function AllStocksModifyModal({
     });
 
     onClickComplete(temp);
-    // setModifyStocks(temp);
   }, [optionCombinations, value]);
 
   return (
