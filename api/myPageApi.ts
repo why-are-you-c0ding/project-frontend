@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { CartData, CartItemInfo } from "@typings/myPage";
+import { CartData, CartItemInfo, orderHistoryPaging } from "@typings/myPage";
 import { getCookie } from "@utils/cookie";
+import { ItemPaging } from "@typings/items";
 const URL = process.env.REACT_APP_BASE_URL;
 const isDevelopment = process.env.REACT_START_MSW !== "true";
 
@@ -60,9 +61,25 @@ export const myPageApi = createApi({
         body: { selectedItems },
       }),
     }),
-    getCustomersOrder: builder.query({
-      query: (ItemId: number) =>
-        `/order-line-items/customers?lastLookUpOrderLineItemId=${ItemId}`,
+    getCustomerOrderHistoryItems: builder.query<orderHistoryPaging, number>({
+      query: (page: number) => ({
+        url: "/order-line-items/customers",
+        params: { page },
+      }),
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      // Always merge incoming data to the cache entry
+      merge: (currentCache, newItems) => {
+        if ("finalPage" in newItems) {
+          currentCache.orderLineItems.push(...newItems.orderLineItems);
+          currentCache.finalPage = newItems.finalPage;
+        }
+      },
+      // Refetch when the page arg changes
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
     }),
     getSellersOrder: builder.query({
       query: (ItemId: number) =>

@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div<{ sideBar: boolean }>`
-  font-weight: 400;
-
-  width: 100%;
+  min-width: 14rem;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
 
   @media (max-width: 769px) {
     margin-bottom: 0;
@@ -20,7 +22,7 @@ export const Wrapper = styled.div<{ sideBar: boolean }>`
 export const Title = styled.header`
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  font-weight: bold;
+  font-weight: 500;
 
   @media (max-width: 769px) {
     display: none;

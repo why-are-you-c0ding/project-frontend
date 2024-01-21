@@ -25,3 +25,26 @@ export interface CartItemInfo {
   count: number;
   cartLineItemId: number;
 }
+
+export interface orderOptionGroups {
+  optionGroupName: string;
+  optionName: string;
+}
+export interface orderLineItems {
+  itemImageUrl: string;
+  shopName: string;
+  itemName: string;
+  count: number;
+  shopId: number;
+  itemId: number;
+  orderLineItemId: number;
+  orderStatus: string;
+  price: number;
+  orderOptionGroups: orderOptionGroups[];
+}
+
+//주문내역 페이징 타입
+export interface orderHistoryPaging {
+  finalPage: boolean;
+  orderLineItems: orderLineItems[];
+}

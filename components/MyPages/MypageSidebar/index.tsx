@@ -9,29 +9,31 @@ interface Props {
 const MypageSidebar: FC<Props> = ({ sideBar }) => {
   return (
     <Wrapper sideBar={sideBar}>
-      <Title>마이 페이지</Title>
-      <Info>
-        <span>
-          <NavLink
-            to={"/mypage/buying"}
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "active" : ""
-            }
-          >
-            주문 내역
-          </NavLink>
-        </span>
-        <span>
-          <NavLink
-            to={"/mypage/like"}
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "active" : ""
-            }
-          >
-            장바구니
-          </NavLink>
-        </span>
-      </Info>
+      <div>
+        <Title>마이 페이지</Title>
+        <Info>
+          <span>
+            <NavLink
+              to={"/mypage/buying"}
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              주문 내역
+            </NavLink>
+          </span>
+          <span>
+            <NavLink
+              to={"/mypage/like"}
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              장바구니
+            </NavLink>
+          </span>
+        </Info>
+      </div>
     </Wrapper>
   );
 };
