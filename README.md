@@ -50,7 +50,7 @@ npm run dev
 <br/>
 
 ## 메인페이지
-![wayc 메인.gif](..%2F..%2FDownloads%2Fwayc%20%EB%A9%94%EC%9D%B8.gif)
+![wayc 메인](https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/2dd3061d-c7a9-4084-9bd7-295929a3c014)
 ## 회원가입
 
 ## 로그인
