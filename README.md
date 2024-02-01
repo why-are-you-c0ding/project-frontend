@@ -30,6 +30,7 @@ npm run dev
 
 ## ❓ WAYC 프로젝트 소개
 1. [메인페이지](#메인페이지)
+    ![wayc 메인](https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/bfae8fe2-1756-45b0-af22-4b3124eaa2e0)
 2. [회원가입](#회원가입)
 3. [로그인](#로그인)
 4. [판매자 페이지](#판매자-페이지)
