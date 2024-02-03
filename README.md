@@ -173,10 +173,12 @@ npm run dev
 데스크톱<br>
 <img width="248" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/f47bc124-8439-4599-a5c1-49de8dcde19f">
 
+- 구현 중
 
 
 ### 주문 내역 조회 페이지
 
+- 구현 중
 ### 장바구니 페이지
 데스크톱<br>
 <img width="1174" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/43235633-d37f-46ce-aec5-4313a50f6f50">
