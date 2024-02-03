@@ -170,8 +170,9 @@ npm run dev
 ---
 
 ## 구매자 마이페이지
-데스크탑<br>
+데스크톱<br>
 <img width="248" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/f47bc124-8439-4599-a5c1-49de8dcde19f">
+
 
 
 ### 주문 내역 조회 페이지
@@ -186,7 +187,7 @@ npm run dev
 <img width="717" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/70c3ae56-fa2d-4af2-aede-715697260d2d">
 
 
-- 구매자가 장바구니에 넣은 상품들을 볼 수 있는 페이지입니다.
+- 구매자가 장바구니에 넣은 상품들을 볼 수 있는 페이지입니다.
 - 전체 선택 체크박스를 누르면 전체 선택이 가능합니다.
 - "구매하기" 버튼을 클릭하면 구매 페이지로 넘어갑니다.
 - "구매하기" 버튼을 클릭하였을 때 선택된 상품이 존재하지 않으면 에러 메시지를 보여줍니다.
