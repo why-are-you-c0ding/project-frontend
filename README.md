@@ -1,4 +1,4 @@
-# WAYC
+# <img width="6%" src="public/wayc.png"> WAYC
 
 기간<br/>
 2022.09 - 2023.11, 2023.09 - 현재
