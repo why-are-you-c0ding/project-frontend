@@ -5,9 +5,9 @@
 
 
 ### 👥  참여인원
-- 가천대학교 컴퓨터공학과 권오현 [Gitgub](https://github.com/5hyun) | qhslsl@gmail.com
+- 가천대학교 컴퓨터공학과 권오현 [Github](https://github.com/5hyun) | qhslsl@gmail.com
 
-- 가천대학교 컴퓨터공학과 추성준 [Gitgub](https://github.com/ChuSeongJun) | j949854@gmail.com
+- 가천대학교 컴퓨터공학과 추성준 [Github](https://github.com/ChuSeongJun) | j949854@gmail.com
 
 ## 🎯 기술 스택
 npm<br/>
