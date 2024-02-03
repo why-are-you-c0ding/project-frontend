@@ -1,4 +1,4 @@
-<img width="248" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/d413b0b2-9a26-40e0-b424-d5a6c8bf7176"># <img width="6%" src="public/wayc.png"> WAYC
+# <img width="6%" src="public/wayc.png"> WAYC
 
 기간<br/>
 2022.09 - 2023.11, 2023.09 - 현재
