@@ -105,7 +105,7 @@ npm run dev
 ## 구매자 상품 관련 페이지
 
 ### 전체 상품 조회 페이지
-<img width="80%" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/881f4a28-b6d2-4aba-b075-c506059d0cc3"/>
+<video src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/c3ce1ff0-8160-495d-8f13-1fa9293dc6f1"></video>
 
 - 메인 페이지에서 전체 상품을 조회할 수 있습니다.
 - 무한 스크롤을 이용하여 구현하였습니다.
@@ -114,33 +114,20 @@ npm run dev
 - 오른쪽 하단에 "TOP" 버튼을 누르면 최상단으로 올라가게 하였습니다.
 
 ### 상품 검색 페이지
-데스크톱<br>
-<img width="1439" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/f6c1c545-d5ce-4aac-9df2-cf52d5b0b9da">
-
-반응형<br>
-<img width="493" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/c02054ab-4958-47e7-a614-50db284491e8">
-
+<video src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/0b49ba8f-8ab4-4491-8864-1a777942bba7"></video>
 
 - 상단바의 검색 부분에 상품을 검색하면 상품이 나오는 페이지 입니다.
 - 메인에서의 전체 상품 조회처럼 무한 스크롤 방식을 사용했습니다.
 
 ### 상품 상세 조회 페이지
-데스크톱<br>
-<img width="1440" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/7d85a82f-e4c8-4003-bcfc-20675ac6dbf3">
-
-반응형<br>
-<img width="497" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/dd49fdee-9d23-4b9b-9e28-490597077c4d">
+<video src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/9a5de74d-d658-4327-86e0-664bbc99ab07"></video>
 
 - 전체 상품 조회에서 상품을 클릭하면 상품 상세 조회 페이지로 이동합니다.
 - 상품의 옵션과 수량 선택이 가능합니다.
 - 장바구니에 상품 등록도 가능합니다.
 
 ### 상품 결제 정보 입력 페이지
-데스크톱<br>
-<img width="721" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/4f5da912-41f8-4e93-8421-a92cff710634">
-
-반응형<br>
-<img width="499" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/bc2472ac-b8cb-4a1c-9bc0-abba0788a79b">
+<video src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/809dd776-8e1e-4c35-af2b-def240c79667"></video>
 
 - 상품 상세 조회 페이지에서 "구매" 버튼을 누르면 나오는 페이지입니다.
 - 구매자의 주소를 입력하고 상품 결제가 가능합니다.
@@ -155,7 +142,6 @@ npm run dev
 <img width="248" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/f47bc124-8439-4599-a5c1-49de8dcde19f">
 
 - 구현 중
-
 
 ### 주문 내역 조회 페이지
 
