@@ -50,15 +50,13 @@ npm run dev
 <br/>
 
 ## 메인페이지
-데스크톱<br>
-<img width="721" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/32ac210e-21a7-4282-91ff-df33695ab053">
-
-반응형<br>
-<img width="100%" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/6a09b75f-d95c-4913-8498-c0aa79b168e5">
+<video src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/9f0782d6-03c9-4595-a283-6a0528e361db"></video>
 
 - 배너 이미지를 통해 상품을 홍보합니다.
-- 현재는 강아지 사진을 임시로 사용하고 있습니다.
+- 현재는 배너에 강아지 사진을 임시로 사용하고 있습니다.
 - 전체 상품 조회도 가능합니다.
+- 전체 상품 조회의 상세 설명은 "전체 상품 조회 페이지" 부분에 있습니다.
+
 ---
 
 ## 회원가입
@@ -78,47 +76,30 @@ npm run dev
 ## 판매자 페이지
 
 ### 등록 상품 조회 페이지
-데스크톱<br>
-<img width="1439" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/9dc026bd-e09d-4f9b-b0aa-93c33efc075e">
-
-반응형<br>
-<img width="498" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/b206940c-82db-47ae-844a-7ef21da92dd3">
-
+<video src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/2aff7e34-82e4-45c1-b85b-8f1e621c37d3"></video>
 
 - 판매자가 등록한 상품을 조회할 수 있는 페이지 입니다.
 - 상품 관리 버튼을 누르면 상품(재고) 관리 페이지로 이동합니다.
 
 ### 상품(재고) 관리 페이지
-데스크톱<br>
-<img width="1440" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/4b513295-8245-460b-a996-0871438757b9">
-<img width="1156" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/897449f9-e752-49cf-a5a9-36713b940d02">
-
-반응형<br>
-<img width="494" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/8f026897-9921-4966-adaf-fb0381875a56">
-
+<video src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/327ba9a5-0591-4cd1-b4b5-c7ea7ab6a829"></video>
 
 - 판매자가 등록한 상품의 재고를 관리할 수 있는 페이지 입니다.
 - "재고 수정" 버튼을 클릭하면 재고 수정이 가능합니다.
 - "재고 일괄 수정" 버튼을 클릭하면 모든 상품의 재고를 일괄 수정할 수 있습니다.
+- MSW로 구축된 상태여서 재고 수정 시 모든 재고의 수가 변경됩니다.
 
 ### 판매 내역 조회 페이지
 
 - 구현 중
 
 ### 상품 등록 페이지
-데스크톱<br>
-<img width="1440" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/fc6facce-6c18-4355-92dc-b6ee95e66872">
-<img width="1172" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/4edd232d-74ff-4b7b-8e93-37a1a03b1de8">
-<img width="1169" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/64fabaa9-0631-4f03-9985-4b86c89cb80b">
-
-반응형<br>
-<img width="497" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/753393ab-9d71-4abb-b01d-e95588e11584">
-<img width="499" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/a8ed5600-edd3-4960-92ff-00d7665e89e6">
-<img width="494" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/944f18a1-2927-489f-a405-b617f50a3818">
-
+<video src="https://github.com/why-are-you-c0ding/project-frontend/assets/86971770/d24b40f5-5f00-4ba3-a125-5deb747c995c"></video>
 
 - 판매자가 상품을 등록할 수 있는 페이지 입니다.
 - 상품 이미지와 옵션 정보를 설정 할 수 있습니다.
+- MSW로 구축된 상태여서 상품 등록 반영이 바로 되지 않습니다.
+
 ---
 
 ## 구매자 상품 관련 페이지
