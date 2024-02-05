@@ -9,7 +9,7 @@ export function createRandomOrderHistoryItem() {
     shopId: faker.number.int(),
     itemId: faker.number.int(),
     orderLineItemId: faker.number.int(),
-    orderStatus: "ORDER_ACCEPTED",
+    orderStatus: "배송 중",
     price: faker.commerce.price({ dec: 0 }),
     orderOptionGroups: RandomOrderHistoryOptionGroups(),
   };
