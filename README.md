@@ -139,17 +139,18 @@ npm run dev
 
 ## 구매자 마이페이지
 
-
-데스크톱<br>
-<img width="248" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/f47bc124-8439-4599-a5c1-49de8dcde19f">
-
 - 구현 중
 
 ### 주문 내역 조회 페이지
+<video src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/78a0e2e3-8d74-41a0-ad7e-915909effa97"></video>
 
-- 구현 중
+- 구매자가 주문한 내역을 볼 수 있는 페이지입니다.
+- 무한 스크롤을 이용하여 구현하였습니다.
+- 무한 스크롤에서는 react-intersection-observer를 사용하였습니다.
+- 또한 RTK Query의 캐싱 기능을 사용하여 구현하였습니다.
+
 ### 장바구니 페이지
-<video scr="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/a88bd835-ffad-46f8-a2a9-2b6b55ca9a5c"></video>
+<video src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/a88bd835-ffad-46f8-a2a9-2b6b55ca9a5c"></video>
 
 - 구매자가 장바구니에 넣은 상품들을 볼 수 있는 페이지입니다.
 - 전체 선택 체크박스를 누르면 전체 선택이 가능합니다.
