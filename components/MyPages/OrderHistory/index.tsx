@@ -5,8 +5,9 @@ import NullData from "@components/UI/NullData";
 
 import { myPageApi } from "@api/myPageApi";
 import { useInView } from "react-intersection-observer";
-import { RegisteredItem } from "@components/SellerPages/RegisteredItems/styled";
 import { Wrapper } from "@components/MyPages/CartItem/styles";
+import { orderOptionGroups } from "@typings/myPage";
+import { OrderHistoryItem } from "@components/MyPages/OrderHistory/styles";
 
 const Buying = () => {
   const [page, setPage] = useState(0);
@@ -15,8 +16,6 @@ const Buying = () => {
 
   const { data, error, isLoading } =
     myPageApi.useGetCustomerOrderHistoryItemsQuery(page);
-
-  console.log(data);
 
   useEffect(() => {
     if (inView && !finalPage) {
@@ -45,7 +44,7 @@ const Buying = () => {
           <div>
             {data.orderLineItems.map((item, index) => {
               return (
-                <RegisteredItem
+                <OrderHistoryItem
                   key={item.itemId}
                   ref={data.orderLineItems.length - 5 === index ? ref : null}
                 >
@@ -55,28 +54,46 @@ const Buying = () => {
                   <div>
                     <div>
                       <span>{item.itemName}</span>
-                      <span>({item.shopName})</span>
+                      <span>{item.shopName}</span>
                     </div>
-                    <span>상품 개수</span>
-                    <span>{item.count}개</span>
                   </div>
                   <div>
                     <span>상품 가격</span>
                     <span>{item.price}원</span>
                   </div>
+                  {/* 백엔드 API에 맞는 가짜 데이터 없음 추후 수정 예정*/}
+                  {/*<div>*/}
+                  {/*  <span>상품 옵션 그룹 이름</span>*/}
+                  {/*  {item.orderOptionGroups.map(*/}
+                  {/*    (optionGroup, optionGroupIndex) => (*/}
+                  {/*      <span key={optionGroupIndex}>*/}
+                  {/*        {optionGroup.optionGroupName}*/}
+                  {/*      </span>*/}
+                  {/*    ),*/}
+                  {/*  )}*/}
+                  {/*</div>*/}
                   <div>
-                    <span>상품 상태</span>
-                    <span>({item.orderStatus})</span>
+                    <span>상품 개수</span>
+                    <span>{item.count}개</span>
                   </div>
                   <div>
-                    <span>상품 옵션 그룹 이름</span>
-                    <span>({item.orderStatus})</span>
+                    <span>상품 상태</span>
+                    <span>{item.orderStatus}</span>
                   </div>
                   <div>
                     <span>상품 옵션 이름</span>
-                    <span>({item.orderStatus})</span>
+                    {item.orderOptionGroups.map(
+                      (
+                        optionGroup: orderOptionGroups,
+                        optionGroupIndex: number,
+                      ) => (
+                        <span key={optionGroupIndex}>
+                          {optionGroup.optionName}
+                        </span>
+                      ),
+                    )}
                   </div>
-                </RegisteredItem>
+                </OrderHistoryItem>
               );
             })}
           </div>
