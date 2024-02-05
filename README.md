@@ -138,6 +138,8 @@ npm run dev
 ---
 
 ## 구매자 마이페이지
+
+
 데스크톱<br>
 <img width="248" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/f47bc124-8439-4599-a5c1-49de8dcde19f">
 
@@ -147,14 +149,7 @@ npm run dev
 
 - 구현 중
 ### 장바구니 페이지
-데스크톱<br>
-<img width="1174" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/43235633-d37f-46ce-aec5-4313a50f6f50">
-<img width="1170" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/e775a8ab-c472-4e6d-9c8b-06a3ff417b93">
-
-반응형<br>
-<img width="707" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/422dd5ad-dda3-4f37-963d-1f971ea1b488">
-<img width="717" alt="image" src="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/70c3ae56-fa2d-4af2-aede-715697260d2d">
-
+<video scr="https://github.com/why-are-you-c0ding/project-frontend/assets/91831079/a88bd835-ffad-46f8-a2a9-2b6b55ca9a5c"></video>
 
 - 구매자가 장바구니에 넣은 상품들을 볼 수 있는 페이지입니다.
 - 전체 선택 체크박스를 누르면 전체 선택이 가능합니다.
