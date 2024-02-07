@@ -14,7 +14,27 @@ const MypageSidebar: FC<Props> = ({ sideBar }) => {
         <Info>
           <span>
             <NavLink
-              to={"/mypage/buying"}
+              to={"/mypage/myinfo"}
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              내 정보
+            </NavLink>
+          </span>
+          <span>
+            <NavLink
+              to={"/mypage/editmyinfo"}
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              내 정보 변경
+            </NavLink>
+          </span>
+          <span>
+            <NavLink
+              to={"/mypage/OrderHistory"}
               className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "active" : ""
               }
