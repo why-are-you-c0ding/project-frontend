@@ -48,3 +48,15 @@ export interface orderHistoryPaging {
   finalPage: boolean;
   orderLineItems: orderLineItems[];
 }
+
+export interface UserInfoData {
+  nickName: string;
+  id: string;
+  email: string;
+  age: number;
+  role: string;
+}
+
+export interface UserInfo {
+  UserInfo: UserInfoData;
+}
