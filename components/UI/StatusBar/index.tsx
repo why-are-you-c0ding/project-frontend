@@ -140,7 +140,7 @@ const StatusBar: FC<Props> = ({ sideBar }) => {
               <Link to="/mypage/like">장바구니</Link>
             </span>
             <span>
-              <Link to="/mypage/buying">마이 페이지</Link>
+              <Link to="/mypage/orderhistory">마이 페이지</Link>
             </span>
             <span>
               {!isLogin ? (

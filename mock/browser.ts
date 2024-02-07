@@ -6,6 +6,7 @@ import { getItems } from "@mock/api/items/getItems";
 import { addcartItem } from "@mock/api/items/addcartItem";
 import { registeredItems } from "@mock/api/seller/RegisteredItems";
 import { orderHistoryItems } from "@mock/api/myPage/orderHistory";
+import { getUserInfo } from "@mock/api/myPage/userInfo";
 
 export const worker = setupWorker(
   ...auth,
@@ -13,6 +14,7 @@ export const worker = setupWorker(
   ...createItems,
   ...registeredItems,
   ...orderHistoryItems,
+  ...getUserInfo,
   ...getItems,
   ...addcartItem,
 );
