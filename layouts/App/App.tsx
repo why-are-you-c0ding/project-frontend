@@ -11,7 +11,11 @@ const SignUp = loadable(() => import("@pages/SignUp"));
 const LogIn = loadable(() => import("@pages/LogIn"));
 const Main = loadable(() => import(`@layouts/Main`));
 const MyPage = loadable(() => import(`@pages/MyPage`));
-const Buying = loadable(() => import("@components/MyPages/OrderHistory"));
+const MyInfo = loadable(() => import(`@components/MyPages/MyInfo`));
+const EditMyInfo = loadable(
+  () => import(`@components/MyPages/MyInfo/EditMyInfo`),
+);
+const OrderHistory = loadable(() => import("@components/MyPages/OrderHistory"));
 const Like = loadable(() => import("@components/MyPages/CartItem"));
 const SellPage = loadable(() => import(`@pages/SellPage`));
 const EachItem = loadable(() => import(`@pages/EachItem`));
@@ -72,8 +76,10 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/mypage" element={<MyPage />}>
+            <Route path="myinfo" element={<MyInfo />} />
+            <Route path="editmyinfo" element={<EditMyInfo />} />
             <Route path="like" element={<Like />} />
-            <Route path="buying" element={<Buying />} />
+            <Route path="orderhistory" element={<OrderHistory />} />
           </Route>
           <Route path="/sellpage" element={<SellPage />}>
             <Route
