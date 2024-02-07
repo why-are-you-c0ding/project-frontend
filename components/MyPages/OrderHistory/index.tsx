@@ -9,7 +9,7 @@ import { Wrapper } from "@components/MyPages/CartItem/styles";
 import { orderOptionGroups } from "@typings/myPage";
 import { OrderHistoryItem } from "@components/MyPages/OrderHistory/styles";
 
-const Buying = () => {
+const OrderHistory = () => {
   const [page, setPage] = useState(0);
   const [finalPage, setFinalPage] = useState(false);
   const { ref, inView } = useInView();
@@ -103,4 +103,4 @@ const Buying = () => {
   );
 };
 
-export default Buying;
+export default OrderHistory;
