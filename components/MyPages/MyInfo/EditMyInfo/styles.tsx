@@ -21,3 +21,5 @@ export const TableDetail = styled.div`
     background-color: #ffffff;
   }
 `;
+
+export const DetailEditBtn = styled.button``;

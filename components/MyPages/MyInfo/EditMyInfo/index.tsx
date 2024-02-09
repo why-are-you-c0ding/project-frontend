@@ -4,6 +4,7 @@ import ReponsiveBar from "@components/UI/ReponsiveBar";
 import { Wrapper } from "@components/MyPages/MyInfo/styles";
 import { TopHeader } from "@pages/MyPage/styles";
 import {
+  DetailEditBtn,
   TableDetail,
   TableSection,
 } from "@components/MyPages/MyInfo/EditMyInfo/styles";
@@ -23,23 +24,36 @@ const EditMyInfo = () => {
           <TableSection>
             <TableDetail>
               <div>닉네임</div>
-              <div>{userData?.UserInfo.nickName}</div>
+              <div>
+                <div>{userData?.UserInfo.nickName}</div>
+                <DetailEditBtn>닉네임 변경</DetailEditBtn>
+              </div>
             </TableDetail>
             <TableDetail>
               <div>아이디</div>
-              <div>{userData?.UserInfo.id}</div>
+              <div>
+                <div>{userData?.UserInfo.id}</div>
+                <DetailEditBtn>아이디 변경</DetailEditBtn>
+              </div>
             </TableDetail>
             <TableDetail>
               <div>이메일</div>
-              <div>{userData?.UserInfo.email}</div>
+              <div>
+                <div>{userData?.UserInfo.email}</div>
+                <DetailEditBtn>이메일 변경</DetailEditBtn>
+              </div>
             </TableDetail>
             <TableDetail>
               <div>나이</div>
-              <div>{userData?.UserInfo.age}</div>
+              <div>
+                <div>{userData?.UserInfo.age}</div>
+              </div>
             </TableDetail>
             <TableDetail>
               <div>직위</div>
-              <div>{userData?.UserInfo.role}</div>
+              <div>
+                <div>{userData?.UserInfo.role}</div>
+              </div>
             </TableDetail>
           </TableSection>
         </Wrapper>
