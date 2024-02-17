@@ -16,4 +16,12 @@ module.exports = {
         '^@mock/(.*)$': '<rootDir>/mock/$1',
         '^@public/(.*)$': '<rootDir>/public/$1',
     },
+    // moduleFileExtensions: [
+    //     'js',
+    //     'jsx',
+    //     'ts',
+    //     'tsx',
+    //     'json',
+    //     'node',
+    // ],
 };

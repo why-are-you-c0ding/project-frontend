@@ -1,11 +1,15 @@
-import { BrowserRouter } from "react-router-dom";
+// import "whatwg-fetch";
 import React from "react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { render } from "@testing-library/react";
 import MyPage from "@pages/MyPage";
+import store from "@redux/store";
+import { Provider } from "react-redux";
 
 describe("제스트 설정 테스트", () => {
   beforeEach(() => {
+    jest.spyOn(console, "warn").mockImplementation(() => {});
+
     const routes = [
       {
         path: "/mypage",
@@ -18,7 +22,16 @@ describe("제스트 설정 테스트", () => {
       initialIndex: 0,
     });
 
-    render(<RouterProvider router={router} />);
+    render(
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>,
+    );
   });
-  test("제스트가 초기 설정 테스트", () => {});
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+  test("제스트가 초기 설정 테스트", () => {
+    console.log("됐나");
+  });
 });
