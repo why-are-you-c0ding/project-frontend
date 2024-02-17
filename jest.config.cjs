@@ -8,7 +8,7 @@ module.exports = {
         '^@hooks/(.*)$': '<rootDir>/hooks/$1',
         '^@components/(.*)$': '<rootDir>/components/$1',
         '^@layouts/(.*)$': '<rootDir>/layouts/$1',
-        '^@pages/(.*)$': '<rootDir>/pages/$1/',
+        '^@pages/(.*)$': '<rootDir>/pages/$1',
         '^@utils/(.*)$': '<rootDir>/utils/$1',
         '^@typings/(.*)$': '<rootDir>/typings/$1',
         '^@api/(.*)$': '<rootDir>/api/$1',
