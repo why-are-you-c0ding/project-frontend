@@ -1,4 +1,4 @@
-// import "whatwg-fetch";
+import "whatwg-fetch";
 import React from "react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { render } from "@testing-library/react";
@@ -24,7 +24,7 @@ describe("제스트 설정 테스트", () => {
 
     render(
       <Provider store={store}>
-        <RouterProvider router={router} />
+        <RouterProvider router={router} />,
       </Provider>,
     );
   });
