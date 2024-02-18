@@ -60,3 +60,9 @@ export interface UserInfoData {
 export interface UserInfo {
   UserInfo: UserInfoData;
 }
+
+export interface EditUserInfo {
+  nickName?: string;
+  id?: string;
+  email?: string;
+}

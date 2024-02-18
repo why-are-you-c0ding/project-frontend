@@ -15,13 +15,13 @@ import {
 } from "@components/MyPages/MyInfo/styles";
 import { myPageApi } from "@api/myPageApi";
 import { useNavigate } from "react-router";
+import { userInfoApi } from "@api/userInfoApi";
 
 const MyInfo = () => {
   const navigate = useNavigate();
 
   const { data: userData, isLoading } =
-    myPageApi.useGetUserDataQuery("getUserData");
-
+    userInfoApi.useGetUserDataQuery("getUserData");
   return (
     <div>
       <ReponsiveBar title={"내 정보"} />

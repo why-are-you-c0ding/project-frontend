@@ -2,11 +2,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   CartData,
   CartItemInfo,
+  EditUserInfo,
   orderHistoryPaging,
   UserInfo,
 } from "@typings/myPage";
 import { getCookie } from "@utils/cookie";
 import { ItemPaging } from "@typings/items";
+import { ModifyStocks } from "@typings/sellerPages";
 const URL = process.env.REACT_APP_BASE_URL;
 const isDevelopment = process.env.REACT_START_MSW !== "true";
 
@@ -18,9 +20,6 @@ export const myPageApi = createApi({
   }),
   tagTypes: ["cart"],
   endpoints: (builder) => ({
-    getUserData: builder.query<UserInfo | undefined, string>({
-      query: () => "/userinfo",
-    }),
     getAllCart: builder.query<CartData, string>({
       query: () => "/carts",
     }),
@@ -77,14 +76,13 @@ export const myPageApi = createApi({
       serializeQueryArgs: ({ endpointName }) => {
         return endpointName;
       },
-      // Always merge incoming data to the cache entry
       merge: (currentCache, newItems) => {
         if ("finalPage" in newItems) {
           currentCache.orderLineItems.push(...newItems.orderLineItems);
           currentCache.finalPage = newItems.finalPage;
         }
       },
-      // Refetch when the page arg changes
+
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },

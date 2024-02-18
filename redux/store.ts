@@ -8,11 +8,13 @@ import { sellersApi } from "@api/sellersApi";
 import { itemsApi } from "@api/itemsApi";
 import { commonSlice } from "@redux/reducers/commonSlice";
 import { sellersSlice } from "@redux/reducers/sellersSlice";
+import { userInfoApi } from "@api/userInfoApi";
 
 export const store = configureStore({
   reducer: {
     [memberApi.reducerPath]: memberApi.reducer,
     [myPageApi.reducerPath]: myPageApi.reducer,
+    [userInfoApi.reducerPath]: userInfoApi.reducer,
     [sellersApi.reducerPath]: sellersApi.reducer,
     [itemsApi.reducerPath]: itemsApi.reducer,
     [userInfoSlice.name]: userInfoSlice.reducer,
@@ -26,6 +28,7 @@ export const store = configureStore({
     }).concat(
       memberApi.middleware,
       myPageApi.middleware,
+      userInfoApi.middleware,
       sellersApi.middleware,
       itemsApi.middleware,
     ),

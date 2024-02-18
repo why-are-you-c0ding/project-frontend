@@ -21,6 +21,7 @@
       "@redux/*": ["redux/*"],
       "@mock/*": ["mock/*"],
       "@public/*": ["public/*"]
-    }
+    },
+    "include": ["/*", "components/__tests__"]
   }
 }
